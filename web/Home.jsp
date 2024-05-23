@@ -81,7 +81,7 @@
         <a href="#"><i class="fa fa-instagram"></i></a>
       </div>
       <ul class="top-widget">
-        <li><i class="fa fa-phone"></i> (12) 345 67890</li>
+        <li><i class="fa fa-phone"></i> (+84) 335 500390</li>
         <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
       </ul>
     </div>
