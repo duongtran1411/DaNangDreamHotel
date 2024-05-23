@@ -106,7 +106,7 @@
                   <a href="#"><i class="fa fa-tripadvisor"></i></a>
                   <a href="#"><i class="fa fa-instagram"></i></a>
                 </div>
-                <a href="login.html" class="bk-btn">Login</a>
+                <a href="Login.jsp" class="bk-btn">Login</a>
               </div>
             </div>
           </div>
@@ -126,21 +126,21 @@
               <div class="nav-menu">
                 <nav class="mainmenu">
                   <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
+                    <li class="active"><a href="Home.jsp">Home</a></li>
                     <!-- <li><a href="rooms.html">Rooms</a></li> -->
-                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="AboutUs.jsp">About Us</a></li>
                     <li>
-                      <a href="pages.html">Accommodation</a>
+                      <a href="Pages.jsp">Accommodation</a>
                       <ul class="dropdown">
-                        <li><a href="rooms.html">Rooms</a></li>
-                        <li><a href="blog-details.html">Blog Details</a></li>
+                        <li><a href="Rooms.jsp">Rooms</a></li>
+                        <li><a href="Blog_Details.jsp">Blog Details</a></li>
                         <li><a href="#">Family Room</a></li>
                         <li><a href="#">Premium Room</a></li>
-                        <li><a href="room-details.html">Room Details</a></li>
+                        <li><a href="Room_Details.jsp">Room Details</a></li>
                       </ul>
                     </li>
-                    <li><a href="blog.html">Events</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="Blog.jsp">Events</a></li>
+                    <li><a href="Contact.jsp">Contact</a></li>
                   </ul>
                 </nav>
                 <div class="nav-right search-switch">
@@ -160,7 +160,7 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="hero-text">
-              <h1>Sona A Luxury Hotel</h1>
+              <h1>Da Nang Dream Hotel</h1>
               <p>
                 Here are the best hotel booking sites, including recommendations
                 for international travel and for finding low-priced hotel rooms.

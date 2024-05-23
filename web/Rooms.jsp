@@ -60,23 +60,23 @@
                         </ul>
                     </div>
                 </div>
-                <a href="#" class="bk-btn">Booking Now</a>
+                <a href="Login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="rooms.html">Rooms</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="pages.html">Pages</a>
+                    <li class="active"><a href="Home.jsp">Home</a></li>
+                    <li><a href="AboutUs.jsp">About Us</a></li>
+                    <li><a href="Pages.jsp">Accommodation</a>
                         <ul class="dropdown">
-                            <li><a href="room-details.html">Room Details</a></li>
-                            <li><a href="blog-details.html">Blog Details</a></li>
+                            <li><a href="Rooms.jsp">Room</a></li>
+                            <li><a href="Room_Details.jsp">Room Details</a></li>
+                            <li><a href="Blog_Details.jsp">Blog Details</a></li>
                             <li><a href="#">Family Room</a></li>
                             <li><a href="#">Premium Room</a></li>
                         </ul>
                     </li>
-                    <li><a href="blog.html">News</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="Blog.jsp">Event</a></li>
+                    <li><a href="Contact.jsp">Contact</a></li>
                 </ul>
             </nav>
             <div id="mobile-menu-wrap"></div>
@@ -112,7 +112,7 @@
                                     <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                 </div>
-                                <a href="#" class="bk-btn">Booking Now</a>
+                                <a href="Login.jsp" class="bk-btn">Login</a>
                                 <div class="language-option">
                                     <img src="img/flag.jpg" alt="">
                                     <span>EN <i class="fa fa-angle-down"></i></span>
@@ -142,19 +142,19 @@
                             <div class="nav-menu">
                                 <nav class="mainmenu">
                                     <ul>
-                                        <li><a href="index.html">Home</a></li>
-                                        <li class="active"><a href="rooms.html">Rooms</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="pages.html">Pages</a>
+                                        <li class="active"><a href="Home.jsp">Home</a></li>
+                                        <li><a href="AboutUs.jsp">About Us</a></li>
+                                        <li><a href="Pages.jsp">Accommodation</a>
                                             <ul class="dropdown">
-                                                <li><a href="room-details.html">Room Details</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
+                                                <li><a href="Rooms.jsp">Room</a></li>
+                                                <li><a href="Room_Details.jsp">Room Details</a></li>
+                                                <li><a href="Blog_Details.jsp">Blog Details</a></li>
                                                 <li><a href="#">Family Room</a></li>
                                                 <li><a href="#">Premium Room</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="blog.html">News</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="Blog.jsp">Event</a></li>
+                                        <li><a href="Contact.jsp">Contact</a></li>
                                     </ul>
                                 </nav>
                                 <div class="nav-right search-switch">
