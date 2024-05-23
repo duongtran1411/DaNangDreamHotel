@@ -1,11 +1,14 @@
+<%-- 
+    Document   : Blog_Details
+    Created on : May 24, 2024, 12:56:56 AM
+    Author     : GIGABYTE
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zxx">
-
-
-<!-- Mirrored from themewagon.github.io/sona/blog-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:26:21 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
-    <meta charset="UTF-8">
+<html>
+    <head>
+        <meta charset="UTF-8">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,10 +30,9 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
-
-<body>
-    <!-- Page Preloder -->
+    </head>
+    <body>
+        <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -453,8 +455,5 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-</body>
-
-
-<!-- Mirrored from themewagon.github.io/sona/blog-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:26:23 GMT -->
+    </body>
 </html>

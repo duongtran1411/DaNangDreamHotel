@@ -1,11 +1,14 @@
+<%-- 
+    Document   : Blog
+    Created on : May 24, 2024, 12:57:33 AM
+    Author     : GIGABYTE
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zxx">
-
-
-<!-- Mirrored from themewagon.github.io/sona/rooms.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:26:14 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
-    <meta charset="UTF-8">
+<html>
+    <head>
+        <meta charset="UTF-8">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,10 +30,9 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
-
-<body>
-    <!-- Page Preloder -->
+    </head>
+    <body>
+        <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -141,7 +143,7 @@
                             <nav class="mainmenu">
                                 <ul>
                                     <li><a href="index.html">Home</a></li>
-                                    <li class="active"><a href="rooms.html">Rooms</a></li>
+                                    <li><a href="rooms.html">Rooms</a></li>
                                     <li><a href="about-us.html">About Us</a></li>
                                     <li><a href="pages.html">Pages</a>
                                         <ul class="dropdown">
@@ -151,7 +153,7 @@
                                             <li><a href="#">Premium Room</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="blog.html">News</a></li>
+                                    <li class="active"><a href="blog.html">News</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
@@ -172,10 +174,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Our Rooms</h2>
+                        <h2>Blog</h2>
                         <div class="bt-option">
                             <a href="home.html">Home</a>
-                            <span>Rooms</span>
+                            <span>Blog Grid</span>
                         </div>
                     </div>
                 </div>
@@ -184,201 +186,100 @@
     </div>
     <!-- Breadcrumb Section End -->
 
-    <!-- Rooms Section Begin -->
-    <section class="rooms-section spad">
+    <!-- Blog Section Begin -->
+    <section class="blog-section blog-page spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img src="img/room/room-1.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Premium King Room</h4>
-                            <h3>159$<span>/Pernight</span></h3>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 3</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                    <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
+                        <div class="bi-text">
+                            <span class="b-tag">Travel Trip</span>
+                            <h4><a href="blog-details.html">Tremblant In Canada</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img src="img/room/room-2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Deluxe Room</h4>
-                            <h3>159$<span>/Pernight</span></h3>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 5</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                    <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
+                        <div class="bi-text">
+                            <span class="b-tag">Camping</span>
+                            <h4><a href="blog-details.html">Choosing A Static Caravan</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img src="img/room/room-3.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Double Room</h4>
-                            <h3>159$<span>/Pernight</span></h3>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 2</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                    <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
+                        <div class="bi-text">
+                            <span class="b-tag">Event</span>
+                            <h4><a href="blog-details.html">Copper Canyon</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> 21th April, 2019</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img src="img/room/room-4.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Luxury Room</h4>
-                            <h3>159$<span>/Pernight</span></h3>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                    <div class="blog-item set-bg" data-setbg="img/blog/blog-4.jpg">
+                        <div class="bi-text">
+                            <span class="b-tag">Trivago</span>
+                            <h4><a href="blog-details.html">A Time Travel Postcard</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> 22th April, 2019</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img src="img/room/room-5.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Room With View</h4>
-                            <h3>159$<span>/Pernight</span></h3>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                    <div class="blog-item set-bg" data-setbg="img/blog/blog-5.jpg">
+                        <div class="bi-text">
+                            <span class="b-tag">Camping</span>
+                            <h4><a href="blog-details.html">A Time Travel Postcard</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> 25th April, 2019</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img src="img/room/room-6.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Small View</h4>
-                            <h3>159$<span>/Pernight</span></h3>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 2</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                    <div class="blog-item set-bg" data-setbg="img/blog/blog-6.jpg">
+                        <div class="bi-text">
+                            <span class="b-tag">Travel Trip</span>
+                            <h4><a href="blog-details.html">Virginia Travel For Kids</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> 28th April, 2019</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-item set-bg" data-setbg="img/blog/blog-7.jpg">
+                        <div class="bi-text">
+                            <span class="b-tag">Travel Trip</span>
+                            <h4><a href="blog-details.html">Bryce Canyon A Stunning</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> 29th April, 2019</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-item set-bg" data-setbg="img/blog/blog-8.jpg">
+                        <div class="bi-text">
+                            <span class="b-tag">Event & Travel</span>
+                            <h4><a href="blog-details.html">Motorhome Or Trailer</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> 30th April, 2019</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-item set-bg" data-setbg="img/blog/blog-9.jpg">
+                        <div class="bi-text">
+                            <span class="b-tag">Camping</span>
+                            <h4><a href="blog-details.html">Lost In Lagos Portugal</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> 30th April, 2019</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="room-pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
+                    <div class="load-more">
+                        <a href="#" class="primary-btn">Load More</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Rooms Section End -->
+    <!-- Blog Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">
@@ -467,8 +368,5 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-</body>
-
-
-<!-- Mirrored from themewagon.github.io/sona/rooms.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:26:16 GMT -->
+    </body>
 </html>

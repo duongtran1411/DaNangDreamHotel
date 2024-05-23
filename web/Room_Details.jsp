@@ -1,19 +1,21 @@
+<%-- 
+    Document   : Room_Details
+    Created on : May 24, 2024, 12:53:04 AM
+    Author     : GIGABYTE
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zxx">
-
-
-<!-- Mirrored from themewagon.github.io/sona/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:26:19 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
-    <meta charset="UTF-8">
+<html>
+    <head>
+        <meta charset="UTF-8">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Sona | Template</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
@@ -26,11 +28,10 @@
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
-
-<body>
-    <!-- Page Preloder -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">   
+    </head>
+    <body>
+        <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -141,7 +142,7 @@
                             <nav class="mainmenu">
                                 <ul>
                                     <li><a href="index.html">Home</a></li>
-                                    <li><a href="rooms.html">Rooms</a></li>
+                                    <li class="active"><a href="rooms.html">Rooms</a></li>
                                     <li><a href="about-us.html">About Us</a></li>
                                     <li><a href="pages.html">Pages</a>
                                         <ul class="dropdown">
@@ -151,7 +152,7 @@
                                             <li><a href="#">Premium Room</a></li>
                                         </ul>
                                     </li>
-                                    <li class="active"><a href="blog.html">News</a></li>
+                                    <li><a href="blog.html">News</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
@@ -172,10 +173,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Blog</h2>
+                        <h2>Our Rooms</h2>
                         <div class="bt-option">
                             <a href="home.html">Home</a>
-                            <span>Blog Grid</span>
+                            <span>Rooms</span>
                         </div>
                     </div>
                 </div>
@@ -184,100 +185,165 @@
     </div>
     <!-- Breadcrumb Section End -->
 
-    <!-- Blog Section Begin -->
-    <section class="blog-section blog-page spad">
+    <!-- Room Details Section Begin -->
+    <section class="room-details-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel Trip</span>
-                            <h4><a href="blog-details.html">Tremblant In Canada</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
+                <div class="col-lg-8">
+                    <div class="room-details-item">
+                        <img src="img/room/room-details.jpg" alt="">
+                        <div class="rd-text">
+                            <div class="rd-title">
+                                <h3>Premium King Room</h3>
+                                <div class="rdt-right">
+                                    <!-- <div class="rating">
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star-half_alt"></i>
+                                    </div> -->
+                                    <a href="#">Booking Now</a>
+                                </div>
+                            </div>
+                            <h2>159$<span>/Pernight</span></h2>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Size:</td>
+                                        <td>30 ft</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Capacity:</td>
+                                        <td>Max persion 5</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Bed:</td>
+                                        <td>King Beds</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Services:</td>
+                                        <td>Wifi, Television, Bathroom,...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="f-para">Motorhome or Trailer that is the question for you. Here are some of the
+                                advantages and disadvantages of both, so you will be confident when purchasing an RV.
+                                When comparing Rvs, a motorhome or a travel trailer, should you buy a motorhome or fifth
+                                wheeler? The advantages and disadvantages of both are studied so that you can make your
+                                choice wisely when purchasing an RV. Possessing a motorhome or fifth wheel is an
+                                achievement of a lifetime. It can be similar to sojourning with your residence as you
+                                search the various sites of our great land, America.</p>
+                            <p>The two commonly known recreational vehicle classes are the motorized and towable.
+                                Towable rvs are the travel trailers and the fifth wheel. The rv travel trailer or fifth
+                                wheel has the attraction of getting towed by a pickup or a car, thus giving the
+                                adaptability of possessing transportation for you when you are parked at your campsite.
+                            </p>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Camping</span>
-                            <h4><a href="blog-details.html">Choosing A Static Caravan</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
+                    <!-- <div class="rd-reviews">
+                        <h4>Reviews</h4>
+                        <div class="review-item">
+                            <div class="ri-pic">
+                                <img src="img/room/avatar/avatar-1.jpg" alt="">
+                            </div>
+                            <div class="ri-text">
+                                <span>27 Aug 2019</span>
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                                <h5>Brandon Kelley</h5>
+                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                                    adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
+                                    magnam.</p>
+                            </div>
+                        </div>
+                        <div class="review-item">
+                            <div class="ri-pic">
+                                <img src="img/room/avatar/avatar-2.jpg" alt="">
+                            </div>
+                            <div class="ri-text">
+                                <span>27 Aug 2019</span>
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                                <h5>Brandon Kelley</h5>
+                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                                    adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
+                                    magnam.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Event</span>
-                            <h4><a href="blog-details.html">Copper Canyon</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 21th April, 2019</div>
+                    <div class="review-add">
+                        <h4>Add Review</h4>
+                        <form action="#" class="ra-form">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="Name*">
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="Email*">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div>
+                                        <h5>You Rating:</h5>
+                                        <div class="rating">
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star-half_alt"></i>
+                                        </div>
+                                    </div>
+                                    <textarea placeholder="Your Review"></textarea>
+                                    <button type="submit">Submit Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-lg-4">
+                <div class="room-booking">
+                    <h3>Your Reservation</h3>
+                    <form action="#">
+                        <div class="check-date">
+                            <label for="date-in">Check In:</label>
+                            <input type="text" class="date-input" id="date-in">
+                            <i class="icon_calendar"></i>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-4.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Trivago</span>
-                            <h4><a href="blog-details.html">A Time Travel Postcard</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 22th April, 2019</div>
+                        <div class="check-date">
+                            <label for="date-out">Check Out:</label>
+                            <input type="text" class="date-input" id="date-out">
+                            <i class="icon_calendar"></i>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-5.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Camping</span>
-                            <h4><a href="blog-details.html">A Time Travel Postcard</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 25th April, 2019</div>
+                        <div class="select-option">
+                            <label for="guest">Guests:</label>
+                            <select id="guest">
+                                <option value="">3 Adults</option>
+                            </select>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-6.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel Trip</span>
-                            <h4><a href="blog-details.html">Virginia Travel For Kids</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 28th April, 2019</div>
+                        <div class="select-option">
+                            <label for="room">Room:</label>
+                            <select id="room">
+                                <option value="">1 Room</option>
+                            </select>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-7.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel Trip</span>
-                            <h4><a href="blog-details.html">Bryce Canyon A Stunning</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 29th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-8.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Event & Travel</span>
-                            <h4><a href="blog-details.html">Motorhome Or Trailer</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 30th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-9.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Camping</span>
-                            <h4><a href="blog-details.html">Lost In Lagos Portugal</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 30th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="load-more">
-                        <a href="#" class="primary-btn">Load More</a>
-                    </div>
+                        <button type="submit">Check Availability</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Blog Section End -->
+    <!-- Room Details Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">
@@ -366,8 +432,5 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-</body>
-
-
-<!-- Mirrored from themewagon.github.io/sona/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:26:21 GMT -->
+    </body>
 </html>

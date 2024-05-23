@@ -1,11 +1,14 @@
+<%-- 
+    Document   : Contact
+    Created on : May 24, 2024, 12:58:30 AM
+    Author     : GIGABYTE
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zxx">
-
-
-<!-- Mirrored from themewagon.github.io/sona/room-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:26:18 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
-    <meta charset="UTF-8">
+<html>
+    <head>
+        <meta charset="UTF-8">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,10 +30,9 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
-
-<body>
-    <!-- Page Preloder -->
+    </head>
+    <body>
+        <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -141,7 +143,7 @@
                             <nav class="mainmenu">
                                 <ul>
                                     <li><a href="index.html">Home</a></li>
-                                    <li class="active"><a href="rooms.html">Rooms</a></li>
+                                    <li><a href="rooms.html">Rooms</a></li>
                                     <li><a href="about-us.html">About Us</a></li>
                                     <li><a href="pages.html">Pages</a>
                                         <ul class="dropdown">
@@ -152,7 +154,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="blog.html">News</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li class="active"><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
                             <div class="nav-right search-switch">
@@ -166,183 +168,56 @@
     </header>
     <!-- Header End -->
 
-    <!-- Breadcrumb Section Begin -->
-    <div class="breadcrumb-section">
+    <!-- Contact Section Begin -->
+    <section class="contact-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <h2>Our Rooms</h2>
-                        <div class="bt-option">
-                            <a href="home.html">Home</a>
-                            <span>Rooms</span>
-                        </div>
+                <div class="col-lg-4">
+                    <div class="contact-text">
+                        <h2>Contact Info</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="c-o">Address:</td>
+                                    <td>856 Cordia Extension Apt. 356, Lake, US</td>
+                                </tr>
+                                <tr>
+                                    <td class="c-o">Phone:</td>
+                                    <td>(12) 345 67890</td>
+                                </tr>
+                                <tr>
+                                    <td class="c-o">Email:</td>
+                                    <td>info.colorlib@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td class="c-o">Fax:</td>
+                                    <td>+(12) 345 67890</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section End -->
-
-    <!-- Room Details Section Begin -->
-    <section class="room-details-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="room-details-item">
-                        <img src="img/room/room-details.jpg" alt="">
-                        <div class="rd-text">
-                            <div class="rd-title">
-                                <h3>Premium King Room</h3>
-                                <div class="rdt-right">
-                                    <!-- <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div> -->
-                                    <a href="#">Booking Now</a>
-                                </div>
-                            </div>
-                            <h2>159$<span>/Pernight</span></h2>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 5</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p class="f-para">Motorhome or Trailer that is the question for you. Here are some of the
-                                advantages and disadvantages of both, so you will be confident when purchasing an RV.
-                                When comparing Rvs, a motorhome or a travel trailer, should you buy a motorhome or fifth
-                                wheeler? The advantages and disadvantages of both are studied so that you can make your
-                                choice wisely when purchasing an RV. Possessing a motorhome or fifth wheel is an
-                                achievement of a lifetime. It can be similar to sojourning with your residence as you
-                                search the various sites of our great land, America.</p>
-                            <p>The two commonly known recreational vehicle classes are the motorized and towable.
-                                Towable rvs are the travel trailers and the fifth wheel. The rv travel trailer or fifth
-                                wheel has the attraction of getting towed by a pickup or a car, thus giving the
-                                adaptability of possessing transportation for you when you are parked at your campsite.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- <div class="rd-reviews">
-                        <h4>Reviews</h4>
-                        <div class="review-item">
-                            <div class="ri-pic">
-                                <img src="img/room/avatar/avatar-1.jpg" alt="">
-                            </div>
-                            <div class="ri-text">
-                                <span>27 Aug 2019</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5>Brandon Kelley</h5>
-                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                    adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                    magnam.</p>
+                <div class="col-lg-7 offset-lg-1">
+                    <form action="#" class="contact-form">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <textarea placeholder="Your Feedback . . ."></textarea>
+                                <button type="submit">Submit Now</button>
                             </div>
                         </div>
-                        <div class="review-item">
-                            <div class="ri-pic">
-                                <img src="img/room/avatar/avatar-2.jpg" alt="">
-                            </div>
-                            <div class="ri-text">
-                                <span>27 Aug 2019</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5>Brandon Kelley</h5>
-                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                    adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                    magnam.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-add">
-                        <h4>Add Review</h4>
-                        <form action="#" class="ra-form">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <input type="text" placeholder="Name*">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" placeholder="Email*">
-                                </div>
-                                <div class="col-lg-12">
-                                    <div>
-                                        <h5>You Rating:</h5>
-                                        <div class="rating">
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star-half_alt"></i>
-                                        </div>
-                                    </div>
-                                    <textarea placeholder="Your Review"></textarea>
-                                    <button type="submit">Submit Now</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div> -->
-            </div>
-            <div class="col-lg-4">
-                <div class="room-booking">
-                    <h3>Your Reservation</h3>
-                    <form action="#">
-                        <div class="check-date">
-                            <label for="date-in">Check In:</label>
-                            <input type="text" class="date-input" id="date-in">
-                            <i class="icon_calendar"></i>
-                        </div>
-                        <div class="check-date">
-                            <label for="date-out">Check Out:</label>
-                            <input type="text" class="date-input" id="date-out">
-                            <i class="icon_calendar"></i>
-                        </div>
-                        <div class="select-option">
-                            <label for="guest">Guests:</label>
-                            <select id="guest">
-                                <option value="">3 Adults</option>
-                            </select>
-                        </div>
-                        <div class="select-option">
-                            <label for="room">Room:</label>
-                            <select id="room">
-                                <option value="">1 Room</option>
-                            </select>
-                        </div>
-                        <button type="submit">Check Availability</button>
                     </form>
                 </div>
             </div>
+            <div class="map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.0606825994123!2d-72.8735845851828!3d40.760690042573295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e85b24c9274c91%3A0xf310d41b791bcb71!2sWilliam%20Floyd%20Pkwy%2C%20Mastic%20Beach%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1578582744646!5m2!1sen!2sbd"
+                    height="470" style="border:0;" allowfullscreen=""></iframe>
+            </div>
         </div>
     </section>
-    <!-- Room Details Section End -->
+    <!-- Contact Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">
@@ -431,8 +306,5 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-</body>
-
-
-<!-- Mirrored from themewagon.github.io/sona/room-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:26:18 GMT -->
+    </body>
 </html>

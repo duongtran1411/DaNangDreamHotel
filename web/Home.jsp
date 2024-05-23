@@ -1,44 +1,44 @@
+<%-- 
+    Document   : home.jsp
+    Created on : May 24, 2024, 12:45:23 AM
+    Author     : GIGABYTE
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zxx">
-  <!-- Mirrored from themewagon.github.io/sona/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:25:53 GMT -->
-  <!-- Added by HTTrack --><meta
-    http-equiv="content-type"
-    content="text/html;charset=utf-8"
-  /><!-- /Added by HTTrack -->
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Sona Template" />
-    <meta name="keywords" content="Sona, unica, creative, html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Da Nang Hotel</title>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8" />
+        <meta name="description" content="Sona Template" />
+        <meta name="keywords" content="Sona, unica, creative, html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap"
+            rel="stylesheet"
+            />
+        <link
+            href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap"
+            rel="stylesheet"
+            />
+        <title>Da Nang Hotel</title>
+        <!-- Css Styles -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
+        <link rel="stylesheet" href="css/flaticon.css" type="text/css" />
+        <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
+        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+        <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/style.css" type="text/css" />
+        
 
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css" />
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-  </head>
-
-  <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
+    </head>
+    <body>
+        <div id="preloder">
       <div class="loader"></div>
     </div>
 
@@ -63,7 +63,7 @@
           <li>
             <a href="pages.html">Accommodation</a>
             <ul class="dropdown">
-              <li><a href="room-details.html">Room Details</a></li>
+              <li><a href="Room_Details.jsp">Room Details</a></li>
               <li><a href="#">Deluxe Room</a></li>
               <li><a href="#">Family Room</a></li>
               <li><a href="#">Premium Room</a></li>
@@ -709,7 +709,5 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-  </body>
-
-  <!-- Mirrored from themewagon.github.io/sona/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 May 2024 08:26:06 GMT -->
+    </body>
 </html>
