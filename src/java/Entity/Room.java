@@ -16,7 +16,7 @@ public class Room {
     public Room() {
     }
 
-    public Room(int room_id, int type_Room_id, int floor_Room_id,String roomName, int numberOfPerson, int numberOfBed, double price, String status, String created_at, String updated_at) {
+    public Room(int room_id, int type_Room_id, int floor_Room_id, String roomName, int numberOfPerson, int numberOfBed, double price, String status, String created_at, String updated_at) {
         this.room_id = room_id;
         this.type_Room_id = type_Room_id;
         this.floor_Room_id = floor_Room_id;
@@ -37,7 +37,6 @@ public class Room {
         this.floor_Room_id = floor_Room_id;
     }
 
-    
     public int getRoom_id() {
         return room_id;
     }
@@ -114,6 +113,5 @@ public class Room {
     public String toString() {
         return "Room{" + "room_id=" + room_id + ", type_Room_id=" + type_Room_id + ", roomName=" + roomName + ", numberOfPerson=" + numberOfPerson + ", numberOfBed=" + numberOfBed + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + '}';
     }
-    
-    
+
 }

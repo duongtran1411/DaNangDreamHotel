@@ -39,6 +39,8 @@ public class DAORoom extends DBConnect{
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
         List<Room> list = dao.getAllRoom();
-        System.out.println(list);
+        for (Room room : list) {
+            System.out.println(room);
+        }
     }
 }

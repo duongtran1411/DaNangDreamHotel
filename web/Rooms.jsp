@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -67,13 +69,13 @@
                     <li class="active"><a href="Home.jsp">Home</a></li>
                     <li><a href="AboutUs.jsp">About Us</a></li>
                     <a href="Rooms.jsp">Accommodation</a>
-                        <ul class="dropdown">
-                            <li><a href="Rooms.jsp">Room</a></li>
-                            <li><a href="Room_Details.jsp">Room Details</a></li>
-                            <li><a href="Blog_Details.jsp">Blog Details</a></li>
-                            <li><a href="#">Family Room</a></li>
-                            <li><a href="#">Premium Room</a></li>
-                        </ul>
+                    <ul class="dropdown">
+                        <li><a href="Rooms.jsp">Room</a></li>
+                        <li><a href="Room_Details.jsp">Room Details</a></li>
+                        <li><a href="Blog_Details.jsp">Blog Details</a></li>
+                        <li><a href="#">Family Room</a></li>
+                        <li><a href="#">Premium Room</a></li>
+                    </ul>
                     </li>
                     <li><a href="Blog.jsp">Event</a></li>
                     <li><a href="Contact.jsp">Contact</a></li>
@@ -113,16 +115,16 @@
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                 </div>
                                 <a href="Login.jsp" class="bk-btn">Login</a>
-                                    <!--<div class="language-option">
-                                        <img src="img/flag.jpg" alt="">
-                                        <span>EN <i class="fa fa-angle-down"></i></span>
-                                        <div class="flag-dropdown">
-                                            <ul>
-                                                <li><a href="#">Zi</a></li>
-                                                <li><a href="#">Fr</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>-->
+                                <!--<div class="language-option">
+                                    <img src="img/flag.jpg" alt="">
+                                    <span>EN <i class="fa fa-angle-down"></i></span>
+                                    <div class="flag-dropdown">
+                                        <ul>
+                                            <li><a href="#">Zi</a></li>
+                                            <li><a href="#">Fr</a></li>
+                                        </ul>
+                                    </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -189,187 +191,39 @@
         <!-- Rooms Section Begin -->
         <section class="rooms-section spad">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="room-item">
-                            <img src="img/room/room-1.jpg" alt="">
-                            <div class="ri-text">
-                                <h4>Premium King Room</h4>
-                                <h3>159$<span>/Pernight</span></h3>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 3</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
+                <div class="row">                 
+                    <c:forEach items="${listRoom}" var="o">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="room-item">
+                                <img src="img/room/room-1.jpg" alt="">
+                                <div class="ri-text">
+                                    <h4>${o.roomName}</h4>
+                                    <h3>${o.price} VND<span>/Pernight</span></h3>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="r-o">Size:</td>
+                                                <td>30 ft</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Capacity:</td>
+                                                <td>Max persion 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Bed:</td>
+                                                <td>King Beds</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Services:</td>
+                                                <td>Wifi, Television, Bathroom,...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a href="#" class="primary-btn">More Details</a>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="room-item">
-                            <img src="img/room/room-2.jpg" alt="">
-                            <div class="ri-text">
-                                <h4>Deluxe Room</h4>
-                                <h3>159$<span>/Pernight</span></h3>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="room-item">
-                            <img src="img/room/room-3.jpg" alt="">
-                            <div class="ri-text">
-                                <h4>Double Room</h4>
-                                <h3>159$<span>/Pernight</span></h3>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 2</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="room-item">
-                            <img src="img/room/room-4.jpg" alt="">
-                            <div class="ri-text">
-                                <h4>Luxury Room</h4>
-                                <h3>159$<span>/Pernight</span></h3>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 1</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="room-item">
-                            <img src="img/room/room-5.jpg" alt="">
-                            <div class="ri-text">
-                                <h4>Room With View</h4>
-                                <h3>159$<span>/Pernight</span></h3>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 1</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="room-item">
-                            <img src="img/room/room-6.jpg" alt="">
-                            <div class="ri-text">
-                                <h4>Small View</h4>
-                                <h3>159$<span>/Pernight</span></h3>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 2</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
+                        </div>      
+                    </c:forEach>
                     <div class="col-lg-12">
                         <div class="room-pagination">
                             <a href="#">1</a>
