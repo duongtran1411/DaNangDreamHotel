@@ -66,7 +66,7 @@
                 <ul>
                     <li class="active"><a href="Home.jsp">Home</a></li>
                     <li><a href="AboutUs.jsp">About Us</a></li>
-                    <li><a href="rooms.jsp">Accommodation</a>
+                    <li><a href="Rooms.jsp">Accommodation</a>
                         <ul class="dropdown">
                             <li><a href="Rooms.jsp">Room</a></li>
                             <li><a href="Room_Details.jsp">Room Details</a></li>
@@ -145,7 +145,7 @@
                                 <ul>
                                     <li class="active"><a href="Home.jsp">Home</a></li>
                                     <li><a href="AboutUs.jsp">About Us</a></li>
-                                    <li><a href="rooms.jsp">Accommodation</a>
+                                    <li><a href="Rooms.jsp">Accommodation</a>
                                         <ul class="dropdown">
                                             <li><a href="Rooms.jsp">Room</a></li>
                                             <li><a href="Room_Details.jsp">Room Details</a></li>

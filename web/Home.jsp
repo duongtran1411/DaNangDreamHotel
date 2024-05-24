@@ -74,7 +74,7 @@
           <!-- <li><a href="rooms.html">Rooms</a></li> -->
           <li><a href="about-us.html">About Us</a></li>
           <li>
-            <a href="Rooms.html">Accommodation</a>
+            <a href="Rooms.jsp">Accommodation</a>
             <ul class="dropdown">
               <li><a href="Room_Details.jsp">Room Details</a></li>
               <li><a href="#">Deluxe Room</a></li>
