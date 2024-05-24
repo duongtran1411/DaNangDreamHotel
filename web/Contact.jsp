@@ -50,7 +50,7 @@
                 <i class="icon_search"></i>
             </div>
             <div class="header-configure-area">
-                <div class="language-option">
+                <!--<div class="language-option">
                     <img src="img/flag.jpg" alt="">
                     <span>EN <i class="fa fa-angle-down"></i></span>
                     <div class="flag-dropdown">
@@ -59,7 +59,7 @@
                             <li><a href="#">Fr</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
                 <a href="Login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
@@ -113,7 +113,7 @@
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                 </div>
                                 <a href="Login.jsp" class="bk-btn">Login</a>
-                                <div class="language-option">
+                                <!--<div class="language-option">
                                     <img src="img/flag.jpg" alt="">
                                     <span>EN <i class="fa fa-angle-down"></i></span>
                                     <div class="flag-dropdown">
@@ -122,7 +122,7 @@
                                             <li><a href="#">Fr</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>

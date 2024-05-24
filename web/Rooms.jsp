@@ -112,7 +112,7 @@
                                     <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                 </div>
-                                <div class="header-configure-area">
+                                <a href="Login.jsp" class="bk-btn">Login</a>
                                     <!--<div class="language-option">
                                         <img src="img/flag.jpg" alt="">
                                         <span>EN <i class="fa fa-angle-down"></i></span>
@@ -123,8 +123,6 @@
                                             </ul>
                                         </div>
                                     </div>-->
-                                    <a href="Login.jsp" class="bk-btn">Login</a>
-                                </div>
                             </div>
                         </div>
                     </div>
