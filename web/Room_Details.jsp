@@ -49,7 +49,7 @@
                 <i class="icon_search"></i>
             </div>
             <div class="header-configure-area">
-                <div class="language-option">
+                <!--<div class="language-option">
                     <img src="img/flag.jpg" alt="">
                     <span>EN <i class="fa fa-angle-down"></i></span>
                     <div class="flag-dropdown">
@@ -58,14 +58,14 @@
                             <li><a href="#">Fr</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
                 <a href="Login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
                     <li class="active"><a href="Home.jsp">Home</a></li>
                     <li><a href="AboutUs.jsp">About Us</a></li>
-                    <li><a href="Pages.jsp">Accommodation</a>
+                    <li><a href="rooms.jsp">Accommodation</a>
                         <ul class="dropdown">
                             <li><a href="Rooms.jsp">Room</a></li>
                             <li><a href="Room_Details.jsp">Room Details</a></li>
@@ -111,17 +111,17 @@
                                     <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                 </div>
-                                <a href="#" class="bk-btn">Booking Now</a>
-                                <div class="language-option">
-                                    <img src="img/flag.jpg" alt="">
-                                    <span>EN <i class="fa fa-angle-down"></i></span>
-                                    <div class="flag-dropdown">
-                                        <ul>
-                                            <li><a href="#">Zi</a></li>
-                                            <li><a href="#">Fr</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <!--<div class="language-option">
+                    <img src="img/flag.jpg" alt="">
+                    <span>EN <i class="fa fa-angle-down"></i></span>
+                    <div class="flag-dropdown">
+                        <ul>
+                            <li><a href="#">Zi</a></li>
+                            <li><a href="#">Fr</a></li>
+                        </ul>
+                    </div>
+                </div>-->
+                                <a href="Login.jsp" class="bk-btn">Login</a>
                             </div>
                         </div>
                     </div>
@@ -141,9 +141,9 @@
                             <div class="nav-menu">
                                 <nav class="mainmenu">
                                     <ul>
-                                       <li class="active"><a href="Home.jsp">Home</a></li>
+                                        <li class="active"><a href="Home.jsp">Home</a></li>
                                         <li><a href="AboutUs.jsp">About Us</a></li>
-                                        <li><a href="Pages.jsp">Accommodation</a>
+                                        <li><a href="rooms.jsp">Accommodation</a>
                                             <ul class="dropdown">
                                                 <li><a href="Rooms.jsp">Room</a></li>
                                                 <li><a href="Room_Details.jsp">Room Details</a></li>

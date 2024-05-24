@@ -54,6 +54,19 @@
       <div class="search-icon search-switch">
         <i class="icon_search"></i>
       </div>
+        <div class="header-configure-area">
+                <!--<div class="language-option">
+                    <img src="img/flag.jpg" alt="">
+                    <span>EN <i class="fa fa-angle-down"></i></span>
+                    <div class="flag-dropdown">
+                        <ul>
+                            <li><a href="#">Zi</a></li>
+                            <li><a href="#">Fr</a></li>
+                        </ul>
+                    </div>
+                </div>-->
+                <a href="Login.jsp" class="bk-btn">Login</a>
+            </div>
 
       <nav class="mainmenu mobile-menu">
         <ul>
@@ -61,7 +74,7 @@
           <!-- <li><a href="rooms.html">Rooms</a></li> -->
           <li><a href="about-us.html">About Us</a></li>
           <li>
-            <a href="pages.html">Accommodation</a>
+            <a href="Rooms.html">Accommodation</a>
             <ul class="dropdown">
               <li><a href="Room_Details.jsp">Room Details</a></li>
               <li><a href="#">Deluxe Room</a></li>
@@ -130,7 +143,7 @@
                     <!-- <li><a href="rooms.html">Rooms</a></li> -->
                     <li><a href="AboutUs.jsp">About Us</a></li>
                     <li>
-                      <a href="Pages.jsp">Accommodation</a>
+                      <a href="Rooms.jsp">Accommodation</a>
                       <ul class="dropdown">
                         <li><a href="Rooms.jsp">Rooms</a></li>
                         <li><a href="Blog_Details.jsp">Blog Details</a></li>
