@@ -77,8 +77,8 @@
                             </a>
                         </div>
 
-                        <div class="text-center p-t-90">
-                            <a class="txt1" href="">
+                        <div class="text-center p-t-90" style="padding-bottom: 30px">
+                            <a class="txt1" href="#">
                                 Forgot Password?
                             </a>
                         </div>
