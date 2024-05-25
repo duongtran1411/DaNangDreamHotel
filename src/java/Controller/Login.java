@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet Login</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
@@ -71,14 +71,9 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("pass");
-        
-        if(username == "" && password == ""){
-            response.sendRedirect("./dashboard/html/ui-card.html");
-        }else{
-            response.sendRedirect("Login.jsp");
-        }
+
+        response.sendRedirect("./dashboard/jsp/ManageRoom.jsp");
+
     }
 
     /**
