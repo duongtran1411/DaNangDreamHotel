@@ -16,6 +16,7 @@
         <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="../assets/css/styles.min.css" />
         <link rel="stylesheet" href="../assets/css/styles.css" />
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
@@ -97,39 +98,35 @@
                 <div class="container">
                     <div class="row">                 
                         <c:forEach items="${listRoom}" var="o">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="room-item">
-                                <img src="https://flchotelsresorts.com/images/hotels/rooms/original/2c5a0001_1663841903.jpg" style="width: 70%" alt="">
-                                <div class="ri-text">
-                                    <h4>LUXURY</h4>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="r-o">Size:</td>
-                                                <td>30 ft</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Capacity:</td>
-                                                <td>Max persion 3</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Bed:</td>
-                                                <td>King Beds</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Services:</td>
-                                                <td>Wifi, Television, Bathroom,...</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <a href="#" class="primary-btn">More Details</a>
+                        <div class="col-lg-3 col-md-6 d-flex justify-content-center">
+                            <div class="room-item" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
+                                <img src="https://flchotelsresorts.com/images/hotels/rooms/original/2c5a0001_1663841903.jpg" style="width: 100%; border-radius: 15px 15px 0 0;" alt="">
+                                <div class="ri-text" style="padding: 10px; text-align: left; width: 100%;">
+                                    <h4 class="text-center">LUXURY</h4>
+                                    <div class="content-icon d-flex align-items-between justify-content-between" style="font-size: 0.9em;">
+                                        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                            <i class="fa fa-users" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>
+                                            <span>02 Adults</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                            <i class="fa fa-bed" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>
+                                            <span>01 Double Bed</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                            <i class="fa fa-bath" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>
+                                            <span>01 Bath</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="position-absolute bottom-0 start-0 text-decoration-none" style="margin: 5px;">DETAIL</a>
+                                    <a href="#" class="position-absolute bottom-0 end-0 text-decoration-none" style="margin: 5px;">EDIT</a>
                                 </div>
                             </div>
-                        </div>      
+                        </div>
                     </c:forEach>  
                 </div>
             </div>
         </section>
+
 
 
         <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
