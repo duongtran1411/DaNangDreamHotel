@@ -75,7 +75,7 @@ public class Login extends HttpServlet {
         String password = request.getParameter("pass");
         
         if(username == "" && password == ""){
-            response.sendRedirect("Admin.jsp");
+            response.sendRedirect("./dashboard/html/ui-card.html");
         }else{
             response.sendRedirect("Login.jsp");
         }
