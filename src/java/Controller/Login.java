@@ -72,7 +72,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.sendRedirect("./dashboard/jsp/ManageRoom.jsp");
+        response.sendRedirect("./dashboard/jsp/ManageTypeRoom.jsp");
 
     }
 
