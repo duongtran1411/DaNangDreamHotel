@@ -113,7 +113,7 @@ public class authentication_login extends HttpServlet {
                 RegistrationDTO a = dao.getDataAccount(username, password);
                 if (!isEmailValid) {
                     request.setAttribute("mess1", "Invalid email format !! Ex : example@example.com ");
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
                 } else if (result) {
                     HttpSession session = request.getSession();
                     session.setAttribute("acc", a);
@@ -122,7 +122,7 @@ public class authentication_login extends HttpServlet {
                 }// End if username and password matched
                 else {
                     request.setAttribute("mess1", " Sai Account hoặc Password ");
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    request.getRequestDispatcher("dashboard/jsp/authentication-login.jspp").forward(request, response);
                 }
 
             } catch (SQLException ex) {
