@@ -4,6 +4,7 @@
     Author     : letua
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <<!doctype html>
 <html lang="en">
@@ -31,6 +32,7 @@
                   <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
                 </a>
                 <p class="text-center">Your Social Campaigns</p>
+                <c:set var="cookie" value="${pageContext.request.cookies}" /> 
                 <form>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
@@ -46,7 +48,7 @@
                     </div>
                     <a class="text-primary fw-bold" href="./index.jsp">Forgot Password ?</a>
                   </div>
-                  <a href="./index.jsp" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a>
+                  <input class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" type="submit" value="Sign In" class="btn float-right login_btn" name="btAction">
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-bold">New to Modernize?</p>
                     <a class="text-primary fw-bold ms-2" href="./authentication-register.jsp">Create an account</a>
