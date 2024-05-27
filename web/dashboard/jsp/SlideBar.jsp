@@ -45,11 +45,11 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+                    <a class="sidebar-link" href="./ManageTypeRoom.jsp" aria-expanded="false">
                         <span>
                             <i class="fas fa-hotel"></i> 
                         </span>
-                        <span class="hide-menu">Manage Room</span>
+                        <span class="hide-menu">Manage Type Room</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
