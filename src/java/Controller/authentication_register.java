@@ -5,12 +5,19 @@
 
 package Controller;
 
+import Entity.RegistrationDTO;
+import Model.RegistrationDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -36,10 +43,48 @@ public class authentication_register extends HttpServlet {
             out.println("<title>Servlet authentication_register</title>");  
             out.println("</head>");
             out.println("<body>");
+            response.setContentType("text/html;charset=UTF-8");
+
+        String account = request.getParameter("acc");
+        String password = request.getParameter("pass");
+        String rePass = request.getParameter("repass");
+        String fullname = request.getParameter("fullname");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+            RegistrationDTO user = new RegistrationDTO(account);
+
+        String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+        boolean isEmailValid = Pattern.matches(emailPattern, account);
+
+        if (!isEmailValid) {
+            request.setAttribute("mess", "Invalid email format !! Ex : example@example.com ");
+            request.getRequestDispatcher("signUP.jsp").forward(request, response);
+        } else if (!password.equals(rePass)) {
+            request.setAttribute("mess", "Nhập lại mật khẩu không giống nhau");
+            request.getRequestDispatcher("signUP.jsp").forward(request, response);
+        } else if (password.length() < 3) {
+            request.setAttribute("mess", "Password must be at least 3 characters long");
+            request.getRequestDispatcher("signUP.jsp").forward(request, response);
+        } else if (!phone.matches("[0-9]*")) {
+            request.setAttribute("mess", "Your Mobile Invalid");
+            request.getRequestDispatcher("signUP.jsp").forward(request, response);
+        }
+        RegistrationDAO dao = new RegistrationDAO();
+        request.setAttribute("mess", "Tạo Tài khoản thành công   !! ");
+        RequestDispatcher rd = request.getRequestDispatcher("signUP.jsp");
+        rd.forward(request, response);
             out.println("<h1>Servlet authentication_register at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            try {
+            dao.addUser(account, rePass, fullname, phone, address);
+        } catch (SQLException ex) {
+            Logger.getLogger(authentication_register.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(authentication_register.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

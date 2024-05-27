@@ -75,6 +75,23 @@ public class RegistrationDAO extends DBConnect {
 
         return null;
     }
+    public  void addUser(String acc, String pass, String fname, String lname, String Phone, String add){
+        String sql = "insert into ACCOUNT (account,[password],phone,fullname,[address])\n"
+                        + "                    values (?,?,?,?,?,?,?) ";
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            pre = conn.prepareStatement(sql);
+            pre.setString(0, rs.getFirstName());
+            
+
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+                
     
 
-}
+

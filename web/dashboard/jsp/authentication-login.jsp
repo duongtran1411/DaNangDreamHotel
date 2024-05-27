@@ -35,7 +35,7 @@
                           <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
                       </a>
                   </div>
-                <p class="text-center">Your Social Campaigns</p>
+                <p class="text-center">Da Nang Dream Hotel</p>
                 <c:set var="cookie" value="${pageContext.request.cookies}" /> 
                 <form action="login" method="post">
                   <div class="mb-3">
