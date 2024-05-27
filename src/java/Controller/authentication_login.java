@@ -60,8 +60,8 @@ public class authentication_login extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    throws ServletException, IOException {
+        request.getRequestDispatcher("/dashboard/jsp/authentication-login.jsp").forward(request, response);
     }
 
     /**
@@ -109,14 +109,14 @@ public class authentication_login extends HttpServlet {
                 RegistrationDTO user = dao.getDataAccount(username, password);
                 if (!isEmailValid) {
                     request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
-                    request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
+                    request.getRequestDispatcher("http://localhost:9999/DaNangDreamHotel/dashboard/jsp/authentication-login.jsp").forward(request, response);
                 } else if (result) {
                     HttpSession session = request.getSession();
                     session.setAttribute("acc", user);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
                     request.setAttribute("mess1", "Incorrect account or password");
-                    request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
+                    request.getRequestDispatcher("http://localhost:9999/DaNangDreamHotel/dashboard/jsp/authentication-login.jsp").forward(request, response);
                 }
 
             } catch (Exception e) {

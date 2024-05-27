@@ -37,7 +37,7 @@
                   </div>
                 <p class="text-center">Your Social Campaigns</p>
                 <c:set var="cookie" value="${pageContext.request.cookies}" /> 
-                <form>
+                <form action="login" method="post">
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
                     <input type="text" class="form-control" placeholder="Username" name="txtUsername"  value="${cookie.cUser.value}" required>
