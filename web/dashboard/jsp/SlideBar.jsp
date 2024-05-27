@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+                    <a class="sidebar-link" href="./ManageEvent.jsp" aria-expanded="false">
                         <span>
                             <i class="far fa-star"></i>
                         </span>

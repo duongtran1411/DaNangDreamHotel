@@ -24,7 +24,7 @@
                             <a href="#"><i class="fa fa-tripadvisor"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
                         </div>
-                        <a href="Login.jsp" class="bk-btn">Login</a>
+                        <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
                     </div>
                 </div>
             </div>
