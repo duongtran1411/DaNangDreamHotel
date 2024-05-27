@@ -59,7 +59,7 @@
                         </ul>
                     </div>
                 </div>-->
-                <a href="Login.jsp" class="bk-btn">Login</a>
+                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
