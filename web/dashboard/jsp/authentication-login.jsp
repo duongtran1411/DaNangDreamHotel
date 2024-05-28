@@ -50,7 +50,7 @@
                     <div class="form-check">
                       <input class="form-check-input primary" type="checkbox" name="remember" ${cookie.cRem != null?'checked': '' } >Remember Me
                     </div>
-                    <a class="text-primary fw-bold" href="http://localhost:9999/WebApplication12/forgotPassword.jsp">Forgot Password ?</a>
+                    <a class="text-primary fw-bold" href="http://localhost:9999/DaNangDreamHotel/forgotPassword.jsp">Forgot Password ?</a>
                   </div>
                   <input class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" type="submit" value="Sign In" class="btn float-right login_btn" name="btAction">
                   <div class="d-flex align-items-center justify-content-center">
