@@ -12,7 +12,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
+  <title>Da Nang Dream Hotel</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
@@ -50,7 +50,7 @@
                     <div class="form-check">
                       <input class="form-check-input primary" type="checkbox" name="remember" ${cookie.cRem != null?'checked': '' } >Remember Me
                     </div>
-                    <a class="text-primary fw-bold" href="./index.jsp">Forgot Password ?</a>
+                    <a class="text-primary fw-bold" href="http://localhost:9999/WebApplication12/forgotPassword.jsp">Forgot Password ?</a>
                   </div>
                   <input class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" type="submit" value="Sign In" class="btn float-right login_btn" name="btAction">
                   <div class="d-flex align-items-center justify-content-center">
