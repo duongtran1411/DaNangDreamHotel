@@ -4,6 +4,7 @@
     Author     : GIGABYTE
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,7 @@
         <title>Sona | Template</title>
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -29,6 +30,8 @@
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">   
+        <<link rel="stylesheet" href="css/slide.css"/>
+
     </head>
     <body>
         <!-- Page Preloder -->
@@ -190,11 +193,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="room-details-item">
-                            <img src="img/room/room-details.jpg" alt="">
+                        <div class="room-details-item " >
+                            <div class="slide">
+                                <div class="image-rooms">
+                                    <c:forEach items="${listImage}" var="o">
+                                        <img src="${o.image}" alt="" id="slide-img" >
+                                    </c:forEach>
+                                </div>
+                                <div class="btns">
+                                    <div class="btn-Left btn-arrow" style="padding-left: 25px"><i class="fa-solid fa-chevron-left icon-L"></i></div>
+                                    <div class="btn-Right btn-arrow" style="padding-right: 25px"><i class="fa-solid fa-chevron-right icon-R"></i></div>
+                                </div>
+                            </div>
+
                             <div class="rd-text">
                                 <div class="rd-title">
-                                    <h3>Premium King Room</h3>
+                                    <h3>${o.name}</h3>
                                     <div class="rdt-right">
                                         <!-- <div class="rating">
                                             <i class="icon_star"></i>
@@ -206,20 +220,24 @@
                                         <a href="#">Booking Now</a>
                                     </div>
                                 </div>
-                                <h2>159$<span>/Pernight</span></h2>
+                                <h2>${room.price}<span>/Pernight</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
+                                            <td>${room.size}</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
+                                            <td>${room.people}</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
+                                            <td>${room.bed}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Bath:</td>
+                                            <td>${room.bath}</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Services:</td>
@@ -432,5 +450,47 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <script >
+
+                                        const listImage = document.querySelector(".list-image");
+                                        const images = document.querySelectorAll(".img-slide");
+                                        const btnLeft = document.querySelector(".btn-Left");
+                                        const btnRight = document.querySelector(".btn-Right");
+                                        let current = 0;
+                                        const length = images.length;
+
+                                        const handleChaneSLide = () => {
+                                            if (current == length - 1) {
+                                                current = 0;
+                                                let width = images[0].offsetWidth;
+                                                listImage.style.transform = `translateX(0px)`;
+                                            } else {
+                                                current++;
+                                                let width = images[0].offsetWidth;
+                                                listImage.style.transform = `translateX(${width * -1 * current}px)`;
+                                            }
+                                        };
+                                        let handleEventChangeSlide = setInterval(handleChaneSLide, 3000);
+
+                                        btnRight.addEventListener('click', () => {
+                                            clearInterval(handleEventChangeSlide);
+                                            handleChaneSLide();
+                                            handleEventChangeSlide = setInterval(handleChaneSLide, 3000);
+                                        });
+
+                                        btnLeft.addEventListener('click', () => {
+                                            clearInterval(handleEventChangeSlide);
+                                            if (current == 0) {
+                                                current = length - 1;
+                                                let width = images[0].offsetWidth;
+                                                listImage.style.transform = `translateX(${width * -1 * current}px)`;
+                                            } else {
+                                                current--;
+                                                let width = images[0].offsetWidth;
+                                                listImage.style.transform = `translateX(${width * -1 * current}px)`;
+                                            }
+                                            handleEventChangeSlide = setInterval(handleChaneSLide, 3000);
+                                        });
+        </script>
     </body>
 </html>

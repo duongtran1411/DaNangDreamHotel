@@ -3,16 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Blog.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Login.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Contact.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/AboutUs.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Home.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Pages.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Blog_Details.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Room_Details.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/src/java/Controller/Login.java</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Rooms.jsp</file>
+            <file>file:/E:/SWP391_GROUP6/DaNangDreamHotel/src/java/Controller/HomeController.java</file>
+            <file>file:/E:/SWP391_GROUP6/DaNangDreamHotel/src/java/Model/DAORoom.java</file>
+            <file>file:/E:/SWP391_GROUP6/DaNangDreamHotel/src/java/Controller/Login.java</file>
         </group>
     </open-files>
 </project-private>

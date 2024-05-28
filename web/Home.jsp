@@ -350,7 +350,7 @@
                             <div class="col-lg-3 col-md-6">
                                 <div
                                     class="hp-room-item set-bg"
-                                    data-setbg="${o.imageRoom.image}"
+                                    data-setbg="${o.image}"
                                     >
                                     <div class="hr-text">
                                         <h3>${o.name}</h3>
@@ -363,19 +363,23 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="r-o">Capacity:</td>
-                                                    <td>${o.typeRoom.people}</td>
+                                                    <td>${o.people}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="r-o">Bed:</td>
-                                                    <td>${o.typeRoom.bed}</td>
+                                                    <td>${o.bed}</td>
                                                 </tr>
+<!--                                                <tr>
+                                                    <td class="r-o">Bath:</td>
+                                                    <td>${o.bath}</td>
+                                                </tr>-->
                                                 <tr>
                                                     <td class="r-o">Services:</td>
                                                     <td>Wifi, Television, Bathroom,...</td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                                <a href="roomDetails?Id=${o.room_Id}" class="primary-btn">More Details</a>
+                                                <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
                                     </div>
                                 </div>
                             </div>
