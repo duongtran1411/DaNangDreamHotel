@@ -6,8 +6,9 @@ public class Room {
     private int type_Room_id;
     private int floor_Room_id;
     private String roomName;
-    private int numberOfPerson;
-    private int numberOfBed;
+    private String people;
+    private String bed;
+    private String bath;
     private double price;
     private String status;
     private String created_at;
@@ -16,25 +17,24 @@ public class Room {
     public Room() {
     }
 
-    public Room(int room_id, int type_Room_id, int floor_Room_id, String roomName, int numberOfPerson, int numberOfBed, double price, String status, String created_at, String updated_at) {
+    public Room(int room_id, int type_Room_id, int floor_Room_id, String roomName, String people, String bed, String bath, double price, String status, String created_at, String updated_at) {
         this.room_id = room_id;
         this.type_Room_id = type_Room_id;
         this.floor_Room_id = floor_Room_id;
         this.roomName = roomName;
-        this.numberOfPerson = numberOfPerson;
-        this.numberOfBed = numberOfBed;
+        this.people = people;
+        this.bed = bed;
+        this.bath = bath;
         this.price = price;
         this.status = status;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }
 
-    public int getFloor_Room_id() {
-        return floor_Room_id;
-    }
-
-    public void setFloor_Room_id(int floor_Room_id) {
-        this.floor_Room_id = floor_Room_id;
+    public Room(String people, String bed, String bath) {
+        this.people = people;
+        this.bed = bed;
+        this.bath = bath;
     }
 
     public int getRoom_id() {
@@ -53,6 +53,14 @@ public class Room {
         this.type_Room_id = type_Room_id;
     }
 
+    public int getFloor_Room_id() {
+        return floor_Room_id;
+    }
+
+    public void setFloor_Room_id(int floor_Room_id) {
+        this.floor_Room_id = floor_Room_id;
+    }
+
     public String getRoomName() {
         return roomName;
     }
@@ -61,20 +69,28 @@ public class Room {
         this.roomName = roomName;
     }
 
-    public int getNumberOfPerson() {
-        return numberOfPerson;
+    public String getpeople() {
+        return people;
     }
 
-    public void setNumberOfPerson(int numberOfPerson) {
-        this.numberOfPerson = numberOfPerson;
+    public void setpeople(String people) {
+        this.people = people;
     }
 
-    public int getNumberOfBed() {
-        return numberOfBed;
+    public String getBed() {
+        return bed;
     }
 
-    public void setNumberOfBed(int numberOfBed) {
-        this.numberOfBed = numberOfBed;
+    public void setBed(String bed) {
+        this.bed = bed;
+    }
+
+    public String getBath() {
+        return bath;
+    }
+
+    public void setBath(String bath) {
+        this.bath = bath;
     }
 
     public double getPrice() {
@@ -111,7 +127,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" + "room_id=" + room_id + ", type_Room_id=" + type_Room_id + ", roomName=" + roomName + ", numberOfPerson=" + numberOfPerson + ", numberOfBed=" + numberOfBed + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + '}';
+        return "Room{" + "room_id=" + room_id + ", type_Room_id=" + type_Room_id + ", floor_Room_id=" + floor_Room_id + ", roomName=" + roomName + ", people=" + people + ", bed=" + bed + ", bath=" + bath + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + '}';
     }
 
 }
