@@ -51,7 +51,7 @@ public class authentication_register extends HttpServlet {
         String fullname = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-            RegistrationDTO user = new RegistrationDTO(account);
+            RegistrationDTO user = new RegistrationDTO();
 
         String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
         boolean isEmailValid = Pattern.matches(emailPattern, account);
@@ -77,14 +77,11 @@ public class authentication_register extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
             try {
-            dao.addUser(account, rePass, fullname, phone, address);
-        } catch (SQLException ex) {
-            Logger.getLogger(authentication_register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(authentication_register.class.getName()).log(Level.SEVERE, null, ex);
+            dao.addUser(account, rePass, fullname, fullname, phone, address);
+        } catch (Exception ex) {
+                System.out.println(ex);   
         }
         }
-        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

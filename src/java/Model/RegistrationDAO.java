@@ -83,14 +83,16 @@ public class RegistrationDAO extends DBConnect {
 
         try {
             pre = conn.prepareStatement(sql);
-            pre.setString(0, rs.getFirstName());
+            pre.setString(0, rs.getCursorName());
             
 
             pre.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
+        
     }
+}
                 
     
 
