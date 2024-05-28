@@ -1,80 +1,73 @@
 package Entity;
 
+import java.util.Date;
+
 public class Room {
 
-    private int room_id;
-    private int type_Room_id;
-    private int floor_Room_id;
-    private String roomName;
-    private int numberOfPerson;
-    private int numberOfBed;
-    private double price;
-    private String status;
-    private String created_at;
-    private String updated_at;
+    private int room_Id,type_Room_Id, floor_Room_Id;
+    private String name;  
+    private double price;  
+    private String status;  
+    private Date created_at,updated_at;
+    private int size;
+    private TypeRoom typeRoom;
+    private ImageRoom imageRoom;
 
     public Room() {
     }
 
-    public Room(int room_id, int type_Room_id, int floor_Room_id, String roomName, int numberOfPerson, int numberOfBed, double price, String status, String created_at, String updated_at) {
-        this.room_id = room_id;
-        this.type_Room_id = type_Room_id;
-        this.floor_Room_id = floor_Room_id;
-        this.roomName = roomName;
-        this.numberOfPerson = numberOfPerson;
-        this.numberOfBed = numberOfBed;
+    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, Date created_at, Date updated_at, int size) {
+        this.room_Id = room_Id;
+        this.type_Room_Id = type_Room_Id;
+        this.floor_Room_Id = floor_Room_Id;
+        this.name = name;
         this.price = price;
         this.status = status;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.size = size;
     }
 
-    public int getFloor_Room_id() {
-        return floor_Room_id;
+    public Room(int room_Id, String name, double price, int size, TypeRoom typeRoom, ImageRoom imageRoom) {
+        this.room_Id = room_Id;
+        this.name = name;
+        this.price = price;
+        this.size = size;
+        this.typeRoom = typeRoom;
+        this.imageRoom = imageRoom;
+    }
+    
+
+    public int getRoom_Id() {
+        return room_Id;
     }
 
-    public void setFloor_Room_id(int floor_Room_id) {
-        this.floor_Room_id = floor_Room_id;
+    public void setRoom_Id(int room_Id) {
+        this.room_Id = room_Id;
     }
 
-    public int getRoom_id() {
-        return room_id;
+    public int getType_Room_Id() {
+        return type_Room_Id;
     }
 
-    public void setRoom_id(int room_id) {
-        this.room_id = room_id;
+    public void setType_Room_Id(int type_Room_Id) {
+        this.type_Room_Id = type_Room_Id;
     }
 
-    public int getType_Room_id() {
-        return type_Room_id;
+    public int getFloor_Room_Id() {
+        return floor_Room_Id;
     }
 
-    public void setType_Room_id(int type_Room_id) {
-        this.type_Room_id = type_Room_id;
+    public void setFloor_Room_Id(int floor_Room_Id) {
+        this.floor_Room_Id = floor_Room_Id;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    public int getNumberOfPerson() {
-        return numberOfPerson;
-    }
-
-    public void setNumberOfPerson(int numberOfPerson) {
-        this.numberOfPerson = numberOfPerson;
-    }
-
-    public int getNumberOfBed() {
-        return numberOfBed;
-    }
-
-    public void setNumberOfBed(int numberOfBed) {
-        this.numberOfBed = numberOfBed;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getPrice() {
@@ -93,25 +86,39 @@ public class Room {
         this.status = status;
     }
 
-    public String getCreated_at() {
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
 
-    public String getUpdated_at() {
+    public Date getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(String updated_at) {
+    public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     @Override
     public String toString() {
-        return "Room{" + "room_id=" + room_id + ", type_Room_id=" + type_Room_id + ", roomName=" + roomName + ", numberOfPerson=" + numberOfPerson + ", numberOfBed=" + numberOfBed + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + '}';
+        return "Room{" + "room_Id=" + room_Id + ", type_Room_Id=" + type_Room_Id + ", floor_Room_Id=" + floor_Room_Id + ", name=" + name + ", price=" + price + ", status=" + status + ", created_at=" + created_at +
+                ", updated_at=" + updated_at + ", size=" + size + ", Bed=" + typeRoom.getBed()+",Bath= "+typeRoom.getBath()+ ", Person="+typeRoom.getPeople()+ ", image = " + imageRoom.getImage()+ '}';
     }
+
+   
+    
+    
+    
 
 }

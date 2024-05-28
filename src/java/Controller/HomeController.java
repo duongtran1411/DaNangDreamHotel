@@ -6,10 +6,10 @@ package Controller;
 
 import Entity.Room;
 import Model.DAORoom;
+import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,10 +17,10 @@ import java.util.List;
 
 /**
  *
- * @author Sơnnnn
+ * @author GIGABYTE
  */
-@WebServlet(name = "RoomController", urlPatterns = {"/room"})
-public class RoomController extends HttpServlet {
+@WebServlet(name = "HomeController", urlPatterns = {"/homeController"})
+public class HomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +34,18 @@ public class RoomController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        DAORoom daoRoom = new DAORoom();
-        List<Room> listRoom = daoRoom.getAllRoom();
-
-        request.setAttribute("listRoom", listRoom);
-        request.getRequestDispatcher("Rooms.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet HomeController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet HomeController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,7 +60,11 @@ public class RoomController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        DAORoom dao = new DAORoom();
+        List<Room> list = dao.getAllRoom();
+        System.out.println(list);
+        request.setAttribute("listR", list);
+        request.getRequestDispatcher("Home.jsp").forward(request, response);
     }
 
     /**
@@ -67,7 +78,7 @@ public class RoomController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
