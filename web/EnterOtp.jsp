@@ -19,9 +19,9 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <style type="text/css">
-                    .form-gap {
-                    padding-top: 70px;
-                }
+            .form-gap {
+                padding-top: 70px;
+            }
         </style>
         <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
@@ -47,23 +47,33 @@
                                     </div>
                                     <h3 class="text-center">Da Nang Dream Hotel</h3>
                                     <h4 style="padding-top: 10px" class="text-center">Enter OTP</h4>
-									<%
-		  			if(request.getAttribute("message")!=null)
-		  			{
-		  				out.print("<p class='text-danger ml-1'>"+request.getAttribute("message")+"</p>");
-		  			}
-                                                                        %>
-                                    
-                                    <form id="register-form" action="ValidateOtp" role="form" autocomplete="off" class="form" method="post">
+                                    <%
+    if(request.getAttribute("message")!=null)
+    {
+            out.print("<p class='text-danger ml-1'>"+request.getAttribute("message")+"</p>");
+    }
+                                    %>
+
+                                    <form id="register-form" action="ValidateOtp" role="form" autocomplete="off"
+                                          class="form" method="post">
+
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <span style="width: 50px" class="input-group-addon">
-                                                    <i  class="glyphicon glyphicon-envelope color-blue"></i>
-                                                </span>
-                                                <input id="opt" name="otp" placeholder="Enter OTP"class="form-control" type="text" required="required">
+                                                <span class="input-group-addon"><i
+                                                        class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                                <input
+                                                    id="opt" name="otp" placeholder="Enter OTP"
+                                                    class="form-control" type="text" required="required">
                                             </div>
                                         </div>
-                                        <input name="recover-submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" class="btn float-right login_btn" value="Reset Password" type="submit">
+                                        <div class="form-group">
+                                            <input name="recover-submit"
+                                                   class="btn btn-lg btn-primary btn-block"
+                                                   value="Reset Password" type="submit">
+                                        </div>
+
+                                        <input type="hidden" class="hide" name="token" id="token"
+                                               value="">
                                     </form>
                                 </div>
                             </div>
