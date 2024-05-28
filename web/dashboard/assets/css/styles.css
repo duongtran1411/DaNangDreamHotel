@@ -16231,3 +16231,8 @@ ul{
 .timeline-widget .timeline-item .timeline-badge.badge-primary{
     border:2px solid #5D87FF
 }
+/* Add this CSS to your stylesheet */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    animation: slide-up 0.5s ease-in-out;
+}

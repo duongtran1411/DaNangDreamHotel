@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ManageRoom
-    Created on : May 26, 2024, 5:49:23 PM
+    Document   : ManageEvent
+    Created on : May 27, 2024, 2:35:59 PM
     Author     : Sơnnnn
 --%>
 
@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="card-body">
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addRoomModal">
-                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Room</p>                  
+                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>New Event</p>                  
                             </button>
                             <div class="container-fluid">
                                 <div class="table-wrapper">
@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-                                            
+
         <!--MODAL FADE-->
         <div class="container-fluid">
             <div class="modal fade" id="addRoomModal">
@@ -80,7 +80,7 @@
                     <div class="modal-content">
                         <form action="addProduct" method="post">
                             <div class="modal-header">						
-                                <h4 class="modal-title">Add Room</h4>
+                                <h4 class="modal-title">New Event</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">					
