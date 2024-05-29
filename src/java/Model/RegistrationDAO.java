@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class RegistrationDAO extends DBConnect {
 
     public boolean checkLogin(String email, String password) {
-        String sql = "SELECT * FROM ACCOUNT WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM ACCOUNT WHERE username = ? AND password = ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -37,14 +37,14 @@ public class RegistrationDAO extends DBConnect {
         return false;
     }
 
-    public RegistrationDTO getDataAccount(String account, String password) {
-        String sql = "SELECT * FROM ACCOUNT WHERE account = ? AND password = ?";
+    public RegistrationDTO getDataAccount(String username, String password) {
+        String sql = "SELECT * FROM ACCOUNT WHERE username = ? AND password = ?";
         PreparedStatement pre = null;
         ResultSet rs = null;
 
         try {
             pre = conn.prepareStatement(sql);
-            pre.setString(1, account);
+            pre.setString(1, username);
             pre.setString(2, password);
             rs = pre.executeQuery();
 
