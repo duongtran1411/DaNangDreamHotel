@@ -1,32 +1,50 @@
 package Entity;
+
 public class TypeRoom {
-    private int typeRoom_Id;
-    private String typeRoomName;
+
+    private int type_Room_Id;
+    private String name;
     private int event_Id;
+    private String bed;
+    private String bath;
+    private String people;
+    private String image;
 
     public TypeRoom() {
     }
 
-    public TypeRoom(int typeRoom_Id, String typeRoomName, int event_Id) {
-        this.typeRoom_Id = typeRoom_Id;
-        this.typeRoomName = typeRoomName;
+    public TypeRoom(String name, String bed, String bath, String people, String image) {
+        this.name = name;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+        this.image = image;
+    }
+
+    public TypeRoom(int type_Room_Id, String name, int event_Id, String bed, String bath, String people, String image) {
+        this.type_Room_Id = type_Room_Id;
+        this.name = name;
         this.event_Id = event_Id;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+        this.image = image;
     }
 
     public int getTypeRoom_Id() {
-        return typeRoom_Id;
+        return type_Room_Id;
     }
 
-    public void setTypeRoom_Id(int typeRoom_Id) {
-        this.typeRoom_Id = typeRoom_Id;
+    public void setTypeRoom_Id(int type_Room_Id) {
+        this.type_Room_Id = type_Room_Id;
     }
 
-    public String getTypeRoomName() {
-        return typeRoomName;
+    public String getName() {
+        return name;
     }
 
-    public void setTypeRoomName(String typeRoomName) {
-        this.typeRoomName = typeRoomName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getEvent_Id() {
@@ -37,9 +55,41 @@ public class TypeRoom {
         this.event_Id = event_Id;
     }
 
+    public String getBed() {
+        return bed;
+    }
+
+    public void setBed(String bed) {
+        this.bed = bed;
+    }
+
+    public String getBath() {
+        return bath;
+    }
+
+    public void setBath(String bath) {
+        this.bath = bath;
+    }
+
+    public String getPeople() {
+        return people;
+    }
+
+    public void setPeople(String people) {
+        this.people = people;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
-        return "TypeRoom{" + "typeRoom_Id=" + typeRoom_Id + ", typeRoomName=" + typeRoomName + ", event_Id=" + event_Id + '}';
+        return "TypeRoom{" + "type_Room_Id=" + type_Room_Id + ", name=" + name + ", event_Id=" + event_Id + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + '}';
     }
-    
+
 }
