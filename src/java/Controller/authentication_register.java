@@ -45,7 +45,8 @@ public class authentication_register extends HttpServlet {
             out.println("<body>");
             response.setContentType("text/html;charset=UTF-8");
 
-        String account = request.getParameter("acc");
+        String acoount = request.getParameter("acc");
+        String job = request.getParameter("job");
         String password = request.getParameter("pass");
         String rePass = request.getParameter("repass");
         String fullname = request.getParameter("fullname");
@@ -54,7 +55,7 @@ public class authentication_register extends HttpServlet {
             RegistrationDTO user = new RegistrationDTO();
 
         String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
-        boolean isEmailValid = Pattern.matches(emailPattern, account);
+        boolean isEmailValid = Pattern.matches(emailPattern, acoount);
 
         if (!isEmailValid) {
             request.setAttribute("mess", "Invalid email format !! Ex : example@example.com ");
@@ -77,7 +78,7 @@ public class authentication_register extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
             try {
-            dao.addUser(account, rePass, fullname, fullname, phone, address);
+            dao.addUser(acoount, job, fullname, fullname, fullname, password, rePass, phone);
         } catch (Exception ex) {
                 System.out.println(ex);   
         }

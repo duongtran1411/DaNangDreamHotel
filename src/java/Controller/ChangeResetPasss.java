@@ -5,12 +5,18 @@
 
 package Controller;
 
+
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -53,7 +59,7 @@ public class ChangeResetPasss extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("ChangeResetPasss.jsp").forward(request, response);
     } 
 
     /** 
@@ -66,8 +72,36 @@ public class ChangeResetPasss extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        
+        HttpSession session = request.getSession();
+		String newPassword = request.getParameter("password");
+		String confPassword = request.getParameter("confPassword");
+		RequestDispatcher dispatcher = null;
+		if (newPassword != null && confPassword != null && newPassword.equals(confPassword)) {
+
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/managerhotel", "root",
+						"root");
+				PreparedStatement pst = con.prepareStatement("update users set upwd = ? where uemail = ? ");
+				pst.setString(1, newPassword);
+				pst.setString(2, (String) session.getAttribute("email"));
+
+				int rowCount = pst.executeUpdate();
+				if (rowCount > 0) {
+					request.setAttribute("status", "resetSuccess");
+					dispatcher = request.getRequestDispatcher("login.jsp");
+				} else {
+					request.setAttribute("status", "resetFailed");
+					dispatcher = request.getRequestDispatcher("login.jsp");
+				}
+				dispatcher.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+    
 
     /** 
      * Returns a short description of the servlet.
