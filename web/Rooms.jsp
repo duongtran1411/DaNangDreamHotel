@@ -20,7 +20,7 @@
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
-
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>        
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/paging.css"/>
     </head>
     <body>
         <!-- Page Preloder -->
@@ -133,22 +134,24 @@
             <div class="menu-item">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-2">
+                        <div class="col-lg-4">
                             <div class="logo">
                                 <a href="index.html">
                                     <img src="img/logo.png" alt="">
                                 </a>
+                                <input type="text" name="txt" value="" placeholder="Search">
                             </div>
+                            
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-lg-8">
                             <div class="nav-menu">
                                 <nav class="mainmenu">
                                     <ul>
-                                        <li class="active"><a href="Home.jsp">Home</a></li>
+                                        <li class="active"><a href="homeController">Home</a></li>
                                         <li><a href="AboutUs.jsp">About Us</a></li>
                                         <li><a href="Rooms.jsp">Accommodation</a>
                                             <ul class="dropdown">
-                                                <li><a href="Rooms.jsp">Room</a></li>
+                                                <li><a href="roomController?index=1">Room</a></li>
                                                 <li><a href="Room_Details.jsp">Room Details</a></li>
                                                 <li><a href="Blog_Details.jsp">Blog Details</a></li>
                                                 <li><a href="#">Family Room</a></li>
@@ -191,27 +194,31 @@
         <!-- Rooms Section Begin -->
         <section class="rooms-section spad">
             <div class="container">
-                <div class="row">                 
+                <div class="row" id="content">                 
                     <c:forEach items="${listRoom}" var="o">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="room-item">
-                                <img src="img/room/room-1.jpg" alt="">
-                                <div class="ri-text">
-                                    <h4>${o.roomName}</h4>
+                        <div class="room col-lg-4 col-md-6">
+                            <div class="room-item " id="item">
+                                <img src="${o.image}" alt="" style="height: 240px">
+                                <div class="ri-text" style="height:450px">
+                                    <h4>${o.name}</h4>
                                     <h3>${o.price} VND<span>/Pernight</span></h3>
                                     <table>
                                         <tbody>
                                             <tr>
                                                 <td class="r-o">Size:</td>
-                                                <td>30 ft</td>
+                                                <td>${o.size}</td>
                                             </tr>
                                             <tr>
                                                 <td class="r-o">Capacity:</td>
-                                                <td>Max persion 3</td>
+                                                <td>${o.people}</td>
                                             </tr>
                                             <tr>
                                                 <td class="r-o">Bed:</td>
-                                                <td>King Beds</td>
+                                                <td>${o.bed}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Bath:</td>
+                                                <td>${o.bath}</td>
                                             </tr>
                                             <tr>
                                                 <td class="r-o">Services:</td>
@@ -219,19 +226,16 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a href="#" class="primary-btn">More Details</a>
+                                    <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
                                 </div>
                             </div>
                         </div>      
                     </c:forEach>
-                    <div class="col-lg-12">
-                        <div class="room-pagination">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
+                    
+                        
+                    
                 </div>
+                <button class="btn-Loadmore" onclick="loadMore()">Load More</button>
             </div>
         </section>
         <!-- Rooms Section End -->
@@ -323,5 +327,25 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <script>
+                                        function loadMore() {
+                                            var amount = document.querySelectorAll(".room").length;
+                                            $.ajax({
+                                                url: "/DaNangDreamHotel/loadMoreController",
+                                                type: "GET",
+                                                data: {
+                                                    totalRoom: amount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML += data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
+        </script>
     </body>
 </html>

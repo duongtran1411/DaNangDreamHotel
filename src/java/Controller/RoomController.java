@@ -6,21 +6,22 @@ package Controller;
 
 import Entity.Room;
 import Model.DAORoom;
+import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author GIGABYTE
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/homeController"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "RoomController", urlPatterns = {"/roomController"})
+public class RoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +40,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeController</title>");            
+            out.println("<title>Servlet RoomController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RoomController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,10 +62,9 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAORoom dao = new DAORoom();
-        List<Room> list = dao.getNewRoom();
-        request.setAttribute("listR", list);
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
-        
+        List<Room> list = dao.getTop6Room();
+        request.setAttribute("listRoom", list);
+        request.getRequestDispatcher("Rooms.jsp").forward(request, response);
     }
 
     /**

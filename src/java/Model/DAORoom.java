@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class DAORoom extends DBConnect {
 
-    public List<Room> getAllRoom() {
+    public List<Room> getNewRoom() {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
                 + "	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n"
@@ -54,30 +54,123 @@ public class DAORoom extends DBConnect {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
-            while(rs.next()){
-                return new Room(rs.getInt(1), 
+            while (rs.next()) {
+                return new Room(rs.getInt(1),
                         rs.getString(2),
                         rs.getDouble(3),
-                       rs.getInt(4),
-                        rs.getString(5), 
-                       rs.getString(6),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
                         rs.getString(7));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;        
+        return null;
     }
+    
+    public List<Room> searchRoomByText(String txt){
+        List<Room> list = new ArrayList<>();
+        String sql = "with roomDetail as (\n" +
+"		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n" +
+"		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n" +
+"		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n" +
+"		join imageroom i on i.room_Id = r.room_Id)\n" +
+"		select room_Id, name, price, size, bed, bath, people, image from roomDetail \n" +
+"		where name like '%F%' and rn = 2\n" +
+"		limit 6";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setString(1, "%"+txt+"%");
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {                
+                list.add(new Room(rs.getInt(1), 
+                        rs.getString(2), 
+                       rs.getDouble(3),
+                       rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public List<Room> getTop6Room() {
+        List<Room> list = new ArrayList<>();
+        String sql = "with roomDetail as (\n"
+                + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n"
+                + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
+                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join imageroom i on i.room_Id = r.room_Id)\n"
+                + "		select room_Id, name, price, size, bed, bath, people, image from roomDetail \n"
+                + "		where rn = 2\n"
+                + "        limit 3";
+
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    
+    public List<Room> getNext6Room(int numberRoom) {
+        List<Room> list = new ArrayList<>();
+        String sql = "with roomDetail as (\n"
+                + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n"
+                + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
+                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join imageroom i on i.room_Id = r.room_Id)\n"
+                + "		select room_Id, name, price, size, bed, bath, people, image from roomDetail \n"
+                + "		where rn = 2\n"
+                + "        limit 3 offset ?";
+
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setInt(1, numberRoom);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
 
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-//        List<Room> list = dao.getAllRoom();
-//        for (Room room : list) {
-//            System.out.println(room);
-//        }
-        
-        Room room = dao.getRoomById(18);
-        System.out.println(room);
+        List<Room> list = dao.getNext6Room(0);
+        for (Room room : list) {
+            System.out.println(room);
+        }
+
+//        Room room = dao.getRoomById(18);
+//        System.out.println(room);
     }
 
 }

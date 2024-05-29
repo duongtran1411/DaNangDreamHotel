@@ -1,0 +1,20 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 29, 2024, 1:46:11 PM
+    Author     : GIGABYTE
+*/
+
+.btn-Loadmore{
+    color: #fff;
+    border-color: #98c3ff;
+}
+
+.btn-Loadmore:hover{
+    background-color: orange;
+}
+
+
+

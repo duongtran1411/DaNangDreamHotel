@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
-
+        <link href="css/paging.css" rel="stylesheet" type="text/css"/>
 
     </head>
     <body>
@@ -72,7 +72,7 @@
             <nav class="mainmenu mobile-menu">
                 <ul>
                     <li class="active"><a href="index.html">Home</a></li>
-                    <!-- <li><a href="rooms.html">Rooms</a></li> -->
+                     <li><a href="roomController">Rooms</a></li> 
                     <li><a href="about-us.html">About Us</a></li>
                     <li>
                         <a href="Rooms.jsp">Accommodation</a>
@@ -146,7 +146,7 @@
                                         <li>
                                             <a href="Rooms.jsp">Accommodation</a>
                                             <ul class="dropdown">
-                                                <li><a href="Rooms.jsp">Rooms</a></li>
+                                                <li><a href="roomController">Rooms</a></li>
                                                 <li><a href="Blog_Details.jsp">Blog Details</a></li>
                                                 <li><a href="#">Family Room</a></li>
                                                 <li><a href="#">Premium Room</a></li>
