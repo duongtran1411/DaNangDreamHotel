@@ -4,8 +4,10 @@
  */
 package Controller;
 
+import Entity.ImageRoom;
 import Entity.Room;
 import Entity.TypeRoom;
+import Model.DAOImageRoom;
 import Model.DAORoom;
 import Model.DAOTypeRoom;
 import java.io.IOException;
@@ -26,6 +28,7 @@ public class TypeRoomController extends HttpServlet {
 
     private DAOTypeRoom daoTypeRoom = new DAOTypeRoom();
     private DAORoom daoRoom = new DAORoom();
+    private DAOImageRoom daoImageRoom = new DAOImageRoom();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,9 +63,6 @@ public class TypeRoomController extends HttpServlet {
             action = "listTypeRoom";
         }
         switch (action) {
-            case "detail":
-                detailRoomByTypeId(request, response);
-                break;
             case "loadEdit":
                 loadEdit(request, response);
                 break;
@@ -109,13 +109,6 @@ public class TypeRoomController extends HttpServlet {
         List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
         request.setAttribute("AllTypeRoom", allTypeRoom);
         request.getRequestDispatcher("dashboard/jsp/ManageTypeRoom.jsp").forward(request, response);
-    }
-
-    private void detailRoomByTypeId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int typeRoomId = Integer.parseInt(request.getParameter("id"));
-        List<Room> listRoom = daoRoom.getRoomByTypeRoomId(typeRoomId);
-        request.setAttribute("ListRoomBID", listRoom);
-        request.getRequestDispatcher("dashboard/jsp/ManageRoom.jsp").forward(request, response);
     }
 
     private void loadEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

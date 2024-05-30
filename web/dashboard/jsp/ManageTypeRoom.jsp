@@ -60,7 +60,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; width: 100%; padding: 5px;">
                                         <a href="typeRoomURL?action=loadEdit&id=${o.typeRoom_Id}" class="text-decoration-none" style="color: #08c;">Edit</a>
-                                        <a href="typeRoomURL?action=detail&id=${o.typeRoom_Id}" class="text-decoration-underline" style="color: seagreen;">Detail</a>
+                                        <a href="roomURL?action=detail&trid=${o.typeRoom_Id}" class="text-decoration-underline" style="color: seagreen;">Detail</a>
                                         <a href="typeRoomURL?action=delete&id=${o.typeRoom_Id}" class="text-decoration-none" style="color: red; ">Delete</a>
                                     </div>
                                 </div>
@@ -80,25 +80,25 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">					
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 20px">
                                     <label>Type Name</label>
-                                    <input name="name" type="text" class="form-control" required>
+                                    <input name="name" placeholder="..." type="text" class="form-control" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 20px">
                                     <label>Bed</label>
-                                    <input name="bed" class="form-control" required>
+                                    <input name="bed" placeholder="... Beds"class="form-control" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 20px">
                                     <label>Bath</label>
-                                    <input name="bath" class="form-control" required>
+                                    <input name="bath" placeholder="... Baths" class="form-control" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 20px">
                                     <label>People</label>
-                                    <input name="people" type="text" class="form-control" required>
+                                    <input name="people" placeholder="... Adults" type="text" class="form-control" required>
                                 </div>					
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 20px">
                                     <label>Image</label>
-                                    <input name="image" placeholder="URL..." type="file" class="form-control" required>
+                                    <input name="image" placeholder="URL..." type="text" class="form-control" required>
                                 </div>						
                             </div>
                             <div class="modal-footer">
@@ -110,7 +110,6 @@
                 </div>
             </div>
         </div>
-
         <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/sidebarmenu.js"></script>
