@@ -97,7 +97,7 @@ public class DAOTypeRoom extends DBConnect {
 
     public void deleteTypeRoom(int trid) {
         String sql = "delete from typeroom\n"
-                + "where type_Room_Id = ?";
+                + "where typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, trid);

@@ -118,8 +118,7 @@ public class TypeRoomController extends HttpServlet {
             // Retrieve the file part from the request
             Part filePart = request.getPart("fileImage");
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            System.out.println(fileName);
-
+            
             // Save the file to the server
             InputStream inputStream = filePart.getInputStream();
             Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName));
@@ -131,7 +130,7 @@ public class TypeRoomController extends HttpServlet {
     }
 
     private void deleteTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("type_Room_Id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         daoTypeRoom.deleteTypeRoom(id);
         response.sendRedirect("typeRoomURL?action=listTypeRoom");
     }
