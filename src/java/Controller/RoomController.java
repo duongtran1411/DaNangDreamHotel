@@ -5,7 +5,9 @@
 package Controller;
 
 import Entity.Room;
+import Entity.TypeRoom;
 import Model.DAORoom;
+import Model.DAOTypeRoom;
 import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -62,8 +64,11 @@ public class RoomController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAORoom dao = new DAORoom();
+        DAOTypeRoom daoT = new DAOTypeRoom();
         List<Room> list = dao.getTop3Room();
+        List<TypeRoom> listT = daoT.getAllTypeRoom();
         request.setAttribute("listRoom", list);
+        request.setAttribute("listTypeRoom", listT);
         request.getRequestDispatcher("Rooms.jsp").forward(request, response);
     }
 

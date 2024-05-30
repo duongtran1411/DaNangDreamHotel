@@ -66,11 +66,11 @@
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
-                    <li class="active"><a href="Home.jsp">Home</a></li>
+                    <li class="active"><a href="homeController">Home</a></li>
                     <li><a href="AboutUs.jsp">About Us</a></li>
                     <li><a href="Rooms.jsp">Accommodation</a>
                         <ul class="dropdown">
-                            <li><a href="Rooms.jsp">Room</a></li>
+                            <li><a href="roomController">Room</a></li>
                             <li><a href="roomDetailsController">Room Details</a></li>
                             <li><a href="Blog_Details.jsp">Blog Details</a></li>
                             <li><a href="#">Family Room</a></li>
@@ -145,11 +145,11 @@
                             <div class="nav-menu">
                                 <nav class="mainmenu">
                                     <ul>
-                                        <li class="active"><a href="Home.jsp">Home</a></li>
+                                        <li class="active"><a href="homeController">Home</a></li>
                                         <li><a href="AboutUs.jsp">About Us</a></li>
                                         <li><a href="Rooms.jsp">Accommodation</a>
                                             <ul class="dropdown">
-                                                <li><a href="Rooms.jsp">Room</a></li>
+                                                <li><a href="roomController">Room</a></li>
                                                 <li><a href="Room_Details.jsp">Room Details</a></li>
                                                 <li><a href="Blog_Details.jsp">Blog Details</a></li>
                                                 <li><a href="#">Family Room</a></li>

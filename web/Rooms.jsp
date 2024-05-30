@@ -185,7 +185,7 @@
                     </div>
                 </div>
                 <div class="row" style="background-color: #DFA974;">
-                    <div class="col-lg-10" style="height: 50px; " >
+                    <div class="col-lg-2" style="height: 50px; " >
                         <div style="display: inline-block;" class="search-container">   
                             <div >
                                 <input oninput="searchByName(this)" type="text" name="txt" class="input-Search"  placeholder="Search">
@@ -193,10 +193,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2">
-                        <button class="btnSort"><i class="fa-solid fa-arrow-up-short-wide"></i></button>
-                        <button class="btnSort"><i class="fa-solid fa-arrow-down-wide-short"></i></button>
+                    <div class="col-lg-6">
+                        <ul class="ulType" >
+                            <c:forEach items="${listTypeRoom}" var="o">
+                                <li> ${o.name}</li>
+                            </c:forEach>   
+                        </ul>
                     </div>
+
+                    <div class="col-lg-2">
+                        <h6 class="textSort">Sort by price</h6>
+                    </div>
+                    <div class="col-lg-2">                        
+                        <button class="btnSort" onclick="sortPriceUp()"><i class="fa-solid fa-arrow-up-short-wide"></i></button>
+                        <button class="btnSort" onclick="sortPriceDown()"><i class="fa-solid fa-arrow-down-wide-short"></i></button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -247,7 +259,7 @@
 
                 </div>
                 <button class="btn-Loadmore" onclick="loadMore()">Load More</button>
-                <button class="btn-Loadmore" onclick="loadLess()">Load Less</button>
+                <!--                <button class="btn-Loadmore" onclick="loadLess()">Load Less</button>-->
             </div>
         </section>
         <!-- Rooms Section End -->
@@ -377,24 +389,46 @@
                                                 }
                                             });
                                         }
-                                        function loadLess(){
-                                            var amount = document.querySelectorAll(".room").length;
+
+                                        function sortPriceUp() {
+                                            var amount = 0;
                                             $.ajax({
-                                                url: "/DaNangDreamHotel/loadMoreController?action=less",
-                                                type: "GET",
+                                                url: '/DaNangDreamHotel/sortRoomController?action=asc',
+                                                type: 'GET',
                                                 data: {
-                                                    totalRoom: amount
+                                                    size: amount
                                                 },
                                                 success: function (data) {
                                                     var row = document.getElementById("content");
-                                                    row.innerHTML -= data;
+                                                    row.innerHTML = data;
                                                     console.log("success");
                                                 },
                                                 error: function (xhr) {
-                                                    console.log(xhr);
+                                                    console.log(xhr, txtSearch.value);
                                                 }
                                             });
                                         }
+                                        ;
+
+                                        function sortPriceDown() {
+                                            var amount = 0;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/sortRoomController?action=desc',
+                                                type: 'GET',
+                                                data: {
+                                                    size: amount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr, txtSearch.value);
+                                                }
+                                            });
+                                        }
+
         </script>
     </body>
 </html>

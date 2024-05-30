@@ -28,6 +28,11 @@ public class TypeRoom {
         this.image = image;
     }
     
+    public TypeRoom(int typeRoom_Id, String name) {
+        this.typeRoom_Id = typeRoom_Id;
+        this.name = name;
+    }
+    
     public TypeRoom(String bed, String bath, String people) {
         this.bed = bed;
         this.bath = bath;

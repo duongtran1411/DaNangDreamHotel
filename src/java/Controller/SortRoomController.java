@@ -6,10 +6,10 @@ package Controller;
 
 import Entity.Room;
 import Model.DAORoom;
+import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,8 +20,8 @@ import java.util.List;
  *
  * @author GIGABYTE
  */
-@WebServlet(name = "LoadMoreController", urlPatterns = {"/loadMoreController"})
-public class LoadMoreController extends HttpServlet {
+@WebServlet(name = "SortRoomController", urlPatterns = {"/sortRoomController"})
+public class SortRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class LoadMoreController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PagingRoomController</title>");
+            out.println("<title>Servlet SortRoomController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PagingRoomController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SortRoomController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,14 +63,16 @@ public class LoadMoreController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        DAORoom dao = new DAORoom();
+        String amount = request.getParameter("size");
         String action = request.getParameter("action");
-        String amount = request.getParameter("totalRoom");
-        int numberRoom = Integer.parseInt(amount);
+        int number = Integer.parseInt(amount);
+        DAORoom dao = new DAORoom();
+        int numberRoom = dao.countRoom();
         List<Room> list = new ArrayList<>();
+
         switch (action) {
-            case "more":
-                list = dao.getNext3Room(numberRoom);
+            case "asc":
+                list = dao.sortRoomByPrice(numberRoom, number);
                 for (Room o : list) {
                     out.println("<div class=\"room col-lg-4 col-md-6\">\n"
                             + "                            <div class=\"room-item \" id=\"item\">\n"
@@ -106,9 +108,47 @@ public class LoadMoreController extends HttpServlet {
                             + "                                </div>\n"
                             + "                            </div>\n"
                             + "                        </div> ");
-                };
+                }
                 break;
-            
+            case "desc":
+                list = dao.sortRoomByPriceDown(numberRoom, number);
+                for (Room o : list) {
+                    out.println("<div class=\"room col-lg-4 col-md-6\">\n"
+                            + "                            <div class=\"room-item \" id=\"item\">\n"
+                            + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"
+                            + "                                <div class=\"ri-text\" style=\"height:450px\">\n"
+                            + "                                    <h4>" + o.getName() + "</h4>\n"
+                            + "                                    <h3>" + o.getPrice() + " VND<span>/Pernight</span></h3>\n"
+                            + "                                    <table>\n"
+                            + "                                        <tbody>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Size:</td>\n"
+                            + "                                                <td>" + o.getSize() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Capacity:</td>\n"
+                            + "                                                <td>" + o.getPeople() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Bed:</td>\n"
+                            + "                                                <td>" + o.getBed() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Bath:</td>\n"
+                            + "                                                <td>" + o.getBath() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Services:</td>\n"
+                            + "                                                <td>Wifi, Television, Bathroom,...</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                        </tbody>\n"
+                            + "                                    </table>\n"
+                            + "                                    <a href=\"roomDetailsController?Id=" + o.getRoom_Id() + "\" class=\"primary-btn\">More Details</a>\n"
+                            + "                                </div>\n"
+                            + "                            </div>\n"
+                            + "                        </div> ");
+                }
+                break;
         }
     }
 

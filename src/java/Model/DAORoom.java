@@ -69,24 +69,38 @@ public class DAORoom extends DBConnect {
         return null;
     }
     
-    public List<Room> searchRoomByText(String txt){
+    public int countRoom(){
+        String sql = "select count(*) from room";
+        try {
+            PreparedStatement pre= conn.prepareCall(sql);
+            ResultSet rs = pre.executeQuery();
+            if(rs.next()){
+               return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public List<Room> searchRoomByText(String txt) {
         List<Room> list = new ArrayList<>();
-        String sql = "with roomDetail as (\n" +
-"		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n" +
-"		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n" +
-"		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n" +
-"		join imageroom i on i.room_Id = r.room_Id)\n" +
-"		select room_Id, name, price, size, bed, bath, people, image from roomDetail \n" +
-"		where name like ? and rn = 2" ;
+        String sql = "with roomDetail as (\n"
+                + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n"
+                + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
+                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join imageroom i on i.room_Id = r.room_Id)\n"
+                + "		select room_Id, name, price, size, bed, bath, people, image from roomDetail \n"
+                + "		where name like ? and rn = 2";
         try {
             PreparedStatement pre = conn.prepareCall(sql);
-            pre.setString(1, "%"+txt+"%");
+            pre.setString(1, "%" + txt + "%");
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {                
-                list.add(new Room(rs.getInt(1), 
-                        rs.getString(2), 
-                       rs.getDouble(3),
-                       rs.getInt(4),
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getInt(4),
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
@@ -97,7 +111,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Room> getTop3Room() {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -127,8 +141,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
-    
+
     public List<Room> getNext3Room(int numberRoom) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -160,10 +173,75 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
+    public List<Room> sortRoomByPrice(int sizeRoom , int numberRoom) {
+        List<Room> list = new ArrayList<>();
+        String sql = "with roomDetail as (\n"
+                + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n"
+                + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ) AS rn from room r\n"
+                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join imageroom i on i.room_Id = r.room_Id)\n"
+                + "		select room_Id, name, price, size, bed, bath, people, image from roomDetail \n"
+                + "		where  rn = 2\n"
+                + "        order by price asc\n"
+                + "		 limit ? offset ? ";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setInt(1, sizeRoom);
+            pre.setInt(2, numberRoom);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public List<Room> sortRoomByPriceDown(int sizeRoom , int numberRoom) {
+        List<Room> list = new ArrayList<>();
+        String sql = "with roomDetail as (\n"
+                + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n"
+                + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ) AS rn from room r\n"
+                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join imageroom i on i.room_Id = r.room_Id)\n"
+                + "		select room_Id, name, price, size, bed, bath, people, image from roomDetail \n"
+                + "		where  rn = 2\n"
+                + "        order by price desc\n"
+                + "		 limit ? offset ? ";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setInt(1, sizeRoom);
+            pre.setInt(2, numberRoom);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        List<Room> list = dao.searchRoomByText("F");
+        int a = dao.countRoom();
+        System.out.println(a);
+        List<Room> list = dao.sortRoomByPrice(a,0 );
         for (Room room : list) {
             System.out.println(room);
         }
