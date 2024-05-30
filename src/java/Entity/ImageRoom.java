@@ -1,11 +1,26 @@
 package Entity;
 
 public class ImageRoom {
+
     private int image_Room_Id;
     private int room_Id;
     private String image;
+    private String name;
 
     public ImageRoom() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ImageRoom(String name, String image) {
+        this.name = name;
+        this.image = image;
     }
 
     public ImageRoom(int image_Room_Id, int room_Id, String image) {
@@ -17,7 +32,7 @@ public class ImageRoom {
     public ImageRoom(String image) {
         this.image = image;
     }
-    
+
     public int getImage_Room_Id() {
         return image_Room_Id;
     }
@@ -44,8 +59,7 @@ public class ImageRoom {
 
     @Override
     public String toString() {
-        return "Image{" + "image_Room_Id=" + image_Room_Id + ", room_Id=" + room_Id + ", image=" + image + '}';
+        return "ImageRoom{" + "image_Room_Id=" + image_Room_Id + ", room_Id=" + room_Id + ", image=" + image + ", name=" + name + '}';
     }
-    
-    
+
 }

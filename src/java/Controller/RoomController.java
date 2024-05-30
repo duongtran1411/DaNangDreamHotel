@@ -4,8 +4,12 @@
  */
 package Controller;
 
+import Entity.ImageRoom;
 import Entity.Room;
+import Entity.TypeRoom;
+import Model.DAOImageRoom;
 import Model.DAORoom;
+import Model.DAOTypeRoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,8 +23,12 @@ import java.util.List;
  *
  * @author Sơnnnn
  */
-@WebServlet(name = "RoomController", urlPatterns = {"/room"})
+@WebServlet(name = "RoomController", urlPatterns = {"/roomURL"})
 public class RoomController extends HttpServlet {
+
+    private DAOTypeRoom daoTypeRoom = new DAOTypeRoom();
+    private DAORoom daoRoom = new DAORoom();
+    private DAOImageRoom daoImageRoom = new DAOImageRoom();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +42,7 @@ public class RoomController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        DAORoom daoRoom = new DAORoom();
-        List<Room> listRoom = daoRoom.getAllRoom();
 
-        request.setAttribute("listRoom", listRoom);
-        request.getRequestDispatcher("Rooms.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,7 +57,32 @@ public class RoomController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        if (action == null || action.isEmpty() || action.isBlank()) {
+            action = "listAllRoom";
+        }
+        switch (action) {
+            case "detail":
+                detailRoom(request, response);
+                break;
+            case "view":
+                viewImageByRoomId(request, response);
+                break;
+            case "add":
+                addRoom(request, response);
+                break;
+            case "delete":
+                deleteRoom(request, response);
+                break;
+            case "loadEdit":
+                loadEdit(request, response);
+                break;
+            case "edit":
+                editRoom(request, response);
+                break;
+            default:
+                listAllRoom(request, response);
+        }
     }
 
     /**
@@ -67,7 +96,7 @@ public class RoomController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     /**
@@ -79,5 +108,70 @@ public class RoomController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void listAllRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Room> allRoom = daoRoom.getAllRoom();
+        request.setAttribute("AllRoom", allRoom);
+        List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
+        request.setAttribute("AllTypeRoom", allTypeRoom);
+        request.getRequestDispatcher("dashboard/jsp/ManageRoom.jsp").forward(request, response);
+    }
+
+    private void detailRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int typeRoomId = Integer.parseInt(request.getParameter("trid"));
+        List<Room> listRoom = daoRoom.getRoomByTypeRoomId(typeRoomId);
+        request.setAttribute("ListRoomBID", listRoom);
+        List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
+        request.setAttribute("AllTypeRoom", allTypeRoom);
+        request.getRequestDispatcher("dashboard/jsp/ManageRoom.jsp").forward(request, response);
+    }
+
+    private void viewImageByRoomId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int roomId = Integer.parseInt(request.getParameter("rid"));
+        Room room = daoRoom.getNameByRoomId(roomId);
+        List<ImageRoom> imageRooms = daoImageRoom.getImageByRoomId(roomId);
+        request.setAttribute("ImageRoomBRID", imageRooms);
+        request.setAttribute("NameRoom", room);
+        request.getRequestDispatcher("dashboard/jsp/ViewImageRoom.jsp").forward(request, response);
+    }
+
+    private void addRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        int floor = Integer.parseInt(request.getParameter("floor"));
+        double price = Double.parseDouble(request.getParameter("price"));
+        int size = Integer.parseInt(request.getParameter("size"));
+        int trid = Integer.parseInt(request.getParameter("type_Room_Id"));
+
+        daoRoom.addRoom(name, floor, price, size, trid);
+        response.sendRedirect("roomURL?action=");
+    }
+
+    private void deleteRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int roomId = Integer.parseInt(request.getParameter("rid"));
+        daoRoom.deleteRoom(roomId);
+        response.sendRedirect("roomURL?action=");
+    }
+
+    private void loadEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int roomId = Integer.parseInt(request.getParameter("rid"));
+        Room room = daoRoom.getRoomByID(roomId);
+        List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
+        request.setAttribute("AllTypeRoom", allTypeRoom);
+        request.setAttribute("RoomByID", room);
+        request.getRequestDispatcher("dashboard/jsp/EditRoom.jsp").forward(request, response);
+    }
+
+    private void editRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        int roomId = Integer.parseInt(request.getParameter("rid"));
+        String name = request.getParameter("name");
+        int floor = Integer.parseInt(request.getParameter("floor"));
+        double price = Double.parseDouble(request.getParameter("price"));
+        int size = Integer.parseInt(request.getParameter("size"));
+        int trid = Integer.parseInt(request.getParameter("trid"));
+        daoRoom.editRoom(trid, floor, name, price, size, roomId);
+
+        response.sendRedirect("roomURL?action=");
+    }
 
 }

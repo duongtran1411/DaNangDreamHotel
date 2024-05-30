@@ -25,39 +25,56 @@
         <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
              data-sidebar-position="fixed" data-header-position="fixed">
             <jsp:include page="SlideBar.jsp"></jsp:include>
-            <div class="body-wrapper">
+                <div class="body-wrapper">
                 <jsp:include page="Profile.jsp"></jsp:include>
-                <div class="card">
-                    <div class="card-body">
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addRoomModal">
-                            <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Room</p>                  
-                        </button>
-                        <div class="container-fluid">
-                            <div class="table-wrapper">
-                                <div class="table-title" style="background-color: #000">                 
-                                </div>
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Img</th>
-                                            <th>Floor</th>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Size</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${ListRoomBID}" var="o">
+                    <div class="card">
+                        <div class="card-body">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addRoomModal">
+                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Room</p>                  
+                            </button>
+                            <div class="container-fluid">
+                                <div class="table-wrapper">
+                                    <div class="table-title" style="background-color: #000">                 
+                                    </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
                                             <tr>
-                                                <td style="width: 250px"><img style="width: 20%" src="${o.image}" alt="alt"/></td>
+                                                <th>Image</th>
+                                                <th>Floor</th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Size</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${AllRoom}" var="o">
+                                            <tr>
+                                                <td>
+                                                    <a href="roomURL?action=view&rid=${o.room_Id}">View</a>
+                                                </td>
                                                 <td>${o.floor_Room_Id}</td>
                                                 <td>${o.name}</td>
                                                 <td>${o.price}</td>
                                                 <td>${o.size}</td>
                                                 <td>
-                                                    <a href="LoadEditProduct?productID=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
-                                                    <a href="deleteProduct?productID=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                    <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                    <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        <c:forEach items="${ListRoomBID}" var="o">
+                                            <tr>
+                                                <td>
+                                                    <a href="roomURL?action=view&rid=${o.room_Id}">View</a>
+                                                </td>
+                                                <td>${o.floor_Room_Id}</td>
+                                                <td>${o.name}</td>
+                                                <td>${o.price}</td>
+                                                <td>${o.size}</td>
+                                                <td>
+                                                    <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                    <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -71,40 +88,66 @@
         </div>
 
         <!--MODAL FADE-->
+        <div class="modal" id="loadImage">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">All Image</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row" style="margin-left: 35px">
+                            <img src="" style="width: 32%; margin-bottom: 20px" alt="alt"/>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         <div class="container-fluid">
             <div class="modal fade" id="addRoomModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="addProduct" method="post">
+                        <form action="roomURL?action=add" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Add Room</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">					
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 12px">
                                     <label>Name</label>
-                                    <input name="productName" type="text" class="form-control" required>
+                                    <input name="name" type="text" class="form-control" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 12px">
+                                    <label>Floor</label>
+                                    <input name="floor" type="number" class="form-control" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 12px">
                                     <label>Price</label>
-                                    <input name="price" class="form-control" required>
+                                    <input name="price" type="number" class="form-control" required>
                                 </div>
-                                <div class="form-group">
-                                    <label>Img</label>
-                                    <input name="img" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <input name="description" type="text" class="form-control" required>
+                                <div class="form-group"style="margin-bottom: 12px">
+                                    <label>Size</label>
+                                    <input name="size" type="number" class="form-control" required>
                                 </div>					
-                                <div class="form-group">
-                                    <label>Category</label>
-                                    <select name="category" class="form-select">
-                                        <c:forEach items="${listCate}" var="o">
-                                            <option value="${o.categoryID}">${o.name}</option>
+                                <div class="form-group" style="margin-bottom: 12px">
+                                    <label>Type Room</label>
+                                    <select name="type_Room_Id" class="form-select" aria-label="Default select example">
+                                        <c:forEach items="${AllTypeRoom}" var="o">
+                                            <option value="${o.typeRoom_Id}">${o.name}</option>
                                         </c:forEach>
                                     </select>
-                                </div>					
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
@@ -115,7 +158,7 @@
                 </div>
             </div>
         </div>
-
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="dashboard/assets/js/sidebarmenu.js"></script>

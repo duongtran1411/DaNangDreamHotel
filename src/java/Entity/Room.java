@@ -16,6 +16,19 @@ public class Room {
     public Room() {
     }
 
+    public Room(String name) {
+        this.name = name;
+    }
+
+    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, int size) {
+        this.room_Id = room_Id;
+        this.type_Room_Id = type_Room_Id;
+        this.floor_Room_Id = floor_Room_Id;
+        this.name = name;
+        this.price = price;
+        this.size = size;
+    }
+
     public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, String created_at, String updated_at, int size) {
         this.room_Id = room_Id;
         this.type_Room_Id = type_Room_Id;
@@ -27,7 +40,7 @@ public class Room {
         this.updated_at = updated_at;
         this.size = size;
     }
-    
+
     public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, String created_at, String updated_at, int size, String image) {
         this.room_Id = room_Id;
         this.type_Room_Id = type_Room_Id;
