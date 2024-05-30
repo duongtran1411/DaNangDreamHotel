@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,46 +63,92 @@ public class LoadMoreController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        DAORoom dao = new DAORoom();
+        String action = request.getParameter("action");
         String amount = request.getParameter("totalRoom");
         int numberRoom = Integer.parseInt(amount);
-        DAORoom dao = new DAORoom();
-        List<Room> list = dao.getNext6Room(numberRoom);
-        for (Room o : list) {
-            out.println("<div class=\"room col-lg-4 col-md-6\">\n" +
-"                            <div class=\"room-item \" id=\"item\">\n" +
-"                                <img src=\""+o.getImage()+"\" alt=\"\" style=\"height: 240px\">\n" +
-"                                <div class=\"ri-text\" style=\"height:450px\">\n" +
-"                                    <h4>"+o.getName()+"</h4>\n" +
-"                                    <h3>"+o.getPrice()+" VND<span>/Pernight</span></h3>\n" +
-"                                    <table>\n" +
-"                                        <tbody>\n" +
-"                                            <tr>\n" +
-"                                                <td class=\"r-o\">Size:</td>\n" +
-"                                                <td>"+o.getSize()+"</td>\n" +
-"                                            </tr>\n" +
-"                                            <tr>\n" +
-"                                                <td class=\"r-o\">Capacity:</td>\n" +
-"                                                <td>"+o.getPeople()+"</td>\n" +
-"                                            </tr>\n" +
-"                                            <tr>\n" +
-"                                                <td class=\"r-o\">Bed:</td>\n" +
-"                                                <td>"+o.getBed()+"</td>\n" +
-"                                            </tr>\n" +
-"                                            <tr>\n" +
-"                                                <td class=\"r-o\">Bath:</td>\n" +
-"                                                <td>"+o.getBath()+"</td>\n" +
-"                                            </tr>\n" +
-"                                            <tr>\n" +
-"                                                <td class=\"r-o\">Services:</td>\n" +
-"                                                <td>Wifi, Television, Bathroom,...</td>\n" +
-"                                            </tr>\n" +
-"                                        </tbody>\n" +
-"                                    </table>\n" +
-"                                    <a href=\"roomDetailsController?Id="+o.getRoom_Id()+"\" class=\"primary-btn\">More Details</a>\n" +
-"                                </div>\n" +
-"                            </div>\n" +
-"                        </div> ");
-        };
+        List<Room> list = new ArrayList<>();
+        switch (action) {
+            case "more":
+                list = dao.getNext3Room(numberRoom);
+                for (Room o : list) {
+                    out.println("<div class=\"room col-lg-4 col-md-6\">\n"
+                            + "                            <div class=\"room-item \" id=\"item\">\n"
+                            + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"
+                            + "                                <div class=\"ri-text\" style=\"height:450px\">\n"
+                            + "                                    <h4>" + o.getName() + "</h4>\n"
+                            + "                                    <h3>" + o.getPrice() + " VND<span>/Pernight</span></h3>\n"
+                            + "                                    <table>\n"
+                            + "                                        <tbody>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Size:</td>\n"
+                            + "                                                <td>" + o.getSize() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Capacity:</td>\n"
+                            + "                                                <td>" + o.getPeople() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Bed:</td>\n"
+                            + "                                                <td>" + o.getBed() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Bath:</td>\n"
+                            + "                                                <td>" + o.getBath() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Services:</td>\n"
+                            + "                                                <td>Wifi, Television, Bathroom,...</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                        </tbody>\n"
+                            + "                                    </table>\n"
+                            + "                                    <a href=\"roomDetailsController?Id=" + o.getRoom_Id() + "\" class=\"primary-btn\">More Details</a>\n"
+                            + "                                </div>\n"
+                            + "                            </div>\n"
+                            + "                        </div> ");
+                };
+                break;
+            case "less":
+                list = dao.getNext3Room(numberRoom - 3);
+                for (Room o : list) {
+                    out.println("<div class=\"room col-lg-4 col-md-6\">\n"
+                            + "                            <div class=\"room-item \" id=\"item\">\n"
+                            + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"
+                            + "                                <div class=\"ri-text\" style=\"height:450px\">\n"
+                            + "                                    <h4>" + o.getName() + "</h4>\n"
+                            + "                                    <h3>" + o.getPrice() + " VND<span>/Pernight</span></h3>\n"
+                            + "                                    <table>\n"
+                            + "                                        <tbody>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Size:</td>\n"
+                            + "                                                <td>" + o.getSize() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Capacity:</td>\n"
+                            + "                                                <td>" + o.getPeople() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Bed:</td>\n"
+                            + "                                                <td>" + o.getBed() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Bath:</td>\n"
+                            + "                                                <td>" + o.getBath() + "</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                            <tr>\n"
+                            + "                                                <td class=\"r-o\">Services:</td>\n"
+                            + "                                                <td>Wifi, Television, Bathroom,...</td>\n"
+                            + "                                            </tr>\n"
+                            + "                                        </tbody>\n"
+                            + "                                    </table>\n"
+                            + "                                    <a href=\"roomDetailsController?Id=" + o.getRoom_Id() + "\" class=\"primary-btn\">More Details</a>\n"
+                            + "                                </div>\n"
+                            + "                            </div>\n"
+                            + "                        </div> ");
+                }
+                ;
+                break;
+        }
     }
 
     /**

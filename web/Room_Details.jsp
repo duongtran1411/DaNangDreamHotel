@@ -71,7 +71,7 @@
                     <li><a href="Rooms.jsp">Accommodation</a>
                         <ul class="dropdown">
                             <li><a href="Rooms.jsp">Room</a></li>
-                            <li><a href="Room_Details.jsp">Room Details</a></li>
+                            <li><a href="roomDetailsController">Room Details</a></li>
                             <li><a href="Blog_Details.jsp">Blog Details</a></li>
                             <li><a href="#">Family Room</a></li>
                             <li><a href="#">Premium Room</a></li>
@@ -93,6 +93,7 @@
                 <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
             </ul>
         </div>
+        
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->

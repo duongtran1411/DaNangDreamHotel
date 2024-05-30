@@ -77,8 +77,7 @@ public class DAORoom extends DBConnect {
 "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n" +
 "		join imageroom i on i.room_Id = r.room_Id)\n" +
 "		select room_Id, name, price, size, bed, bath, people, image from roomDetail \n" +
-"		where name like '%F%' and rn = 2\n" +
-"		limit 6";
+"		where name like ? and rn = 2" ;
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setString(1, "%"+txt+"%");
@@ -99,7 +98,7 @@ public class DAORoom extends DBConnect {
         return list;
     }
     
-    public List<Room> getTop6Room() {
+    public List<Room> getTop3Room() {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n"
@@ -130,7 +129,7 @@ public class DAORoom extends DBConnect {
     }
     
     
-    public List<Room> getNext6Room(int numberRoom) {
+    public List<Room> getNext3Room(int numberRoom) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.people, i.image ,\n"
@@ -164,7 +163,7 @@ public class DAORoom extends DBConnect {
 
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        List<Room> list = dao.getNext6Room(0);
+        List<Room> list = dao.searchRoomByText("F");
         for (Room room : list) {
             System.out.println(room);
         }

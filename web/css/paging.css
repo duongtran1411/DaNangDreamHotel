@@ -7,14 +7,65 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : GIGABYTE
 */
 
-.btn-Loadmore{
-    color: #fff;
-    border-color: #98c3ff;
+/*.btn-Loadmore{
+    color: #ffffff;
+    border-color: #DFA974;
+    background-color: #DFA974;
 }
 
 .btn-Loadmore:hover{
     background-color: orange;
 }
 
+.btnSearch{
+    padding-top: 5px;
+    
+    transform: translateX(-25px);
+    pointer-events: none;
+    opacity: 0.7;
+}
 
+.input-Search{
+    border: none;
+    opacity: 1;
+    width: 180px;
+    transform: translateY(10px);
+    padding-right: 100px;
+    
+}*/
+.btn-Loadmore {
+            color: #ffffff;
+            border-color: #DFA974;
+            background-color: #DFA974;
+        }
 
+        .btn-Loadmore:hover {
+            background-color: orange;
+        }
+
+        .search-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .input-Search {
+            transform: translateY(8px);
+            border: 1px solid #ccc;
+            opacity: 1;
+            width: 180px;
+            padding: 5px 30px 5px 10px;
+            border-radius: 4px;
+        }
+
+        .btnSearch {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-5%);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+.btnSort{
+    transform: translateY(10px);
+}

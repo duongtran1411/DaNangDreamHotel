@@ -20,7 +20,8 @@
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>     
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -139,9 +140,8 @@
                                 <a href="index.html">
                                     <img src="img/logo.png" alt="">
                                 </a>
-                                <input type="text" name="txt" value="" placeholder="Search">
                             </div>
-                            
+
                         </div>
                         <div class="col-lg-8">
                             <div class="nav-menu">
@@ -162,9 +162,6 @@
                                         <li><a href="Contact.jsp">Contact</a></li>
                                     </ul>
                                 </nav>
-                                <div class="nav-right search-switch">
-                                    <i class="icon_search"></i>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -185,6 +182,20 @@
                                 <span>Rooms</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row" style="background-color: #DFA974;">
+                    <div class="col-lg-10" style="height: 50px; " >
+                        <div style="display: inline-block;" class="search-container">   
+                            <div >
+                                <input oninput="searchByName(this)" type="text" name="txt" class="input-Search"  placeholder="Search">
+                                <i class="fa-solid fa-magnifying-glass btnSearch" ></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btnSort"><i class="fa-solid fa-arrow-up-short-wide"></i></button>
+                        <button class="btnSort"><i class="fa-solid fa-arrow-down-wide-short"></i></button>
                     </div>
                 </div>
             </div>
@@ -231,11 +242,12 @@
                             </div>
                         </div>      
                     </c:forEach>
-                    
-                        
-                    
+
+
+
                 </div>
                 <button class="btn-Loadmore" onclick="loadMore()">Load More</button>
+                <button class="btn-Loadmore" onclick="loadLess()">Load Less</button>
             </div>
         </section>
         <!-- Rooms Section End -->
@@ -331,7 +343,7 @@
                                         function loadMore() {
                                             var amount = document.querySelectorAll(".room").length;
                                             $.ajax({
-                                                url: "/DaNangDreamHotel/loadMoreController",
+                                                url: "/DaNangDreamHotel/loadMoreController?action=more",
                                                 type: "GET",
                                                 data: {
                                                     totalRoom: amount
@@ -339,6 +351,43 @@
                                                 success: function (data) {
                                                     var row = document.getElementById("content");
                                                     row.innerHTML += data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
+                                        function searchByName(txtSearch) {
+                                            var text = txtSearch.value;
+                                            console.log(text);
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/searchController',
+                                                type: 'GET',
+                                                data: {
+                                                    txt: text
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr, txtSearch.value);
+                                                }
+                                            });
+                                        }
+                                        function loadLess(){
+                                            var amount = document.querySelectorAll(".room").length;
+                                            $.ajax({
+                                                url: "/DaNangDreamHotel/loadMoreController?action=less",
+                                                type: "GET",
+                                                data: {
+                                                    totalRoom: amount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML -= data;
                                                     console.log("success");
                                                 },
                                                 error: function (xhr) {

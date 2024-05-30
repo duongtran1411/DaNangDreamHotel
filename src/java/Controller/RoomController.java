@@ -62,7 +62,7 @@ public class RoomController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAORoom dao = new DAORoom();
-        List<Room> list = dao.getTop6Room();
+        List<Room> list = dao.getTop3Room();
         request.setAttribute("listRoom", list);
         request.getRequestDispatcher("Rooms.jsp").forward(request, response);
     }

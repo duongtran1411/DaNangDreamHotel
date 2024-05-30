@@ -20,6 +20,10 @@
         <servlet-name>LoadMoreController</servlet-name>
         <servlet-class>Controller.LoadMoreController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>Controller.SearchController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/loginControllerURL</url-pattern>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>LoadMoreController</servlet-name>
         <url-pattern>/loadMoreController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/searchController</url-pattern>
     </servlet-mapping>
 </web-app>
