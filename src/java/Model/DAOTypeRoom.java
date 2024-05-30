@@ -57,7 +57,7 @@ public class DAOTypeRoom extends DBConnect {
     }
 
     public TypeRoom getTypeRoomByID(int trid) {
-        String sql = "SELECT * FROM typeroom WHERE type_Room_Id = ?";
+        String sql = "SELECT * FROM typeroom WHERE typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, trid);
@@ -97,7 +97,7 @@ public class DAOTypeRoom extends DBConnect {
 
     public void deleteTypeRoom(int trid) {
         String sql = "delete from typeroom\n"
-                + "where type_Room_Id = ?";
+                + "where typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, trid);

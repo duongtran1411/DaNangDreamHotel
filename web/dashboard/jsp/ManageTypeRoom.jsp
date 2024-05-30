@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!doctype html>
@@ -32,10 +33,17 @@
                         </button>
                         <div class="row">                 
                         <c:forEach items="${AllTypeRoom}" var="o">
-                            <c:url value="${o.image}" var="urlImg1"/>
+                            <c:url value="/img/typeroom/${o.image}" var="urlImg1"/>
                             <div class="col-lg-3 col-md-6 d-flex justify-content-center">
                                 <div class="room-item" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 15px; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
-                                    <img src="${o.image}" style="width: 100%; border-radius: 15px 15px 0 0;" alt="">
+                                    <c:choose>
+                                        <c:when test="${fn:startsWith(o.image, 'http')}">
+                                            <img src="${o.image}" style="width: 304px; height: 202px; border-radius: 15px 15px 0 0;" alt="">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="${urlImg1}" style="width: 304px; height: 202px; border-radius: 15px 15px 0 0;" alt="">
+                                        </c:otherwise>
+                                    </c:choose>
                                     <div class="ri-text" style="padding: 10px; text-align: left; width: 100%;">
                                         <h4 class="text-center" style="margin-bottom: 3px">${o.name}</h4>
                                         <div class="content-icon d-flex align-items-between justify-content-between" style="font-size: 0.95rem;">

@@ -73,7 +73,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
-                                <input value="${TypeRoomBID.image}" name="image" type="text" class="form-control" required>
+                                <input name="fileImage" type="file" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">

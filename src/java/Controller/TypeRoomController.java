@@ -1,12 +1,7 @@
 package Controller;
 
-import Entity.ImageRoom;
-import Entity.Room;
 import Entity.TypeRoom;
-import Model.DAOImageRoom;
-import Model.DAORoom;
 import Model.DAOTypeRoom;
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,11 +9,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @WebServlet(name = "TypeRoomController", urlPatterns = {"/typeRoomURL"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1 MB
@@ -27,8 +25,6 @@ import java.util.List;
 public class TypeRoomController extends HttpServlet {
 
     private DAOTypeRoom daoTypeRoom = new DAOTypeRoom();
-    private DAORoom daoRoom = new DAORoom();
-    private DAOImageRoom daoImageRoom = new DAOImageRoom();
     private static String uploadPath = null;
 
     @Override
@@ -43,14 +39,13 @@ public class TypeRoomController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        /* TODO output your page here. You may use following sample code. */
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null || action.isEmpty() || action.isBlank()) {
+        if (action == null || action.isEmpty()) {
             action = "listTypeRoom";
         }
         switch (action) {
@@ -114,26 +109,24 @@ public class TypeRoomController extends HttpServlet {
         String bed = request.getParameter("bed");
         String bath = request.getParameter("bath");
         String people = request.getParameter("people");
-        try {
-            // Retrieve the file part from the request
-            Part filePart = request.getPart("fileImage");
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            System.out.println(fileName);
 
-            // Save the file to the server
+        try {
+            Part filePart = request.getPart("fileImage");
+            String fileName = UUID.randomUUID().toString() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+
             InputStream inputStream = filePart.getInputStream();
             Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName));
             daoTypeRoom.addTypeRoom(name, bed, bath, people, fileName);
-            response.sendRedirect("typeRoomURL");
+            response.sendRedirect("typeRoomURL?action=listTypeRoom");
         } catch (IOException | ServletException e) {
             response.getWriter().println("File upload failed due to an error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     private void deleteTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("type_Room_Id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         daoTypeRoom.deleteTypeRoom(id);
         response.sendRedirect("typeRoomURL?action=listTypeRoom");
     }
-
 }
