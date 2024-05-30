@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ManageTypeRoom.jsp" aria-expanded="false">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
                         <span>
                             <i class="fas fa-hotel"></i> 
                         </span>

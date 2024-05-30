@@ -4,6 +4,7 @@
     Author     : Sơnnnn
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -12,13 +13,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Da Nang Hotel</title>
-        <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-        <link rel="stylesheet" href="../assets/css/styles.min.css" />
-        <link rel="stylesheet" href="../assets/css/styles.css" />
+        <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
     </head>
 
     <body>
@@ -39,31 +39,45 @@
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Type</th>
+                                                <th>Image</th>
                                                 <th>Floor</th>
-                                                <th>NoP</th>
-                                                <th>Bed</th>
-                                                <th>Bath</th>
+                                                <th>Name</th>
                                                 <th>Price</th>
+                                                <th>Size</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${listUsers}" var="o">
-                                        <tr>
-                                            <th scope="row">${o.userID}</th>
-                                            <td>${o.userName}</td>
-                                            <td>${o.userName}</td>
-                                            <td>${o.password}</td>
-                                            <td>${o.email}</td>
-                                            <td>${o.phone}</td>
-                                            <td>o.roleID</td>
-                                            <td>
-                                                <a href="DeleteUser?userID=${o.userID}" title="Delete" data-toggle="tooltip"><i class="ti ti-pencil fs-7"></i></a>
-                                                <a href="LoadEditUser?userID=${o.userID}"  title="Settings" data-toggle="tooltip"><i class="ti ti-trash-off fs-7" style="color: red"></i></a>
-                                            </td>
-                                        </tr>      
-                                    </c:forEach>
+                                        <c:forEach items="${AllRoom}" var="o">
+                                            <tr>
+                                                <td>
+                                                    <a href="roomURL?action=view&rid=${o.room_Id}">View</a>
+                                                </td>
+                                                <td>${o.floor_Room_Id}</td>
+                                                <td>${o.name}</td>
+                                                <td>${o.price}</td>
+                                                <td>${o.size}</td>
+                                                <td>
+                                                    <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                    <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        <c:forEach items="${ListRoomBID}" var="o">
+                                            <tr>
+                                                <td>
+                                                    <a href="roomURL?action=view&rid=${o.room_Id}">View</a>
+                                                </td>
+                                                <td>${o.floor_Room_Id}</td>
+                                                <td>${o.name}</td>
+                                                <td>${o.price}</td>
+                                                <td>${o.size}</td>
+                                                <td>
+                                                    <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                    <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -72,42 +86,68 @@
                 </div>
             </div>
         </div>
-                                            
+
         <!--MODAL FADE-->
+        <div class="modal" id="loadImage">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">All Image</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row" style="margin-left: 35px">
+                            <img src="" style="width: 32%; margin-bottom: 20px" alt="alt"/>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         <div class="container-fluid">
             <div class="modal fade" id="addRoomModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="addProduct" method="post">
+                        <form action="roomURL?action=add" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Add Room</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">					
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 12px">
                                     <label>Name</label>
-                                    <input name="productName" type="text" class="form-control" required>
+                                    <input name="name" type="text" class="form-control" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 12px">
+                                    <label>Floor</label>
+                                    <input name="floor" type="number" class="form-control" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 12px">
                                     <label>Price</label>
-                                    <input name="price" class="form-control" required>
+                                    <input name="price" type="number" class="form-control" required>
                                 </div>
-                                <div class="form-group">
-                                    <label>Img</label>
-                                    <input name="img" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <input name="description" type="text" class="form-control" required>
+                                <div class="form-group"style="margin-bottom: 12px">
+                                    <label>Size</label>
+                                    <input name="size" type="number" class="form-control" required>
                                 </div>					
-                                <div class="form-group">
-                                    <label>Category</label>
-                                    <select name="category" class="form-select">
-                                        <c:forEach items="${listCate}" var="o">
-                                            <option value="${o.categoryID}">${o.name}</option>
+                                <div class="form-group" style="margin-bottom: 12px">
+                                    <label>Type Room</label>
+                                    <select name="type_Room_Id" class="form-select" aria-label="Default select example">
+                                        <c:forEach items="${AllTypeRoom}" var="o">
+                                            <option value="${o.typeRoom_Id}">${o.name}</option>
                                         </c:forEach>
                                     </select>
-                                </div>					
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
@@ -118,12 +158,12 @@
                 </div>
             </div>
         </div>
-
-        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../assets/js/sidebarmenu.js"></script>
-        <script src="../assets/js/app.min.js"></script>
-        <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="dashboard/assets/js/sidebarmenu.js"></script>
+        <script src="dashboard/assets/js/app.min.js"></script>
+        <script src="dashboard/assets/libs/simplebar/dist/simplebar.js"></script>
     </body>
 
 </html>
