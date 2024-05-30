@@ -1,9 +1,3 @@
-<%-- 
-    Document   : ManageRoom.jsp
-    Created on : May 25, 2024, 5:34:17 PM
-    Author     : Sơnnnn
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -38,8 +32,9 @@
                         </button>
                         <div class="row">                 
                         <c:forEach items="${AllTypeRoom}" var="o">
+                            <c:url value="${o.image}" var="urlImg1"/>
                             <div class="col-lg-3 col-md-6 d-flex justify-content-center">
-                                <div class="room-item" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
+                                <div class="room-item" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 15px; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
                                     <img src="${o.image}" style="width: 100%; border-radius: 15px 15px 0 0;" alt="">
                                     <div class="ri-text" style="padding: 10px; text-align: left; width: 100%;">
                                         <h4 class="text-center" style="margin-bottom: 3px">${o.name}</h4>
@@ -74,7 +69,7 @@
             <div class="modal fade" id="addTypeRoomModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="typeRoomURL?action=add" method="post">
+                        <form action="typeRoomURL?action=add" method="post" enctype="multipart/form-data">
                             <div class="modal-header">						
                                 <h4 class="modal-title">New Type Room</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -98,7 +93,7 @@
                                 </div>					
                                 <div class="form-group" style="margin-bottom: 20px">
                                     <label>Image</label>
-                                    <input name="image" placeholder="URL..." type="text" class="form-control" required>
+                                    <input name="fileImage" type="file" class="form-control" required>
                                 </div>						
                             </div>
                             <div class="modal-footer">
