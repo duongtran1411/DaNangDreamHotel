@@ -11,7 +11,7 @@
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="../../Rooms.jsp" class="text-nowrap logo-img">
-                <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+                <img src="dashboard/assets/images/logos/dark-logo.svg" width="180" alt="" />
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-8"></i>
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ManageTypeRoom.jsp" aria-expanded="false">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
                         <span>
                             <i class="fas fa-hotel"></i> 
                         </span>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+                    <a class="sidebar-link" href="./ManageEvent.jsp" aria-expanded="false">
                         <span>
                             <i class="far fa-star"></i>
                         </span>
