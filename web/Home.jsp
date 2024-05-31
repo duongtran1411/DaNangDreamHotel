@@ -22,7 +22,7 @@
             href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap"
             rel="stylesheet"
             />
-        <title>Da Nang Hotel</title>
+        <title>Da Nang Dream Hotel</title>
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
@@ -42,7 +42,7 @@
             <div class="loader"></div>
         </div>
 
-        
+ main
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->

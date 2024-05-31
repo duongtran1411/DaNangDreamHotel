@@ -5,6 +5,14 @@
         <servlet-class>Controller.StaffController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RoomController</servlet-name>
+        <servlet-class>Controller.RoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TypeRoomController</servlet-name>
+        <servlet-class>Controller.TypeRoomController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CustomerController</servlet-name>
         <servlet-class>Controller.CustomerController</servlet-class>
     </servlet>
@@ -12,6 +20,30 @@
         <servlet-name>ItemManagerController</servlet-name>
         <servlet-class>Controller.ItemManagerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>authentication_register</servlet-name>
+        <servlet-class>Controller.authentication_register</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>authentication_login</servlet-name>
+        <servlet-class>Controller.authentication_login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeResetPasss</servlet-name>
+        <servlet-class>Controller.ChangeResetPasss</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>authentication_register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TypeRoomController</servlet-name>
+        <url-pattern>/typeRoomURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoomController</servlet-name>
+        <url-pattern>/roomURL</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StaffController</servlet-name>
         <url-pattern>/staffController</url-pattern>
@@ -23,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>ItemManagerController</servlet-name>
         <url-pattern>/ItemManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>authentication_login</servlet-name>
+        <url-pattern>/dashboard/jsp/authentication-login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeResetPasss</servlet-name>
+        <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
