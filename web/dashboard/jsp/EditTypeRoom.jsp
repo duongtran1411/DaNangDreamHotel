@@ -42,7 +42,7 @@
         <div id="editEmployeeModal">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="typeRoomURL?action=edit" method="post">
+                    <form action="typeRoomURL?action=edit" method="post" enctype="multipart/form-data">
                         <div class="modal-header">						
                             <h4 class="modal-title">Edit Type Room</h4>
                         </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
-                                <input name="fileImage" type="file" class="form-control" required>
+                                <input name="fileImageTypeRoom" type="file" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">

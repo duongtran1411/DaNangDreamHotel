@@ -98,10 +98,18 @@ public class TypeRoomController extends HttpServlet {
         String bed = request.getParameter("bed");
         String bath = request.getParameter("bath");
         String people = request.getParameter("people");
-        String image = request.getParameter("image");
+        try {
+            Part filePart = request.getPart("fileImageTypeRoom");
+            String fileName = UUID.randomUUID().toString() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
-        daoTypeRoom.editTypeRoom(id, name, eventId, bed, bath, people, image);
-        response.sendRedirect("typeRoomURL?action=listTypeRoom");
+            InputStream inputStream = filePart.getInputStream();
+            Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName));
+            daoTypeRoom.editTypeRoom(id, name, eventId, bed, bath, people, fileName);
+            response.sendRedirect("typeRoomURL?action=listTypeRoom");
+        } catch (IOException | ServletException e) {
+            response.getWriter().println("File upload failed due to an error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void addTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
