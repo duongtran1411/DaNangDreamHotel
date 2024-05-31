@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page import="Entity.FormatUtils" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -196,13 +196,13 @@
                     <div class="col-lg-6">
                         <ul class="ulType" >
                             <c:forEach items="${listTypeRoom}" var="o">
-                                <li> ${o.name}</li>
-                            </c:forEach>   
+                                <button class="btnType" name="typeRoom" onclick="loadType(this)" value="${o.typeRoom_Id}"><li>${o.name}</li></button>
+                                    </c:forEach>   
                         </ul>
                     </div>
 
-                    <div class="col-lg-2">
-                        <h6 class="textSort">Sort by price</h6>
+                    <div class="col-lg-2" style="position: relative">
+                        <h6 class="textSort" >Sort by price :</h6>
                     </div>
                     <div class="col-lg-2">                        
                         <button class="btnSort" onclick="sortPriceUp()"><i class="fa-solid fa-arrow-up-short-wide"></i></button>
@@ -224,12 +224,12 @@
                                 <img src="${o.image}" alt="" style="height: 240px">
                                 <div class="ri-text" style="height:450px">
                                     <h4>${o.name}</h4>
-                                    <h3>${o.price} VND<span>/Pernight</span></h3>
+                                    <h3>${FormatUtils.formatPRice(o.price)}đ<span>/Pernight</span></h3>
                                     <table>
                                         <tbody>
                                             <tr>
                                                 <td class="r-o">Size:</td>
-                                                <td>${o.size}</td>
+                                                <td>${o.size}m2</td>
                                             </tr>
                                             <tr>
                                                 <td class="r-o">Capacity:</td>
@@ -425,6 +425,28 @@
                                                 },
                                                 error: function (xhr) {
                                                     console.log(xhr, txtSearch.value);
+                                                }
+                                            });
+                                        }
+                                        ;
+
+                                        function loadType(param) {
+
+                                            var typeRoom = param.value;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/roomOfTypeController',
+                                                type: 'GET',
+                                                data: {
+                                                    type: typeRoom
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log(typeRoom);
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
                                                 }
                                             });
                                         }

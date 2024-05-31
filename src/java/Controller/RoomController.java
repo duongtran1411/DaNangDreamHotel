@@ -15,6 +15,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +69,8 @@ public class RoomController extends HttpServlet {
         DAOTypeRoom daoT = new DAOTypeRoom();
         List<Room> list = dao.getTop3Room();
         List<TypeRoom> listT = daoT.getAllTypeRoom();
+//        NumberFormat formatter = new DecimalFormat("#,###");
+//        String formattedPrice = formatter.format(list.get(0));
         request.setAttribute("listRoom", list);
         request.setAttribute("listTypeRoom", listT);
         request.getRequestDispatcher("Rooms.jsp").forward(request, response);

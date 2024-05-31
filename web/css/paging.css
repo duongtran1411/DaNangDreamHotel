@@ -43,6 +43,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .btnSort{
     transform: translateY(10px);
+     border: 2px outset white;
+    color: #ffffff;
+    background-color: #f44336;
+}
+
+.btnSort:hover{
+    background-color: orange;
 }
 
 .ulType{
@@ -52,18 +59,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .ulType li{
     color: #ffffff;
-    transform: translateY(10px);
+    transform: translateY(15px);
     padding-right:20px;
     padding-left: 70px;
 }
 
 .ulType li:hover{
-    color: #49BEFF;
+    color: #F9EEE3;
     cursor: pointer;
 }
 
 .textSort{
     color: #ffffff;
-    transform: translateY(10px);
+    transform: translateY(15px);
+    position: absolute; 
+    right: 0;
+}
+
+.btnType{
+    border: none;
+    background: #DFA974;
 }
 

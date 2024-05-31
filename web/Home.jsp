@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="Entity.FormatUtils" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -354,7 +355,7 @@
                                     >
                                     <div class="hr-text">
                                         <h3>${o.name}</h3>
-                                        <h2>${o.price}<span>/Pernight</span></h2>
+                                        <h2>${FormatUtils.formatPRice(o.price)}đ<span>/Pernight</span></h2>
                                         <table>
                                             <tbody>
                                                 <tr>

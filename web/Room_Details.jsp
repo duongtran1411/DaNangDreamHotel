@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="Entity.FormatUtils" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -71,7 +72,6 @@
                     <li><a href="Rooms.jsp">Accommodation</a>
                         <ul class="dropdown">
                             <li><a href="roomController">Room</a></li>
-                            <li><a href="roomDetailsController">Room Details</a></li>
                             <li><a href="Blog_Details.jsp">Blog Details</a></li>
                             <li><a href="#">Family Room</a></li>
                             <li><a href="#">Premium Room</a></li>
@@ -150,7 +150,6 @@
                                         <li><a href="Rooms.jsp">Accommodation</a>
                                             <ul class="dropdown">
                                                 <li><a href="roomController">Room</a></li>
-                                                <li><a href="Room_Details.jsp">Room Details</a></li>
                                                 <li><a href="Blog_Details.jsp">Blog Details</a></li>
                                                 <li><a href="#">Family Room</a></li>
                                                 <li><a href="#">Premium Room</a></li>
@@ -196,7 +195,7 @@
                     <div class="col-lg-8">
                         <div class="room-details-item " >
                             <div class="slide">
-                                <div class="image-rooms">
+                                <div class="image-rooms list-image">
                                     <c:forEach items="${listImage}" var="o">
                                         <img src="${o.image}" alt="" id="slide-img" >
                                     </c:forEach>
@@ -209,7 +208,7 @@
 
                             <div class="rd-text">
                                 <div class="rd-title">
-                                    <h3>${o.name}</h3>
+                                    <h3>${room.name}</h3>
                                     <div class="rdt-right">
                                         <!-- <div class="rating">
                                             <i class="icon_star"></i>
@@ -221,7 +220,7 @@
                                         <a href="#">Booking Now</a>
                                     </div>
                                 </div>
-                                <h2>${room.price}<span>/Pernight</span></h2>
+                                <h2>${FormatUtils.formatPRice(room.price)}đ<span>/Pernight</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
@@ -260,75 +259,7 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- <div class="rd-reviews">
-                            <h4>Reviews</h4>
-                            <div class="review-item">
-                                <div class="ri-pic">
-                                    <img src="img/room/avatar/avatar-1.jpg" alt="">
-                                </div>
-                                <div class="ri-text">
-                                    <span>27 Aug 2019</span>
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                        magnam.</p>
-                                </div>
-                            </div>
-                            <div class="review-item">
-                                <div class="ri-pic">
-                                    <img src="img/room/avatar/avatar-2.jpg" alt="">
-                                </div>
-                                <div class="ri-text">
-                                    <span>27 Aug 2019</span>
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                        magnam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-add">
-                            <h4>Add Review</h4>
-                            <form action="#" class="ra-form">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="Name*">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="Email*">
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div>
-                                            <h5>You Rating:</h5>
-                                            <div class="rating">
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star-half_alt"></i>
-                                            </div>
-                                        </div>
-                                        <textarea placeholder="Your Review"></textarea>
-                                        <button type="submit">Submit Now</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div> -->
+                        
                     </div>
                     <div class="col-lg-4">
                         <div class="room-booking">
@@ -451,47 +382,6 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
-        <script >
-
-                                        const listImage = document.querySelector(".list-image");
-                                        const images = document.querySelectorAll(".img-slide");
-                                        const btnLeft = document.querySelector(".btn-Left");
-                                        const btnRight = document.querySelector(".btn-Right");
-                                        let current = 0;
-                                        const length = images.length;
-
-                                        const handleChaneSLide = () => {
-                                            if (current == length - 1) {
-                                                current = 0;
-                                                let width = images[0].offsetWidth;
-                                                listImage.style.transform = `translateX(0px)`;
-                                            } else {
-                                                current++;
-                                                let width = images[0].offsetWidth;
-                                                listImage.style.transform = `translateX(${width * -1 * current}px)`;
-                                            }
-                                        };
-                                        let handleEventChangeSlide = setInterval(handleChaneSLide, 3000);
-
-                                        btnRight.addEventListener('click', () => {
-                                            clearInterval(handleEventChangeSlide);
-                                            handleChaneSLide();
-                                            handleEventChangeSlide = setInterval(handleChaneSLide, 3000);
-                                        });
-
-                                        btnLeft.addEventListener('click', () => {
-                                            clearInterval(handleEventChangeSlide);
-                                            if (current == 0) {
-                                                current = length - 1;
-                                                let width = images[0].offsetWidth;
-                                                listImage.style.transform = `translateX(${width * -1 * current}px)`;
-                                            } else {
-                                                current--;
-                                                let width = images[0].offsetWidth;
-                                                listImage.style.transform = `translateX(${width * -1 * current}px)`;
-                                            }
-                                            handleEventChangeSlide = setInterval(handleChaneSLide, 3000);
-                                        });
-        </script>
+        <script src="js/slide.js"></script>
     </body>
 </html>
