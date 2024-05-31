@@ -15,7 +15,7 @@
         <meta name="keywords" content="Sona, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Sona | Template</title>
+        <title>Da Nang Dream Hotel</title>
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
@@ -62,7 +62,7 @@
                         </ul>
                     </div>
                 </div>-->
-                <a href="Login.jsp" class="bk-btn">Login</a>
+                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>

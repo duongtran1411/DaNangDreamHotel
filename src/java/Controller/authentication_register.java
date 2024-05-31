@@ -7,21 +7,23 @@ package Controller;
 
 import Entity.RegistrationDTO;
 import Model.RegistrationDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
  *
  * @author letua
  */
-public class authentication_login extends HttpServlet {
+public class authentication_register extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,12 +40,48 @@ public class authentication_login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet authentication_login</title>");  
+            out.println("<title>Servlet authentication_register</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet authentication_login at " + request.getContextPath () + "</h1>");
+            response.setContentType("text/html;charset=UTF-8");
+
+        String acoount = request.getParameter("acc");
+        String job = request.getParameter("job");
+        String password = request.getParameter("pass");
+        String rePass = request.getParameter("repass");
+        String fullname = request.getParameter("fullname");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+            RegistrationDTO user = new RegistrationDTO();
+
+        String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+        boolean isEmailValid = Pattern.matches(emailPattern, acoount);
+
+        if (!isEmailValid) {
+            request.setAttribute("mess", "Invalid email format !! Ex : example@example.com ");
+            request.getRequestDispatcher("signUP.jsp").forward(request, response);
+        } else if (!password.equals(rePass)) {
+            request.setAttribute("mess", "Nhập lại mật khẩu không giống nhau");
+            request.getRequestDispatcher("signUP.jsp").forward(request, response);
+        } else if (password.length() < 3) {
+            request.setAttribute("mess", "Password must be at least 3 characters long");
+            request.getRequestDispatcher("signUP.jsp").forward(request, response);
+        } else if (!phone.matches("[0-9]*")) {
+            request.setAttribute("mess", "Your Mobile Invalid");
+            request.getRequestDispatcher("signUP.jsp").forward(request, response);
+        }
+        RegistrationDAO dao = new RegistrationDAO();
+        request.setAttribute("mess", "Tạo Tài khoản thành công   !! ");
+        RequestDispatcher rd = request.getRequestDispatcher("signUP.jsp");
+        rd.forward(request, response);
+            out.println("<h1>Servlet authentication_register at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            try {
+            dao.addUser(acoount, job, fullname, fullname, fullname, password, rePass, phone);
+        } catch (Exception ex) {
+                System.out.println(ex);   
+        }
         }
     } 
 
@@ -58,7 +96,7 @@ public class authentication_login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -71,53 +109,7 @@ public class authentication_login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        try (PrintWriter out = response.getWriter()) {
-            String username = request.getParameter("txtUsername");
-            String password = request.getParameter("txtPassword");
-            String remember = request.getParameter("remember");
-
-            String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
-            boolean isEmailValid = Pattern.matches(emailPattern, username);
-
-            // Tạo 3 cookie: cookieU, cookieP, cookieR
-            Cookie cookieU = new Cookie("cUser", username);
-            Cookie cookieP = new Cookie("cPass", password);
-            Cookie cookieR = new Cookie("cRem", remember);
-            if (remember != null) {
-                cookieU.setMaxAge(60 * 60 * 24);  // 1 ngày
-                cookieP.setMaxAge(60 * 60 * 24);
-                cookieR.setMaxAge(60 * 60 * 24);
-            } else {
-                cookieU.setMaxAge(0);
-                cookieP.setMaxAge(0);
-                cookieR.setMaxAge(0);
-            }
-            response.addCookie(cookieU);
-            response.addCookie(cookieP);
-            response.addCookie(cookieR);
-
-            try {
-                RegistrationDAO dao = new RegistrationDAO();
-                boolean result = dao.checkLogin(username, password);
-
-                RegistrationDTO user = dao.getDataAccount(username, password);
-                if (!isEmailValid) {
-                    request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
-                    request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
-                } else if (result) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("acc", user);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("mess1", "Incorrect account or password");
-                    request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
-                }
-
-            } catch (Exception e) {
-            }
-        }
+        processRequest(request, response);
     }
 
     /** 
