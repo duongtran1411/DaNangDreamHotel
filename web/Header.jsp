@@ -59,6 +59,7 @@
                                 </li>
                                 <li><a href="Blog.jsp">Events</a></li>
                                 <li><a href="Contact.jsp">Contact</a></li>
+                                <li><a href="staffController">Staff</a></li>
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">

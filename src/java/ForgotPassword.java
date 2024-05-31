@@ -1,8 +1,5 @@
 
 
-import java.io.IOException;
-import java.util.Properties;
-import java.util.Random;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -18,13 +15,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.Random;
 
 /**
  * Servlet implementation class ForgotPassword
  */
 @WebServlet("/forgotPassword")
 public class ForgotPassword extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+     throws ServletException, IOException {
 		
 		String email = request.getParameter("email");
 		RequestDispatcher dispatcher = null;
