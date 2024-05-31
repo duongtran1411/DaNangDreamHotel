@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
+        <servlet-name>authentication_register</servlet-name>
+        <servlet-class>Controller.authentication_register</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>authentication_login</servlet-name>
         <servlet-class>Controller.authentication_login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeResetPasss</servlet-name>
+        <servlet-class>Controller.ChangeResetPasss</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>authentication_register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>authentication_login</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <url-pattern>/dashboard/jsp/authentication-login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeResetPasss</servlet-name>
+        <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

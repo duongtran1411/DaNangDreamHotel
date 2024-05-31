@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sona | Template</title>
+        <title>Da Nang Dream Hotel</title>
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
 
@@ -59,7 +59,7 @@
                         </ul>
                     </div>
                 </div>-->
-                <a href="Login.jsp" class="bk-btn">Login</a>
+                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
