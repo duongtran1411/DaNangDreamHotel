@@ -10,36 +10,44 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Manage Type Room</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/crudtable.css"/>
-        <link rel="shortcut icon" href="images/imgfonts/P.png" type="image/x-icon" />
-
-
+        <title>Da Nang Hotel</title>
+        <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <style>
+            .modal-dialog {
+                max-width: 500px;
+            }
+            .back-link {
+                font-size: 18px;
+                color: #fff;
+                text-decoration: none;
+            }
+            .back-link:hover {
+                text-decoration: underline;
+            }
+            .table-title h2 {
+                margin: 0;
+            }
+        </style>
+    </head>
     <body>
-        <div class="container-fluid">
-            <div class="table-wrapper">
-                <div class="table-title" style="background-color: #000">
-                    <div class="row">
-
-                        <div class="col-sm-6">
-                            <div class="col-sm-2">
-                                <h2><a href="${pageContext.request.contextPath}/typeRoomURL" style="color: #ffff">Back</a></h2>
-                            </div>
-                        </div>               
-                    </div>
+        <div class="table-wrapper">
+            <div class="table-title" style="background-color: #000; padding: 15px;">
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        <h2><a href="${pageContext.request.contextPath}/typeRoomURL" class="back-link"><i class="fas fa-arrow-left"></i> </a></h2>
+                    </div>               
                 </div>
             </div>
         </div>
 
-
         <!-- Edit Modal HTML -->
-        <div id="editEmployeeModal">
+        <div class="container-fluid">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form action="typeRoomURL?action=edit" method="post" enctype="multipart/form-data">
@@ -47,31 +55,31 @@
                             <h4 class="modal-title">Edit Type Room</h4>
                         </div>
                         <div class="modal-body">					
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 20px">
                                 <label>ID</label>
                                 <input value="${TypeRoomBID.getTypeRoom_Id()}" name="type_Room_Id" type="text" class="form-control" readonly required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 20px">
                                 <label>Name</label>
                                 <input value="${TypeRoomBID.name}" name="name" type="text" class="form-control" required>
                             </div>
-                            <div class="form-group">
-                                <label>Even ID</label>
+                            <div class="form-group" style="margin-bottom: 20px">
+                                <label>Event ID</label>
                                 <input value="${TypeRoomBID.event_Id}" name="event_Id" type="number" class="form-control" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 20px">
                                 <label>Bed</label>
                                 <input value="${TypeRoomBID.bed}" name="bed" type="text" class="form-control" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 20px">
                                 <label>Bath</label>
                                 <input value="${TypeRoomBID.bath}" name="bath" type="text" class="form-control" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 20px">
                                 <label>People</label>
                                 <input value="${TypeRoomBID.people}" name="people" type="text" class="form-control" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 20px">
                                 <label>Image</label>
                                 <input name="fileImageTypeRoom" type="file" class="form-control" required>
                             </div>
