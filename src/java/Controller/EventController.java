@@ -5,13 +5,11 @@
 package Controller;
 
 import Entity.Event;
-import Entity.Room;
 import Model.DAOEvent;
-import Model.DAORoom;
+import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,8 +19,9 @@ import java.util.List;
  *
  * @author GIGABYTE
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/homeController"})
-public class HomeController extends HttpServlet {
+
+@WebServlet(name = "EventController", urlPatterns = {"/eventController"})
+public class EventController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +40,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeController</title>");            
+            out.println("<title>Servlet EventController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EventController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,15 +61,14 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAORoom dao = new DAORoom();
-        List<Room> list = dao.getNewRoom();
-        DAOEvent daoE = new DAOEvent();
-        List<Event> listE = daoE.getAllEvent();
-        
-        request.setAttribute("listR", list);
-        request.setAttribute("listE", listE);
-       
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
+        String id = request.getParameter("Id");
+        int event_Id = Integer.parseInt(id);
+        DAOEvent dao = new DAOEvent();
+        Event event = dao.getEventById(event_Id);
+        List<Event> list = dao.getAllEvent();
+        request.setAttribute("event", event);
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("Event.jsp").forward(request, response);
         
     }
 

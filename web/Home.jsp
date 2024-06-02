@@ -37,6 +37,7 @@
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
         <link href="css/paging.css" rel="stylesheet" type="text/css"/>
+        <link href="css/home.css" rel="stylesheet" />
 
     </head>
     <body>
@@ -218,9 +219,9 @@
                 </div>
             </div>
             <div class="hero-slider owl-carousel">
-                <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
-                <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
-                <div class="hs-item set-bg" data-setbg="img/hero/hero-3.jpg"></div>
+                <div class="hs-item set-bg" data-setbg="img/img_HomePage01.jpg"></div>
+                <div class="hs-item set-bg" data-setbg="img/img_HomePage02.jpg"></div>
+                <div class="hs-item set-bg" data-setbg="img/img_HomePage05.jpg"></div>
             </div>
         </section>
         <!-- Hero Section End -->
@@ -265,83 +266,6 @@
         </section>
         <!-- About Us Section End -->
 
-        <!-- Services Section End -->
-        <!-- <section class="services-section spad">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="section-title">
-                  <span>What We Do</span>
-                  <h2>Discover Our Services</h2>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-036-parking"></i>
-                  <h4>Travel Plan</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-033-dinner"></i>
-                  <h4>Catering Service</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-026-bed"></i>
-                  <h4>Babysitting</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-024-towel"></i>
-                  <h4>Laundry</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-044-clock-1"></i>
-                  <h4>Hire Driver</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-012-cocktail"></i>
-                  <h4>Bar & Drink</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> -->
-        <!-- Services Section End -->
-
         <!-- Home Room Section Begin -->  <!--BEST SELLER-->
         <section class="hp-room-section">
             <div class="container-fluid">
@@ -370,10 +294,6 @@
                                                     <td class="r-o">Bed:</td>
                                                     <td>${o.bed}</td>
                                                 </tr>
-<!--                                                <tr>
-                                                    <td class="r-o">Bath:</td>
-                                                    <td>${o.bath}</td>
-                                                </tr>-->
                                                 <tr>
                                                     <td class="r-o">Services:</td>
                                                     <td>Wifi, Television, Bathroom,...</td>
@@ -464,71 +384,19 @@
                     </div>
                 </div>
                 <div class="row">
+                    <c:forEach items="${listE}" var="o">
                     <div class="col-lg-4">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
+                        <div class="blog-item set-bg" data-setbg="${o.image}">
                             <div class="bi-text">
                                 <span class="b-tag">Travel Trip</span>
-                                <h4><a href="#">Tremblant In Canada</a></h4>
+                                <h4 class="name-Event"><a  href="eventController?Id=${o.event_Id}">${o.name}</a></h4>
                                 <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 15th April, 2019
+                                    <i class="icon_clock_alt"></i> ${o.startDay}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Camping</span>
-                                <h4><a href="#">Choosing A Static Caravan</a></h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 15th April, 2019
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Event</span>
-                                <h4><a href="#">Copper Canyon</a></h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 21th April, 2019
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div
-                            class="blog-item small-size set-bg"
-                            data-setbg="img/blog/blog-wide.jpg"
-                            >
-                            <div class="bi-text">
-                                <span class="b-tag">Event</span>
-                                <h4>
-                                    <a href="#"
-                                       >Trip To Iqaluit In Nunavut A Canadian Arctic City</a
-                                    >
-                                </h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 08th April, 2019
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div
-                            class="blog-item small-size set-bg"
-                            data-setbg="img/blog/blog-10.jpg"
-                            >
-                            <div class="bi-text">
-                                <span class="b-tag">Travel</span>
-                                <h4><a href="#">Traveling To Barcelona</a></h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 12th April, 2019
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </section>

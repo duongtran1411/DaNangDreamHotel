@@ -32,6 +32,10 @@
         <servlet-name>RoomOfTypeController</servlet-name>
         <servlet-class>Controller.RoomOfTypeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EventController</servlet-name>
+        <servlet-class>Controller.EventController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/loginControllerURL</url-pattern>
@@ -63,5 +67,9 @@
     <servlet-mapping>
         <servlet-name>RoomOfTypeController</servlet-name>
         <url-pattern>/roomOfTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventController</servlet-name>
+        <url-pattern>/eventController</url-pattern>
     </servlet-mapping>
 </web-app>
