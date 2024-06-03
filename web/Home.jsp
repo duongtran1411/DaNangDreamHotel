@@ -37,7 +37,7 @@
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
         <link href="css/paging.css" rel="stylesheet" type="text/css"/>
-        <link href="css/home.css" rel="stylesheet" />
+        <link href="css/home.css" rel="stylesheet" type="text/css"/>
 
     </head>
     <body>
@@ -77,7 +77,7 @@
                      <li><a href="roomController">Rooms</a></li> 
                     <li><a href="about-us.html">About Us</a></li>
                     <li>
-                        <a href="Rooms.jsp">Accommodation</a>
+                        <a href="Rooms.jsp">Resort</a>
                         <ul class="dropdown">
                             <li><a href="Room_Details.jsp">Room Details</a></li>
                             <li><a href="#">Deluxe Room</a></li>
@@ -142,20 +142,17 @@
                             <div class="nav-menu">
                                 <nav class="mainmenu">
                                     <ul>
-                                        <li class="active"><a href="Home.jsp">Home</a></li>
-                                        <!-- <li><a href="rooms.html">Rooms</a></li> -->
+                                        <li class="active"><a href="homeController">Home</a></li>
                                         <li><a href="AboutUs.jsp">About Us</a></li>
                                         <li>
-                                            <a href="Rooms.jsp">Accommodation</a>
+                                            <a href="roomController">Resort</a>
                                             <ul class="dropdown">
                                                 <li><a href="roomController">Rooms</a></li>
                                                 <li><a href="Blog_Details.jsp">Blog Details</a></li>
-                                                <li><a href="#">Family Room</a></li>
-                                                <li><a href="#">Premium Room</a></li>
                                                 <li><a href="Room_Details.jsp">Room Details</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="Blog.jsp">Events</a></li>
+                                        <li><a href="eventController?action=listall">Events</a></li>
                                         <li><a href="Contact.jsp">Contact</a></li>
                                     </ul>
                                 </nav>
@@ -177,11 +174,6 @@
                     <div class="col-lg-6">
                         <div class="hero-text">
                             <h1>Da Nang Dream Hotel</h1>
-                            <p>
-                                Here are the best hotel booking sites, including recommendations
-                                for international travel and for finding low-priced hotel rooms.
-                            </p>
-                            <a href="#" class="primary-btn">Discover Now</a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
@@ -389,7 +381,7 @@
                         <div class="blog-item set-bg" data-setbg="${o.image}">
                             <div class="bi-text">
                                 <span class="b-tag">Travel Trip</span>
-                                <h4 class="name-Event"><a  href="eventController?Id=${o.event_Id}">${o.name}</a></h4>
+                                <h4 ><a class="name-Event"  href="eventController?Id=${o.event_Id}&action=listdetail">${o.name}</a></h4>
                                 <div class="b-time">
                                     <i class="icon_clock_alt"></i> ${o.startDay}
                                 </div>

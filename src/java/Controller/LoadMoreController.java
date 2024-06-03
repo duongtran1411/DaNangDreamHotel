@@ -82,7 +82,7 @@ public class LoadMoreController extends HttpServlet {
                             + "                                        <tbody>\n"
                             + "                                            <tr>\n"
                             + "                                                <td class=\"r-o\">Size:</td>\n"
-                            + "                                                <td>" + o.getSize() + "</td>\n"
+                            + "                                                <td>" + o.getSize() + "m2</td>\n"
                             + "                                            </tr>\n"
                             + "                                            <tr>\n"
                             + "                                                <td class=\"r-o\">Capacity:</td>\n"

@@ -65,7 +65,7 @@ public class HomeController extends HttpServlet {
         DAORoom dao = new DAORoom();
         List<Room> list = dao.getNewRoom();
         DAOEvent daoE = new DAOEvent();
-        List<Event> listE = daoE.getAllEvent();
+        List<Event> listE = daoE.getTop3Event();
         
         request.setAttribute("listR", list);
         request.setAttribute("listE", listE);

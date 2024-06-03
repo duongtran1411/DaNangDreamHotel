@@ -65,10 +65,36 @@ public class DAOEvent extends DBConnect {
         return null;
     }
     
+    public List<Event> getTop3Event(){
+        List<Event> list = new ArrayList<>();
+        String sql = "select * from event limit 3";
+                    
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            ResultSet rs = pre.executeQuery();
+            while(rs.next()){
+                list.add(new Event(rs.getInt(1), 
+                        rs.getString(2), 
+                       rs.getString(3),
+                        rs.getDate(4),
+                        rs.getDate(5),
+                        rs.getString(6),
+                       rs.getDouble(7), 
+                        rs.getString(8)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOEvent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;
+    }
+    
    
     public static void main(String[] args) {
         DAOEvent dao = new DAOEvent();
-        Event event = dao.getEventById(2);
-        System.out.println(event);
+        List<Event> list = dao.getTop3Event();
+        for (Event event : list) {
+            System.out.println(event);
+        }
     }
 }

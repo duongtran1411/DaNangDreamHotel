@@ -61,14 +61,25 @@ public class EventController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("Id");
-        int event_Id = Integer.parseInt(id);
+        PrintWriter out = response.getWriter();
+        String action = request.getParameter("action");
         DAOEvent dao = new DAOEvent();
-        Event event = dao.getEventById(event_Id);
         List<Event> list = dao.getAllEvent();
-        request.setAttribute("event", event);
-        request.setAttribute("list", list);
-        request.getRequestDispatcher("Event.jsp").forward(request, response);
+        if(action.equals("listall")){
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("Event.jsp").forward(request, response);
+        }
+        
+        if(action.equals("listdetail")){
+            String id = request.getParameter("Id");
+            int event_Id = Integer.parseInt(id);
+            Event event = dao.getEventById(event_Id);
+            request.setAttribute("event", event);
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("EventDetail.jsp").forward(request, response);
+        }
+        
+        
         
     }
 
