@@ -80,8 +80,12 @@ public class TypeRoomController extends HttpServlet {
 
     private void listTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
-        request.setAttribute("AllTypeRoom", allTypeRoom);
-        request.getRequestDispatcher("dashboard/jsp/ManageTypeRoom.jsp").forward(request, response);
+        if (allTypeRoom == null) {
+            response.sendRedirect("Pages.jsp");
+        } else {
+            request.setAttribute("AllTypeRoom", allTypeRoom);
+            request.getRequestDispatcher("dashboard/jsp/ManageTypeRoom.jsp").forward(request, response);
+        }
     }
 
     private void loadEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
