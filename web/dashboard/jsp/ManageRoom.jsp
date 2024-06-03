@@ -51,7 +51,7 @@
                                         <c:forEach items="${AllRoom}" var="o">
                                             <tr>
                                                 <td>
-                                                    <a href="roomURL?action=view&rid=${o.room_Id}">View</a>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}">View</a>
                                                 </td>
                                                 <td>${o.floor_Room_Id}</td>
                                                 <td>${o.name}</td>
@@ -66,7 +66,7 @@
                                         <c:forEach items="${ListRoomBID}" var="o">
                                             <tr>
                                                 <td>
-                                                    <a href="roomURL?action=view&rid=${o.room_Id}">View</a>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}">View</a>
                                                 </td>
                                                 <td>${o.floor_Room_Id}</td>
                                                 <td>${o.name}</td>
@@ -91,7 +91,7 @@
             <div class="modal fade" id="addRoomModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="roomURL?action=add" method="post">
+                        <form action="imageRoomURL?action=add" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Add Room</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

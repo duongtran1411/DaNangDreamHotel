@@ -12,6 +12,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!doctype html>
 <html lang="en">
@@ -44,9 +45,17 @@
                         <h2>${NameRoom.name}</h2>
                     <div class="row">                 
                         <c:forEach items="${ImageRoomBRID}" var="o">
+                            <c:url value="/img/room/${o.image}" var="urlImgRoom"/>
                             <div class="col-lg-3 col-md-6 d-flex justify-content-center">
-                                <div class="room-item" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
-                                    <img src="${o.image}" style="width: 304px; height: 202px; border-radius: 15px 15px 0 0;" alt="">
+                                <div class="room-item" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative; margin-bottom: 12px">
+                                    <c:choose>
+                                        <c:when test="${fn:startsWith(o.image, 'http')}">
+                                            <img src="${o.image}" style="width: 304px; height: 202px; border-radius: 15px 15px 0 0;" alt="">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="${urlImgRoom}" style="width: 304px; height: 202px; border-radius: 15px 15px 0 0;" alt="">
+                                        </c:otherwise>
+                                    </c:choose>                                
                                 </div>
                             </div>
                         </c:forEach>
@@ -58,12 +67,12 @@
             <div class="modal fade" id="addImage">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="roomURL?action=view" method="post" enctype="multipart/form-data">
+                        <form action="imageRoomURL?action=add&rid=${rid}" method="post" enctype="multipart/form-data">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Add Image Room</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                            <div class="modal-body">					
+                            <div class="modal-body">			
                                 <div class="form-group">
                                     <label>Image</label>
                                     <input name="fileImageRoom" type="file" class="form-control" required>
@@ -76,9 +85,11 @@
                         </form>
                     </div>        <div class="container-fluid">
 
+                    </div>
                 </div>
             </div>
         </div>
+
         <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/sidebarmenu.js"></script>
