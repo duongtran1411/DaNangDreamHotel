@@ -109,6 +109,6 @@ public class DAOTypeRoom extends DBConnect {
 
     public static void main(String[] args) {
         DAOTypeRoom dao = new DAOTypeRoom();
-        dao.editTypeRoom(5, "z", 1, "z", "Z", "Z", "954a5535---copy-2_rs_1654161451.jpg");
+        dao.editTypeRoom(1, "z", 1, "z", "Z", "Z", "954a5535---copy-2_rs_1654161451.jpg");
     }
 }

@@ -38,7 +38,7 @@
                 </div>
                 <section class="rooms-section spad">
                     <div class="container">
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addRoomModal">
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addImage">
                             <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Image</p>                  
                         </button>
                         <h2>${NameRoom.name}</h2>
@@ -55,34 +55,18 @@
             </section>
         </div> 
         <div class="container-fluid">
-            <div class="modal fade" id="addTypeRoomModal">
+            <div class="modal fade" id="addImage">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="typeRoomURL?action=add" method="post">
+                        <form action="roomURL?action=view" method="post" enctype="multipart/form-data">
                             <div class="modal-header">						
-                                <h4 class="modal-title">New Type Room</h4>
+                                <h4 class="modal-title">Add Image Room</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">
-                                    <label>Type Name</label>
-                                    <input name="name" type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Bed</label>
-                                    <input name="bed" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Bath</label>
-                                    <input name="bath" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>People</label>
-                                    <input name="people" type="text" class="form-control" required>
-                                </div>					
-                                <div class="form-group">
                                     <label>Image</label>
-                                    <input name="image" placeholder="URL..." type="file" class="form-control" required>
+                                    <input name="fileImageRoom" type="file" class="form-control" required>
                                 </div>						
                             </div>
                             <div class="modal-footer">
@@ -90,7 +74,8 @@
                                 <input type="submit" class="btn btn-success" value="Add">
                             </div>
                         </form>
-                    </div>
+                    </div>        <div class="container-fluid">
+
                 </div>
             </div>
         </div>
