@@ -10,8 +10,10 @@ public class DBConnect {
 
     public DBConnect() {
         String url = "jdbc:mysql://localhost:3306/managerhotel";
-        String userName = "sa";
-        String password = "sa";
+
+        String userName = "root";
+        String password = "12345";
+
         try {
             // Load the JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
