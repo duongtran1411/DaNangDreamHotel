@@ -93,62 +93,63 @@
                 </div>
             </div>
         </div>
-         <div class="container-fluid">
-        <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form action="InsertControllerURL" method="post">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addAccountModalLabel">Add Information Account</h5>
-                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      <div class="container-fluid">
+    <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="InsertControllerURL" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addAccountModalLabel">Add Information Account</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input name="username" type="text" class="form-control" placeholder="Enter username" required>
                         </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Username</label>
-                                <input name="username" type="text" class="form-control" placeholder="Enter username" required>
-                            </div>
-                            <div class="form-group">
-                                <label>First Name</label>
-                                <input name="firstName" type="text" class="form-control" placeholder="Enter first name" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Last Name</label>
-                                <input name="lastName" type="text" class="form-control" placeholder="Enter last name" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input name="password" type="password" class="form-control" placeholder="Enter password" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Role Id</label>
-                                <input name="roleid" type="text" class="form-control" value="2" readonly required>
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input name="phone" type="text" class="form-control" placeholder="Enter phone" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input name="email" type="email" class="form-control" placeholder="Enter email" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Create At</label>
-                                <input name="create_at" type="date" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Update At</label>
-                                <input name="update_at" type="date" class="form-control" required>
-                            </div>
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input name="firstName" type="text" class="form-control" placeholder="Enter first name" required>
                         </div>
-                        <div class="modal-footer">
-                             <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                            <button type="submit" class="btn btn-success">Add</button>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input name="lastName" type="text" class="form-control" placeholder="Enter last name" required>
                         </div>
-                    </form>
-                </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input name="password" type="password" class="form-control" placeholder="Enter password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Role Id</label>
+                            <input name="roleid" type="text" class="form-control" value="2" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input name="phone" type="text" class="form-control" placeholder="Enter phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input name="email" type="email" class="form-control" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Create At</label>
+                            <input name="create_at" type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Update At</label>
+                            <input name="update_at" type="date" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
         <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="dashboard/assets/js/sidebarmenu.js"></script>

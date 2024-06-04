@@ -59,44 +59,54 @@ public class InsertAccountController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-         DAOAccount dao = new DAOAccount();
-        Account lastAccount = dao.getLastAccount();
-        int id = lastAccount.getAccount_Id() + 1;
-        int jobId = lastAccount.getJobId().getJob_Id() + 1;
-
-        String userName = request.getParameter("username");
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        int roleId = Integer.parseInt(request.getParameter("roleid"));
-        
-        String createAtString = request.getParameter("create_at");
-            String updateAtString = request.getParameter("update_at");
-
-            // Define the date format
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-            // Parse the date strings
-            java.sql.Date create_at = null;
-            java.sql.Date update_at = null;
-            try {
-                Date createDate = sdf.parse(createAtString);
-                create_at = new java.sql.Date(createDate.getTime());
-
-                Date updateDate = sdf.parse(updateAtString);
-                update_at = new java.sql.Date(updateDate.getTime());
-            } catch (ParseException e) {
-                e.printStackTrace();
-                // Handle the error appropriately
-            }
-
-        dao.insertAccount(id, jobId, userName, firstName, lastName, password, email, phone, roleId,create_at, update_at);
-        response.sendRedirect("ManageAccountControllerURL");
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    DAOAccount dao = new DAOAccount();
+    Account lastAccount = dao.getLastAccount();
+    
+    if (lastAccount == null) {
+        // Handle case where there's no last account
+        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to retrieve last account");
+        return;
     }
+
+    int id = lastAccount.getAccount_Id() + 1;
+    int jobId = lastAccount.getJobId().getJob_Id() + 1;
+
+    String userName = request.getParameter("username");
+    String firstName = request.getParameter("firstName");
+    String lastName = request.getParameter("lastName");
+    String password = request.getParameter("password");
+    String email = request.getParameter("email");
+    String phone = request.getParameter("phone");
+    int roleId = Integer.parseInt(request.getParameter("roleid"));
+    
+    String createAtString = request.getParameter("create_at");
+    String updateAtString = request.getParameter("update_at");
+
+    // Define the date format
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    // Parse the date strings
+    java.sql.Date create_at = null;
+    java.sql.Date update_at = null;
+    try {
+        java.util.Date createDate = sdf.parse(createAtString);
+        create_at = new java.sql.Date(createDate.getTime());
+
+        java.util.Date updateDate = sdf.parse(updateAtString);
+        update_at = new java.sql.Date(updateDate.getTime());
+    } catch (ParseException e) {
+        e.printStackTrace();
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid date format");
+        return;
+    }
+
+    dao.insertAccount(jobId, userName, firstName, lastName, password, email, phone, roleId, create_at, update_at, id);
+    response.sendRedirect("ManageAccountControllerURL");
+}
+
+
 
         // Create an instance of your DAO (Data Access Object)
         
