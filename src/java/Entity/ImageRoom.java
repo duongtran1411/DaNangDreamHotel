@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -12,6 +13,7 @@ public class ImageRoom {
 
     private int image_Room_Id, room_Id;
     private String image;
+    private String name;
 
     public ImageRoom() {
     }
@@ -22,11 +24,17 @@ public class ImageRoom {
         this.image = image;
     }
     
-    public ImageRoom(String image) {
+    public ImageRoom(String name, String image) {
+        this.name = name;
         this.image = image;
     }
     
 
+    
+    public ImageRoom(String image) {
+        this.image = image;
+    }
+    
     public int getImage_Room_Id() {
         return image_Room_Id;
     }
@@ -57,4 +65,5 @@ public class ImageRoom {
     }
     
     
+
 }

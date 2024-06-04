@@ -13,7 +13,7 @@
         <meta name="keywords" content="Sona, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Sona | Template</title>
+        <title>Da Nang Dream Hotel</title>
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
@@ -51,7 +51,8 @@
             </div>
             <div class="header-configure-area">
 
-                <a href="Login.jsp" class="bk-btn">Login</a>
+                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
+
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
@@ -83,72 +84,9 @@
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
-        <header class="header-section header-normal">
-            <div class="top-nav">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="tn-left">
-                                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="tn-right">
-                                <div class="top-social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
-                                <a href="Login.jsp" class="bk-btn">Login</a>
-                                <!--<div class="language-option">
-                                    <img src="img/flag.jpg" alt="">
-                                    <span>EN <i class="fa fa-angle-down"></i></span>
-                                    <div class="flag-dropdown">
-                                        <ul>
-                                            <li><a href="#">Zi</a></li>
-                                            <li><a href="#">Fr</a></li>
-                                        </ul>
-                                    </div>
-                                </div>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <div class="logo">
-                                <a href="index.html">
-                                    <img src="img/logo.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-10">
-                            <div class="nav-menu">
-                                <nav class="mainmenu ">
-                                    <ul>
-                                        <li ><a href="Home.jsp">Home</a></li>
-                                        <li><a href="AboutUs.jsp">About Us</a></li>
-                                        <li><a href="roomController">Resort</a>
-                                            <ul class="dropdown">
-                                                <li><a href="roomController">Room</a></li>
-                                                
-                                            </ul>
-                                        </li>
-                                        <li><a href="eventController?action=listall">Event</a></li>
-                                        <li class="active"><a href="Contact.jsp">Feedback</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+
+        <jsp:include page="Header.jsp"></jsp:include>
+
         <!-- Header End -->
 
         <!-- Contact Section Begin -->

@@ -65,15 +65,15 @@
                         </div>
 
                         <div class="container-login100-form-btn">
-                            <a href="#" class="login-link">
+                            <a href="/dashboard/html/ui-card.html" class="login-link">
                                 <button class="login100-form-btn">Login</button>
                             </a>
                         </div>
                         <div class="container-login100-form-btn" style="margin-top: 30px">
                             <a href="Home.jsp">
                                 <button class="login100-form-btn" type="button">
-                                <h1 style="font-size:12px ">Back to home</h1>
-                            </button>
+                                    <h1 style="font-size:12px ">Back to home</h1>
+                                </button>
                             </a>
                         </div>
 
