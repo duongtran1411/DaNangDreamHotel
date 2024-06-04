@@ -36,16 +36,19 @@
                                         </a>
                                     </div>
                                     <p class="text-center">Da Nang Dream Hotel</p>
-                                    
+
                                     <form action="forgotPassword" method="post">
                                         <div class="mb-4">
-                                            <label for="exampleInputPassword1" class="form-label">Enter Your Email</label>
+                                            <label class="form-label">Enter Your Email</label>
                                             <input class="form-control" placeholder="Your Email" type="text" name="email" id="email-for-pass" required="">
                                         </div>
                                         
                                         <button class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" class="btn float-right login_btn" type="submit">Get New Password</button>
                                         
                                     </form>
+                                    <div>
+                                        <h1 style="color:red; text-align: center; font-size: 20px">${error}</h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>

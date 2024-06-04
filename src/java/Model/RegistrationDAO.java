@@ -25,9 +25,9 @@ public class RegistrationDAO extends DBConnect {
         String sql = "SELECT * FROM ACCOUNT WHERE username = ? AND password = ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
             st.setString(1, email);
             st.setString(2, password);
+            ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return true;
             }
@@ -37,6 +37,21 @@ public class RegistrationDAO extends DBConnect {
         return false;
     }
 
+    public boolean CheckDataEmail(String email) {
+        String sql="SELECT * FROM ACCOUNT WHERE email = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+           if (rs.next()){
+               return true;
+           }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     public RegistrationDTO getDataAccount(String username, String password) {
         String sql = "SELECT * FROM ACCOUNT WHERE username = ? AND password = ?";
         PreparedStatement pre = null;
@@ -50,7 +65,7 @@ public class RegistrationDAO extends DBConnect {
 
             if (rs.next()) {
                 return new RegistrationDTO(
-                        rs.getString("acoount_Id"),
+                        rs.getString("account_Id"),
                         rs.getString("job_Id"),
                         rs.getString("userName"),
                         rs.getString("firstName"),
@@ -78,29 +93,70 @@ public class RegistrationDAO extends DBConnect {
 
         return null;
     }
-    public  void addUser(String acoount_Id, String job_Id, String userName, String firstName, String lastName, String password, String email,String Phone){
-        String sql = "insert Stringo ACCOUNT (account,[password],phone,fullname,[address])\n"
-                        + "                    values (?,?,?,?,?,?,?,?) ";
+
+    public void addUser(String account_Id, String job_Id, String userName, String firstName, String lastName, String password, String email, String phone) {
+        String sql = "INSERT INTO ACCOUNT (account_Id, job_Id, userName, firstName, lastName, password, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pre = null;
-        ResultSet rs = null;
 
         try {
             pre = conn.prepareStatement(sql);
-            pre.setString(1, acoount_Id);
+            pre.setString(1, account_Id);
             pre.setString(2, job_Id);
             pre.setString(3, userName);
             pre.setString(4, firstName);
             pre.setString(5, lastName);
-            pre.setString(6,password);
+            pre.setString(6, password);
             pre.setString(7, email);
-            pre.setString(8, Phone);
-            
+            pre.setString(8, phone);
 
             pre.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            try {
+                if (pre != null) {
+                    pre.close();
+                }
+            } catch (SQLException e) {
+                Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, e);
+
+            }
         }
-        
+    }
+
+    public boolean CheckPassExist(String email,String pass){
+        String sql = "SELECT * FROM ACCOUNT WHERE email=? and password = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, email);
+            st.setString(2, pass);
+
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        }catch (SQLException e){
+            Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
+    }
+    public void UpdatePassReset(String email, String password) {
+        String sql = "UPDATE ACCOUNT SET password = ? WHERE email = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, password);
+            st.setString(2, email);
+
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
+    public static void main(String[] args) {
+        RegistrationDAO dao = new RegistrationDAO();
+        dao.UpdatePassReset("lem29140@gmail.com","123456");
     }
 }
                 

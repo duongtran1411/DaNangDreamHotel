@@ -3,7 +3,7 @@
     Created on : May 26, 2024, 6:57:44 AM
     Author     : letua
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -47,12 +47,9 @@
                                     </div>
                                     <h3 class="text-center">Da Nang Dream Hotel</h3>
                                     <h4 style="padding-top: 10px" class="text-center">Enter OTP</h4>
-                                    <%
-    if(request.getAttribute("message")!=null)
-    {
-            out.print("<p class='text-danger ml-1'>"+request.getAttribute("message")+"</p>");
-    }
-                                    %>
+                                    <div>
+                                        <h1 style="color: red; text-align: center; font-size: 20px ">${message}</h1>
+                                    </div>
 
                                     <form id="register-form" action="ValidateOtp" role="form" autocomplete="off"
                                           class="form" method="post">

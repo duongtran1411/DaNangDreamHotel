@@ -24,6 +24,16 @@
         <servlet-name>ChangeResetPasss</servlet-name>
         <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>ProtectedPage</filter-name>
+        <filter-class>org.example.Filter.ProtectedPage</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ProtectedPage</filter-name>
+        <url-pattern>/dashboard/jsp/logout</url-pattern>
+        <url-pattern>/dashboard/jsp/index</url-pattern>
+        <url-pattern>/dashboard/jsp/index.jsp</url-pattern>
+    </filter-mapping>
     <session-config>
         <session-timeout>
             30

@@ -9,7 +9,6 @@ package Entity;
  * @author letua
  */
 public class RegistrationDTO {
-
     private String account_Id;
     private String job_Id;
     private String userName;
@@ -23,14 +22,14 @@ public class RegistrationDTO {
     public RegistrationDTO() {
     }
 
-    public RegistrationDTO(String account_Id, String job_Id, String userName, String firstName, String lastName, String password, String email, String phone, String role_Id) {
+    public RegistrationDTO(String account_Id, String job_Id, String userName, String firstName, String lastName, String email, String password, String phone, String role_Id) {
         this.account_Id = account_Id;
         this.job_Id = job_Id;
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
         this.email = email;
+        this.password = password;
         this.phone = phone;
         this.role_Id = role_Id;
     }
@@ -106,7 +105,4 @@ public class RegistrationDTO {
     public void setRole_Id(String role_Id) {
         this.role_Id = role_Id;
     }
-    
-    
-
 }

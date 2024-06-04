@@ -37,20 +37,23 @@
                                     </div>
                                     <p class="text-center">Da Nang Dream Hotel</p>
                                     <c:set var="cookie" value="${pageContext.request.cookies}" /> 
-                                    <form action="changepass" method="post">
+                                    <form action="ChangeResetPasss" method="post">
                                         <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Enter Password</label>
+                                            <label  class="form-label">Enter Password</label>
                                             <input type="password" class="form-control" placeholder="Password" name="password" required>
                                         </div>
                                         <div class="mb-4">
-                                            <label for="exampleInputPassword1" class="form-label">Enter Password Again</label>
+                                            <label class="form-label">Enter Password Again</label>
                                             <input type="password" class="form-control" placeholder="Password Again" name="confPassword" required>
                                         </div>
 
                                         <input class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" type="submit" value="Submit" class="btn float-right login_btn" name="btAction">
                                     </form>
-                                    <p class="text-danger" style="color: red ;  width: auto ; margin: auto ;padding: auto ; text-align: center ; border-radius: 50px;">${mess1}
-                                    </p>
+                                    <div>
+                                        <h1 style="font-size: 20px; color: red; text-align: center" >${message}</h1>
+                                    </div>
+
+                                    Back to login<a href="./dashboard/jsp/authentication-login">Click Here</a>
                                 </div>
                             </div>
                         </div>

@@ -78,7 +78,8 @@ public class authentication_login extends HttpServlet {
             String password = request.getParameter("txtPassword");
             String remember = request.getParameter("remember");
 
-            String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+            //String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+            String emailPattern="^[a-zA-Z0-9._-]{5,}";
             boolean isEmailValid = Pattern.matches(emailPattern, username);
 
             // Tạo 3 cookie: cookieU, cookieP, cookieR
@@ -104,14 +105,16 @@ public class authentication_login extends HttpServlet {
 
                 RegistrationDTO user = dao.getDataAccount(username, password);
                 if (!isEmailValid) {
-                    request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
+                    //request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
+                    request.setAttribute("mess1", "Username or password is incorrect!"+"<br>"+"Enter your username again");
                     request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
                 } else if (result) {
                     HttpSession session = request.getSession();
                     session.setAttribute("acc", user);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
+                    //response.sendRedirect("index.jsp");
                 } else {
-                    request.setAttribute("mess1", "Incorrect account or password");
+                    request.setAttribute("mess1", "Username or password is incorrect!"+"<br>"+"Enter your username again");
                     request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
                 }
 

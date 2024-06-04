@@ -88,14 +88,16 @@
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">AUTH</span>
             </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-login.jsp" aria-expanded="false">
+            <form action="logout" method="post">
+              <li class="sidebar-item">
+                <button style="border: 2px solid white; width: 20px" class="sidebar-link" type="submit" aria-expanded="false">
                 <span>
                   <i class="ti ti-login"></i>
                 </span>
-                <span class="hide-menu">Logout</span>
-              </a>
-            </li>
+                  <span class="hide-menu">Logout</span>
+                </button>
+              </li>
+            </form>
             
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>

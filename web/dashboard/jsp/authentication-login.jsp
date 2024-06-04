@@ -13,6 +13,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Da Nang Dream Hotel</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="../assets/css/styles.min.css" />
     </head>
@@ -39,11 +40,11 @@
                                     <c:set var="cookie" value="${pageContext.request.cookies}" /> 
                                     <form action="authentication-login" method="post">
                                         <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                                            <label class="form-label">Username</label>
                                             <input type="text" class="form-control" placeholder="Username" name="txtUsername"  value="${cookie.cUser.value}" required>
                                         </div>
                                         <div class="mb-4">
-                                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                                            <label class="form-label">Password</label>
                                             <input type="password" class="form-control" placeholder="Password" name="txtPassword"  value="${cookie.cPass.value}" required>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mb-4">
@@ -58,8 +59,10 @@
                                             <a class="text-primary fw-bold ms-2" href="./authentication-register.jsp">Create an account</a>
                                         </div>
                                     </form>
-                                    <p class="text-danger" style="color: red ;  width: auto ; margin: auto ;padding: auto ; text-align: center ; border-radius: 50px;">${mess1}
-                                    </p>
+                                    <div>
+                                        <h1 style="color: red; font-size: 20px; text-align: center">${mess1}</h1>
+                                        <h1 style="color: greenyellow; font-size: 20px; text-align: center">${authentication}</h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>
