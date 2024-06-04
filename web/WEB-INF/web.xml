@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>RoomController</servlet-name>
-        <servlet-class>Controller.RoomController</servlet-class>
+        <servlet-class>Controller.ViewRoomController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoadMoreController</servlet-name>

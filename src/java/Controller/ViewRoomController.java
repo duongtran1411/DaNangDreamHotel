@@ -25,7 +25,7 @@ import java.util.List;
  * @author GIGABYTE
  */
 @WebServlet(name = "RoomController", urlPatterns = {"/roomController"})
-public class RoomController extends HttpServlet {
+public class ViewRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
