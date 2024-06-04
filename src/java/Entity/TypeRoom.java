@@ -1,17 +1,27 @@
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Entity;
 
+/**
+ *
+ * @author GIGABYTE
+ */
 public class TypeRoom {
 
-    private int type_Room_Id;
+    private int typeRoom_Id;
     private String name;
     private int event_Id;
-    private String bed;
-    private String bath;
-    private String people;
-    private String image;
+    private String bed, bath, people, image;
+
+
+
 
     public TypeRoom() {
     }
+
 
     public TypeRoom(String name, String bed, String bath, String people, String image) {
         this.name = name;
@@ -21,8 +31,8 @@ public class TypeRoom {
         this.image = image;
     }
 
-    public TypeRoom(int type_Room_Id, String name, int event_Id, String bed, String bath, String people, String image) {
-        this.type_Room_Id = type_Room_Id;
+    public TypeRoom(int typeRoom_Id, String name, int event_Id, String bed, String bath, String people, String image) {
+        this.typeRoom_Id = typeRoom_Id;
         this.name = name;
         this.event_Id = event_Id;
         this.bed = bed;
@@ -31,14 +41,27 @@ public class TypeRoom {
         this.image = image;
     }
 
+    
+    public TypeRoom(int typeRoom_Id, String name) {
+        this.typeRoom_Id = typeRoom_Id;
+        this.name = name;
+    }
+    
+    public TypeRoom(String bed, String bath, String people) {
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+    }
+    
+
     public int getTypeRoom_Id() {
-        return type_Room_Id;
+        return typeRoom_Id;
     }
 
-    public void setTypeRoom_Id(int type_Room_Id) {
-        this.type_Room_Id = type_Room_Id;
+    public void setTypeRoom_Id(int typeRoom_Id) {
+        this.typeRoom_Id = typeRoom_Id;
     }
-
+    
     public String getName() {
         return name;
     }
@@ -89,7 +112,9 @@ public class TypeRoom {
 
     @Override
     public String toString() {
-        return "TypeRoom{" + "type_Room_Id=" + type_Room_Id + ", name=" + name + ", event_Id=" + event_Id + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + '}';
+        return "TypeRoom{" + "typeRoom_Id=" + typeRoom_Id + ", name=" + name + ", event_Id=" + event_Id + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + '}';
     }
+    
+    
 
 }

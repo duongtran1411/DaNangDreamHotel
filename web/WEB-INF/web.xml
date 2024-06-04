@@ -32,11 +32,78 @@
         <servlet-name>ChangeResetPasss</servlet-name>
         <servlet-class>Controller.ChangeResetPasss</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>Controller.HomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RoomDetailsController</servlet-name>
+        <servlet-class>Controller.RoomDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RoomController</servlet-name>
+        <servlet-class>Controller.ViewRoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadMoreController</servlet-name>
+        <servlet-class>Controller.LoadMoreController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>Controller.SearchController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortRoomController</servlet-name>
+        <servlet-class>Controller.SortRoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RoomOfTypeController</servlet-name>
+        <servlet-class>Controller.RoomOfTypeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EventController</servlet-name>
+        <servlet-class>Controller.EventController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedBackController</servlet-name>
+        <servlet-class>Controller.FeedBackController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/homeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoomDetailsController</servlet-name>
+        <url-pattern>/roomDetailsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadMoreController</servlet-name>
+        <url-pattern>/loadMoreController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/searchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortRoomController</servlet-name>
+        <url-pattern>/sortRoomController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoomOfTypeController</servlet-name>
+        <url-pattern>/roomOfTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventController</servlet-name>
+        <url-pattern>/eventController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedBackController</servlet-name>
+        <url-pattern>/feedBackController</url-pattern>
+    </servlet-mapping>
         <servlet-name>TypeRoomController</servlet-name>
         <url-pattern>/typeRoomURL</url-pattern>
     </servlet-mapping>

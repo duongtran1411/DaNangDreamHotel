@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="Entity.FormatUtils" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,6 +36,8 @@
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
+        <link href="css/paging.css" rel="stylesheet" type="text/css"/>
+        <link href="css/home.css" rel="stylesheet" type="text/css"/>
 
 
     </head>
@@ -41,6 +45,7 @@
         <div id="preloder">
             <div class="loader"></div>
         </div>
+
 
         <!-- Offcanvas Menu Section End -->
 
@@ -104,6 +109,149 @@
         </section>
         <!-- Hero Section End -->
 
+
+            <nav class="mainmenu mobile-menu">
+                <ul>
+                    <li class="active"><a href="index.html">Home</a></li>
+                     <li><a href="roomController">Rooms</a></li> 
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li>
+                        <a href="Rooms.jsp">Resort</a>
+                        <ul class="dropdown">
+                            <li><a href="Room_Details.jsp">Room Details</a></li>
+                            <li><a href="#">Deluxe Room</a></li>
+                            <li><a href="#">Family Room</a></li>
+                            <li><a href="#">Premium Room</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div id="mobile-menu-wrap"></div>
+            <div class="top-social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+            </div>
+            <ul class="top-widget">
+                <li><i class="fa fa-phone"></i> (+84) 335 500390</li>
+                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+            </ul>
+        </div>
+        <!-- Offcanvas Menu Section End -->
+
+        <!-- Header Section Begin -->
+        <header class="header-section">
+            <div class="top-nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="tn-left">
+                                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
+                                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="tn-right">
+                                <div class="top-social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div>
+                                <a href="Login.jsp" class="bk-btn">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="nav-menu">
+                                <nav class="mainmenu">
+                                    <ul>
+                                        <li class="active"><a href="homeController">Home</a></li>
+                                        <li><a href="AboutUs.jsp">About Us</a></li>
+                                        <li>
+                                            <a href="roomController">Resort</a>
+                                            <ul class="dropdown">
+                                                <li><a href="roomController">Rooms</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a href="eventController?action=listall">Events</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header End -->
+
+        <!-- Hero Section Begin -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="hero-text">
+                            <h1>Da Nang Dream Hotel</h1>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
+                        <div class="booking-form">
+                            <h3>Booking Your Hotel</h3>
+                            <form action="roomController" method="get">
+                                <div class="check-date">
+                                    <label for="date-in">Check In:</label>
+                                    <input type="text" class="date-input" id="date-in" />
+                                    <i class="icon_calendar"></i>
+                                </div>
+                                <div class="check-date">
+                                    <label for="date-out">Check Out:</label>
+                                    <input type="text" class="date-input" id="date-out" />
+                                    <i class="icon_calendar"></i>
+                                </div>
+                                <div class="select-option">
+                                    <label for="guest">Guests:</label>
+                                    <select id="guest">
+                                        <option value="">2 Adults</option>
+                                        <option value="">3 Adults</option>
+                                    </select>
+                                </div>
+                                <div class="select-option">
+                                    <label for="room">Room:</label>
+                                    <select id="room">
+                                        <option value="">1 Room</option>
+                                        <option value="">2 Room</option>
+                                    </select>
+                                </div>
+                                <button type="submit">Check Availability</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slider owl-carousel">
+                <div class="hs-item set-bg" data-setbg="img/img_HomePage01.jpg"></div>
+                <div class="hs-item set-bg" data-setbg="img/img_HomePage02.jpg"></div>
+                <div class="hs-item set-bg" data-setbg="img/img_HomePage05.jpg"></div>
+            </div>
+        </section>
+        <!-- Hero Section End -->
         <!-- About Us Section Begin -->
         <section class="aboutus-section spad">
             <div class="container">
@@ -220,140 +368,46 @@
           </div>
         </section> -->
         <!-- Services Section End -->
-
         <!-- Home Room Section Begin -->  <!--BEST SELLER-->
         <section class="hp-room-section">
             <div class="container-fluid">
                 <div class="hp-room-items">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div
-                                class="hp-room-item set-bg"
-                                data-setbg="img/room/room-b1.jpg"
-                                >
-                                <div class="hr-text">
-                                    <h3>Double Room</h3>
-                                    <h2>199$<span>/Pernight</span></h2>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="r-o">Size:</td>
-                                                <td>30 ft</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Capacity:</td>
-                                                <td>Max persion 5</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Bed:</td>
-                                                <td>King Beds</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Services:</td>
-                                                <td>Wifi, Television, Bathroom,...</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <a href="#" class="primary-btn">More Details</a>
+                        <c:forEach items="${listR}" var="o">
+                            <div class="col-lg-3 col-md-6">
+                                <div
+                                    class="hp-room-item set-bg"
+                                    data-setbg="${o.image}"
+                                    >
+                                    <div class="hr-text">
+                                        <h3>${o.name}</h3>
+                                        <h2>${FormatUtils.formatPRice(o.price)}đ<span>/Pernight</span></h2>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="r-o">Size:</td>
+                                                    <td>${o.size}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Capacity:</td>
+                                                    <td>${o.people}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Bed:</td>
+                                                    <td>${o.bed}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="r-o">Services:</td>
+                                                    <td>Wifi, Television, Bathroom,...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                                <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div
-                                class="hp-room-item set-bg"
-                                data-setbg="img/room/room-b2.jpg"
-                                >
-                                <div class="hr-text">
-                                    <h3>Premium King Room</h3>
-                                    <h2>159$<span>/Pernight</span></h2>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="r-o">Size:</td>
-                                                <td>30 ft</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Capacity:</td>
-                                                <td>Max persion 5</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Bed:</td>
-                                                <td>King Beds</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Services:</td>
-                                                <td>Wifi, Television, Bathroom,...</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <a href="#" class="primary-btn">More Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div
-                                class="hp-room-item set-bg"
-                                data-setbg="img/room/room-b3.jpg"
-                                >
-                                <div class="hr-text">
-                                    <h3>Deluxe Room</h3>
-                                    <h2>198$<span>/Pernight</span></h2>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="r-o">Size:</td>
-                                                <td>30 ft</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Capacity:</td>
-                                                <td>Max persion 5</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Bed:</td>
-                                                <td>King Beds</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Services:</td>
-                                                <td>Wifi, Television, Bathroom,...</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <a href="#" class="primary-btn">More Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div
-                                class="hp-room-item set-bg"
-                                data-setbg="img/room/room-b4.jpg"
-                                >
-                                <div class="hr-text">
-                                    <h3>Family Room</h3>
-                                    <h2>299$<span>/Pernight</span></h2>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="r-o">Size:</td>
-                                                <td>30 ft</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Capacity:</td>
-                                                <td>Max persion 5</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Bed:</td>
-                                                <td>King Beds</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="r-o">Services:</td>
-                                                <td>Wifi, Television, Bathroom,...</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <a href="#" class="primary-btn">More Details</a>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
+
                     </div>
                 </div>
             </div>
@@ -433,6 +487,15 @@
                     </div>
                 </div>
                 <div class="row">
+                    <c:forEach items="${listE}" var="o">
+                    <div class="col-lg-4">
+                        <div class="blog-item set-bg" data-setbg="${o.image}">
+                            <div class="bi-text">
+                                <span class="b-tag">NEW EVENT</span>
+                                <h4 ><a class="name-Event"  href="eventController?Id=${o.event_Id}&action=listdetail">${o.name}</a></h4>
+                                <div class="b-time">
+                                    <i class="icon_clock_alt"></i> ${o.startDay}
+
                     <div class="col-lg-4">
                         <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
                             <div class="bi-text">
@@ -494,10 +557,15 @@
                                 <h4><a href="#">Traveling To Barcelona</a></h4>
                                 <div class="b-time">
                                     <i class="icon_clock_alt"></i> 12th April, 2019
+
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    </c:forEach>
+
+
                 </div>
             </div>
         </section>

@@ -94,7 +94,9 @@
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
+
         <jsp:include page="Header.jsp"></jsp:include>
+
         <!-- Header End -->
 
         <!-- Breadcrumb Section Begin -->

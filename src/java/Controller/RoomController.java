@@ -4,6 +4,7 @@
  */
 package Controller;
 
+
 import Entity.Room;
 import Entity.TypeRoom;
 import Model.DAOImageRoom;
@@ -15,12 +16,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.List;
+
+
 
 /**
  *
- * @author Sơnnnn
+ * @author GIGABYTE
  */
+
 @WebServlet(name = "RoomController", urlPatterns = {"/roomURL"})
 public class RoomController extends HttpServlet {
 
@@ -40,7 +45,18 @@ public class RoomController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet FeedBackController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet FeedBackController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

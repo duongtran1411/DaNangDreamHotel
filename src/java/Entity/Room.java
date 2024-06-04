@@ -1,21 +1,27 @@
 package Entity;
 
+import java.util.Date;
+
 public class Room {
 
-    private int room_Id;
-    private int type_Room_Id;
-    private int floor_Room_Id;
-    private String name;
-    private double price;
-    private String status;
-    private String created_at;
-    private String updated_at;
+
+    private int room_Id,type_Room_Id, floor_Room_Id;
+    private String name;  
+    private double price;  
+    private String status;  
+    private Date created_at,updated_at;
     private int size;
+    private String bed;
+    private String bath;
+    private String people;
+
+    
+
     private String image;
 
     public Room() {
     }
-
+    
     public Room(String name) {
         this.name = name;
     }
@@ -29,7 +35,7 @@ public class Room {
         this.size = size;
     }
 
-    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, String created_at, String updated_at, int size) {
+    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, Date created_at, Date updated_at, int size) {
         this.room_Id = room_Id;
         this.type_Room_Id = type_Room_Id;
         this.floor_Room_Id = floor_Room_Id;
@@ -41,7 +47,29 @@ public class Room {
         this.size = size;
     }
 
-    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, String created_at, String updated_at, int size, String image) {
+
+    public Room(int room_Id, String name, double price, int size, String bed, String bath, String people, String image) {
+        this.room_Id = room_Id;
+        this.name = name;
+        this.price = price;
+        this.size = size;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+        this.image = image;
+    }
+    
+    public Room(int room_Id, String name, double price, int size, String bed, String bath, String people) {
+        this.room_Id = room_Id;
+        this.name = name;
+        this.price = price;
+        this.size = size;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+    }
+    
+    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, Date created_at, Date updated_at, int size, String image) {
         this.room_Id = room_Id;
         this.type_Room_Id = type_Room_Id;
         this.floor_Room_Id = floor_Room_Id;
@@ -52,6 +80,7 @@ public class Room {
         this.updated_at = updated_at;
         this.size = size;
         this.image = image;
+
     }
 
     public int getRoom_Id() {
@@ -102,19 +131,19 @@ public class Room {
         this.status = status;
     }
 
-    public String getCreated_at() {
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
 
-    public String getUpdated_at() {
+    public Date getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(String updated_at) {
+    public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -124,6 +153,30 @@ public class Room {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public String getBed() {
+        return bed;
+    }
+
+    public void setBed(String bed) {
+        this.bed = bed;
+    }
+
+    public String getBath() {
+        return bath;
+    }
+
+    public void setBath(String bath) {
+        this.bath = bath;
+    }
+
+    public String getPeople() {
+        return people;
+    }
+
+    public void setPeople(String people) {
+        this.people = people;
     }
 
     public String getImage() {
@@ -136,17 +189,8 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{"
-                + "room_Id=" + room_Id
-                + ", type_Room_Id=" + type_Room_Id
-                + ", floor_Room_Id=" + floor_Room_Id
-                + ", name='" + name + '\''
-                + ", price=" + price
-                + ", status='" + status + '\''
-                + ", created_at='" + created_at + '\''
-                + ", updated_at='" + updated_at + '\''
-                + ", size=" + size
-                + ", image='" + image + '\''
-                + '}';
+        return "Room{" + "room_Id=" + room_Id + ", type_Room_Id=" + type_Room_Id + ", floor_Room_Id=" + floor_Room_Id + ", name=" + name + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + ", size=" + size + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + '}';
+
     }
+
 }
