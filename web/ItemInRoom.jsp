@@ -123,9 +123,8 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
                 <th>Room</th>
+                <th>Name</th>
                 <th>Quantity</th>
             </tr>
         </thead>
@@ -136,7 +135,6 @@
                     for (ItemInRoom x : list) {
             %>
             <tr>
-                <td data-label="ID"><%= x.getId() %></td>
                 <td data-label="Name"><%= x.getItemName() %></td>
                 <td data-label="Room"><%= x.getRoomId() %></td>
                 <td data-label="Quantity"><%= x.getQuantity() %></td>

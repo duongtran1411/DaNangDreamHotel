@@ -125,7 +125,7 @@
     </div>
     <h1>Customer List</h1>
     <div>
-        <button onclick="location.href='addCustomer.jsp'">Add Customer</button>
+        <button onclick="location.href='AddCustomer.jsp'">Booking now</button>
     </div>
     <table>
         <thead>
@@ -153,7 +153,7 @@
                 <td data-label="Email"><%= customer.getEmail() %></td>
                 <td data-label="ID Card"><%= customer.getIdCard() %></td>
                 <td data-label="Actions">
-                    <button onclick="location.href='updateCustomer.jsp?id=<%= customer.getCustomerId() %>'">Update</button>
+                    <button onclick="location.href='UpdateCustomer.jsp?id=<%= customer.getCustomerId() %>'">Update</button>
                     <button onclick="if(confirm('Are you sure you want to delete this customer?')) { location.href='customerController?mod=2?id=<%= customer.getCustomerId() %>'; }">Delete</button>
                 </td>
             </tr>

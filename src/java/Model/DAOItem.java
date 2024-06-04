@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Entity.Item;
 import Entity.ItemInRoom;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,6 +32,25 @@ public class DAOItem extends DBConnect{
                 x.roomId = rs.getInt("room_Id");
                 x.itemName = rs.getString("nameItem");
                 x.quantity = rs.getInt("quantity");
+                list.add(x);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    public List<Item> getAllItem(){
+        List<Item> list = new ArrayList();
+        String sql = "select * from item";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                Item x = new Item();
+                x.itemId = rs.getInt("item_Id");
+                x.itemName = rs.getString("name");
+                x.typeItemId = rs.getInt("typeItem_Id");
+                x.price = rs.getDouble("price");
                 list.add(x);
             }
         } catch (SQLException ex) {
