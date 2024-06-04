@@ -148,17 +148,13 @@
                                             <a href="roomController">Resort</a>
                                             <ul class="dropdown">
                                                 <li><a href="roomController">Rooms</a></li>
-                                                <li><a href="Blog_Details.jsp">Blog Details</a></li>
-                                                <li><a href="Room_Details.jsp">Room Details</a></li>
+                                                
                                             </ul>
                                         </li>
                                         <li><a href="eventController?action=listall">Events</a></li>
-                                        <li><a href="Contact.jsp">Contact</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
                                     </ul>
                                 </nav>
-                                <div class="nav-right search-switch">
-                                    <i class="icon_search"></i>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -179,7 +175,7 @@
                     <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                         <div class="booking-form">
                             <h3>Booking Your Hotel</h3>
-                            <form action="#">
+                            <form action="roomController" method="get">
                                 <div class="check-date">
                                     <label for="date-in">Check In:</label>
                                     <input type="text" class="date-input" id="date-in" />
@@ -335,27 +331,6 @@
                                     </div>
                                     <h5>- Alexander Vasquez</h5>
                                 </div>
-                                <img src="img/testimonial-logo.png" alt="" />
-                            </div>
-                            <div class="ts-item">
-                                <p>
-                                    After a construction project took longer than expected, my
-                                    husband, my daughter and I needed a place to stay for a few
-                                    nights. As a Chicago resident, we know a lot about our city,
-                                    neighborhood and the types of housing options available and
-                                    absolutely love our vacation at Sona Hotel.
-                                </p>
-                                <div class="ti-author">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <h5>- Alexander Vasquez</h5>
-                                </div>
-                                <img src="img/testimonial-logo.png" alt="" />
                             </div>
                         </div>
                     </div>
@@ -380,7 +355,7 @@
                     <div class="col-lg-4">
                         <div class="blog-item set-bg" data-setbg="${o.image}">
                             <div class="bi-text">
-                                <span class="b-tag">Travel Trip</span>
+                                <span class="b-tag">NEW EVENT</span>
                                 <h4 ><a class="name-Event"  href="eventController?Id=${o.event_Id}&action=listdetail">${o.name}</a></h4>
                                 <div class="b-time">
                                     <i class="icon_clock_alt"></i> ${o.startDay}

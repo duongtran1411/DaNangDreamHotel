@@ -142,12 +142,9 @@
                                             </ul>
                                         </li>
                                         <li class="active"><a href="eventController?action=listall">Event</a></li>
-                                        <li><a href="Contact.jsp">Contact</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
                                     </ul>
                                 </nav>
-                                <div class="nav-right search-switch">
-                                    <i class="icon_search"></i>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -180,7 +177,7 @@
                                 <p>${event.description}</p>
                             </div>
                             <div class="leave-comment">
-                                <h4>Leave A Comment</h4>
+                                <h4>Booking</h4>
                                 <form action="#" class="comment-form">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -192,7 +189,7 @@
                                         <div class="col-lg-12 text-center">
                                             <input type="text" placeholder="Website">
                                             <textarea placeholder="Messages"></textarea>
-                                            <button type="submit" class="site-btn" style="margin-bottom: 20px">Send Message</button>
+                                            <button type="submit" class="site-btn" style="margin-bottom: 20px">Booking Now</button>
                                         </div>
                                     </div>
                                 </form>

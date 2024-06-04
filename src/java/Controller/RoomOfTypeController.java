@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Entity.FormatUtils;
 import Entity.Room;
 import Model.DAORoom;
 import java.io.IOException;
@@ -66,6 +67,7 @@ public class RoomOfTypeController extends HttpServlet {
         DAORoom dao = new DAORoom();
         int numberType = Integer.parseInt(type);
         int size = dao.countRoom();
+        FormatUtils format = new FormatUtils();
         List<Room> list = dao.getRoomByType(size, numberType);
         for (Room o : list) {
             out.println("<div class=\"room col-lg-4 col-md-6\">\n"
@@ -73,7 +75,7 @@ public class RoomOfTypeController extends HttpServlet {
                     + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"
                     + "                                <div class=\"ri-text\" style=\"height:450px\">\n"
                     + "                                    <h4>" + o.getName() + "</h4>\n"
-                    + "                                    <h3>" + o.getPrice()+ " VND<span>/Pernight</span></h3>\n"
+                    + "                                    <h3>" + format.formatPRice(o.getPrice())+ " VND<span>/Pernight</span></h3>\n"
                     + "                                    <table>\n"
                     + "                                        <tbody>\n"
                     + "                                            <tr>\n"

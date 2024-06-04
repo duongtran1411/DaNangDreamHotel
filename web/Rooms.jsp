@@ -149,15 +149,14 @@
                                     <ul>
                                         <li><a href="homeController">Home</a></li>
                                         <li><a href="AboutUs.jsp">About Us</a></li>
-                                        <li class="active"><a href="Rooms.jsp">Resort</a>
+                                        <li class="active"><a href="roomController?action=listall">Resort</a>
                                             <ul class="dropdown">
-                                                <li><a href="roomController?index=1">Room</a></li>
-                                                <li><a href="Room_Details.jsp">Room Details</a></li>
-                                                <li><a href="Blog_Details.jsp">Blog Details</a></li>
+                                                <li><a href="roomController?action=listall">Room</a></li>
+                                                
                                             </ul>
                                         </li>
                                         <li><a href="eventController?action=listall">Event</a></li>
-                                        <li><a href="Contact.jsp">Contact</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
                                     </ul>
                                 </nav>
                             </div>

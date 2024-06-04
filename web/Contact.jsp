@@ -50,33 +50,22 @@
                 <i class="icon_search"></i>
             </div>
             <div class="header-configure-area">
-                <!--<div class="language-option">
-                    <img src="img/flag.jpg" alt="">
-                    <span>EN <i class="fa fa-angle-down"></i></span>
-                    <div class="flag-dropdown">
-                        <ul>
-                            <li><a href="#">Zi</a></li>
-                            <li><a href="#">Fr</a></li>
-                        </ul>
-                    </div>
-                </div>-->
+
                 <a href="Login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
-                    <li class="active"><a href="Home.jsp">Home</a></li>
+                    <li ><a href="Home.jsp">Home</a></li>
                     <li><a href="AboutUs.jsp">About Us</a></li>
-                    <li><a href="Pages.jsp">Accommodation</a>
+                    <li><a href="roomController">Resort</a>
                         <ul class="dropdown">
-                            <li><a href="Rooms.jsp">Room</a></li>
+                            <li><a href="roomController">Room</a></li>
                             <li><a href="Room_Details.jsp">Room Details</a></li>
                             <li><a href="Blog_Details.jsp">Blog Details</a></li>
-                            <li><a href="#">Family Room</a></li>
-                            <li><a href="#">Premium Room</a></li>
                         </ul>
                     </li>
-                    <li><a href="Blog.jsp">Event</a></li>
-                    <li><a href="Contact.jsp">Contact</a></li>
+                    <li><a href="eventController?action=listall">Event</a></li>
+                    <li class="active"><a href="Contact.jsp">Contact</a></li>
                 </ul>
             </nav>
             <div id="mobile-menu-wrap"></div>
@@ -140,26 +129,20 @@
                         </div>
                         <div class="col-lg-10">
                             <div class="nav-menu">
-                                <nav class="mainmenu">
+                                <nav class="mainmenu ">
                                     <ul>
-                                        <li class="active"><a href="Home.jsp">Home</a></li>
+                                        <li ><a href="Home.jsp">Home</a></li>
                                         <li><a href="AboutUs.jsp">About Us</a></li>
-                                        <li><a href="Pages.jsp">Accommodation</a>
+                                        <li><a href="roomController">Resort</a>
                                             <ul class="dropdown">
-                                                <li><a href="Rooms.jsp">Room</a></li>
-                                                <li><a href="Room_Details.jsp">Room Details</a></li>
-                                                <li><a href="Blog_Details.jsp">Blog Details</a></li>
-                                                <li><a href="#">Family Room</a></li>
-                                                <li><a href="#">Premium Room</a></li>
+                                                <li><a href="roomController">Room</a></li>
+                                                
                                             </ul>
                                         </li>
-                                        <li><a href="Blog.jsp">Event</a></li>
-                                        <li><a href="Contact.jsp">Contact</a></li>
+                                        <li><a href="eventController?action=listall">Event</a></li>
+                                        <li class="active"><a href="Contact.jsp">Feedback</a></li>
                                     </ul>
                                 </nav>
-                                <div class="nav-right search-switch">
-                                    <i class="icon_search"></i>
-                                </div>
                             </div>
                         </div>
                     </div>

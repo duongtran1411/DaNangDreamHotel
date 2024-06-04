@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Entity.FormatUtils;
 import Entity.Room;
 import Model.DAORoom;
 import java.io.IOException;
@@ -64,6 +65,7 @@ public class LoadMoreController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         DAORoom dao = new DAORoom();
+        FormatUtils format= new FormatUtils();
         String action = request.getParameter("action");
         String amount = request.getParameter("totalRoom");
         int numberRoom = Integer.parseInt(amount);
@@ -77,7 +79,7 @@ public class LoadMoreController extends HttpServlet {
                             + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"
                             + "                                <div class=\"ri-text\" style=\"height:450px\">\n"
                             + "                                    <h4>" + o.getName() + "</h4>\n"
-                            + "                                    <h3>" + o.getPrice() + " VND<span>/Pernight</span></h3>\n"
+                            + "                                    <h3>" + format.formatPRice(o.getPrice()) + " VND<span>/Pernight</span></h3>\n"
                             + "                                    <table>\n"
                             + "                                        <tbody>\n"
                             + "                                            <tr>\n"

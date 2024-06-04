@@ -150,16 +150,13 @@
                                         <li class="active"><a href="roomController">Resort</a>
                                             <ul class="dropdown">
                                                 <li><a href="roomController">Room</a></li>
-                                                <li><a href="Blog_Details.jsp">Blog Details</a></li>
+                                                
                                             </ul>
                                         </li>
                                         <li><a href="eventController?action=listall">Event</a></li>
-                                        <li><a href="Contact.jsp">Contact</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
                                     </ul>
                                 </nav>
-                                <div class="nav-right search-switch">
-                                    <i class="icon_search"></i>
-                                </div>
                             </div>
                         </div>
                     </div>

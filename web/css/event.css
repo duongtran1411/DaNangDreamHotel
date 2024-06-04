@@ -31,3 +31,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     font-weight: 550;
     font-family: 'Google Sans' ,sans-serif ;
 }
+
+.event-main:hover{
+    color: #DFA974;
+    cursor: none;
+}
+
+
+

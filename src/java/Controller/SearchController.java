@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Entity.FormatUtils;
 import Entity.Room;
 import Model.DAORoom;
 import jakarta.servlet.annotation.WebServlet;
@@ -64,6 +65,7 @@ public class SearchController extends HttpServlet {
         PrintWriter out = response.getWriter();
         String txtSearch = request.getParameter("txt");
         DAORoom dao = new DAORoom();
+        FormatUtils format = new FormatUtils();
         List<Room> list = dao.searchRoomByText(txtSearch);
         for (Room o : list) {
             out.println("<div class=\"room col-lg-4 col-md-6\">\n" +
@@ -80,7 +82,7 @@ public class SearchController extends HttpServlet {
 "                                            </tr>\n" +
 "                                            <tr>\n" +
 "                                                <td class=\"r-o\">Capacity:</td>\n" +
-"                                                <td>"+o.getPeople()+"</td>\n" +
+"                                                <td>"+format.formatPRice(o.getPrice())+"</td>\n" +
 "                                            </tr>\n" +
 "                                            <tr>\n" +
 "                                                <td class=\"r-o\">Bed:</td>\n" +
