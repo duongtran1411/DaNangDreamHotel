@@ -57,7 +57,7 @@ public class DAOTypeRoom extends DBConnect {
     }
 
     public TypeRoom getTypeRoomByID(int trid) {
-        String sql = "SELECT * FROM typeroom WHERE type_Room_Id = ?";
+        String sql = "SELECT * FROM typeroom WHERE typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, trid);
@@ -79,7 +79,7 @@ public class DAOTypeRoom extends DBConnect {
                 + "       bath = ?,\n"
                 + "       people = ?,\n"
                 + "       image = ?\n"
-                + " WHERE type_Room_Id = ?";
+                + " WHERE typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, name);
@@ -109,6 +109,6 @@ public class DAOTypeRoom extends DBConnect {
 
     public static void main(String[] args) {
         DAOTypeRoom dao = new DAOTypeRoom();
-        dao.deleteTypeRoom(1);
+        dao.editTypeRoom(1, "z", 1, "z", "Z", "Z", "954a5535---copy-2_rs_1654161451.jpg");
     }
 }

@@ -4,14 +4,12 @@
  */
 package Controller;
 
-import Entity.ImageRoom;
 import Entity.Room;
 import Entity.TypeRoom;
 import Model.DAOImageRoom;
 import Model.DAORoom;
 import Model.DAOTypeRoom;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -64,9 +62,6 @@ public class RoomController extends HttpServlet {
         switch (action) {
             case "detail":
                 detailRoom(request, response);
-                break;
-            case "view":
-                viewImageByRoomId(request, response);
                 break;
             case "add":
                 addRoom(request, response);
@@ -124,15 +119,6 @@ public class RoomController extends HttpServlet {
         List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
         request.setAttribute("AllTypeRoom", allTypeRoom);
         request.getRequestDispatcher("dashboard/jsp/ManageRoom.jsp").forward(request, response);
-    }
-
-    private void viewImageByRoomId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int roomId = Integer.parseInt(request.getParameter("rid"));
-        Room room = daoRoom.getNameByRoomId(roomId);
-        List<ImageRoom> imageRooms = daoImageRoom.getImageByRoomId(roomId);
-        request.setAttribute("ImageRoomBRID", imageRooms);
-        request.setAttribute("NameRoom", room);
-        request.getRequestDispatcher("dashboard/jsp/ViewImageRoom.jsp").forward(request, response);
     }
 
     private void addRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
