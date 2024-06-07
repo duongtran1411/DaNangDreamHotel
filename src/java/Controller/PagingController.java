@@ -14,14 +14,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author GIGABYTE
  */
-@WebServlet(name = "RoomOfTypeController", urlPatterns = {"/roomOfTypeController"})
-public class RoomOfTypeController extends HttpServlet {
+@WebServlet(name = "PagingController", urlPatterns = {"/pagingController"})
+public class PagingController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +41,10 @@ public class RoomOfTypeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RoomOfTypeController</title>");            
+            out.println("<title>Servlet PagingRoomController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RoomOfTypeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PagingRoomController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,24 +64,24 @@ public class RoomOfTypeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String type = request.getParameter("type");
         DAORoom dao = new DAORoom();
-        int numberType = Integer.parseInt(type);
-        int size = dao.countRoom();
         FormatUtils format = new FormatUtils();
-        List<Room> list = dao.getRoomByType(size, numberType);
+        String number = request.getParameter("page");
+        int numberPage = Integer.parseInt(number); 
+        List<Room> list = new ArrayList<>();
+        list = dao.getTop3Room(numberPage);
         for (Room o : list) {
             out.println("<div class=\"room col-lg-4 col-md-6\">\n"
                     + "                            <div class=\"room-item \" id=\"item\">\n"
                     + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"
                     + "                                <div class=\"ri-text\" style=\"height:450px\">\n"
                     + "                                    <h4>" + o.getName() + "</h4>\n"
-                    + "                                    <h3>" + format.formatPRice(o.getPrice())+ " VND<span>/Pernight</span></h3>\n"
+                    + "                                    <h3>" + format.formatPRice(o.getPrice()) + " VND<span>/Pernight</span></h3>\n"
                     + "                                    <table>\n"
                     + "                                        <tbody>\n"
                     + "                                            <tr>\n"
                     + "                                                <td class=\"r-o\"><i class=\"fa-solid fa-expand icon\"></i></td>\n"
-                    + "                                                <td>" + o.getSize() + " m2</td>\n"
+                    + "                                                <td>" + o.getSize() + "m2</td>\n"
                     + "                                            </tr>\n"
                     + "                                            <tr>\n"
                     + "                                                <td class=\"r-o\"><i class=\"fa-solid fa-user-group icon\"></i></td>\n"
@@ -104,8 +105,8 @@ public class RoomOfTypeController extends HttpServlet {
                     + "                                </div>\n"
                     + "                            </div>\n"
                     + "                        </div> ");
-        }
-        
+        };
+
     }
 
     /**

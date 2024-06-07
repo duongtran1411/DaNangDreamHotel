@@ -67,10 +67,22 @@ public class ViewRoomController extends HttpServlet {
             throws ServletException, IOException {
         DAORoom dao = new DAORoom();
         DAOTypeRoom daoT = new DAOTypeRoom();
-        List<Room> list = dao.getTop3Room();
+        String amount = request.getParameter("numberPage");
+        if(amount == null){
+            amount = "1";
+        }
+        int pageNumber = Integer.parseInt(amount);
+        List<Room> list = dao.getTop3Room(pageNumber);
         List<TypeRoom> listT = daoT.getAllTypeRoom();
+        int sizeRoom = dao.countRoom();
+        int page = sizeRoom / 6;
+        if(sizeRoom % 6 != 0){
+            page++;
+        }
         request.setAttribute("listRoom", list);
         request.setAttribute("listTypeRoom", listT);
+        request.setAttribute("tag", pageNumber);
+        request.setAttribute("end", page);
         request.getRequestDispatcher("Rooms.jsp").forward(request, response);
     }
 

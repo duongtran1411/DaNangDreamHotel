@@ -1,9 +1,10 @@
 package Entity;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Date;
 
 public class Room {
-
 
     private int room_Id,type_Room_Id, floor_Room_Id;
     private String name;  
@@ -14,25 +15,9 @@ public class Room {
     private String bed;
     private String bath;
     private String people;
-
-    
-
     private String image;
 
     public Room() {
-    }
-    
-    public Room(String name) {
-        this.name = name;
-    }
-
-    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, int size) {
-        this.room_Id = room_Id;
-        this.type_Room_Id = type_Room_Id;
-        this.floor_Room_Id = floor_Room_Id;
-        this.name = name;
-        this.price = price;
-        this.size = size;
     }
 
     public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, Date created_at, Date updated_at, int size) {
@@ -46,7 +31,6 @@ public class Room {
         this.updated_at = updated_at;
         this.size = size;
     }
-
 
     public Room(int room_Id, String name, double price, int size, String bed, String bath, String people, String image) {
         this.room_Id = room_Id;
@@ -67,20 +51,6 @@ public class Room {
         this.bed = bed;
         this.bath = bath;
         this.people = people;
-    }
-    
-    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, Date created_at, Date updated_at, int size, String image) {
-        this.room_Id = room_Id;
-        this.type_Room_Id = type_Room_Id;
-        this.floor_Room_Id = floor_Room_Id;
-        this.name = name;
-        this.price = price;
-        this.status = status;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-        this.size = size;
-        this.image = image;
-
     }
 
     public int getRoom_Id() {
@@ -190,7 +160,14 @@ public class Room {
     @Override
     public String toString() {
         return "Room{" + "room_Id=" + room_Id + ", type_Room_Id=" + type_Room_Id + ", floor_Room_Id=" + floor_Room_Id + ", name=" + name + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + ", size=" + size + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + '}';
-
     }
+    
+    
+    
+
+   
+    
+    
+    
 
 }

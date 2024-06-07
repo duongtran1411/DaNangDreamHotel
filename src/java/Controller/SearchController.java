@@ -73,24 +73,24 @@ public class SearchController extends HttpServlet {
 "                                <img src=\""+o.getImage()+"\" alt=\"\" style=\"height: 240px\">\n" +
 "                                <div class=\"ri-text\" style=\"height:450px\">\n" +
 "                                    <h4>"+o.getName()+"</h4>\n" +
-"                                    <h3>"+o.getPrice()+" VND<span>/Pernight</span></h3>\n" +
+"                                    <h3>"+format.formatPRice(o.getPrice())+" VND<span>/Pernight</span></h3>\n" +
 "                                    <table>\n" +
 "                                        <tbody>\n" +
 "                                            <tr>\n" +
-"                                                <td class=\"r-o\">Size:</td>\n" +
-"                                                <td>"+o.getSize()+"</td>\n" +
+"                                                <td class=\"r-o\"><i class=\"fa-solid fa-expand icon\"></i></td>\n" +
+"                                                <td>"+o.getSize()+" m2</td>\n" +
 "                                            </tr>\n" +
 "                                            <tr>\n" +
-"                                                <td class=\"r-o\">Capacity:</td>\n" +
-"                                                <td>"+format.formatPRice(o.getPrice())+"</td>\n" +
+"                                                <td class=\"r-o\"><i class=\"fa-solid fa-user-group icon\"></i></td>\n" +
+"                                                <td>"+o.getPeople()+" person</td>\n" +
 "                                            </tr>\n" +
 "                                            <tr>\n" +
-"                                                <td class=\"r-o\">Bed:</td>\n" +
-"                                                <td>"+o.getBed()+"</td>\n" +
+"                                                <td class=\"r-o\"><i class=\"fa-solid fa-bed icon\" ></i></td>\n" +
+"                                                <td>"+o.getBed()+" bed</td>\n" +
 "                                            </tr>\n" +
 "                                            <tr>\n" +
-"                                                <td class=\"r-o\">Bath:</td>\n" +
-"                                                <td>"+o.getBath()+"</td>\n" +
+"                                                <td class=\"r-o\"><i class=\"fa-solid fa-bath icon\"></i></td>\n" +
+"                                                <td>"+o.getBath()+" bath</td>\n" +
 "                                            </tr>\n" +
 "                                            <tr>\n" +
 "                                                <td class=\"r-o\">Services:</td>\n" +

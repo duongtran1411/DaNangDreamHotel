@@ -24,7 +24,7 @@
             href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap"
             rel="stylesheet"
             />
-        <title>Da Nang Dream Hotel</title>
+        <title>Da Nang Hotel</title>
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
@@ -39,76 +39,37 @@
         <link href="css/paging.css" rel="stylesheet" type="text/css"/>
         <link href="css/home.css" rel="stylesheet" type="text/css"/>
 
-
     </head>
     <body>
         <div id="preloder">
             <div class="loader"></div>
         </div>
 
-
-        <!-- Offcanvas Menu Section End -->
-
-        <!-- Header Section Begin -->
-        <jsp:include page="Header.jsp"></jsp:include>
-        <!-- Header End -->
-
-        <!-- Hero Section Begin -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero-text">
-                            <h1>Da Nang Dream Hotel</h1>
-                            <p>
-                                Here are the best hotel booking sites, including recommendations
-                                for international travel and for finding low-priced hotel rooms.
-                            </p>
-                            <a href="#" class="primary-btn">Discover Now</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
-                        <div class="booking-form">
-                            <h3>Booking Your Hotel</h3>
-                            <form action="#">
-                                <div class="check-date">
-                                    <label for="date-in">Check In:</label>
-                                    <input type="text" class="date-input" id="date-in" />
-                                    <i class="icon_calendar"></i>
-                                </div>
-                                <div class="check-date">
-                                    <label for="date-out">Check Out:</label>
-                                    <input type="text" class="date-input" id="date-out" />
-                                    <i class="icon_calendar"></i>
-                                </div>
-                                <div class="select-option">
-                                    <label for="guest">Guests:</label>
-                                    <select id="guest">
-                                        <option value="">2 Adults</option>
-                                        <option value="">3 Adults</option>
-                                    </select>
-                                </div>
-                                <div class="select-option">
-                                    <label for="room">Room:</label>
-                                    <select id="room">
-                                        <option value="">1 Room</option>
-                                        <option value="">2 Room</option>
-                                    </select>
-                                </div>
-                                <button type="submit">Check Availability</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+        <!-- Offcanvas Menu Section Begin -->
+        <div class="offcanvas-menu-overlay"></div>
+        <div class="canvas-open">
+            <i class="icon_menu"></i>
+        </div>
+        <div class="offcanvas-menu-wrapper">
+            <div class="canvas-close">
+                <i class="icon_close"></i>
             </div>
-            <div class="hero-slider owl-carousel">
-                <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
-                <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
-                <div class="hs-item set-bg" data-setbg="img/hero/hero-3.jpg"></div>
+            <div class="search-icon search-switch">
+                <i class="icon_search"></i>
             </div>
-        </section>
-        <!-- Hero Section End -->
-
+            <div class="header-configure-area">
+                <!--<div class="language-option">
+                    <img src="img/flag.jpg" alt="">
+                    <span>EN <i class="fa fa-angle-down"></i></span>
+                    <div class="flag-dropdown">
+                        <ul>
+                            <li><a href="#">Zi</a></li>
+                            <li><a href="#">Fr</a></li>
+                        </ul>
+                    </div>
+                </div>-->
+                <a href="Login.jsp" class="bk-btn">Login</a>
+            </div>
 
             <nav class="mainmenu mobile-menu">
                 <ul>
@@ -214,15 +175,15 @@
                     <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                         <div class="booking-form">
                             <h3>Booking Your Hotel</h3>
-                            <form action="roomController" method="get">
+                            <form action="bookingController" method="get">
                                 <div class="check-date">
                                     <label for="date-in">Check In:</label>
-                                    <input type="text" class="date-input" id="date-in" />
+                                    <input type="text" class="date-input" id="date-in" name="checkin" />
                                     <i class="icon_calendar"></i>
                                 </div>
                                 <div class="check-date">
                                     <label for="date-out">Check Out:</label>
-                                    <input type="text" class="date-input" id="date-out" />
+                                    <input type="text" class="date-input" id="date-out" name="checkout" />
                                     <i class="icon_calendar"></i>
                                 </div>
                                 <div class="select-option">
@@ -239,7 +200,7 @@
                                         <option value="">2 Room</option>
                                     </select>
                                 </div>
-                                <button type="submit">Check Availability</button>
+                                <button type="submit">Booking Now</button>
                             </form>
                         </div>
                     </div>
@@ -252,6 +213,7 @@
             </div>
         </section>
         <!-- Hero Section End -->
+
         <!-- About Us Section Begin -->
         <section class="aboutus-section spad">
             <div class="container">
@@ -292,82 +254,6 @@
         </section>
         <!-- About Us Section End -->
 
-        <!-- Services Section End -->
-        <!-- <section class="services-section spad">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="section-title">
-                  <span>What We Do</span>
-                  <h2>Discover Our Services</h2>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-036-parking"></i>
-                  <h4>Travel Plan</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-033-dinner"></i>
-                  <h4>Catering Service</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-026-bed"></i>
-                  <h4>Babysitting</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-024-towel"></i>
-                  <h4>Laundry</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-044-clock-1"></i>
-                  <h4>Hire Driver</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-012-cocktail"></i>
-                  <h4>Bar & Drink</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> -->
-        <!-- Services Section End -->
         <!-- Home Room Section Begin -->  <!--BEST SELLER-->
         <section class="hp-room-section">
             <div class="container-fluid">
@@ -386,15 +272,15 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="r-o">Size:</td>
-                                                    <td>${o.size}</td>
+                                                    <td>${o.size}m2</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="r-o">Capacity:</td>
-                                                    <td>${o.people}</td>
+                                                    <td>${o.people} person</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="r-o">Bed:</td>
-                                                    <td>${o.bed}</td>
+                                                    <td>${o.bed} bed</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="r-o">Services:</td>
@@ -407,7 +293,6 @@
                                 </div>
                             </div>
                         </c:forEach>
-
                     </div>
                 </div>
             </div>
@@ -446,27 +331,6 @@
                                     </div>
                                     <h5>- Alexander Vasquez</h5>
                                 </div>
-                                <img src="img/testimonial-logo.png" alt="" />
-                            </div>
-                            <div class="ts-item">
-                                <p>
-                                    After a construction project took longer than expected, my
-                                    husband, my daughter and I needed a place to stay for a few
-                                    nights. As a Chicago resident, we know a lot about our city,
-                                    neighborhood and the types of housing options available and
-                                    absolutely love our vacation at Sona Hotel.
-                                </p>
-                                <div class="ti-author">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <h5>- Alexander Vasquez</h5>
-                                </div>
-                                <img src="img/testimonial-logo.png" alt="" />
                             </div>
                         </div>
                     </div>
@@ -495,77 +359,11 @@
                                 <h4 ><a class="name-Event"  href="eventController?Id=${o.event_Id}&action=listdetail">${o.name}</a></h4>
                                 <div class="b-time">
                                     <i class="icon_clock_alt"></i> ${o.startDay}
-
-                    <div class="col-lg-4">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Travel Trip</span>
-                                <h4><a href="#">Tremblant In Canada</a></h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 15th April, 2019
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Camping</span>
-                                <h4><a href="#">Choosing A Static Caravan</a></h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 15th April, 2019
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Event</span>
-                                <h4><a href="#">Copper Canyon</a></h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 21th April, 2019
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div
-                            class="blog-item small-size set-bg"
-                            data-setbg="img/blog/blog-wide.jpg"
-                            >
-                            <div class="bi-text">
-                                <span class="b-tag">Event</span>
-                                <h4>
-                                    <a href="#"
-                                       >Trip To Iqaluit In Nunavut A Canadian Arctic City</a
-                                    >
-                                </h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 08th April, 2019
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div
-                            class="blog-item small-size set-bg"
-                            data-setbg="img/blog/blog-10.jpg"
-                            >
-                            <div class="bi-text">
-                                <span class="b-tag">Travel</span>
-                                <h4><a href="#">Traveling To Barcelona</a></h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> 12th April, 2019
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     </c:forEach>
-
-
                 </div>
             </div>
         </section>

@@ -1,36 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
-        <servlet-name>StaffController</servlet-name>
-        <servlet-class>Controller.StaffController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RoomController</servlet-name>
-        <servlet-class>Controller.RoomController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>TypeRoomController</servlet-name>
-        <servlet-class>Controller.TypeRoomController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CustomerController</servlet-name>
-        <servlet-class>Controller.CustomerController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ItemManagerController</servlet-name>
-        <servlet-class>Controller.ItemManagerController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>authentication_register</servlet-name>
-        <servlet-class>Controller.authentication_register</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>authentication_login</servlet-name>
-        <servlet-class>Controller.authentication_login</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ChangeResetPasss</servlet-name>
-        <servlet-class>Controller.ChangeResetPasss</servlet-class>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>Controller.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeController</servlet-name>
@@ -45,8 +17,8 @@
         <servlet-class>Controller.ViewRoomController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoadMoreController</servlet-name>
-        <servlet-class>Controller.LoadMoreController</servlet-class>
+        <servlet-name>PagingController</servlet-name>
+        <servlet-class>Controller.PagingController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchController</servlet-name>
@@ -65,12 +37,12 @@
         <servlet-class>Controller.EventController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FeedBackController</servlet-name>
-        <servlet-class>Controller.FeedBackController</servlet-class>
+        <servlet-name>BookingController</servlet-name>
+        <servlet-class>Controller.BookingController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>authentication_register</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/loginControllerURL</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -81,8 +53,12 @@
         <url-pattern>/roomDetailsController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoadMoreController</servlet-name>
-        <url-pattern>/loadMoreController</url-pattern>
+        <servlet-name>RoomController</servlet-name>
+        <url-pattern>/roomController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PagingController</servlet-name>
+        <url-pattern>/pagingController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
@@ -101,39 +77,7 @@
         <url-pattern>/eventController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>FeedBackController</servlet-name>
-        <url-pattern>/feedBackController</url-pattern>
+        <servlet-name>BookingController</servlet-name>
+        <url-pattern>/bookingController</url-pattern>
     </servlet-mapping>
-        <servlet-name>TypeRoomController</servlet-name>
-        <url-pattern>/typeRoomURL</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RoomController</servlet-name>
-        <url-pattern>/roomURL</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StaffController</servlet-name>
-        <url-pattern>/staffController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CustomerController</servlet-name>
-        <url-pattern>/customerController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ItemManagerController</servlet-name>
-        <url-pattern>/ItemManager</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>authentication_login</servlet-name>
-        <url-pattern>/dashboard/jsp/authentication-login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChangeResetPasss</servlet-name>
-        <url-pattern>/changepass</url-pattern>
-    </servlet-mapping>
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
 </web-app>
