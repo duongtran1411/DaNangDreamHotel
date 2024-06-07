@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Da Nang Dream Hotel</title>
+        <title>Sona | Template</title>
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
@@ -63,7 +63,7 @@
                         </ul>
                     </div>
                 </div>-->
-                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
+                <a href="Login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
@@ -97,8 +97,72 @@
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
-
-        <jsp:include page="Header.jsp"></jsp:include>
+        <header class="header-section header-normal">
+            <div class="top-nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="tn-left">
+                                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
+                                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="tn-right">
+                                <div class="top-social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div>
+                                <!--<div class="language-option">
+                    <img src="img/flag.jpg" alt="">
+                    <span>EN <i class="fa fa-angle-down"></i></span>
+                    <div class="flag-dropdown">
+                        <ul>
+                            <li><a href="#">Zi</a></li>
+                            <li><a href="#">Fr</a></li>
+                        </ul>
+                    </div>
+                </div>-->
+                                <a href="Login.jsp" class="bk-btn">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="nav-menu">
+                                <nav class="mainmenu">
+                                    <ul>
+                                        <li ><a href="homeController">Home</a></li>
+                                        <li><a href="AboutUs.jsp">About Us</a></li>
+                                        <li class="active"><a href="roomController">Resort</a>
+                                            <ul class="dropdown">
+                                                <li><a href="roomController">Room</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a href="eventController?action=listall">Event</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
         <!-- Header End -->
 
         <!-- Breadcrumb Section Begin -->
@@ -124,11 +188,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="room-details-item " width="750px" height="500px" >
+                        <div class="room-details-item "  >
                             <div class="slide">
                                 <div class="image-rooms list-image">
                                     <c:forEach items="${listImage}" var="o">
-                                        <img src="${o.image}" alt="" id="slide-img" >
+                                        <img src="${o.image}" alt="" width="750px" height="502px" id="slide-img" >
                                     </c:forEach>
                                 </div>
                                 <div class="btns">
@@ -156,19 +220,19 @@
                                     <tbody>
                                         <tr>
                                             <td class="r-o">Size:</td>
-                                            <td>${room.size}</td>
+                                            <td>${room.size}m2</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Capacity:</td>
-                                            <td>${room.people}</td>
+                                            <td>${room.people} person</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Bed:</td>
-                                            <td>${room.bed}</td>
+                                            <td>${room.bed} bed</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Bath:</td>
-                                            <td>${room.bath}</td>
+                                            <td>${room.bath} bath</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Services:</td>

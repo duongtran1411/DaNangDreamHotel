@@ -81,3 +81,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     background: #DFA974;
 }
 
+.page li{
+    list-style: none;
+    color:black
+}
+
+.page button{
+    background-color: #ffffff;
+    border: none;
+    width:21px;
+    transform: translateX(520px);
+}
+
+.page button:hover{
+    background-color: orange;
+    
+}
+
+.highlight{
+    background-color: orange;
+}
+
+.icon{
+    width: 50%;
+    height: 40%
+        
+}
+

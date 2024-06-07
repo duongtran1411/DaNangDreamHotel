@@ -15,7 +15,7 @@
         <meta name="keywords" content="Sona, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Da Nang Dream Hotel</title>
+        <title>Sona | Template</title>
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
@@ -64,7 +64,7 @@
                         </ul>
                     </div>
                 </div>-->
-                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
+                <a href="Login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
@@ -98,22 +98,85 @@
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
-
-        <jsp:include page="Header.jsp"></jsp:include>
-
-        <!-- Header End -->
-
-            <!-- Breadcrumb Section Begin -->
-            <div class="breadcrumb-section">
+        <header class="header-section header-normal">
+            <div class="top-nav">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="breadcrumb-text">
-                                <h2>Our Rooms</h2>
-                                <div class="bt-option">
-                                    <a href="home.html">Home</a>
-                                    <span>Rooms</span>
+                        <div class="col-lg-6">
+                            <ul class="tn-left">
+                                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
+                                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="tn-right">
+                                <div class="top-social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
                                 </div>
+                                <a href="Login.jsp" class="bk-btn">Login</a>
+                                <!--<div class="language-option">
+                                    <img src="img/flag.jpg" alt="">
+                                    <span>EN <i class="fa fa-angle-down"></i></span>
+                                    <div class="flag-dropdown">
+                                        <ul>
+                                            <li><a href="#">Zi</a></li>
+                                            <li><a href="#">Fr</a></li>
+                                        </ul>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="nav-menu">
+                                <nav class="mainmenu">
+                                    <ul>
+                                        <li><a href="homeController">Home</a></li>
+                                        <li><a href="AboutUs.jsp">About Us</a></li>
+                                        <li class="active"><a href="roomController?action=listall">Resort</a>
+                                            <ul class="dropdown">
+                                                <li><a href="roomController?action=listall">Room</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a href="eventController?action=listall">Event</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header End -->
+
+        <!-- Breadcrumb Section Begin -->
+        <div class="breadcrumb-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb-text">
+                            <h2>Our Rooms</h2>
+                            <div class="bt-option">
+                                <a href="homeController">Home</a>
+                                <span>Rooms</span>
                             </div>
                         </div>
                     </div>
@@ -129,6 +192,7 @@
                     </div>
                     <div class="col-lg-6">
                         <ul class="ulType" >
+                            
                             <c:forEach items="${listTypeRoom}" var="o">
                                 <button class="btnType" name="typeRoom" onclick="loadType(this)" value="${o.typeRoom_Id}"><li>${o.name}</li></button>
                                     </c:forEach>   
@@ -145,12 +209,13 @@
 
                 </div>
             </div>
-            <!-- Breadcrumb Section End -->
+        </div>
+        <!-- Breadcrumb Section End -->
+
         <!-- Rooms Section Begin -->
         <section class="rooms-section spad">
             <div class="container">
                 <div class="row" id="content">                 
-
                     <c:forEach items="${listRoom}" var="o">
                         <div class="room col-lg-4 col-md-6">
                             <div class="room-item " id="item">
@@ -161,20 +226,20 @@
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td class="r-o">Size:</td>
+                                                <td class="r-o"><i class="fa-solid fa-expand icon"></i></td>
                                                 <td>${o.size}m2</td>
                                             </tr>
                                             <tr>
-                                                <td class="r-o">Capacity:</td>
-                                                <td>${o.people}</td>
+                                                <td class="r-o"><i class="fa-solid fa-user-group"></i></td>
+                                                <td>${o.people} person</td>
                                             </tr>
                                             <tr>
-                                                <td class="r-o">Bed:</td>
-                                                <td>${o.bed}</td>
+                                                <td class="r-o"><i class="fa-solid fa-bed icon" ></i></td>
+                                                <td>${o.bed} bed</td>
                                             </tr>
                                             <tr>
-                                                <td class="r-o">Bath:</td>
-                                                <td>${o.bath}</td>
+                                                <td class="r-o"><i class="fa-solid fa-bath icon"></i></td>
+                                                <td>${o.bath} bath</td>
                                             </tr>
                                             <tr>
                                                 <td class="r-o">Services:</td>
@@ -191,7 +256,13 @@
 
 
                 </div>
-                <button class="btn-Loadmore" onclick="loadMore()">Load More</button>
+                <ul class="page">
+                    <c:forEach begin="1" end="${end}" var="o">
+                        <button class="${tag == o?"highlight":""}" onclick="handlePage(this)" value="${o}"><li>${o}</li></button>
+                    </c:forEach>
+                    
+                </ul>
+<!--                <button class="btn-Loadmore" onclick="loadMore()">Load More</button>-->
                 <!--                <button class="btn-Loadmore" onclick="loadLess()">Load Less</button>-->
             </div>
         </section>
@@ -285,24 +356,6 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
         <script>
-                                        function loadMore() {
-                                            var amount = document.querySelectorAll(".room").length;
-                                            $.ajax({
-                                                url: "/DaNangDreamHotel/loadMoreController?action=more",
-                                                type: "GET",
-                                                data: {
-                                                    totalRoom: amount
-                                                },
-                                                success: function (data) {
-                                                    var row = document.getElementById("content");
-                                                    row.innerHTML += data;
-                                                    console.log("success");
-                                                },
-                                                error: function (xhr) {
-                                                    console.log(xhr);
-                                                }
-                                            });
-                                        }
                                         function searchByName(txtSearch) {
                                             var text = txtSearch.value;
                                             console.log(text);
@@ -337,11 +390,11 @@
                                                     console.log("success");
                                                 },
                                                 error: function (xhr) {
-                                                    console.log(xhr, txtSearch.value);
+                                                    console.log(xhr);
                                                 }
                                             });
                                         }
-                                        ;
+                                        
 
                                         function sortPriceDown() {
                                             var amount = 0;
@@ -357,11 +410,10 @@
                                                     console.log("success");
                                                 },
                                                 error: function (xhr) {
-                                                    console.log(xhr, txtSearch.value);
+                                                    console.log(xhr);
                                                 }
                                             });
                                         }
-                                        ;
 
                                         function loadType(param) {
 
@@ -376,6 +428,25 @@
                                                     var row = document.getElementById("content");
                                                     row.innerHTML = data;
                                                     console.log(typeRoom);
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
+                                        
+                                        function handlePage(param){
+                                            var numberPage = param.value;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/pagingController',
+                                                type: 'GET',
+                                                data: {
+                                                    page: numberPage
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
                                                     console.log("success");
                                                 },
                                                 error: function (xhr) {

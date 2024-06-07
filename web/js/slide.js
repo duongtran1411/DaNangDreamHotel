@@ -18,6 +18,6 @@ setInterval(() => {
     } else {
         current++;
         let width = images[0].offsetWidth;
-        listImage.style.transform = `translateX(${width * -1 * current}px)`;
+        listImage.style.transform = `translateX(${width * - 1 * current}px)`;
     }
 }, 3000);

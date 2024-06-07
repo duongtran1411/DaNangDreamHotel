@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -16,19 +15,7 @@ public class TypeRoom {
     private int event_Id;
     private String bed, bath, people, image;
 
-
-
-
     public TypeRoom() {
-    }
-
-
-    public TypeRoom(String name, String bed, String bath, String people, String image) {
-        this.name = name;
-        this.bed = bed;
-        this.bath = bath;
-        this.people = people;
-        this.image = image;
     }
 
     public TypeRoom(int typeRoom_Id, String name, int event_Id, String bed, String bath, String people, String image) {
@@ -40,7 +27,6 @@ public class TypeRoom {
         this.people = people;
         this.image = image;
     }
-
     
     public TypeRoom(int typeRoom_Id, String name) {
         this.typeRoom_Id = typeRoom_Id;
@@ -61,7 +47,7 @@ public class TypeRoom {
     public void setTypeRoom_Id(int typeRoom_Id) {
         this.typeRoom_Id = typeRoom_Id;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -116,5 +102,4 @@ public class TypeRoom {
     }
     
     
-
 }
