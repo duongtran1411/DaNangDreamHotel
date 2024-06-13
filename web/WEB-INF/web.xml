@@ -13,7 +13,7 @@
         <servlet-class>Controller.RoomDetailsController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RoomController</servlet-name>
+        <servlet-name>ViewRoomController</servlet-name>
         <servlet-class>Controller.ViewRoomController</servlet-class>
     </servlet>
     <servlet>
@@ -53,8 +53,8 @@
         <url-pattern>/roomDetailsController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RoomController</servlet-name>
-        <url-pattern>/roomController</url-pattern>
+        <servlet-name>ViewRoomController</servlet-name>
+        <url-pattern>/viewRoomController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PagingController</servlet-name>

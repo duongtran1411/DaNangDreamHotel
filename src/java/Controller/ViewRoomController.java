@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author GIGABYTE
  */
-@WebServlet(name = "RoomController", urlPatterns = {"/roomController"})
+@WebServlet(name = "ViewRoomController", urlPatterns = {"/viewRoomController"})
 public class ViewRoomController extends HttpServlet {
 
     /**
