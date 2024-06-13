@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page import="Entity.FormatUtils" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,12 +15,13 @@
         <meta name="keywords" content="Sona, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Da Nang Dream Hotel</title>
+        <title>Sona | Template</title>
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
-
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>     
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -32,6 +33,7 @@
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/paging.css"/>
     </head>
     <body>
         <!-- Page Preloder -->
@@ -62,7 +64,7 @@
                         </ul>
                     </div>
                 </div>-->
-                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
+                <a href="Login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
@@ -96,51 +98,148 @@
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
-        <jsp:include page="Header.jsp"></jsp:include>
-        <!-- Header End -->
-
-            <!-- Breadcrumb Section Begin -->
-            <div class="breadcrumb-section">
+        <header class="header-section header-normal">
+            <div class="top-nav">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="breadcrumb-text">
-                                <h2>Our Rooms</h2>
-                                <div class="bt-option">
-                                    <a href="home.html">Home</a>
-                                    <span>Rooms</span>
+                        <div class="col-lg-6">
+                            <ul class="tn-left">
+                                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
+                                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="tn-right">
+                                <div class="top-social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
                                 </div>
+                                <a href="Login.jsp" class="bk-btn">Login</a>
+                                <!--<div class="language-option">
+                                    <img src="img/flag.jpg" alt="">
+                                    <span>EN <i class="fa fa-angle-down"></i></span>
+                                    <div class="flag-dropdown">
+                                        <ul>
+                                            <li><a href="#">Zi</a></li>
+                                            <li><a href="#">Fr</a></li>
+                                        </ul>
+                                    </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Breadcrumb Section End -->
-
-            <!-- Rooms Section Begin -->
-            <section class="rooms-section spad">
+            <div class="menu-item">
                 <div class="container">
-                    <div class="row">                 
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="nav-menu">
+                                <nav class="mainmenu">
+                                    <ul>
+                                        <li><a href="homeController">Home</a></li>
+                                        <li><a href="AboutUs.jsp">About Us</a></li>
+                                        <li class="active"><a href="roomController?action=listall">Resort</a>
+                                            <ul class="dropdown">
+                                                <li><a href="roomController?action=listall">Room</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a href="eventController?action=listall">Event</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header End -->
+
+        <!-- Breadcrumb Section Begin -->
+        <div class="breadcrumb-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb-text">
+                            <h2>Our Rooms</h2>
+                            <div class="bt-option">
+                                <a href="homeController">Home</a>
+                                <span>Rooms</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="background-color: #DFA974;">
+                    <div class="col-lg-2" style="height: 50px; " >
+                        <div style="display: inline-block;" class="search-container">   
+                            <div >
+                                <input oninput="searchByName(this)" type="text" name="txt" class="input-Search"  placeholder="Search">
+                                <i class="fa-solid fa-magnifying-glass btnSearch" ></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="ulType" >
+                            
+                            <c:forEach items="${listTypeRoom}" var="o">
+                                <button class="btnType" name="typeRoom" onclick="loadType(this)" value="${o.typeRoom_Id}"><li>${o.name}</li></button>
+                                    </c:forEach>   
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2" style="position: relative">
+                        <h6 class="textSort" >Sort by price :</h6>
+                    </div>
+                    <div class="col-lg-2">                        
+                        <button class="btnSort" onclick="sortPriceUp()"><i class="fa-solid fa-arrow-up-short-wide"></i></button>
+                        <button class="btnSort" onclick="sortPriceDown()"><i class="fa-solid fa-arrow-down-wide-short"></i></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb Section End -->
+
+        <!-- Rooms Section Begin -->
+        <section class="rooms-section spad">
+            <div class="container">
+                <div class="row" id="content">                 
                     <c:forEach items="${listRoom}" var="o">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="room-item">
-                                <img src="img/room/room-1.jpg" alt="">
-                                <div class="ri-text">
-                                    <h4>${o.roomName}</h4>
-                                    <h3>${o.price} VND<span>/Pernight</span></h3>
+                        <div class="room col-lg-4 col-md-6">
+                            <div class="room-item " id="item">
+                                <img src="${o.image}" alt="" style="height: 240px">
+                                <div class="ri-text" style="height:450px">
+                                    <h4>${o.name}</h4>
+                                    <h3>${FormatUtils.formatPRice(o.price)}đ<span>/Pernight</span></h3>
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td class="r-o">Size:</td>
-                                                <td>30 ft</td>
+                                                <td class="r-o"><i class="fa-solid fa-expand icon"></i></td>
+                                                <td>${o.size}m2</td>
                                             </tr>
                                             <tr>
-                                                <td class="r-o">Capacity:</td>
-                                                <td>Max persion 3</td>
+                                                <td class="r-o"><i class="fa-solid fa-user-group"></i></td>
+                                                <td>${o.people} person</td>
                                             </tr>
                                             <tr>
-                                                <td class="r-o">Bed:</td>
-                                                <td>King Beds</td>
+                                                <td class="r-o"><i class="fa-solid fa-bed icon" ></i></td>
+                                                <td>${o.bed} bed</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o"><i class="fa-solid fa-bath icon"></i></td>
+                                                <td>${o.bath} bath</td>
                                             </tr>
                                             <tr>
                                                 <td class="r-o">Services:</td>
@@ -148,19 +247,23 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a href="#" class="primary-btn">More Details</a>
+                                    <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
                                 </div>
                             </div>
                         </div>      
                     </c:forEach>
-                    <div class="col-lg-12">
-                        <div class="room-pagination">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
+
+
+
                 </div>
+                <ul class="page">
+                    <c:forEach begin="1" end="${end}" var="o">
+                        <button class="${tag == o?"highlight":""}" onclick="handlePage(this)" value="${o}"><li>${o}</li></button>
+                    </c:forEach>
+                    
+                </ul>
+<!--                <button class="btn-Loadmore" onclick="loadMore()">Load More</button>-->
+                <!--                <button class="btn-Loadmore" onclick="loadLess()">Load Less</button>-->
             </div>
         </section>
         <!-- Rooms Section End -->
@@ -252,5 +355,106 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <script>
+                                        function searchByName(txtSearch) {
+                                            var text = txtSearch.value;
+                                            console.log(text);
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/searchController',
+                                                type: 'GET',
+                                                data: {
+                                                    txt: text
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr, txtSearch.value);
+                                                }
+                                            });
+                                        }
+
+                                        function sortPriceUp() {
+                                            var amount = 0;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/sortRoomController?action=asc',
+                                                type: 'GET',
+                                                data: {
+                                                    size: amount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
+                                        
+
+                                        function sortPriceDown() {
+                                            var amount = 0;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/sortRoomController?action=desc',
+                                                type: 'GET',
+                                                data: {
+                                                    size: amount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
+
+                                        function loadType(param) {
+
+                                            var typeRoom = param.value;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/roomOfTypeController',
+                                                type: 'GET',
+                                                data: {
+                                                    type: typeRoom
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log(typeRoom);
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
+                                        
+                                        function handlePage(param){
+                                            var numberPage = param.value;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/pagingController',
+                                                type: 'GET',
+                                                data: {
+                                                    page: numberPage
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
+
+        </script>
     </body>
 </html>
