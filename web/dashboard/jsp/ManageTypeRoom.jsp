@@ -49,7 +49,12 @@
                                         <div class="content-icon d-flex align-items-between justify-content-between" style="font-size: 0.95rem;">
                                             <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
                                                 <i class="fa fa-users" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>
-                                                <span>${o.people}</span>
+                                                <c:if test="${o.people == 1}">
+                                                    <span>${o.people} Person</span>
+                                                </c:if>
+                                                <c:if test="${o.people > 1}">
+                                                    <span>${o.people} People</span>
+                                                </c:if>
                                             </div>
                                             <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
                                                 <i class="fa fa-bed" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>

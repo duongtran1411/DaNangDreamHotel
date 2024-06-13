@@ -99,17 +99,25 @@ public class TypeRoomController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("type_Room_Id"));
         String name = request.getParameter("name");
         int eventId = Integer.parseInt(request.getParameter("event_Id"));
-        String bed = request.getParameter("bed");
-        String bath = request.getParameter("bath");
-        String people = request.getParameter("people");
+        int bed = Integer.parseInt(request.getParameter("bed"));
+        int bath = Integer.parseInt(request.getParameter("bath"));
+        int people = Integer.parseInt(request.getParameter("people"));
+
         try {
             Part filePart = request.getPart("fileImageTypeRoom");
             String fileName = UUID.randomUUID().toString() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
             InputStream inputStream = filePart.getInputStream();
             Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName));
-            daoTypeRoom.editTypeRoom(id, name, eventId, bed, bath, people, fileName);
-            response.sendRedirect("typeRoomURL?action=listTypeRoom");
+            if (daoTypeRoom.isValidName(name)) {
+                daoTypeRoom.editTypeRoom(id, name, eventId, bed, bath, people, fileName);
+                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+            } else {
+
+                // Xử lý lại else nếu mà nhập tên nếu invalid
+                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+            }
+
         } catch (IOException | ServletException e) {
             response.getWriter().println("File upload failed due to an error: " + e.getMessage());
             e.printStackTrace();
@@ -118,9 +126,9 @@ public class TypeRoomController extends HttpServlet {
 
     private void addTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
-        String bed = request.getParameter("bed");
-        String bath = request.getParameter("bath");
-        String people = request.getParameter("people");
+        int bed = Integer.parseInt(request.getParameter("bed"));
+        int bath = Integer.parseInt(request.getParameter("bath"));
+        int people = Integer.parseInt(request.getParameter("people"));
 
         try {
             Part filePart = request.getPart("fileImage");
@@ -128,8 +136,13 @@ public class TypeRoomController extends HttpServlet {
 
             InputStream inputStream = filePart.getInputStream();
             Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName));
-            daoTypeRoom.addTypeRoom(name, bed, bath, people, fileName);
-            response.sendRedirect("typeRoomURL?action=listTypeRoom");
+            if (daoTypeRoom.isValidName(name)) {
+                daoTypeRoom.addTypeRoom(name, bed, bath, people, fileName);
+                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+            } else {
+                
+                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+            }
         } catch (IOException | ServletException e) {
             response.getWriter().println("File upload failed due to an error: " + e.getMessage());
             e.printStackTrace();
