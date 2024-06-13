@@ -5,8 +5,8 @@
 package Controller;
 
 import Entity.FormatUtils;
-import Entity.RoomView;
-import Model.DAORoomView;
+import Entity.Room;
+import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -64,13 +64,13 @@ public class PagingController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        DAORoomView dao = new DAORoomView();
+        DAORoom dao = new DAORoom();
         FormatUtils format = new FormatUtils();
         String number = request.getParameter("page");
         int numberPage = Integer.parseInt(number); 
-        List<RoomView> list = new ArrayList<>();
+        List<Room> list = new ArrayList<>();
         list = dao.getTop3Room(numberPage);
-        for (RoomView o : list) {
+        for (Room o : list) {
             out.println("<div class=\"room col-lg-4 col-md-6\">\n"
                     + "                            <div class=\"room-item \" id=\"item\">\n"
                     + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"

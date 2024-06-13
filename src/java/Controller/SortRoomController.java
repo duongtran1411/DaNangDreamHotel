@@ -5,8 +5,8 @@
 package Controller;
 
 import Entity.FormatUtils;
-import Entity.RoomView;
-import Model.DAORoomView;
+import Entity.Room;
+import Model.DAORoom;
 import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -67,14 +67,14 @@ public class SortRoomController extends HttpServlet {
         String amount = request.getParameter("size");
         String action = request.getParameter("action");
         int number = Integer.parseInt(amount);
-        DAORoomView dao = new DAORoomView();
+        DAORoom dao = new DAORoom();
         FormatUtils format = new FormatUtils();
         int numberRoom = dao.countRoom();
-        List<RoomView> list = new ArrayList<>();
+        List<Room> list = new ArrayList<>();
         switch (action) {
             case "asc":
                 list = dao.sortRoomByPrice(numberRoom, number);
-                for (RoomView o : list) {
+                for (Room o : list) {
                     out.println("<div class=\"room col-lg-4 col-md-6\">\n"
                             + "                            <div class=\"room-item \" id=\"item\">\n"
                             + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"
@@ -113,7 +113,7 @@ public class SortRoomController extends HttpServlet {
                 break;
             case "desc":
                 list = dao.sortRoomByPriceDown(numberRoom, number);
-                for (RoomView o : list) {
+                for (Room o : list) {
                     out.println("<div class=\"room col-lg-4 col-md-6\">\n"
                             + "                            <div class=\"room-item \" id=\"item\">\n"
                             + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"

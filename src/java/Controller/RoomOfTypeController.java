@@ -5,8 +5,8 @@
 package Controller;
 
 import Entity.FormatUtils;
-import Entity.RoomView;
-import Model.DAORoomView;
+import Entity.Room;
+import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -64,12 +64,12 @@ public class RoomOfTypeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String type = request.getParameter("type");
-        DAORoomView dao = new DAORoomView();
+        DAORoom dao = new DAORoom();
         int numberType = Integer.parseInt(type);
         int size = dao.countRoom();
         FormatUtils format = new FormatUtils();
-        List<RoomView> list = dao.getRoomByType(size, numberType);
-        for (RoomView o : list) {
+        List<Room> list = dao.getRoomByType(size, numberType);
+        for (Room o : list) {
             out.println("<div class=\"room col-lg-4 col-md-6\">\n"
                     + "                            <div class=\"room-item \" id=\"item\">\n"
                     + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"

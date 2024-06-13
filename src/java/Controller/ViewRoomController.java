@@ -4,10 +4,10 @@
  */
 package Controller;
 
-import Entity.RoomView;
-import Entity.TypeRoomView;
-import Model.DAORoomView;
-import Model.DAOTypeRoomView;
+import Entity.Room;
+import Entity.TypeRoom;
+import Model.DAORoom;
+import Model.DAOTypeRoom;
 import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -65,15 +65,15 @@ public class ViewRoomController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAORoomView dao = new DAORoomView();
-        DAOTypeRoomView daoT = new DAOTypeRoomView();
+        DAORoom dao = new DAORoom();
+        DAOTypeRoom daoT = new DAOTypeRoom();
         String amount = request.getParameter("numberPage");
         if(amount == null){
             amount = "1";
         }
         int pageNumber = Integer.parseInt(amount);
-        List<RoomView> list = dao.getTop3Room(pageNumber);
-        List<TypeRoomView> listT = daoT.getAllTypeRoom();
+        List<Room> list = dao.getTop3Room(pageNumber);
+        List<TypeRoom> listT = daoT.getAllTypeRoom();
         int sizeRoom = dao.countRoom();
         int page = sizeRoom / 6;
         if(sizeRoom % 6 != 0){

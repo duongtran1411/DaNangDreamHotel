@@ -4,7 +4,7 @@
  */
 package Model;
 
-import Entity.ImageRoomView;
+import Entity.ImageRoom;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,8 +19,8 @@ import java.util.logging.Logger;
  */
 public class DAOImageRoom extends DBConnect {
 
-    public List<ImageRoomView> getImageByRoomId(int id) {
-        List<ImageRoomView> list = new ArrayList<>();
+    public List<ImageRoom> getImageByRoomId(int id) {
+        List<ImageRoom> list = new ArrayList<>();
         String sql = "select image from ImageRoom\n"
                 + "where room_Id = ?";
         try {
@@ -28,7 +28,7 @@ public class DAOImageRoom extends DBConnect {
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {                
-                list.add(new ImageRoomView(rs.getString(1)));
+                list.add(new ImageRoom(rs.getString(1)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOImageRoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -39,8 +39,8 @@ public class DAOImageRoom extends DBConnect {
     
     public static void main(String[] args) {
         DAOImageRoom dao = new DAOImageRoom();
-        List<ImageRoomView> list = dao.getImageByRoomId(1);
-        for (ImageRoomView imageRoom : list) {
+        List<ImageRoom> list = dao.getImageByRoomId(1);
+        for (ImageRoom imageRoom : list) {
             System.out.println(imageRoom);
         }
     }

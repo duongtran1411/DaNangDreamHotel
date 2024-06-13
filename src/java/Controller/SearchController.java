@@ -5,8 +5,8 @@
 package Controller;
 
 import Entity.FormatUtils;
-import Entity.RoomView;
-import Model.DAORoomView;
+import Entity.Room;
+import Model.DAORoom;
 import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,10 +64,10 @@ public class SearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String txtSearch = request.getParameter("txt");
-        DAORoomView dao = new DAORoomView();
+        DAORoom dao = new DAORoom();
         FormatUtils format = new FormatUtils();
-        List<RoomView> list = dao.searchRoomByText(txtSearch);
-        for (RoomView o : list) {
+        List<Room> list = dao.searchRoomByText(txtSearch);
+        for (Room o : list) {
             out.println("<div class=\"room col-lg-4 col-md-6\">\n" +
 "                            <div class=\"room-item \" id=\"item\">\n" +
 "                                <img src=\""+o.getImage()+"\" alt=\"\" style=\"height: 240px\">\n" +
