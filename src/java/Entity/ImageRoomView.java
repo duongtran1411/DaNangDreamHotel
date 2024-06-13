@@ -8,21 +8,21 @@ package Entity;
  *
  * @author GIGABYTE
  */
-public class ImageRoom {
+public class ImageRoomView {
 
     private int image_Room_Id, room_Id;
     private String image;
 
-    public ImageRoom() {
+    public ImageRoomView() {
     }
 
-    public ImageRoom(int image_Room_Id, int room_Id, String image) {
+    public ImageRoomView(int image_Room_Id, int room_Id, String image) {
         this.image_Room_Id = image_Room_Id;
         this.room_Id = room_Id;
         this.image = image;
     }
     
-    public ImageRoom(String image) {
+    public ImageRoomView(String image) {
         this.image = image;
     }
     

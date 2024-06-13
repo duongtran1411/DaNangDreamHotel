@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 
-public class Room {
+public class RoomView {
 
     private int room_Id,type_Room_Id, floor_Room_Id;
     private String name;  
@@ -17,10 +17,10 @@ public class Room {
     private String people;
     private String image;
 
-    public Room() {
+    public RoomView() {
     }
 
-    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, Date created_at, Date updated_at, int size) {
+    public RoomView(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, Date created_at, Date updated_at, int size) {
         this.room_Id = room_Id;
         this.type_Room_Id = type_Room_Id;
         this.floor_Room_Id = floor_Room_Id;
@@ -32,7 +32,7 @@ public class Room {
         this.size = size;
     }
 
-    public Room(int room_Id, String name, double price, int size, String bed, String bath, String people, String image) {
+    public RoomView(int room_Id, String name, double price, int size, String bed, String bath, String people, String image) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
@@ -43,7 +43,7 @@ public class Room {
         this.image = image;
     }
     
-    public Room(int room_Id, String name, double price, int size, String bed, String bath, String people) {
+    public RoomView(int room_Id, String name, double price, int size, String bed, String bath, String people) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
