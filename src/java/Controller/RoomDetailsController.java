@@ -4,10 +4,10 @@
  */
 package Controller;
 
-import Entity.ImageRoom;
-import Entity.Room;
+import Entity.ImageRoomView;
+import Entity.RoomView;
 import Model.DAOImageRoom;
-import Model.DAORoom;
+import Model.DAORoomView;
 import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -63,10 +63,10 @@ public class RoomDetailsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int room_Id = Integer.parseInt(request.getParameter("Id"));
-        DAORoom daoR = new DAORoom();
+        DAORoomView daoR = new DAORoomView();
         DAOImageRoom daoI = new DAOImageRoom();
-        Room room = daoR.getRoomById(room_Id);
-        List<ImageRoom> list = daoI.getImageByRoomId(room_Id);
+        RoomView room = daoR.getRoomById(room_Id);
+        List<ImageRoomView> list = daoI.getImageByRoomId(room_Id);
         request.setAttribute("room", room);
         request.setAttribute("listImage", list);
         request.getRequestDispatcher("Room_Details.jsp").forward(request, response);

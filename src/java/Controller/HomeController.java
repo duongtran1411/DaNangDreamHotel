@@ -5,9 +5,9 @@
 package Controller;
 
 import Entity.Event;
-import Entity.Room;
+import Entity.RoomView;
 import Model.DAOEvent;
-import Model.DAORoom;
+import Model.DAORoomView;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -62,8 +62,8 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAORoom dao = new DAORoom();
-        List<Room> list = dao.getNewRoom();
+        DAORoomView dao = new DAORoomView();
+        List<RoomView> list = dao.getNewRoom();
         DAOEvent daoE = new DAOEvent();
         List<Event> listE = daoE.getTop3Event();
         
