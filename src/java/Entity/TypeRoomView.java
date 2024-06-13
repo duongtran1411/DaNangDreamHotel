@@ -8,17 +8,17 @@ package Entity;
  *
  * @author GIGABYTE
  */
-public class TypeRoom {
+public class TypeRoomView {
 
     private int typeRoom_Id;
     private String name;
     private int event_Id;
     private String bed, bath, people, image;
 
-    public TypeRoom() {
+    public TypeRoomView() {
     }
 
-    public TypeRoom(int typeRoom_Id, String name, int event_Id, String bed, String bath, String people, String image) {
+    public TypeRoomView(int typeRoom_Id, String name, int event_Id, String bed, String bath, String people, String image) {
         this.typeRoom_Id = typeRoom_Id;
         this.name = name;
         this.event_Id = event_Id;
@@ -28,12 +28,12 @@ public class TypeRoom {
         this.image = image;
     }
     
-    public TypeRoom(int typeRoom_Id, String name) {
+    public TypeRoomView(int typeRoom_Id, String name) {
         this.typeRoom_Id = typeRoom_Id;
         this.name = name;
     }
     
-    public TypeRoom(String bed, String bath, String people) {
+    public TypeRoomView(String bed, String bath, String people) {
         this.bed = bed;
         this.bath = bath;
         this.people = people;
