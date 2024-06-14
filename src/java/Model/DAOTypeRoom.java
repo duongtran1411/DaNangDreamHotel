@@ -141,6 +141,44 @@ public class DAOTypeRoom extends DBConnect {
 
         return true;
     }
+    
+    
+    public List<TypeRoom> getNameTypeRoom(){
+        List<TypeRoom> list = new ArrayList<>();
+        String sql = "select * from typeroom";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {                
+                list.add(new TypeRoom(rs.getInt(1),
+                        rs.getString(2)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    } 
+    
+    public TypeRoom getTypeRoomById(int trid) {
+        String sql = "SELECT * FROM typeroom WHERE typeRoom_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, trid);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                return new TypeRoom(rs.getInt(1), 
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                       rs.getInt(5), 
+                        rs.getInt(6),
+                        rs.getString(7));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         DAOTypeRoom dao = new DAOTypeRoom();

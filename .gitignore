@@ -2,3 +2,5 @@
 /dist/
 /nbproject/
 ./build.xml
+/.idea/
+./build

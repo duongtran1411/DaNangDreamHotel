@@ -43,6 +43,24 @@ public class DAOImageRoom extends DBConnect {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public List<ImageRoom> getImageById(int id) {
+        List<ImageRoom> list = new ArrayList<>();
+        String sql = "select image from ImageRoom\n"
+                + "where room_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {                
+                list.add(new ImageRoom(rs.getString(1)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOImageRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return list;
+    }
 
     public static void main(String[] args) {
         DAOImageRoom dao = new DAOImageRoom();

@@ -30,6 +30,27 @@ public class TypeRoom {
         this.people = people;
         this.image = image;
     }
+    
+    public TypeRoom(int typeRoom_Id, String name, int event_Id, int bed, int bath, int people, String image) {
+        this.type_Room_Id = typeRoom_Id;
+        this.name = name;
+        this.event_Id = event_Id;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+        this.image = image;
+    }
+    
+    public TypeRoom(int typeRoom_Id, String name) {
+        this.type_Room_Id = typeRoom_Id;
+        this.name = name;
+    }
+    
+    public TypeRoom(int bed, int bath,int people) {
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+    }
 
     public int getTypeRoom_Id() {
         return type_Room_Id;

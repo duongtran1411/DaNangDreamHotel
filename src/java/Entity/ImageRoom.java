@@ -9,7 +9,22 @@ public class ImageRoom {
 
     public ImageRoom() {
     }
+    
+    public ImageRoom(int image_Room_Id, int room_Id, String image) {
+        this.image_Room_Id = image_Room_Id;
+        this.room_Id = room_Id;
+        this.image = image;
+    }
+    
+    public ImageRoom(String name, String image) {
+        this.name = name;
+        this.image = image;
+    }
 
+    public ImageRoom(String image) {
+        this.image = image;
+    }
+    
     public String getName() {
         return name;
     }
@@ -18,21 +33,7 @@ public class ImageRoom {
         this.name = name;
     }
 
-    public ImageRoom(String name, String image) {
-        this.name = name;
-        this.image = image;
-    }
-
-    public ImageRoom(int image_Room_Id, int room_Id, String image) {
-        this.image_Room_Id = image_Room_Id;
-        this.room_Id = room_Id;
-        this.image = image;
-    }
-
-    public ImageRoom(String image) {
-        this.image = image;
-    }
-
+    
     public int getImage_Room_Id() {
         return image_Room_Id;
     }

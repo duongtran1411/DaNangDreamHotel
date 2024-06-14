@@ -44,20 +44,20 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="active"><a href="Home.jsp">Home</a></li>
+                                <li class="active"><a href="homeController">Home</a></li>
                                 <!-- <li><a href="rooms.html">Rooms</a></li> -->
                                 <li><a href="AboutUs.jsp">About Us</a></li>
                                 <li>
                                     <a href="room">Accommodation</a>
                                     <ul class="dropdown">
-                                        <li><a href="room  ">Rooms</a></li>
+                                        <li><a href="viewRoomController">Rooms</a></li>
                                         <li><a href="Blog_Details.jsp">Blog Details</a></li>
                                         <li><a href="#">Family Room</a></li>
                                         <li><a href="#">Premium Room</a></li>
                                         <li><a href="Room_Details.jsp">Room Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="Blog.jsp">Events</a></li>
+                                <li><a href="Event.jsp">Events</a></li>
                                 <li><a href="Contact.jsp">Contact</a></li>
                                 <li><a href="staffController">Staff</a></li>
                             </ul>

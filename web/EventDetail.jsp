@@ -1,9 +1,10 @@
 <%-- 
-    Document   : Room_Details
-    Created on : May 24, 2024, 12:53:04 AM
+    Document   : Blog_Details
+    Created on : May 24, 2024, 12:56:56 AM
     Author     : GIGABYTE
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,8 +14,9 @@
         <meta name="keywords" content="Sona, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Da Nang Dream Hotel</title>
+        <title>Sona | Template</title>
+
+        <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
 
@@ -28,8 +30,8 @@
         <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-        <link rel="stylesheet" href="css/style.css" type="text/css">   
-        <link rel="stylesheet" href="css/slide.css"/>
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/event.css" type="text/css"/>
     </head>
     <body>
         <!-- Page Preloder -->
@@ -60,7 +62,7 @@
                         </ul>
                     </div>
                 </div>-->
-                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
+                <a href="Login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
@@ -94,133 +96,127 @@
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
-        <jsp:include page="Header.jsp"></jsp:include>
-        <!-- Header End -->
-
-        <!-- Breadcrumb Section Begin -->
-        <div class="breadcrumb-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="breadcrumb-text">
-                            <h2>Our Rooms</h2>
-                            <div class="bt-option">
-                                <a href="home.html">Home</a>
-                                <span>Rooms</span>
+        <header class="header-section">
+            <div class="top-nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="tn-left">
+                                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
+                                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="tn-right">
+                                <div class="top-social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div>
+                                <a href="Login.jsp" class="bk-btn">Login</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Breadcrumb Section End -->
-
-        <!-- Room Details Section Begin -->
-        <section class="room-details-section spad">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="room-details-item "  >
-                            <div class="slide">
-                                <div class="image-rooms list-image">
-                                    <c:forEach items="${listImage}" var="o">
-                                        <img src="${o.image}" alt="" width="750px" height="502px" id="slide-img" >
-                                    </c:forEach>
-                                </div>
-                                <div class="btns">
-                                    <div class="btn-Left btn-arrow" style="padding-left: 25px"><i class="fa-solid fa-chevron-left icon-L"></i></div>
-                                    <div class="btn-Right btn-arrow" style="padding-right: 25px"><i class="fa-solid fa-chevron-right icon-R"></i></div>
-                                </div>
-                            </div>
-
-                            <div class="rd-text">
-                                <div class="rd-title">
-                                    <h3>${room.name}</h3>
-                                    <div class="rdt-right">
-                                        <!-- <div class="rating">
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star-half_alt"></i>
-                                        </div> -->
-                                        <a href="#">Booking Now</a>
-                                    </div>
-                                </div>
-                                <h2>${FormatUtils.formatPRice(room.price)}đ<span>/Pernight</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>${room.size}m2</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>${room.people} person</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>${room.bed} bed</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bath:</td>
-                                            <td>${room.bath} bath</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <p class="f-para">Motorhome or Trailer that is the question for you. Here are some of the
-                                    advantages and disadvantages of both, so you will be confident when purchasing an RV.
-                                    When comparing Rvs, a motorhome or a travel trailer, should you buy a motorhome or fifth
-                                    wheeler? The advantages and disadvantages of both are studied so that you can make your
-                                    choice wisely when purchasing an RV. Possessing a motorhome or fifth wheel is an
-                                    achievement of a lifetime. It can be similar to sojourning with your residence as you
-                                    search the various sites of our great land, America.</p>
-                                <p>The two commonly known recreational vehicle classes are the motorized and towable.
-                                    Towable rvs are the travel trailers and the fifth wheel. The rv travel trailer or fifth
-                                    wheel has the attraction of getting towed by a pickup or a car, thus giving the
-                                    adaptability of possessing transportation for you when you are parked at your campsite.
-                                </p>
+            <div class="menu-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="">
+                                </a>
                             </div>
                         </div>
-                        
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="room-booking">
-                            <h3>Your Reservation</h3>
-                            <form action="#">
-                                <div class="check-date">
-                                    <label for="date-in">Check In:</label>
-                                    <input type="text" class="date-input" id="date-in">
-                                    <i class="icon_calendar"></i>
-                                </div>
-                                <div class="check-date">
-                                    <label for="date-out">Check Out:</label>
-                                    <input type="text" class="date-input" id="date-out">
-                                    <i class="icon_calendar"></i>
-                                </div>
-                                <div class="select-option">
-                                    <label for="guest">Guests:</label>
-                                    <select id="guest">
-                                        <option value="">3 Adults</option>
-                                    </select>
-                                </div>
-                                <div class="select-option">
-                                    <label for="room">Room:</label>
-                                    <select id="room">
-                                        <option value="">1 Room</option>
-                                    </select>
-                                </div>
-                                <button type="submit">Check Availability</button>
-                            </form>
+                        <div class="col-lg-10">
+                            <div class="nav-menu">
+                                <nav class="mainmenu">
+                                    <ul>
+                                        <li><a href="homeController">Home</a></li>
+                                        <li><a href="AboutUs.jsp">About Us</a></li>
+                                        <li><a href="roomController">Resort</a>
+                                            <ul class="dropdown">
+                                                <li><a href="roomController">Room</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="active"><a href="eventController?action=listall">Event</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </header>
+        <!-- Header End -->
+
+        <!-- Blog Details Hero Section Begin -->
+        <section class="blog-details-hero set-bg" data-setbg="img/img_EventPage.png">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1">
+
+                    </div>
+                </div>
+            </div>
         </section>
-        <!-- Room Details Section End -->
+        <!-- Blog Details Hero End -->
+
+        <!-- Blog Details Section Begin -->
+        <section class="blog-details-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3 class="event-main">${event.name}</h3>
+                        <div class="blog-details-text">
+                            <div class="bd-title">
+                                <img src="${event.image}" alt="alt"/>
+                                <p>${event.description}</p>
+                            </div>
+                            <div class="leave-comment">
+                                <h4>Booking</h4>
+                                <form action="#" class="comment-form">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="Name">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="Email">
+                                        </div>
+                                        <div class="col-lg-12 text-center">
+                                            <input type="text" placeholder="Website">
+                                            <textarea placeholder="Messages"></textarea>
+                                            <button type="submit" class="site-btn" style="margin-bottom: 20px">Booking Now</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>        
+
+                    <div class="col-lg-4" style="display: block">
+                        <h3 class="event-main">Other Event</h3>
+                        <c:forEach items="${list}" var="o">
+                            <div class="row">
+                                <div class="col-lg-6 list-img">
+                                    <img src="${o.image}" width="160px" height="86px" alt="">
+                                </div>
+                                <div class="col-lg-6">
+                                    <a class="eventName" href="eventController?action=listdetail&Id=${o.event_Id}">${o.name}</a>
+                                    <p class="startDay" >${o.startDay}</p>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Blog Details Section End -->
 
         <!-- Footer Section Begin -->
         <footer class="footer-section">
@@ -309,5 +305,7 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        
+
     </body>
 </html>
