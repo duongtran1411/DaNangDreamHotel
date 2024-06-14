@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
@@ -36,14 +37,17 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">MANAGER</span>
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
-                        <span>
-                            <i class="fas fa-user-circle"></i>
-                        </span>
-                        <span class="hide-menu">Manage Account</span>
-                    </a>
-                </li>
+                <c:if test="${sessionScope.acc.role_Id == 1}" >
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+                            <span>
+                                <i class="fas fa-user-circle"></i>
+                            </span>
+                            <span class="hide-menu">Manage Account</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.acc.role_Id == 2}" >    
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
                         <span>
@@ -52,6 +56,7 @@
                         <span class="hide-menu">Manage Type Room</span>
                     </a>
                 </li>
+                
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./ManageEvent.jsp" aria-expanded="false">
                         <span>
@@ -60,6 +65,7 @@
                         <span class="hide-menu">Manage Event</span>
                     </a>
                 </li>
+                </c:if>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
                         <span>

@@ -168,7 +168,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
                 + "    ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
-                + "	join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
+                + "	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
                 + "	join imageroom i on i.room_Id = r.room_Id\n"
                 + "\n"
                 + ")\n"
@@ -424,6 +424,10 @@ public class DAORoom extends DBConnect {
     }
 
     public static void main(String[] args) {
-       
+       DAORoom dao = new DAORoom();
+       List<Room> list = dao.getNewRoom();
+        for (Room room : list) {
+            System.out.println(room);
+        }
     }
 }
