@@ -200,7 +200,7 @@ public class DAORoom extends DBConnect {
     public Room getRoomById(int id) {
         Room room = new Room();
         String sql = "select r.room_Id, r.name, r.price, r.size,t.bed, t.bath, t.person from room r\n"
-                + "join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
+                + "join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
                 + "where r.room_Id = ?";
         try {
             PreparedStatement pre = conn.prepareCall(sql);
@@ -269,7 +269,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
                 + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
+                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
                 + "		join imageroom i on i.room_Id = r.room_Id)\n"
                 + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
                 + "		where rn = 2\n"
