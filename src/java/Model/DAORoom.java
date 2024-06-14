@@ -39,7 +39,7 @@ public class DAORoom extends DBConnect {
     public List<Room> getRoomByTypeRoomId(int typeRoomId) {
         List<Room> list = new ArrayList();
         String sql = "select distinct r.* from room r\n"
-                + "join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
                 + "where t.typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
@@ -68,7 +68,7 @@ public class DAORoom extends DBConnect {
                 + "`floor_Room_Id`,\n"
                 + "`price`,\n"
                 + "`size`,\n"
-                + "`type_Room_Id`)\n"
+                + "`typeRoom_Id`)\n"
                 + "VALUES\n"
                 + "(?,?,?,?,?);";
         try {
@@ -126,7 +126,7 @@ public class DAORoom extends DBConnect {
 
     public void editRoom(int trid, int floor, String name, double price, int size, int rid) {
         String sql = "UPDATE room\n"
-                + "   SET type_Room_Id = ?,\n"
+                + "   SET typeRoom_Id = ?,\n"
                 + "       floor_Room_Id = ?,\n"
                 + "       name = ?,\n"
                 + "       price = ?,\n"
@@ -148,7 +148,7 @@ public class DAORoom extends DBConnect {
     }
 
     public Room getRoomByID(int rid) {
-        String sql = "select room_Id, type_Room_Id, floor_Room_Id, name, price, size from room\n"
+        String sql = "select room_Id, typeRoom_Id, floor_Room_Id, name, price, size from room\n"
                 + "where room_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
@@ -168,7 +168,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
                 + "    ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
-                + "	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "	join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
                 + "	join imageroom i on i.room_Id = r.room_Id\n"
                 + "\n"
                 + ")\n"
@@ -200,7 +200,7 @@ public class DAORoom extends DBConnect {
     public Room getRoomById(int id) {
         Room room = new Room();
         String sql = "select r.room_Id, r.name, r.price, r.size,t.bed, t.bath, t.person from room r\n"
-                + "join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
                 + "where r.room_Id = ?";
         try {
             PreparedStatement pre = conn.prepareCall(sql);
@@ -240,7 +240,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
                 + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
                 + "		join imageroom i on i.room_Id = r.room_Id)\n"
                 + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
                 + "		where name like ? and rn = 2";
@@ -269,7 +269,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
                 + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
                 + "		join imageroom i on i.room_Id = r.room_Id)\n"
                 + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
                 + "		where rn = 2\n"
@@ -300,7 +300,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
                 + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
                 + "		join imageroom i on i.room_Id = r.room_Id)\n"
                 + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
                 + "		where rn = 2\n"
@@ -331,7 +331,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
                 + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
                 + "		join imageroom i on i.room_Id = r.room_Id)\n"
                 + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
                 + "		where  rn = 2\n"
@@ -363,7 +363,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
                 + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
                 + "		join imageroom i on i.room_Id = r.room_Id)\n"
                 + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
                 + "		where  rn = 2\n"
@@ -395,7 +395,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , t.typeRoom_Id,\n"
                 + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id order by r.room_Id asc ) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "		join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
                 + "		join imageroom i on i.room_Id = r.room_Id)\n"
                 + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
                 + "		where typeroom_Id = ? and rn = 2 "

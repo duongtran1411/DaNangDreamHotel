@@ -1,17 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Entity;
+package org.example.Model;
 
-/**
- *
- * @author letua
- */
 public class RegistrationDTO {
-
     private String account_Id;
-    private String job_Id;
+    private int job_Id;
     private String userName;
     private String firstName;
     private String lastName;
@@ -19,11 +10,13 @@ public class RegistrationDTO {
     private String email;
     private String phone;
     private String role_Id;
+    private String create_at;
+    private String update_at;
 
     public RegistrationDTO() {
     }
 
-    public RegistrationDTO(String account_Id, String job_Id, String userName, String firstName, String lastName, String password, String email, String phone, String role_Id) {
+    public RegistrationDTO(String account_Id, int job_Id, String userName, String firstName, String lastName, String password, String email, String phone, String role_Id, String create_at, String update_at) {
         this.account_Id = account_Id;
         this.job_Id = job_Id;
         this.userName = userName;
@@ -33,6 +26,8 @@ public class RegistrationDTO {
         this.email = email;
         this.phone = phone;
         this.role_Id = role_Id;
+        this.create_at = create_at;
+        this.update_at = update_at;
     }
 
     public String getAccount_Id() {
@@ -43,11 +38,11 @@ public class RegistrationDTO {
         this.account_Id = account_Id;
     }
 
-    public String getJob_Id() {
+    public int getJob_Id() {
         return job_Id;
     }
 
-    public void setJob_Id(String job_Id) {
+    public void setJob_Id(int job_Id) {
         this.job_Id = job_Id;
     }
 
@@ -106,7 +101,20 @@ public class RegistrationDTO {
     public void setRole_Id(String role_Id) {
         this.role_Id = role_Id;
     }
-    
-    
 
+    public String getCreate_at() {
+        return create_at;
+    }
+
+    public void setCreate_at(String create_at) {
+        this.create_at = create_at;
+    }
+
+    public String getUpdate_at() {
+        return update_at;
+    }
+
+    public void setUpdate_at(String update_at) {
+        this.update_at = update_at;
+    }
 }

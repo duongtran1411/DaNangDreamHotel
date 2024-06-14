@@ -182,6 +182,6 @@ public class DAOTypeRoom extends DBConnect {
 
     public static void main(String[] args) {
         DAOTypeRoom dao = new DAOTypeRoom();
-        System.out.println(dao.getAllTypeRoom());
+        dao.addTypeRoom("1", 1, 1, 1, "sds");
     }
 }

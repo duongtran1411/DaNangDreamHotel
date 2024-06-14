@@ -58,7 +58,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>authentication_login</servlet-name>
-        <url-pattern>/dashboard/jsp/authentication-login</url-pattern>
+        <url-pattern>/authentication-login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangeResetPasss</servlet-name>
