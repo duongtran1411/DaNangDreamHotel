@@ -65,6 +65,9 @@ public class EventController extends HttpServlet {
         String action = request.getParameter("action");
         DAOEvent dao = new DAOEvent();
         List<Event> list = dao.getAllEvent();
+        if(action == null){
+            action = "listall";
+        }
         if(action.equals("listall")){
             request.setAttribute("list", list);
             request.getRequestDispatcher("Event.jsp").forward(request, response);

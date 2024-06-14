@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="Entity.FormatUtils" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,7 +47,6 @@
             <div class="loader"></div>
         </div>
 
- main
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
@@ -52,7 +54,7 @@
         <!-- Header End -->
 
         <!-- Hero Section Begin -->
-        section class="hero-section">
+        <section class="hero-section">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">

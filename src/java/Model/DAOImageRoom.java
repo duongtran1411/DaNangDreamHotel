@@ -64,6 +64,6 @@ public class DAOImageRoom extends DBConnect {
 
     public static void main(String[] args) {
         DAOImageRoom dao = new DAOImageRoom();
-        dao.addImageByRoomId(1, "aaaaaa");
+        System.out.println(dao.getImageByRoomId(9));
     }
 }

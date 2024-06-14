@@ -64,6 +64,10 @@
         <servlet-name>ChangeResetPasss</servlet-name>
         <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewRoomController</servlet-name>
+        <url-pattern>/viewRoomController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
