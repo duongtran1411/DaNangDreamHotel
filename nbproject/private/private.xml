@@ -3,16 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Blog.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Login.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Contact.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/AboutUs.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Home.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Pages.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Blog_Details.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Room_Details.jsp</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/src/java/Controller/Login.java</file>
-            <file>file:/D:/JavaWed/DaNangDreamHotel/web/Rooms.jsp</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/src/java/Model/DAORoom.java</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/src/java/Entity/Event.java</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/src/java/Model/DBConnect.java</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/src/java/Model/DAOAccount.java</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/src/java/Model/DAOEvent.java</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/src/java/Controller/DeleteAccountController.java</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/src/java/Entity/Jobs.java</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/src/java/Entity/Account.java</file>
+            <file>file:/C:/Users/PC%20QUANG%20MINH/Documents/GitHub/DaNangDreamHotel/src/java/Entity/Role.java</file>
         </group>
     </open-files>
 </project-private>

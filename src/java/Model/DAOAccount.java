@@ -40,7 +40,7 @@ public class DAOAccount extends DBConnect {
                 list.add(a);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return list;

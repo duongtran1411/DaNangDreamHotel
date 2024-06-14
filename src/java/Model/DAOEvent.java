@@ -31,7 +31,7 @@ public class DAOEvent extends DBConnect {
                         rs.getString(6), rs.getDouble(7), rs.getString(8)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return list;
