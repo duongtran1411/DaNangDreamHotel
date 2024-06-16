@@ -28,7 +28,36 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     </head>
+    <style>
+        .room-item {
+            position: relative;
+            overflow: hidden;
+        }
 
+        .room-image {
+            width: 304px;
+            height: 202px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .delete-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: red;
+            font-size: 24px;
+            display: none;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+        .room-item:hover .delete-icon {
+            display: block;
+        }
+    </style>
     <body>
         <!--  Body Wrapper -->
         <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -55,7 +84,10 @@
                                         <c:otherwise>
                                             <img src="${urlImgRoom}" style="width: 304px; height: 202px; border-radius: 15px 15px 0 0;" alt="">
                                         </c:otherwise>
-                                    </c:choose>                                
+                                    </c:choose>                      
+                                    <a href="imageRoomURL?action=delete&irid=${o.image_Room_Id}" class="delete-icon">
+                                        <i class="ti ti-trash-off"></i>
+                                    </a>
                                 </div>
                             </div>
                         </c:forEach>

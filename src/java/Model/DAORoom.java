@@ -39,7 +39,7 @@ public class DAORoom extends DBConnect {
     public List<Room> getRoomByTypeRoomId(int typeRoomId) {
         List<Room> list = new ArrayList();
         String sql = "select distinct r.* from room r\n"
-                + "join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
+                + "join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
                 + "where t.typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
