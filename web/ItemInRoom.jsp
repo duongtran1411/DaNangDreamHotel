@@ -123,8 +123,8 @@
     <table>
         <thead>
             <tr>
-                <th>Room</th>
                 <th>Name</th>
+                <th>Room Id</th>
                 <th>Quantity</th>
             </tr>
         </thead>
@@ -140,7 +140,7 @@
                 <td data-label="Quantity"><%= x.getQuantity() %></td>
                 <td data-label="Actions">
                     <button onclick="location.href='#'">Update</button>
-                    <button onclick="if(confirm('Are you sure you want to delete this customer?')) { location.href='#'; }">Delete</button>
+                    
                 </td>
             </tr>
             <%

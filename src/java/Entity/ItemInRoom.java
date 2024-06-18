@@ -12,7 +12,6 @@ public class ItemInRoom {
     public int id;
     public int itemId;
     public int roomId;
-    public String itemName;
     public int quantity;
 
     public int getId() {
@@ -39,13 +38,6 @@ public class ItemInRoom {
         this.roomId = roomId;
     }
 
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
 
     public int getQuantity() {
         return quantity;

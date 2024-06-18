@@ -42,7 +42,7 @@
             <div class="loader"></div>
         </div>
 
- main
+
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
