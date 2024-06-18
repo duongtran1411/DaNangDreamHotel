@@ -2,62 +2,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller;
 
+import Entity.Customer;
+import Model.DAOCustomer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
  * @author CaoTung
  */
 public class StaffController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet StaffController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet StaffController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    DAOCustomer daoCustomer = new DAOCustomer();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.sendRedirect("Staff.jsp");
-    } 
+            throws ServletException, IOException {
+        request.getRequestDispatcher("dashboard/jsp/Staff.jsp").forward(request, response);
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -65,17 +37,61 @@ public class StaffController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        doGet(request, response);
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
+  
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
+  
+
+//    private void loadEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        int typeRoomId = Integer.parseInt(request.getParameter("id"));
+//        TypeRoom typeRoom = daoTypeRoom.getTypeRoomByID(typeRoomId);
+//        request.setAttribute("TypeRoomBID", typeRoom);
+//        request.getRequestDispatcher("dashboard/jsp/EditTypeRoom.jsp").forward(request, response);
+//    }
+
+//    private void editTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        int id = Integer.parseInt(request.getParameter("type_Room_Id"));
+//        String name = request.getParameter("name");
+//        int eventId = Integer.parseInt(request.getParameter("event_Id"));
+//        String bed = request.getParameter("bed");
+//        String bath = request.getParameter("bath");
+//        String people = request.getParameter("people");
+//        String image = request.getParameter("image");
+//
+//        daoTypeRoom.editTypeRoom(id, name, eventId, bed, bath, people, image);
+//        response.sendRedirect("typeRoomURL?action=listTypeRoom");
+//    }
+
+//    private void addTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        String name = request.getParameter("name");
+//        String bed = request.getParameter("bed");
+//        String bath = request.getParameter("bath");
+//        String people = request.getParameter("people");
+//        try {
+//            // Retrieve the file part from the request
+//            Part filePart = request.getPart("fileImage");
+//            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+//            
+//            // Save the file to the server
+//            InputStream inputStream = filePart.getInputStream();
+//            Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName));
+//            daoTypeRoom.addTypeRoom(name, bed, bath, people, fileName);
+//            response.sendRedirect("typeRoomURL");
+//        } catch (IOException | ServletException e) {
+//            response.getWriter().println("File upload failed due to an error: " + e.getMessage());
+//        }
+//    }
+//
+//    private void deleteTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        int id = Integer.parseInt(request.getParameter("id"));
+//        daoTypeRoom.deleteTypeRoom(id);
+//        response.sendRedirect("typeRoomURL?action=listTypeRoom");
+//    }
 
 }

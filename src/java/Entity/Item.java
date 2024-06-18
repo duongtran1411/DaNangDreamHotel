@@ -6,6 +6,36 @@ package Entity;
 
 /**
  *
+ * @author CaoTung
+ */
+public class Item {
+    public int itemId;
+    public String itemName;
+    public int typeItemId;
+    public double price;
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public int getTypeItemId() {
+        return typeItemId;
+    }
+
+    public void setTypeItemId(int typeItemId) {
+        this.typeItemId = typeItemId;
  * @author GIGABYTE
  */
 public class Item {
@@ -57,5 +87,5 @@ public class Item {
         this.price = price;
     }
     
-    
+
 }
