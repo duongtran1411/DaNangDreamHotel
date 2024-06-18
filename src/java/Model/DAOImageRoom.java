@@ -29,9 +29,41 @@ public class DAOImageRoom extends DBConnect {
         return list;
     }
 
+    public void addImageByRoomId(int roomId, String image) {
+        String sql = "INSERT INTO `managerhotel`.`imageroom`\n"
+                + "(`room_Id`, `image`)\n"
+                + "VALUES\n"
+                + "(?, ?);";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, roomId);
+            pre.setString(2, image);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public List<ImageRoom> getImageById(int id) {
+        List<ImageRoom> list = new ArrayList<>();
+        String sql = "select image from ImageRoom\n"
+                + "where room_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {                
+                list.add(new ImageRoom(rs.getString(1)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOImageRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return list;
+    }
+
     public static void main(String[] args) {
         DAOImageRoom dao = new DAOImageRoom();
-        List<ImageRoom> list = dao.getImageByRoomId(1);
-        System.out.println(list);
+        System.out.println(dao.getImageByRoomId(9));
     }
 }

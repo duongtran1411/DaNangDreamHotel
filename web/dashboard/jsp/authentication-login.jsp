@@ -13,8 +13,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Da Nang Dream Hotel</title>
-        <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-        <link rel="stylesheet" href="../assets/css/styles.min.css" />
+        <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
     </head>
 
     <body>
@@ -29,7 +29,7 @@
                             <div class="card mb-0">
                                 <div class="card-body">
                                     <div style="display: flex">
-                                        <a href="http://localhost:9999/DaNangDreamHotel/Home.jsp"> <button type="button" ><img style="width: 30px;border: 1px solid black; margin-left: -20px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmweiKifYhYWtioAUGKuLzMwDX2m-l_OdYLQ&s"></button></a>
+                                        <a href="homeController"> <button type="button" ><img style="width: 30px;border: 1px solid black; margin-left: -20px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmweiKifYhYWtioAUGKuLzMwDX2m-l_OdYLQ&s"></button></a>
 
                                         <a href="./index.jsp" class="text-nowrap logo-img text-center d-block py-3 w-100">
                                             <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">

@@ -5,15 +5,15 @@ public class TypeRoom {
     private int type_Room_Id;
     private String name;
     private int event_Id;
-    private String bed;
-    private String bath;
-    private String people;
+    private int bed;
+    private int bath;
+    private int people;
     private String image;
 
     public TypeRoom() {
     }
 
-    public TypeRoom(String name, String bed, String bath, String people, String image) {
+    public TypeRoom(String name, int bed, int bath, int people, String image) {
         this.name = name;
         this.bed = bed;
         this.bath = bath;
@@ -21,7 +21,7 @@ public class TypeRoom {
         this.image = image;
     }
 
-    public TypeRoom(int type_Room_Id, String name, int event_Id, String bed, String bath, String people, String image) {
+    public TypeRoom(int type_Room_Id, String name, int event_Id, String image, int bed, int people , int bath) {
         this.type_Room_Id = type_Room_Id;
         this.name = name;
         this.event_Id = event_Id;
@@ -29,6 +29,27 @@ public class TypeRoom {
         this.bath = bath;
         this.people = people;
         this.image = image;
+    }
+    
+    public TypeRoom(int typeRoom_Id, String name, int event_Id, int bed, int bath, int people, String image) {
+        this.type_Room_Id = typeRoom_Id;
+        this.name = name;
+        this.event_Id = event_Id;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+        this.image = image;
+    }
+    
+    public TypeRoom(int typeRoom_Id, String name) {
+        this.type_Room_Id = typeRoom_Id;
+        this.name = name;
+    }
+    
+    public TypeRoom(int bed, int bath,int people) {
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
     }
 
     public int getTypeRoom_Id() {
@@ -55,27 +76,27 @@ public class TypeRoom {
         this.event_Id = event_Id;
     }
 
-    public String getBed() {
+    public int getBed() {
         return bed;
     }
 
-    public void setBed(String bed) {
+    public void setBed(int bed) {
         this.bed = bed;
     }
 
-    public String getBath() {
+    public int getBath() {
         return bath;
     }
 
-    public void setBath(String bath) {
+    public void setBath(int bath) {
         this.bath = bath;
     }
 
-    public String getPeople() {
+    public int getPeople() {
         return people;
     }
 
-    public void setPeople(String people) {
+    public void setPeople(int people) {
         this.people = people;
     }
 

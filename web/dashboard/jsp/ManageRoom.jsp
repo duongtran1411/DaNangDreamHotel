@@ -52,7 +52,7 @@
                                         <c:forEach items="${AllRoom}" var="o">
                                             <tr>
                                                 <td>
-                                                    <a href="roomURL?action=view&rid=${o.room_Id}">View</a>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}">View</a>
                                                 </td>
                                               
                                                 <td>${o.floor_Room_Id}</td>
@@ -68,7 +68,7 @@
                                         <c:forEach items="${ListRoomBID}" var="o">
                                             <tr>
                                                 <td>
-                                                    <a href="roomURL?action=view&rid=${o.room_Id}">View</a>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}">View</a>
                                                 </td>
                                                 <td>
                                                     <a href="itemManageURL?action=view&rid=${o.room_Id}">View</a>
@@ -92,38 +92,11 @@
             </div>
         </div>
 
-        <!--MODAL FADE-->
-        <div class="modal" id="loadImage">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">All Image</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="row" style="margin-left: 35px">
-                            <img src="" style="width: 32%; margin-bottom: 20px" alt="alt"/>
-                        </div>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
         <div class="container-fluid">
             <div class="modal fade" id="addRoomModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="roomURL?action=add" method="post">
+                        <form action="imageRoomURL?action=add" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Add Room</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

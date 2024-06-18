@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 public class DAOTypeRoom extends DBConnect {
 
@@ -23,9 +24,9 @@ public class DAOTypeRoom extends DBConnect {
                         rs.getString(2),
                         rs.getInt(3),
                         rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7)));
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -34,21 +35,21 @@ public class DAOTypeRoom extends DBConnect {
         return list;
     }
 
-    public void addTypeRoom(String name, String bed, String bath, String people, String img) {
+    public void addTypeRoom(String name, int bed, int bath, int person, String img) {
         String sql = "INSERT INTO `managerhotel`.`typeroom`\n"
                 + "(`name`,\n"
                 + "`bed`,\n"
                 + "`bath`,\n"
-                + "`people`,\n"
+                + "`person`,\n"
                 + "`image`)\n"
                 + "VALUES\n"
                 + "(?,?,?,?,?);";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, name);
-            pre.setString(2, bed);
-            pre.setString(3, bath);
-            pre.setString(4, people);
+            pre.setInt(2, bed);
+            pre.setInt(3, bath);
+            pre.setInt(4, person);
             pre.setString(5, img);
             pre.executeUpdate();
         } catch (SQLException ex) {
@@ -57,13 +58,19 @@ public class DAOTypeRoom extends DBConnect {
     }
 
     public TypeRoom getTypeRoomByID(int trid) {
-        String sql = "SELECT * FROM typeroom WHERE type_Room_Id = ?";
+        String sql = "SELECT * FROM typeroom WHERE typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, trid);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                return new TypeRoom(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+                return new TypeRoom(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,22 +78,22 @@ public class DAOTypeRoom extends DBConnect {
         return null;
     }
 
-    public void editTypeRoom(int id, String name, int eventId, String bed, String bath, String people, String image) {
+    public void editTypeRoom(int id, String name, int eventId, int bed, int bath, int person, String image) {
         String sql = "UPDATE typeroom\n"
                 + "   SET name = ?,\n"
                 + "       event_Id = ?,\n"
                 + "       bed = ?,\n"
                 + "       bath = ?,\n"
-                + "       people = ?,\n"
+                + "       person = ?,\n"
                 + "       image = ?\n"
-                + " WHERE type_Room_Id = ?";
+                + " WHERE typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, name);
             pre.setInt(2, eventId);
-            pre.setString(3, bed);
-            pre.setString(4, bath);
-            pre.setString(5, people);
+            pre.setInt(3, bed);
+            pre.setInt(4, bath);
+            pre.setInt(5, person);
             pre.setString(6, image);
             pre.setInt(7, id);
             pre.executeUpdate();
@@ -107,8 +114,74 @@ public class DAOTypeRoom extends DBConnect {
         }
     }
 
+    public boolean isValidName(String name) {
+        if(name == null || name.isEmpty()) {
+            return false;
+        }
+
+        // Kiểm tra xem tên không chứa số
+        if (name.matches(".*\\d.*")) {
+            return false;
+        }
+
+        // Kiểm tra xem tên không chứa ký tự đặc biệt
+        if (!Pattern.matches("[a-zA-Z\\s]+", name)) {
+            return false;
+        }
+
+        // Kiểm tra xem ký tự đầu tiên có viết hoa không
+        if (!Character.isUpperCase(name.charAt(0))) {
+            return false;
+        }
+
+        // Kiểm tra khoảng trắng ở đầu và cuối tên
+        if (name.trim().length() != name.length()) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    
+    public List<TypeRoom> getNameTypeRoom(){
+        List<TypeRoom> list = new ArrayList<>();
+        String sql = "select * from typeroom";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {                
+                list.add(new TypeRoom(rs.getInt(1),
+                        rs.getString(2)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    } 
+    
+    public TypeRoom getTypeRoomById(int trid) {
+        String sql = "SELECT * FROM typeroom WHERE typeRoom_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, trid);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                return new TypeRoom(rs.getInt(1), 
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                       rs.getInt(5), 
+                        rs.getInt(6),
+                        rs.getString(7));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         DAOTypeRoom dao = new DAOTypeRoom();
-        dao.deleteTypeRoom(1);
+        dao.addTypeRoom("1", 1, 1, 1, "sds");
     }
 }

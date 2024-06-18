@@ -5,12 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="../../Rooms.jsp" class="text-nowrap logo-img">
+            <a href="homeController" class="text-nowrap logo-img">
                 <img src="dashboard/assets/images/logos/dark-logo.svg" width="180" alt="" />
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -36,7 +37,19 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">MANAGER</span>
                 </li>
-                <li class="sidebar-item">
+
+                <c:if test="${sessionScope.acc.role_Id == 1}" >
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+                            <span>
+                                <i class="fas fa-user-circle"></i>
+                            </span>
+                            <span class="hide-menu">Manage Account</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.acc.role_Id == 2}" >    
+                   <li class="sidebar-item">
                     <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
                         <span>
                             <i class="fas fa-user-circle"></i>
@@ -52,20 +65,13 @@
                         <span class="hide-menu">Manage Customer</span>
                     </a>
                 </li>
+              </c:if>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
                         <span>
                             <i class="fas fa-hotel"></i> 
                         </span>
                         <span class="hide-menu">Manage Type Room</span>
-                    </a>
-                </li>
-                <li  class="sidebar-item">
-                    <a  class="sidebar-link" href="itemManageURL" aria-expanded="false">
-                        <span>
-                            <i class="fas fa-user-circle"></i>
-                        </span>
-                        <span class="hide-menu">Manage Items In Rooms</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -76,6 +82,7 @@
                         <span class="hide-menu">Manage Event</span>
                     </a>
                 </li>
+                </c:if>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
                         <span>

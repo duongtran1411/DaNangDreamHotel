@@ -1,0 +1,110 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 29, 2024, 1:46:11 PM
+    Author     : GIGABYTE
+*/
+
+
+.btn-Loadmore {
+            color: #ffffff;
+            border-color: #DFA974;
+            background-color: #DFA974;
+        }
+
+.btn-Loadmore:hover {
+            background-color: orange;
+        }
+
+.search-container {
+            position: relative;
+            display: inline-block;
+        }
+
+.input-Search {
+            transform: translateY(8px);
+            border: 1px solid #ccc;
+            opacity: 1;
+            width: 180px;
+            padding: 5px 30px 5px 10px;
+            border-radius: 4px;            
+        }
+
+.btnSearch {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-5%);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+.btnSort{
+    transform: translateY(10px);
+     border: 2px outset white;
+    color: #ffffff;
+    background-color: #f44336;
+}
+
+.btnSort:hover{
+    background-color: orange;
+}
+
+.ulType{
+    display: flex;
+    list-style: none;
+}
+
+.ulType li{
+    color: #ffffff;
+    transform: translateY(15px);
+    padding-right:20px;
+    padding-left: 70px;
+}
+
+.ulType li:hover{
+    color: #F9EEE3;
+    cursor: pointer;
+}
+
+.textSort{
+    color: #ffffff;
+    transform: translateY(15px);
+    position: absolute; 
+    right: 0;
+}
+
+.btnType{
+    border: none;
+    background: #DFA974;
+}
+
+.page li{
+    list-style: none;
+    color:black
+}
+
+.page button{
+    background-color: #ffffff;
+    border: none;
+    width:21px;
+    transform: translateX(520px);
+}
+
+.page button:hover{
+    background-color: orange;
+    
+}
+
+.highlight{
+    background-color: orange;
+}
+
+.icon{
+    width: 50%;
+    height: 40%
+        
+}
+

@@ -3,7 +3,8 @@
     Created on : May 24, 2024, 12:53:04 AM
     Author     : GIGABYTE
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="Entity.FormatUtils" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,69 +30,13 @@
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">   
+        <link rel="stylesheet" href="css/slide.css"/>
     </head>
     <body>
         <!-- Page Preloder -->
         <div id="preloder">
             <div class="loader"></div>
         </div>
-
-        <!-- Offcanvas Menu Section Begin -->
-        <div class="offcanvas-menu-overlay"></div>
-        <div class="canvas-open">
-            <i class="icon_menu"></i>
-        </div>
-        <div class="offcanvas-menu-wrapper">
-            <div class="canvas-close">
-                <i class="icon_close"></i>
-            </div>
-            <div class="search-icon search-switch">
-                <i class="icon_search"></i>
-            </div>
-            <div class="header-configure-area">
-                <!--<div class="language-option">
-                    <img src="img/flag.jpg" alt="">
-                    <span>EN <i class="fa fa-angle-down"></i></span>
-                    <div class="flag-dropdown">
-                        <ul>
-                            <li><a href="#">Zi</a></li>
-                            <li><a href="#">Fr</a></li>
-                        </ul>
-                    </div>
-                </div>-->
-                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
-            </div>
-            <nav class="mainmenu mobile-menu">
-                <ul>
-                    <li class="active"><a href="Home.jsp">Home</a></li>
-                    <li><a href="AboutUs.jsp">About Us</a></li>
-                    <li><a href="Rooms.jsp">Accommodation</a>
-                        <ul class="dropdown">
-                            <li><a href="Rooms.jsp">Room</a></li>
-                            <li><a href="Room_Details.jsp">Room Details</a></li>
-                            <li><a href="Blog_Details.jsp">Blog Details</a></li>
-                            <li><a href="#">Family Room</a></li>
-                            <li><a href="#">Premium Room</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="Blog.jsp">Event</a></li>
-                    <li><a href="Contact.jsp">Contact</a></li>
-                </ul>
-            </nav>
-            <div id="mobile-menu-wrap"></div>
-            <div class="top-social">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-            </div>
-            <ul class="top-widget">
-                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-            </ul>
-        </div>
-        <!-- Offcanvas Menu Section End -->
-
         <!-- Header Section Begin -->
         <jsp:include page="Header.jsp"></jsp:include>
         <!-- Header End -->
@@ -119,36 +64,44 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="room-details-item">
-                            <img src="img/room/room-details.jpg" alt="">
+                        <div class="room-details-item "  >
+                            <div class="slide">
+                                <div class="image-rooms list-image">
+                                    <c:forEach items="${listImage}" var="o">
+                                        <img src="${o.image}" alt="" width="750px" height="502px" id="slide-img" >
+                                    </c:forEach>
+                                </div>
+                                <div class="btns">
+                                    <div class="btn-Left btn-arrow" style="padding-left: 25px"><i class="fa-solid fa-chevron-left icon-L"></i></div>
+                                    <div class="btn-Right btn-arrow" style="padding-right: 25px"><i class="fa-solid fa-chevron-right icon-R"></i></div>
+                                </div>
+                            </div>
+
                             <div class="rd-text">
                                 <div class="rd-title">
-                                    <h3>Premium King Room</h3>
+                                    <h3>${room.name}</h3>
                                     <div class="rdt-right">
-                                        <!-- <div class="rating">
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star-half_alt"></i>
-                                        </div> -->
                                         <a href="#">Booking Now</a>
                                     </div>
                                 </div>
-                                <h2>159$<span>/Pernight</span></h2>
+                                <h2>${FormatUtils.formatPRice(room.price)}đ<span>/Pernight</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
+                                            <td>${room.size}m2</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
+                                            <td>${room.people} person</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
+                                            <td>${room.bed} bed</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Bath:</td>
+                                            <td>${room.bath} bath</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Services:</td>
@@ -170,75 +123,7 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- <div class="rd-reviews">
-                            <h4>Reviews</h4>
-                            <div class="review-item">
-                                <div class="ri-pic">
-                                    <img src="img/room/avatar/avatar-1.jpg" alt="">
-                                </div>
-                                <div class="ri-text">
-                                    <span>27 Aug 2019</span>
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                        magnam.</p>
-                                </div>
-                            </div>
-                            <div class="review-item">
-                                <div class="ri-pic">
-                                    <img src="img/room/avatar/avatar-2.jpg" alt="">
-                                </div>
-                                <div class="ri-text">
-                                    <span>27 Aug 2019</span>
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                        magnam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-add">
-                            <h4>Add Review</h4>
-                            <form action="#" class="ra-form">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="Name*">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="Email*">
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div>
-                                            <h5>You Rating:</h5>
-                                            <div class="rating">
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star"></i>
-                                                <i class="icon_star-half_alt"></i>
-                                            </div>
-                                        </div>
-                                        <textarea placeholder="Your Review"></textarea>
-                                        <button type="submit">Submit Now</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div> -->
+                        
                     </div>
                     <div class="col-lg-4">
                         <div class="room-booking">
@@ -361,5 +246,6 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/slide.js"></script>
     </body>
 </html>

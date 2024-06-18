@@ -1,9 +1,10 @@
 <%-- 
-    Document   : Blog
-    Created on : May 24, 2024, 12:57:33 AM
+    Document   : Blog_Details
+    Created on : May 24, 2024, 12:56:56 AM
     Author     : GIGABYTE
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
         <meta name="keywords" content="Sona, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Da Nang Dream Hotel</title>
+        <title>Sona | Template</title>
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
@@ -30,6 +31,7 @@
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/event.css" type="text/css"/>
     </head>
     <body>
         <!-- Page Preloder -->
@@ -60,7 +62,7 @@
                         </ul>
                     </div>
                 </div>-->
-                <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
+                <a href="Login.jsp" class="bk-btn">Login</a>
             </div>
             <nav class="mainmenu mobile-menu">
                 <ul>
@@ -94,121 +96,127 @@
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
-        <jsp:include page="Header.jsp"></jsp:include>
-        <!-- Header End -->
-
-        <!-- Breadcrumb Section Begin -->
-        <div class="breadcrumb-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="breadcrumb-text">
-                            <h2>Blog</h2>
-                            <div class="bt-option">
-                                <a href="home.html">Home</a>
-                                <span>Blog Grid</span>
+        <header class="header-section">
+            <div class="top-nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="tn-left">
+                                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
+                                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="tn-right">
+                                <div class="top-social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div>
+                                <a href="Login.jsp" class="bk-btn">Login</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Breadcrumb Section End -->
+            <div class="menu-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="nav-menu">
+                                <nav class="mainmenu">
+                                    <ul>
+                                        <li><a href="homeController">Home</a></li>
+                                        <li><a href="AboutUs.jsp">About Us</a></li>
+                                        <li><a href="roomController">Resort</a>
+                                            <ul class="dropdown">
+                                                <li><a href="roomController">Room</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="active"><a href="eventController?action=listall">Event</a></li>
+                                        <li><a href="Contact.jsp">Feedback</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header End -->
 
-        <!-- Blog Section Begin -->
-        <section class="blog-section blog-page spad">
+        <!-- Blog Details Hero Section Begin -->
+        <section class="blog-details-hero set-bg" data-setbg="img/img_EventPage.png">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Travel Trip</span>
-                                <h4><a href="blog-details.html">Tremblant In Canada</a></h4>
-                                <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Camping</span>
-                                <h4><a href="blog-details.html">Choosing A Static Caravan</a></h4>
-                                <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Event</span>
-                                <h4><a href="blog-details.html">Copper Canyon</a></h4>
-                                <div class="b-time"><i class="icon_clock_alt"></i> 21th April, 2019</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-4.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Trivago</span>
-                                <h4><a href="blog-details.html">A Time Travel Postcard</a></h4>
-                                <div class="b-time"><i class="icon_clock_alt"></i> 22th April, 2019</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-5.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Camping</span>
-                                <h4><a href="blog-details.html">A Time Travel Postcard</a></h4>
-                                <div class="b-time"><i class="icon_clock_alt"></i> 25th April, 2019</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-6.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Travel Trip</span>
-                                <h4><a href="blog-details.html">Virginia Travel For Kids</a></h4>
-                                <div class="b-time"><i class="icon_clock_alt"></i> 28th April, 2019</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-7.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Travel Trip</span>
-                                <h4><a href="blog-details.html">Bryce Canyon A Stunning</a></h4>
-                                <div class="b-time"><i class="icon_clock_alt"></i> 29th April, 2019</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-8.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Event & Travel</span>
-                                <h4><a href="blog-details.html">Motorhome Or Trailer</a></h4>
-                                <div class="b-time"><i class="icon_clock_alt"></i> 30th April, 2019</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item set-bg" data-setbg="img/blog/blog-9.jpg">
-                            <div class="bi-text">
-                                <span class="b-tag">Camping</span>
-                                <h4><a href="blog-details.html">Lost In Lagos Portugal</a></h4>
-                                <div class="b-time"><i class="icon_clock_alt"></i> 30th April, 2019</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="load-more">
-                            <a href="#" class="primary-btn">Load More</a>
-                        </div>
+                    <div class="col-lg-10 offset-lg-1">
+
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Blog Section End -->
+        <!-- Blog Details Hero End -->
+
+        <!-- Blog Details Section Begin -->
+        <section class="blog-details-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3 class="event-main">${event.name}</h3>
+                        <div class="blog-details-text">
+                            <div class="bd-title">
+                                <img src="${event.image}" alt="alt"/>
+                                <p>${event.description}</p>
+                            </div>
+                            <div class="leave-comment">
+                                <h4>Booking</h4>
+                                <form action="#" class="comment-form">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="Name">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" placeholder="Email">
+                                        </div>
+                                        <div class="col-lg-12 text-center">
+                                            <input type="text" placeholder="Website">
+                                            <textarea placeholder="Messages"></textarea>
+                                            <button type="submit" class="site-btn" style="margin-bottom: 20px">Booking Now</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>        
+
+                    <div class="col-lg-4" style="display: block">
+                        <h3 class="event-main">Other Event</h3>
+                        <c:forEach items="${list}" var="o">
+                            <div class="row">
+                                <div class="col-lg-6 list-img">
+                                    <img src="${o.image}" width="160px" height="86px" alt="">
+                                </div>
+                                <div class="col-lg-6">
+                                    <a class="eventName" href="eventController?action=listdetail&Id=${o.event_Id}">${o.name}</a>
+                                    <p class="startDay" >${o.startDay}</p>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Blog Details Section End -->
 
         <!-- Footer Section Begin -->
         <footer class="footer-section">
@@ -297,5 +305,7 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        
+
     </body>
 </html>
