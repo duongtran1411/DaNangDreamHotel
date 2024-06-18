@@ -66,13 +66,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Update Customer Information</h1>
+        <h1>Add Customer</h1>
     <%
        int currCustomerId = Integer.parseInt(request.getParameter("id"));
         DAOCustomer daoCustomer = new DAOCustomer();
         Customer cus = daoCustomer.getCustomerById(currCustomerId);
     %>
-    <form action="customerController?action=edit" method="post">
+    <form action="customerController?mod=1" method="post">
         Id: <input  readonly="" type="text" name="id" value="<%= cus.customerId %>"><br>
         First Name: <input type="text" name="firstName" value="<%= cus.firstName %>"><br>
         Last Name: <input type="text" name="lastName" value="<%= cus.lastName %>"><br>
@@ -86,6 +86,5 @@
             <a href="customerController">Back</a>
         </div>
     </div>
-        
 </body>
 </html>

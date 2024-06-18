@@ -22,7 +22,7 @@
             href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap"
             rel="stylesheet"
             />
-        <title>Da Nang Dream Hotel</title>
+        <title>Da Nang Hotel</title>
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
@@ -42,11 +42,39 @@
             <div class="loader"></div>
         </div>
 
- main
+        
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
-        <jsp:include page="Header.jsp"></jsp:include>
+      <div class="menu-item">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="img/logo.png" alt="" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="nav-menu">
+                        <nav class="mainmenu">
+                            <ul>
+                                <li class="active"><a href="Home.jsp">Home</a></li>
+                                <li ><a href="customerController">Customer List</a></li>
+                                <li>
+                                    <a href="ItemManager">Item List</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="nav-right search-switch">
+                            <i class="icon_search"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         <!-- Header End -->
 
         <!-- Hero Section Begin -->
@@ -143,84 +171,6 @@
                 </div>
             </div>
         </section>
-        <!-- About Us Section End -->
-
-        <!-- Services Section End -->
-        <!-- <section class="services-section spad">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="section-title">
-                  <span>What We Do</span>
-                  <h2>Discover Our Services</h2>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-036-parking"></i>
-                  <h4>Travel Plan</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-033-dinner"></i>
-                  <h4>Catering Service</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-026-bed"></i>
-                  <h4>Babysitting</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-024-towel"></i>
-                  <h4>Laundry</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-044-clock-1"></i>
-                  <h4>Hire Driver</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="service-item">
-                  <i class="flaticon-012-cocktail"></i>
-                  <h4>Bar & Drink</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> -->
-        <!-- Services Section End -->
 
         <!-- Home Room Section Begin -->  <!--BEST SELLER-->
         <section class="hp-room-section">

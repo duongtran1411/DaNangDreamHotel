@@ -17,8 +17,8 @@
         <servlet-class>Controller.CustomerController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ItemInRoomController</servlet-name>
-        <servlet-class>Controller.ItemInRoomController</servlet-class>
+        <servlet-name>ItemManagerController</servlet-name>
+        <servlet-class>Controller.ItemManagerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>authentication_register</servlet-name>
@@ -53,8 +53,8 @@
         <url-pattern>/customerController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ItemInRoomController</servlet-name>
-        <url-pattern>/itemManageURL</url-pattern>
+        <servlet-name>ItemManagerController</servlet-name>
+        <url-pattern>/ItemManager</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>authentication_login</servlet-name>

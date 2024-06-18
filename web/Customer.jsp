@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, Entity.ItemInRoom" %>
+<%@ page import="java.util.*, Entity.Customer" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Item In Room List</title>
+    <title>Customer List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8" />
     <meta name="description" content="Sona Template" />
@@ -105,7 +105,14 @@
                         <nav class="mainmenu">
                             <ul>
                                 <li class="active"><a href="Home.jsp">Home</a></li>
-                                <li ><a href="customerController">Customer List</a></li>
+                                <li>
+                                    <a href="ItemManager">Item List</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">Luxury Rooms</a></li>
+                                        <li><a href="#">Grand Rooms</a></li>
+                                        <li><a href="#">Family Rooms</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">
@@ -116,31 +123,38 @@
             </div>
         </div>
     </div>
-    <h1>Item In Room List</h1>
+    <h1>Customer List</h1>
     <div>
-        <button onclick="location.href='#'">Add Item</button>
+        <button onclick="location.href='AddCustomer.jsp'">Booking now</button>
     </div>
     <table>
         <thead>
             <tr>
-                <th>Room</th>
-                <th>Name</th>
-                <th>Quantity</th>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>ID Card</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <%
-                List<ItemInRoom> list = (List<ItemInRoom>) request.getAttribute("listItem");
-                if (list != null) {
-                    for (ItemInRoom x : list) {
+                List<Customer> customerList = (List<Customer>) request.getAttribute("customerList");
+                if (customerList != null) {
+                    for (Customer customer : customerList) {
             %>
             <tr>
-                <td data-label="Name"><%= x.getItemName() %></td>
-                <td data-label="Room"><%= x.getRoomId() %></td>
-                <td data-label="Quantity"><%= x.getQuantity() %></td>
+                <td data-label="ID"><%= customer.getCustomerId() %></td>
+                <td data-label="First Name"><%= customer.getFirstName() %></td>
+                <td data-label="Last Name"><%= customer.getLastName() %></td>
+                <td data-label="Phone Number"><%= customer.getPhoneNumber() %></td>
+                <td data-label="Email"><%= customer.getEmail() %></td>
+                <td data-label="ID Card"><%= customer.getIdCard() %></td>
                 <td data-label="Actions">
-                    <button onclick="location.href='#'">Update</button>
-                    <button onclick="if(confirm('Are you sure you want to delete this customer?')) { location.href='#'; }">Delete</button>
+                    <button onclick="location.href='UpdateCustomer.jsp?id=<%= customer.getCustomerId() %>'">Update</button>
+                    <button onclick="if(confirm('Are you sure you want to delete this customer?')) { location.href='customerController?mod=2?id=<%= customer.getCustomerId() %>'; }">Delete</button>
                 </td>
             </tr>
             <%

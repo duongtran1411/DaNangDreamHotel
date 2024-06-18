@@ -62,8 +62,9 @@ public class DAOCustomer extends DBConnect{
 }
     
     public void insertCustomer(String firstName, String lastName, String phoneNumber, String email, String idCard) {
-        String sql = "insert into customer(firstName, lastName, phone, email, idCard)"
-                + " values(?,?,?,?,?)";
+        String sql = "insert into customer(firstName, lastName, phone,email,idCard) values(\n"
+                + "	?,?,?,?,?\n"
+                + ")";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, firstName);
@@ -97,16 +98,15 @@ public class DAOCustomer extends DBConnect{
 
     public void deleteCustomer(int id){
         String sql = "delete from customer "
-                + "where customer_Id= ? ";
+                + "where customer_Id=?";
         try{
             PreparedStatement pre= conn.prepareStatement(sql);
             pre.setInt(1, id);
-            pre.executeUpdate();
-        }catch (SQLException ex) {
-           Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            pre.execute();
+        }catch (SQLException e) {
+            System.out.println("Error at deleteCustomer " + e.getMessage());
         }
     }
-   
     public static void main(String[] args) {
         DAOCustomer dao = new DAOCustomer();
         List<Customer> list = dao.getAllCustomer();

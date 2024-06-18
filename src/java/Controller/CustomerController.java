@@ -7,49 +7,117 @@ package Controller;
 import Entity.Customer;
 import Model.DAOCustomer;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ *
+ * @author CaoTung
+ */
 public class CustomerController extends HttpServlet {
 
-    DAOCustomer daoCustomer = new DAOCustomer();
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CustomerController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CustomerController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        System.out.println(action);
-        if (action == null || action.isEmpty()) {
-            action = "listCustomer";
-        }
-        switch (action) {
-            case "edit":
-                editCustomer(request, response);
-                break;
-            case "add":
-                addCustomer(request, response);
-                break;
-            case "delete":
-                deleteCustomer(request, response);
-                break;
-            default:
-                listCustomer(request, response);
-                break;
-        }
+        DAOCustomer daoCustomer = new DAOCustomer();
+        List<Customer> customerList = daoCustomer.getAllCustomer();
+        request.setAttribute("customerList", customerList);
+        request.getRequestDispatcher("Customer.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        int mod = Integer.parseInt(request.getParameter("mod"));
+        int id;
+        String firstName;
+        String lastName;
+        String phoneNumber;
+        String email;
+        String idCard;
+        DAOCustomer daoCustomer = new DAOCustomer();
+        List<Customer> customerList;
+        switch (mod) {
+            case 0://insert
+
+                firstName = request.getParameter("firstName");
+                lastName = request.getParameter("lastName");
+                phoneNumber = request.getParameter("phoneNumber");
+                email = request.getParameter("email");
+                idCard = request.getParameter("idCard");
+
+                daoCustomer.insertCustomer(firstName, lastName, phoneNumber, email, idCard);
+
+                customerList = daoCustomer.getAllCustomer();
+                request.setAttribute("customerList", customerList);
+                request.getRequestDispatcher("Customer.jsp").forward(request, response);
+                break;
+            case 1://update
+                 id = Integer.parseInt(request.getParameter("id"));
+                firstName = request.getParameter("firstName");
+                lastName = request.getParameter("lastName");
+                phoneNumber = request.getParameter("phoneNumber");
+                email = request.getParameter("email");
+                idCard = request.getParameter("idCard");
+
+                daoCustomer.updateCustomer(id, firstName, lastName, phoneNumber, email, idCard);
+
+                customerList = daoCustomer.getAllCustomer();
+                request.setAttribute("customerList", customerList);
+                request.getRequestDispatcher("Customer.jsp").forward(request, response);
+                break;
+            case 2://delete
+                id = Integer.parseInt(request.getParameter("id"));
+                daoCustomer.deleteCustomer(id);
+                customerList = daoCustomer.getAllCustomer();
+                request.setAttribute("customerList", customerList);
+                request.getRequestDispatcher("Customer.jsp").forward(request, response);
+                break;
+            default:
+                customerList = daoCustomer.getAllCustomer();
+                request.setAttribute("customerList", customerList);
+                request.getRequestDispatcher("Customer.jsp").forward(request, response);
+        }
+
     }
 
     @Override
@@ -57,36 +125,4 @@ public class CustomerController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Customer> allCustomer = daoCustomer.getAllCustomer();
-        request.setAttribute("allCustomer", allCustomer);
-        request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);
-    }
-
-    private void addCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String email = request.getParameter("email");
-        String idCard = request.getParameter("idCard");
-        daoCustomer.insertCustomer(firstName, lastName, phoneNumber, email, idCard);
-        response.sendRedirect("customerController?action=listCustomer");
-    }
-
-    private void editCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String email = request.getParameter("email");
-        String idCard = request.getParameter("idCard");
-        daoCustomer.updateCustomer(id, firstName, lastName, phoneNumber, email, idCard);
-        response.sendRedirect("customerController?action=listCustomer");
-    }
-
-    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        daoCustomer.deleteCustomer(id);
-        response.sendRedirect("customerController?action=listCustomer");
-    }
 }

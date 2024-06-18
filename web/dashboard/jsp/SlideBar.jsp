@@ -44,28 +44,12 @@
                         <span class="hide-menu">Manage Account</span>
                     </a>
                 </li>
-                <li  class="sidebar-item">
-                    <a  class="sidebar-link" href="customerController" aria-expanded="false">
-                        <span>
-                            <i class="fas fa-user-circle"></i>
-                        </span>
-                        <span class="hide-menu">Manage Customer</span>
-                    </a>
-                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
                         <span>
                             <i class="fas fa-hotel"></i> 
                         </span>
                         <span class="hide-menu">Manage Type Room</span>
-                    </a>
-                </li>
-                <li  class="sidebar-item">
-                    <a  class="sidebar-link" href="itemManageURL" aria-expanded="false">
-                        <span>
-                            <i class="fas fa-user-circle"></i>
-                        </span>
-                        <span class="hide-menu">Manage Items In Rooms</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

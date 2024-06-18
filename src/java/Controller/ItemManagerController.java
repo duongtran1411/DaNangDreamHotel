@@ -5,18 +5,21 @@
 
 package Controller;
 
+import Entity.ItemInRoom;
+import Model.DAOItem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
  * @author CaoTung
  */
-public class StaffController extends HttpServlet {
+public class ItemManagerController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +36,10 @@ public class StaffController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StaffController</title>");  
+            out.println("<title>Servlet ItemManagerController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StaffController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ItemManagerController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +56,10 @@ public class StaffController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.sendRedirect("Staff.jsp");
+        DAOItem dao = new DAOItem();
+        List<ItemInRoom> ListItemInRoom = dao.getAllItemInRoom();
+        request.setAttribute("listItem", ListItemInRoom);
+        request.getRequestDispatcher("ItemInRoom.jsp").forward(request, response);
     } 
 
     /** 
@@ -66,7 +72,9 @@ public class StaffController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       
+
+        
     }
 
     /** 
