@@ -141,7 +141,13 @@
                   <ul>
                     <li class="active"><a href="Home.jsp">Home</a></li>
                     <!-- <li><a href="rooms.html">Rooms</a></li> -->
-                    <li><a href="AboutUs.jsp">About Us</a></li>
+                     <li>
+                                    <a href="AboutUs.jsp">About Us</a>
+                                     <ul class="dropdown">
+                            <li><a href="Jobs.jsp">Jobs</a></li>
+                                     </ul>
+                                    
+                                </li>
                     <li>
                       <a href="Rooms.jsp">Accommodation</a>
                       <ul class="dropdown">
