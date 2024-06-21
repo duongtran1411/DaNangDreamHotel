@@ -53,11 +53,9 @@
                                 <li><a href="eventController">Events</a></li>
                                 <li><a href="Contact.jsp">Contact</a></li>
                                 <li><a href="staffController">Staff</a></li>
+                                <li><a href="viewCartController">Booked</a></li>
                             </ul>
                         </nav>
-                        <div class="nav-right search-switch">
-                            <i class="icon_search"></i>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -4,20 +4,24 @@
  */
 package Controller;
 
+import Entity.BookingCart;
+import Entity.CartItem;
+import Entity.Room;
+import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
- * @author GIGABYTE
+ * @author CaoTung
  */
-@WebServlet(name = "BookingController", urlPatterns = {"/bookingController"})
-public class BookingController extends HttpServlet {
+public class CartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,15 +35,15 @@ public class BookingController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BookingController</title>");            
+            out.println("<title>Servlet CartController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BookingController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CartController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,10 +61,14 @@ public class BookingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-    String checkIn = request.getParameter("checkin");
-    String checkOut =request.getParameter("checkout");
-        System.out.println(checkIn + "   " + checkOut );
+        BookingCart bookingCart = new BookingCart();
+        HttpSession session = request.getSession();
+        bookingCart = (BookingCart) session.getAttribute("cart");
+        if (bookingCart == null) {
+            bookingCart = new BookingCart();
+        }
+        session.setAttribute("cart", bookingCart);
+        doPost(request, response);
     }
 
     /**
@@ -74,7 +82,45 @@ public class BookingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
+        String action = request.getParameter("action");
+        switch (action) {
+            case "get":
+                response.sendRedirect("viewCart");
+                break;
+            case "delete":
+                doDelete(request, response);
+                break;
+            default:
+                String id = request.getParameter("id");
+                int roomId = Integer.parseInt(id);
+                DAORoom dao = new DAORoom();
+                Room room = dao.getRoomToCart(roomId);
+                CartItem cartItem = new CartItem(room);
+                List<CartItem> list = bookingCart.getListCartItem();
+//        for (CartItem o : list) {
+//            if(o.getRoom().getRoom_Id() == cartItem.getRoom().getRoom_Id()){
+//                response.sendRedirect("viewCart");
+//            }
+//        }
+                bookingCart.addRoom(cartItem);
+                session.setAttribute("cart", bookingCart);
+                response.sendRedirect("viewRoomController");
+                break;
+        }
+
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
+        String id = req.getParameter("Id");
+        int roomId = Integer.parseInt(id);
+        bookingCart.remove(roomId);
+        session.setAttribute("cart", bookingCart);
+        resp.sendRedirect("viewCartController");
     }
 
     /**

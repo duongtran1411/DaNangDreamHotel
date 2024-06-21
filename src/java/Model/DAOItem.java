@@ -86,15 +86,16 @@ public class DAOItem extends DBConnect {
         }
         return list;
     }
-     public void updateItemQuantity(int itemId, int newQuantity) {
-        String sql = "UPDATE Items SET quantity = ? WHERE itemId = ?";
+     public void updateItemQuantity(int itemId, int newQuantity, int roomId) {
+        String sql = "   UPDATE item_in_room SET quantity = ? WHERE item_Id = ? and room_id= ?";
         try {
                 PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, newQuantity);
             pre.setInt(2, itemId);
+            pre.setInt(3, roomId);
             pre.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
  
     }

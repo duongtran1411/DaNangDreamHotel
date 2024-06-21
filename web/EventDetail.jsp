@@ -189,7 +189,7 @@
                                         <div class="col-lg-12 text-center">
                                             <input type="text" placeholder="Website">
                                             <textarea placeholder="Messages"></textarea>
-                                            <button type="submit" class="site-btn" style="margin-bottom: 20px">Booking Now</button>
+                                            <button type="submit" class="site-btn" style="margin-bottom: 20px"><a href="bookByEventController?Id=${event.event_Id}">Booking Now</a></button>
                                         </div>
                                     </div>
                                 </form>

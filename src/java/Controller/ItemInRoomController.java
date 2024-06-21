@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -51,7 +52,7 @@ public class ItemInRoomController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null || action.isEmpty() ) {
+        if (action == null || action.isEmpty()) {
             action = "listTypeRoom";
         }
         switch (action) {
@@ -62,7 +63,7 @@ public class ItemInRoomController extends HttpServlet {
                 updateQuantity(request, response);
                 break;
             default:
-                listTypeRoom(request, response);
+                allItemInRoom(request, response);
                 break;
         }
     }
@@ -83,18 +84,52 @@ public class ItemInRoomController extends HttpServlet {
         request.setAttribute("AllTypeRoom", allTypeRoom);
         request.getRequestDispatcher("dashboard/jsp/ManageTypeRoom.jsp").forward(request, response);
     }
+
     private void allItemInRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomId = Integer.parseInt(request.getParameter("rid"));
         List<RoomWithItem> allItem = daoItem.getRoomWithItem(roomId);
         request.setAttribute("allItem", allItem);
         request.getRequestDispatcher("dashboard/jsp/ManageItemInRoom.jsp").forward(request, response);
     }
+
     private void updateQuantity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int itemId = Integer.parseInt(request.getParameter("id"));
-        int newQuantity = Integer.parseInt(request.getParameter("quantity"));
+//        int itemId = Integer.parseInt(request.getParameter("id"));
+//        int newQuantity = Integer.parseInt(request.getParameter("quantity"));
+//        int roomId = Integer.parseInt(request.getParameter("roomId"));
+//        System.out.println(itemId + newQuantity + roomId);
+//        daoItem.updateItemQuantity(itemId, newQuantity, roomId);
+//        request.getRequestDispatcher("itemManageURL").forward(request, response);
+        PrintWriter out = response.getWriter();
+        String[] itemId = request.getParameterValues("itemId");
+        String[] newQuantity = request.getParameterValues("quantity");
+        int roomId = Integer.parseInt(request.getParameter("roomId"));
+        for (int i = 0; i < itemId.length; i++) {
+            System.out.println(itemId[i]+'a');
+        }
+        
+        for (int i = 0; i < newQuantity.length; i++) {
+            System.out.println(newQuantity[i]+'b');
+        }
+        System.out.println(roomId+ "c");
+        int[] itemIds = null;
+        int[] quantity = null;
+        
+        System.out.println("lengt:" + itemIds.length);
+        if (itemId != null && newQuantity != null) {
+            itemIds = new int[itemId.length];
+            quantity = new int[newQuantity.length];
+            for (int i = 0; i <  10; i++) {
+               
+                    itemIds[i] = Integer.parseInt(itemId[i]);
+                    quantity[i] = Integer.parseInt(newQuantity[i]);
+                
+                System.out.println("item" + itemIds[i]);
+                System.out.println("quantity" + quantity[i]);
+                daoItem.updateItemQuantity(itemIds[i], quantity[i], roomId);
+            }
+        }
+  
+        response.sendRedirect("itemManageURL?action=view");
 
-        daoItem.updateItemQuantity(itemId, newQuantity);
-
-       
     }
 }

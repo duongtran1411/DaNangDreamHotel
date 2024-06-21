@@ -9,6 +9,7 @@ package Entity;
  * @author CaoTung
  */
 public class Item {
+
     public int itemId;
     public String itemName;
     public int typeItemId;
@@ -36,56 +37,5 @@ public class Item {
 
     public void setTypeItemId(int typeItemId) {
         this.typeItemId = typeItemId;
- * @author GIGABYTE
- */
-public class Item {
-
-    private int item_Id;
-    private String name;
-    private int typeItem_Id;
-    private double price;
-
-    public Item() {
     }
-
-    public Item(int item_Id, String name, int typeItem_Id, double price) {
-        this.item_Id = item_Id;
-        this.name = name;
-        this.typeItem_Id = typeItem_Id;
-        this.price = price;
-    }
-
-    public int getItem_Id() {
-        return item_Id;
-    }
-
-    public void setItem_Id(int item_Id) {
-        this.item_Id = item_Id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getTypeItem_Id() {
-        return typeItem_Id;
-    }
-
-    public void setTypeItem_Id(int typeItem_Id) {
-        this.typeItem_Id = typeItem_Id;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-    
-
 }
