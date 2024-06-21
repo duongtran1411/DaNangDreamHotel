@@ -12,7 +12,7 @@ public class DBConnect {
         String url = "jdbc:mysql://localhost:3306/managerhotel";
 
         String userName = "root";
-        String password = "duong1411";
+        String password = "123456";
 
         try {
             // Load the JDBC driver

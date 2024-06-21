@@ -32,6 +32,14 @@
         <servlet-name>ChangeResetPasss</servlet-name>
         <servlet-class>Controller.ChangeResetPasss</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VNpay</servlet-name>
+        <servlet-class>Controller.VNpay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VNpayReturn</servlet-name>
+        <servlet-class>Controller.VNpayReturn</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -67,6 +75,14 @@
     <servlet-mapping>
         <servlet-name>ViewRoomController</servlet-name>
         <url-pattern>/viewRoomController</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>VNpay</servlet-name>
+        <url-pattern>/vnpayajax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VNpayReturn</servlet-name>
+        <url-pattern>/vnpay_return</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

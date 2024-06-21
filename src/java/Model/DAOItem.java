@@ -48,12 +48,10 @@ public class DAOItem extends DBConnect {
             PreparedStatement pre = conn.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                Item x = new Item();
-                x.itemId = rs.getInt("item_Id");
-                x.itemName = rs.getString("name");
-                x.typeItemId = rs.getInt("typeItem_Id");
-                x.price = rs.getDouble("price");
-                list.add(x);
+                list.add(new Item(rs.getInt("item_Id"), 
+                        rs.getString("name"),
+                        rs.getInt("typeItem_Id"),
+                        rs.getDouble("price")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
