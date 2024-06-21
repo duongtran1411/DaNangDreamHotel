@@ -143,7 +143,6 @@
                                     <th>Price</th>
                                     <td data-label="Actions">
                                         <button class="btn-save" onclick="saveQuantity()">Save</button>
-
                                     </td>
                                 </tr>
                             </thead>

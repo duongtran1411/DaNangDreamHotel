@@ -63,7 +63,7 @@ public class ItemInRoomController extends HttpServlet {
                 updateQuantity(request, response);
                 break;
             default:
-                allItemInRoom(request, response);
+                listTypeRoom(request, response);
                 break;
         }
     }

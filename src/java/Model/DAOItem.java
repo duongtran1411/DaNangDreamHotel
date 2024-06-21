@@ -43,7 +43,7 @@ public class DAOItem extends DBConnect {
 
     public List<Item> getAllItem() {
         List<Item> list = new ArrayList();
-        String sql = "select * from item";
+        String sql = "select * from items";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
@@ -102,8 +102,8 @@ public class DAOItem extends DBConnect {
     
     public static void main(String[] args) {
         DAOItem dao = new DAOItem();
-        List<RoomWithItem> list = dao.getRoomWithItem(1);
-        for (RoomWithItem o : list) {
+        List<Item> list = dao.getAllItem();
+        for (Item o : list) {
             System.out.println(o);
         }
     }

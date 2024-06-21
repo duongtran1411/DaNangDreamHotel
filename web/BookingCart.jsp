@@ -75,7 +75,6 @@
                                         <div class="col-lg-6">
                                             <button class="btn btn" style="background-color: #C59B24; color: white; right: 0">Check Out</button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
