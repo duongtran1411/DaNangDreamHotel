@@ -3,3 +3,6 @@
 /nbproject/
 ./build.xml
 /nbproject/private
+/nbproject/project.properties
+/nbproject/project.xml
+/nbproject/build-impl.xml
