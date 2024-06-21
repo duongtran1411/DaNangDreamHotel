@@ -68,7 +68,7 @@ public class DAORoom extends DBConnect {
                 + "`floor_Room_Id`,\n"
                 + "`price`,\n"
                 + "`size`,\n"
-                + "`typeRoom_Id`)\n"
+                + "`type_Room_Id`)\n"
                 + "VALUES\n"
                 + "(?,?,?,?,?);";
         try {
@@ -240,7 +240,7 @@ public class DAORoom extends DBConnect {
         String sql = "with roomDetail as (\n"
                 + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
                 + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.typeRoom_Id\n"
+                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
                 + "		join imageroom i on i.room_Id = r.room_Id)\n"
                 + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
                 + "		where name like ? and rn = 2";
@@ -425,9 +425,6 @@ public class DAORoom extends DBConnect {
 
     public static void main(String[] args) {
        DAORoom dao = new DAORoom();
-       List<Room> list = dao.getNewRoom();
-        for (Room room : list) {
-            System.out.println(room);
-        }
+       dao.addRoom("1", 1, 22, 22, 1);
     }
 }

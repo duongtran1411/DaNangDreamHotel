@@ -78,6 +78,7 @@ public class DAOCustomer extends DBConnect{
 "            System.out.ptCustomer " + e.getMessage());
         }
     }
+    
     public void updateCustomer(int id,String firstName, String lastName, String phoneNumber, String email, String idCard){
         String sql = "update customer "
                 + "set firstName=?, lastName=?, phone=?, email=?, idCard=? "
@@ -109,7 +110,6 @@ public class DAOCustomer extends DBConnect{
     }
     public static void main(String[] args) {
         DAOCustomer dao = new DAOCustomer();
-        List<Customer> list = dao.getAllCustomer();
-        System.out.println(list);
+        dao.insertCustomer("2", "2", "2", "2", "2");
     }
 }

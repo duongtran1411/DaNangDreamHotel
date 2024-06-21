@@ -91,7 +91,7 @@
             <div class="modal fade" id="addRoomModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="imageRoomURL?action=add" method="post">
+                        <form action="roomURL?action=add" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Add Room</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -103,7 +103,11 @@
                                 </div>
                                 <div class="form-group" style="margin-bottom: 12px">
                                     <label>Floor</label>
-                                    <input name="floor" type="number" class="form-control" required>
+                                    <div class="input-group">
+                                        <button type="button" class="btn btn-outline-secondary" onclick="updateValue('floor', -1)">-</button>
+                                        <input name="floor" id="floor" type="text" class="form-control text-center" value="1" readonly>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="updateValue('floor', 1)">+</button>
+                                    </div>
                                 </div>
                                 <div class="form-group" style="margin-bottom: 12px">
                                     <label>Price</label>
@@ -131,6 +135,17 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            function updateValue(elementId, increment) {
+                var element = document.getElementById(elementId);
+                var currentValue = parseInt(element.value);
+                var newValue = currentValue + increment;
+                if (newValue >= 0) {
+                    element.value = newValue;
+                }
+            }
+        </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
