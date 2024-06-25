@@ -28,10 +28,29 @@
                 </div>
                 <section class="rooms-section spad">
                     <div class="container">
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTypeRoomModal">
-                            <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>New Type</p>                  
-                        </button>
-                        <div class="row">                 
+                    <c:if test="${not empty sessionScope.notificationMessage}">
+                        <div class="alert alert-${sessionScope.notificationStatus == 'success' ? 'success' : 'danger'} alert-dismissible fade show" role="alert" id="status-alert">
+                            ${sessionScope.notificationMessage}
+                        </div>
+                        <script>
+                            setTimeout(function () {
+                                var alert = document.getElementById('status-alert');
+                                if (alert) {
+                                    alert.classList.remove('show');
+                                    alert.classList.add('fade');
+                                    setTimeout(function () {
+                                        alert.parentNode.removeChild(alert);
+                                    }, 500);
+                                }
+                            }, 3000);
+                        </script>
+                        <c:remove var="notificationMessage" scope="session"/>
+                        <c:remove var="notificationStatus" scope="session"/>
+                    </c:if>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTypeRoomModal">
+                        <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>New Type</p>                  
+                    </button>
+                    <div class="row">                 
                         <c:forEach items="${AllTypeRoom}" var="o">
                             <c:url value="/img/typeroom/${o.image}" var="urlImg1"/>
                             <div class="col-lg-3 col-md-6 d-flex justify-content-center">
@@ -58,11 +77,21 @@
                                             </div>
                                             <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
                                                 <i class="fa fa-bed" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>
-                                                <span>${o.bed}</span>
+                                                <c:if test="${o.bed == 1}">
+                                                    <span>${o.bed} Bed</span>
+                                                </c:if>
+                                                <c:if test="${o.bed > 1}">
+                                                    <span>${o.bed} Beds</span>
+                                                </c:if>
                                             </div>
                                             <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
                                                 <i class="fa fa-bath" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>
-                                                <span>${o.bath}</span>
+                                                <c:if test="${o.bath == 1}">
+                                                    <span>${o.bath} Bath</span>
+                                                </c:if>
+                                                <c:if test="${o.bath > 1}">
+                                                    <span>${o.bath} Baths</span>
+                                                </c:if>                                       
                                             </div>
                                         </div>
                                     </div>
@@ -87,22 +116,34 @@
                                 <h4 class="modal-title">New Type Room</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                            <div class="modal-body">					
+                            <div class="modal-body">
                                 <div class="form-group" style="margin-bottom: 20px">
                                     <label>Type Name</label>
-                                    <input name="name" placeholder="..." type="text" class="form-control" required>
+                                    <input name="name" placeholder="Enter The Room Type Name..." type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group" style="margin-bottom: 20px">
                                     <label>Bed</label>
-                                    <input name="bed" placeholder="... Beds"class="form-control" required>
+                                    <div class="input-group">
+                                        <button type="button" class="btn btn-outline-secondary" onclick="updateValue('bed', -1)">-</button>
+                                        <input name="bed" id="bed" type="text" class="form-control text-center" value="0" readonly>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="updateValue('bed', 1)">+</button>
+                                    </div>
                                 </div>
                                 <div class="form-group" style="margin-bottom: 20px">
                                     <label>Bath</label>
-                                    <input name="bath" placeholder="... Baths" class="form-control" required>
+                                    <div class="input-group">
+                                        <button type="button" class="btn btn-outline-secondary" onclick="updateValue('bath', -1)">-</button>
+                                        <input name="bath" id="bath" type="text" class="form-control text-center" value="0" readonly>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="updateValue('bath', 1)">+</button>
+                                    </div>
                                 </div>
                                 <div class="form-group" style="margin-bottom: 20px">
                                     <label>People</label>
-                                    <input name="people" placeholder="... Adults" type="text" class="form-control" required>
+                                    <div class="input-group">
+                                        <button type="button" class="btn btn-outline-secondary" onclick="updateValue('people', -1)">-</button>
+                                        <input name="people" id="people" type="text" class="form-control text-center" value="0" readonly>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="updateValue('people', 1)">+</button>
+                                    </div>
                                 </div>					
                                 <div class="form-group" style="margin-bottom: 20px">
                                     <label>Image</label>
@@ -118,11 +159,23 @@
                 </div>
             </div>
         </div>
-        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../assets/js/sidebarmenu.js"></script>
-        <script src="../assets/js/app.min.js"></script>
-        <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-    </body>
+
+        <script>
+            function updateValue(elementId, increment) {
+                var element = document.getElementById(elementId);
+                var currentValue = parseInt(element.value);
+                var newValue = currentValue + increment;
+                if (newValue >= 0) {
+                    element.value = newValue;
+                }
+            }
+        </script>
+    </div>
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/sidebarmenu.js"></script>
+    <script src="../assets/js/app.min.js"></script>
+    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
 
 </html>

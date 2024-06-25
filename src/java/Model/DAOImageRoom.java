@@ -13,7 +13,7 @@ public class DAOImageRoom extends DBConnect {
 
     public List<ImageRoom> getImageByRoomId(int roomId) {
         List<ImageRoom> list = new ArrayList();
-        String sql = "select r.name, i.image from imageroom i\n"
+        String sql = "select i.image_Room_Id ,r.name, i.image, r.room_Id from imageroom i\n"
                 + "join room r on r.room_Id = i.room_Id\n"
                 + "where r.room_Id = ?";
         try {
@@ -21,7 +21,7 @@ public class DAOImageRoom extends DBConnect {
             pre.setInt(1, roomId);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                list.add(new ImageRoom(rs.getString(1), rs.getString(2)));
+                list.add(new ImageRoom(rs.getInt(1), rs.getString(2), rs.getString(3)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOImageRoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,14 +46,14 @@ public class DAOImageRoom extends DBConnect {
     
     public List<ImageRoom> getImageById(int id) {
         List<ImageRoom> list = new ArrayList<>();
-        String sql = "select image from ImageRoom\n"
+        String sql = "select * from ImageRoom\n"
                 + "where room_Id = ?";
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {                
-                list.add(new ImageRoom(rs.getString(1)));
+                list.add(new ImageRoom(rs.getInt(1), rs.getInt(2), rs.getString(3)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOImageRoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,8 +62,20 @@ public class DAOImageRoom extends DBConnect {
         return list;
     }
 
+    public void deleteImageRoom(int irid) {
+        String sql = "DELETE FROM `managerhotel`.`imageroom`\n"
+                + "WHERE image_Room_Id = ?;";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, irid);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOImageRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
     public static void main(String[] args) {
         DAOImageRoom dao = new DAOImageRoom();
-        System.out.println(dao.getImageByRoomId(9));
     }
 }

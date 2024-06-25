@@ -94,7 +94,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VNpay</servlet-name>
-        <url-pattern>/vnpayajax</url-pattern>
+        <url-pattern>/vnpayajax/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VNpayReturn</servlet-name>

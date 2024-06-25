@@ -46,12 +46,11 @@
                         <label for="card">Card</label>
                         <input class="form-control" id="card" name="card" type="text" value=""/>
                     </div>
-                    <button type="submit" class="btn btn-default" href>Thanh toán</button>
+                    <button type="submit" class="btn btn-default">Thanh toán</button>
                 </form>
+                <hr>
             </div>
-            <p>
-                &nbsp;
-            </p>
+            <p id="error-message" style="color: red;"></p>
             <footer class="footer">
                 <p>&copy; VNPAY 2020</p>
             </footer>
@@ -60,28 +59,43 @@
         <link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet" />
         <script src="https://pay.vnpay.vn/lib/vnpay/vnpay.min.js"></script>
         <script type="text/javascript">
-            $("#frmCreateOrder").submit(function () {
-                var postData = $("#frmCreateOrder").serialize();
-                var submitUrl = $("#frmCreateOrder").attr("action");
-                $.ajax({
-                    type: "POST",
-                    url: submitUrl,
-                    data: postData,
-                    dataType: 'JSON',
-                    success: function (x) {
-                        if (x.code === '00') {
-                            if (window.vnpay) {
-                                vnpay.open({width: 768, height: 600, url: x.data});
+            $("#frmCreateOrder").submit(function (event) {
+                event.preventDefault();
+                var card = $("#card").val();
+                var phone = $("#phone").val();
+                var errorMessage = '';
+
+                if (!/^\d{12}$/.test(card)) {
+                    errorMessage += 'Invalid card number. Card number must be exactly 12 digits.<br>';
+                }
+
+                if (!/^\d{10}$/.test(phone)) {
+                    errorMessage += 'Invalid phone number. Phone number must be exactly 10 digits.<br>';
+                }
+
+                if (errorMessage) {
+                    $("#error-message").html(errorMessage);
+                } else {
+                    var postData = $("#frmCreateOrder").serialize();
+                    var submitUrl = $("#frmCreateOrder").attr("action");
+                    $.ajax({
+                        type: "POST",
+                        url: submitUrl,
+                        data: postData,
+                        dataType: 'JSON',
+                        success: function (x) {
+                            if (x.code === '00') {
+                                if (window.vnpay) {
+                                    vnpay.open({width: 768, height: 600, url: x.data});
+                                } else {
+                                    location.href = x.data;
+                                }
                             } else {
-                                location.href = x.data;
+                                alert(x.message);
                             }
-                            return false;
-                        } else {
-                            alert(x.Message);
                         }
-                    }
-                });
-                return false;
+                    });
+                }
             });
         </script>       
     </body>

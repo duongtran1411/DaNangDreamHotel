@@ -126,7 +126,7 @@ public class DAORoom extends DBConnect {
 
     public void editRoom(int trid, int floor, String name, double price, int size, int rid) {
         String sql = "UPDATE room\n"
-                + "   SET typeRoom_Id = ?,\n"
+                + "   SET type_Room_Id = ?,\n"
                 + "       floor_Room_Id = ?,\n"
                 + "       name = ?,\n"
                 + "       price = ?,\n"
@@ -148,7 +148,7 @@ public class DAORoom extends DBConnect {
     }
 
     public Room getRoomByID(int rid) {
-        String sql = "select room_Id, typeRoom_Id, floor_Room_Id, name, price, size from room\n"
+        String sql = "select room_Id, type_Room_Id, floor_Room_Id, name, price, size from room\n"
                 + "where room_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);

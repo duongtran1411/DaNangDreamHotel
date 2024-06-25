@@ -102,20 +102,21 @@ public class DAOTypeRoom extends DBConnect {
         }
     }
 
-    public void deleteTypeRoom(int trid) {
-        String sql = "delete from typeroom\n"
-                + "where typeRoom_Id = ?";
+    public boolean deleteTypeRoom(int trid) {
+        String sql = "DELETE FROM typeroom WHERE typeRoom_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, trid);
-            pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            int affectedRows = pre.executeUpdate();
+            return affectedRows > 0; // Return true if one or more rows were deleted
+        }catch (Exception e) {
+            Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, "Cannot delete type room due to foreign key constraint", e);
+            return false; // Return false if there is a foreign key constraint violation
+        }        
     }
 
     public boolean isValidName(String name) {
-        if(name == null || name.isEmpty()) {
+        if (name == null || name.isEmpty()) {
             return false;
         }
 
@@ -141,15 +142,14 @@ public class DAOTypeRoom extends DBConnect {
 
         return true;
     }
-    
-    
-    public List<TypeRoom> getNameTypeRoom(){
+
+    public List<TypeRoom> getNameTypeRoom() {
         List<TypeRoom> list = new ArrayList<>();
         String sql = "select * from typeroom";
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 list.add(new TypeRoom(rs.getInt(1),
                         rs.getString(2)));
             }
@@ -157,8 +157,8 @@ public class DAOTypeRoom extends DBConnect {
             Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
-    } 
-    
+    }
+
     public TypeRoom getTypeRoomById(int trid) {
         String sql = "SELECT * FROM typeroom WHERE typeRoom_Id = ?";
         try {
@@ -166,11 +166,11 @@ public class DAOTypeRoom extends DBConnect {
             pre.setInt(1, trid);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                return new TypeRoom(rs.getInt(1), 
+                return new TypeRoom(rs.getInt(1),
                         rs.getString(2),
                         rs.getInt(3),
                         rs.getInt(4),
-                       rs.getInt(5), 
+                        rs.getInt(5),
                         rs.getInt(6),
                         rs.getString(7));
             }
@@ -182,6 +182,6 @@ public class DAOTypeRoom extends DBConnect {
 
     public static void main(String[] args) {
         DAOTypeRoom dao = new DAOTypeRoom();
-        dao.addTypeRoom("1", 1, 1, 1, "sds");
+        dao.deleteTypeRoom(4);
     }
 }

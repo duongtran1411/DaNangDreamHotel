@@ -47,7 +47,7 @@ public class ImageController extends HttpServlet {
             uploadDir.mkdirs();
         }
     }
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -112,7 +112,7 @@ public class ImageController extends HttpServlet {
     private void viewImageByRoomId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomId = Integer.parseInt(request.getParameter("rid"));
         Room room = daoRoom.getNameByRoomId(roomId);
-        List<ImageRoom> imageRooms = daoImageRoom.getImageByRoomId(roomId);
+        List<ImageRoom> imageRooms = daoImageRoom.getImageById(roomId);
         request.setAttribute("rid", roomId);
         request.setAttribute("ImageRoomBRID", imageRooms);
         request.setAttribute("NameRoom", room);
@@ -136,5 +136,10 @@ public class ImageController extends HttpServlet {
     }
 
     private void deleteImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int irid = Integer.parseInt(request.getParameter("irid"));
+        int roomId = Integer.parseInt(request.getParameter("rid"));  // Get roomId from the request parameters
+        daoImageRoom.deleteImageRoom(irid);
+        response.sendRedirect("imageRoomURL?action=view&rid=" + roomId);  // Redirect back to the image view page of the same room
     }
+
 }
