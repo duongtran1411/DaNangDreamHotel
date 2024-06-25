@@ -16,7 +16,8 @@ public class ImageRoom {
         this.image = image;
     }
     
-    public ImageRoom(String name, String image) {
+    public ImageRoom(int image_Room_Id, String name, String image) {
+        this.image_Room_Id = image_Room_Id;
         this.name = name;
         this.image = image;
     }
@@ -62,5 +63,7 @@ public class ImageRoom {
     public String toString() {
         return "ImageRoom{" + "image_Room_Id=" + image_Room_Id + ", room_Id=" + room_Id + ", image=" + image + ", name=" + name + '}';
     }
+
+    
 
 }

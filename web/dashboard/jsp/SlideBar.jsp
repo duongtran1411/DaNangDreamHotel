@@ -48,7 +48,7 @@
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.acc.role_Id == 2}" >    
+                <%--<c:if test="${sessionScope.acc.role_Id == 2}" >--%>    
                    <li class="sidebar-item">
                     <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
                         <span>
@@ -65,7 +65,7 @@
                         <span class="hide-menu">Manage Customer</span>
                     </a>
                 </li>
-              </c:if>
+              <%--</c:if>--%>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
                         <span>
@@ -82,7 +82,6 @@
                         <span class="hide-menu">Manage Event</span>
                     </a>
                 </li>
-                </c:if>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
                         <span>

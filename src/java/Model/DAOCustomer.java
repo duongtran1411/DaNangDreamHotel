@@ -109,7 +109,6 @@ public class DAOCustomer extends DBConnect{
    
     public static void main(String[] args) {
         DAOCustomer dao = new DAOCustomer();
-        List<Customer> list = dao.getAllCustomer();
-        System.out.println(list);
+        dao.insertCustomer("1", "1", "1", "1", "1");
     }
 }

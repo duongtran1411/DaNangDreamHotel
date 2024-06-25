@@ -111,15 +111,13 @@ public class TypeRoomController extends HttpServlet {
             Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName));
             if (daoTypeRoom.isValidName(name)) {
                 daoTypeRoom.editTypeRoom(id, name, eventId, bed, bath, people, fileName);
-                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+                setNotificationAndRedirect(request, response, "Updated successfully!", "success");
             } else {
-
-                // Xử lý lại else nếu mà nhập tên nếu invalid
-                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+                setNotificationAndRedirect(request, response, "Invalid Type Room name!", "error");
             }
 
         } catch (IOException | ServletException e) {
-            response.getWriter().println("File upload failed due to an error: " + e.getMessage());
+            setNotificationAndRedirect(request, response, "File upload failed due to an error: " + e.getMessage(), "error");
             e.printStackTrace();
         }
     }
@@ -138,20 +136,30 @@ public class TypeRoomController extends HttpServlet {
             Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName));
             if (daoTypeRoom.isValidName(name)) {
                 daoTypeRoom.addTypeRoom(name, bed, bath, people, fileName);
-                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+                setNotificationAndRedirect(request, response, "Added successfully!", "success");
             } else {
-                
-                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+                setNotificationAndRedirect(request, response, "Invalid Type Room name!", "error");
             }
         } catch (IOException | ServletException e) {
-            response.getWriter().println("File upload failed due to an error: " + e.getMessage());
+            setNotificationAndRedirect(request, response, "File upload failed due to an error: " + e.getMessage(), "error");
             e.printStackTrace();
         }
     }
 
     private void deleteTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        daoTypeRoom.deleteTypeRoom(id);
+        boolean isDeleted = daoTypeRoom.deleteTypeRoom(id);
+
+        if (isDeleted) {
+            setNotificationAndRedirect(request, response, "Type Room deleted successfully!", "success");
+        } else {
+            setNotificationAndRedirect(request, response, "This room type have the room can't delete", "error");
+        }
+    }
+
+    private void setNotificationAndRedirect(HttpServletRequest request, HttpServletResponse response, String message, String status) throws IOException {
+        request.getSession().setAttribute("notificationMessage", message);
+        request.getSession().setAttribute("notificationStatus", status);
         response.sendRedirect("typeRoomURL?action=listTypeRoom");
     }
 }
