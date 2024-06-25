@@ -63,8 +63,8 @@ public class ViewCart extends HttpServlet {
             bookingCart = new BookingCart();
         }
         List<CartItem> list = bookingCart.getListCartItem();
-        double total = bookingCart.getTotalMoney();
-        request.setAttribute("total", total);
+        int total = bookingCart.getTotalMoney();
+        session.setAttribute("total", total);
         request.setAttribute("list", list);
         request.getRequestDispatcher("BookingCart.jsp").forward(request, response);
     } 

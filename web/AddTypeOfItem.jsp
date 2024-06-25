@@ -75,24 +75,14 @@
     </head>
     <body>
         <div class="container">
-            <h1>Item</h1>
-            <form id ="bookingForm" action="ItemController?action=add" method="post">
-                <label for="Name">Item Name:</label>
+            <h1>Type Of Item</h1>
+            <form id ="bookingForm" action="ItemTypeController?action=add" method="post">
+                <label for="Name">Type Name:</label>
                 <input required="" type="text" id="name" name="name"><br>
-                <label for="lastName">Type: </label>
-                <select name="type" style="width: 600px; height: 35px; margin-bottom: 10px">
-                    <option value="1">Food</option>
-                    <option value="2">Drink</option>
-                    <option value="3">Device</option>
-                    <option value="4">Amenities</option>
-                </select>
-                <br>
-                <label for="phoneNumber">Price</label>
-                <input required="" type="text" id="price" name="price"><br>
                 <input type="submit" value="ADD" style="background-color: #C59B24; color: white">
             </form>
             <div class="back-btn" >
-                <a href="ItemController" style="color: #C59B24">Back</a>
+                <a href="ItemTypeController" style="color: #C59B24">Back</a>
             </div>
         </div>
     </body>

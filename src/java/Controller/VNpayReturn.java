@@ -1,5 +1,7 @@
 package Controller;
 
+import Entity.BookingCart;
+import Entity.CartItem;
 import Model.DAOCustomer;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -8,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -45,7 +48,8 @@ public class VNpayReturn extends HttpServlet {
             String phone = (String) req.getSession().getAttribute("phone");
             String email = (String) req.getSession().getAttribute("email");
             String card = (String) req.getSession().getAttribute("card");
-
+            BookingCart bookingCart = (BookingCart) req.getSession().getAttribute("cart");
+            List<CartItem> list = bookingCart.getListCartItem();
             DAOCustomer daoC = new DAOCustomer();
             daoC.insertCustomer(firstName, lastName, phone, email, card);
 
@@ -79,12 +83,12 @@ public class VNpayReturn extends HttpServlet {
 
                     // HTML content for the email
                     String htmlContent = "<h1>Thank You for Your Booking!</h1>"
-                            + "<p>Dear Customer,</p>"
+                            + "<p>Dear " + lastName + ",</p>"
                             + "<p>We appreciate your booking. Here are the details:</p>"
                             + "<ul>"
                             + "<li><b>Booking ID:</b> 1</li>"
                             + "<li><b>Date:</b> " + formattedDate + " </li>"
-                            + "<li><b>Room:</b> P401 </li>"
+                            + "<li><b>Room:</b> "+ list +" </li>"
                             + "</ul>"
                             + "<p>We look forward to serving you.</p>"
                             + "<p>Best regards,</p>"
@@ -106,6 +110,8 @@ public class VNpayReturn extends HttpServlet {
             req.getSession().removeAttribute("phone");
             req.getSession().removeAttribute("email");
             req.getSession().removeAttribute("card");
+            req.getSession().removeAttribute("cart");
+            
         }
 
         // Redirect to a confirmation page or display a message

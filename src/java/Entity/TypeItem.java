@@ -10,8 +10,8 @@ package Entity;
  */
 public class TypeItem {
 
-    private int typeItem_Id;
-    private String name;
+    public int typeItem_Id;
+    public String name;
 
     public TypeItem() {
     }

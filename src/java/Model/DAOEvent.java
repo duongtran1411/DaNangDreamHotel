@@ -18,45 +18,46 @@ import java.util.logging.Logger;
  * @author GIGABYTE
  */
 public class DAOEvent extends DBConnect {
-    public List<Event> getAllEvent(){
+
+    public List<Event> getAllEvent() {
         List<Event> list = new ArrayList<>();
         String sql = "select * from event";
-                    
+
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             ResultSet rs = pre.executeQuery();
-            while(rs.next()){
-                list.add(new Event(rs.getInt(1), 
-                        rs.getString(2), 
-                       rs.getString(3),
+            while (rs.next()) {
+                list.add(new Event(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
                         rs.getDate(4),
                         rs.getDate(5),
                         rs.getString(6),
-                       rs.getDouble(7), 
+                        rs.getDouble(7),
                         rs.getString(8)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
-    public Event getEventById(int Id){
+
+    public Event getEventById(int Id) {
         Event event = new Event();
-        String sql ="select * from event where event_Id = ?";
+        String sql = "select * from event where event_Id = ?";
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setInt(1, Id);
             ResultSet rs = pre.executeQuery();
-            if(rs.next()){
-                return new Event(rs.getInt(1), 
-                        rs.getString(2), 
-                       rs.getString(3),
+            if (rs.next()) {
+                return new Event(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
                         rs.getDate(4),
                         rs.getDate(5),
                         rs.getString(6),
-                       rs.getDouble(7), 
+                        rs.getDouble(7),
                         rs.getString(8));
             }
         } catch (SQLException ex) {
@@ -64,32 +65,48 @@ public class DAOEvent extends DBConnect {
         }
         return null;
     }
-    
-    public List<Event> getTop3Event(){
+
+    public List<Event> getTop3Event() {
         List<Event> list = new ArrayList<>();
         String sql = "select * from event limit 3";
-                    
+
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             ResultSet rs = pre.executeQuery();
-            while(rs.next()){
-                list.add(new Event(rs.getInt(1), 
-                        rs.getString(2), 
-                       rs.getString(3),
+            while (rs.next()) {
+                list.add(new Event(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
                         rs.getDate(4),
                         rs.getDate(5),
                         rs.getString(6),
-                       rs.getDouble(7), 
+                        rs.getDouble(7),
                         rs.getString(8)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
-   
+
+    public Event getImageEvent(int id) {
+        String sql = "select image from event \n"
+                + "where event_Id = ? ";
+        PreparedStatement pre;
+        try {
+            pre = conn.prepareCall(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                return new Event(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOEvent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         DAOEvent dao = new DAOEvent();
         List<Event> list = dao.getTop3Event();

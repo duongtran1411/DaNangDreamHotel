@@ -56,6 +56,10 @@
         <servlet-name>ItemController</servlet-name>
         <servlet-class>Controller.ItemController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TypeOfItemController</servlet-name>
+        <servlet-class>Controller.TypeOfItemController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -115,6 +119,10 @@
     <servlet-mapping>
         <servlet-name>ItemController</servlet-name>
         <url-pattern>/ItemController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TypeOfItemController</servlet-name>
+        <url-pattern>/ItemTypeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

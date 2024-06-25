@@ -5,7 +5,9 @@
 
 package Controller;
 
+import Entity.Event;
 import Entity.Room;
+import Model.DAOEvent;
 import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,7 +61,10 @@ public class BookingByEventController extends HttpServlet {
         String id = request.getParameter("Id");
         int eventId = Integer.parseInt(id);
         DAORoom dao = new DAORoom();
+        DAOEvent daoE = new DAOEvent();
+        Event event = daoE.getImageEvent(eventId);
         List<Room> list = dao.getRoomByEvent(eventId);
+        request.setAttribute("event", event);
         request.setAttribute("listR", list);
         request.getRequestDispatcher("Booking.jsp").forward(request, response);
     } 

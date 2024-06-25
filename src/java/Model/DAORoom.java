@@ -23,7 +23,7 @@ public class DAORoom extends DBConnect {
                         rs.getInt(2),
                         rs.getInt(3),
                         rs.getString(4),
-                        rs.getDouble(5),
+                        rs.getInt(5),
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
@@ -50,7 +50,7 @@ public class DAORoom extends DBConnect {
                         rs.getInt(2),
                         rs.getInt(3),
                         rs.getString(4),
-                        rs.getDouble(5),
+                        rs.getInt(5),
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
@@ -155,7 +155,7 @@ public class DAORoom extends DBConnect {
             pre.setInt(1, rid);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                return new Room(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDouble(5), rs.getInt(6));
+                return new Room(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOTypeRoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,7 +180,7 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getDouble(3), 
+                       rs.getInt(3), 
                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -207,7 +207,7 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 return new Room(rs.getInt(1),
                         rs.getString(2), 
-                        rs.getDouble(3),
+                        rs.getInt(3),
                         rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -249,7 +249,7 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getDouble(3), 
+                       rs.getInt(3), 
                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -280,7 +280,7 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getDouble(3), 
+                       rs.getInt(3), 
                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -311,7 +311,7 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getDouble(3), 
+                       rs.getInt(3), 
                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -343,7 +343,7 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getDouble(3), 
+                       rs.getInt(3), 
                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -375,7 +375,7 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getDouble(3), 
+                       rs.getInt(3), 
                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -407,7 +407,7 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getDouble(3), 
+                       rs.getInt(3), 
                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -437,7 +437,7 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 return new Room(rs.getInt(1),
                         rs.getString(2),
-                        rs.getDouble(3),
+                        rs.getInt(3),
                         rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -469,13 +469,13 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                        rs.getDouble(3),
+                        rs.getInt(3),
                         rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getDouble(9)));
+                        rs.getInt(9)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -485,9 +485,8 @@ public class DAORoom extends DBConnect {
 
     public static void main(String[] args) {
        DAORoom dao = new DAORoom();
-       List<Room> list = dao.getNewRoom();
-        for (Room room : list) {
-            System.out.println(room);
-        }
+       List<Room> list = dao.getAllRoom();
+            System.out.println(list);
+        
     }
 }

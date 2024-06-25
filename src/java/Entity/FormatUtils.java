@@ -24,4 +24,10 @@ public class FormatUtils {
         NumberFormat formatter = new DecimalFormat("#,###", symbols);
         return formatter.format(price);
     }
+    
+    public static String formatNumber(String number) {
+        NumberFormat formatter = NumberFormat.getInstance(Locale.US);
+        formatter.setMaximumFractionDigits(0);
+        return formatter.format(number);
+    }
 }

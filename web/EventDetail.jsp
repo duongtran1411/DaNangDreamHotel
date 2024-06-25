@@ -34,123 +34,13 @@
         <link rel="stylesheet" href="css/event.css" type="text/css"/>
     </head>
     <body>
-        <!-- Page Preloder -->
+         Page Preloder 
         <div id="preloder">
             <div class="loader"></div>
         </div>
 
-        <!-- Offcanvas Menu Section Begin -->
-        <div class="offcanvas-menu-overlay"></div>
-        <div class="canvas-open">
-            <i class="icon_menu"></i>
-        </div>
-        <div class="offcanvas-menu-wrapper">
-            <div class="canvas-close">
-                <i class="icon_close"></i>
-            </div>
-            <div class="search-icon search-switch">
-                <i class="icon_search"></i>
-            </div>
-            <div class="header-configure-area">
-                <!--<div class="language-option">
-                    <img src="img/flag.jpg" alt="">
-                    <span>EN <i class="fa fa-angle-down"></i></span>
-                    <div class="flag-dropdown">
-                        <ul>
-                            <li><a href="#">Zi</a></li>
-                            <li><a href="#">Fr</a></li>
-                        </ul>
-                    </div>
-                </div>-->
-                <a href="Login.jsp" class="bk-btn">Login</a>
-            </div>
-            <nav class="mainmenu mobile-menu">
-                <ul>
-                    <li class="active"><a href="Home.jsp">Home</a></li>
-                    <li><a href="AboutUs.jsp">About Us</a></li>
-                    <li><a href="Rooms.jsp">Accommodation</a>
-                        <ul class="dropdown">
-                            <li><a href="Rooms.jsp">Room</a></li>
-                            <li><a href="Room_Details.jsp">Room Details</a></li>
-                            <li><a href="Blog_Details.jsp">Blog Details</a></li>
-                            <li><a href="#">Family Room</a></li>
-                            <li><a href="#">Premium Room</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="Blog.jsp">Event</a></li>
-                    <li><a href="Contact.jsp">Contact</a></li>
-                </ul>
-            </nav>
-            <div id="mobile-menu-wrap"></div>
-            <div class="top-social">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-            </div>
-            <ul class="top-widget">
-                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-            </ul>
-        </div>
-        <!-- Offcanvas Menu Section End -->
-
         <!-- Header Section Begin -->
-        <header class="header-section">
-            <div class="top-nav">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="tn-left">
-                                <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="tn-right">
-                                <div class="top-social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
-                                <a href="Login.jsp" class="bk-btn">Login</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <div class="logo">
-                                <a href="index.html">
-                                    <img src="img/logo.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-10">
-                            <div class="nav-menu">
-                                <nav class="mainmenu">
-                                    <ul>
-                                        <li><a href="homeController">Home</a></li>
-                                        <li><a href="AboutUs.jsp">About Us</a></li>
-                                        <li><a href="roomController">Resort</a>
-                                            <ul class="dropdown">
-                                                <li><a href="roomController">Room</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="active"><a href="eventController?action=listall">Event</a></li>
-                                        <li><a href="Contact.jsp">Feedback</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <jsp:include page="Header.jsp"></jsp:include>
         <!-- Header End -->
 
         <!-- Blog Details Hero Section Begin -->
@@ -189,7 +79,7 @@
                                         <div class="col-lg-12 text-center">
                                             <input type="text" placeholder="Website">
                                             <textarea placeholder="Messages"></textarea>
-                                            <button type="submit" class="site-btn" style="margin-bottom: 20px"><a href="bookByEventController?Id=${event.event_Id}">Booking Now</a></button>
+                                            <button type="submit" class="site-btn" style="margin-bottom: 20px"><a href="bookByEventController?Id=${event.event_Id}" style="color: white">Booking Now</a></button>
                                         </div>
                                     </div>
                                 </form>
