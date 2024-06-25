@@ -9,6 +9,7 @@ package Entity;
  * @author CaoTung
  */
 public class RoomWithItem {
+    public int itemInRoomId;
     public int itemId;
     public int roomId;
     public String roomName;
@@ -19,7 +20,9 @@ public class RoomWithItem {
     public RoomWithItem() {
     }
 
-    public RoomWithItem(int itemId, int roomId, String roomName, String itemName, int quantity, double itempPrice) {
+
+    public RoomWithItem(int itemInRoomId, int itemId, int roomId, String roomName, String itemName, int quantity, double itempPrice) {
+        this.itemInRoomId = itemInRoomId;
         this.itemId = itemId;
         this.roomId = roomId;
         this.roomName = roomName;
@@ -27,6 +30,24 @@ public class RoomWithItem {
         this.quantity = quantity;
         this.itempPrice = itempPrice;
     }
+
+    public int getItemInRoomId() {
+        return itemInRoomId;
+    }
+
+    public void setItemInRoomId(int itemInRoomId) {
+        this.itemInRoomId = itemInRoomId;
+    }
+
+    public double getItempPrice() {
+        return itempPrice;
+    }
+
+    public void setItempPrice(double itempPrice) {
+        this.itempPrice = itempPrice;
+    }
+    
+    
     
 
     public int getItemId() {
@@ -79,8 +100,10 @@ public class RoomWithItem {
 
     @Override
     public String toString() {
-        return "RoomWithItem{" + "itemId=" + itemId + ", roomId=" + roomId + ", roomName=" + roomName + ", itemName=" + itemName + ", quantity=" + quantity + ", itempPrice=" + itempPrice + '}';
+        return "RoomWithItem{" + "itemInRoomId=" + itemInRoomId + ", itemId=" + itemId + ", roomId=" + roomId + ", roomName=" + roomName + ", itemName=" + itemName + ", quantity=" + quantity + ", itempPrice=" + itempPrice + '}';
     }
+
+   
     
     
 }

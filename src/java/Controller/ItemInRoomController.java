@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -85,16 +86,18 @@ public class ItemInRoomController extends HttpServlet {
     }
     private void allItemInRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomId = Integer.parseInt(request.getParameter("rid"));
+        int troomId = Integer.parseInt(request.getParameter("trid"));
         List<RoomWithItem> allItem = daoItem.getRoomWithItem(roomId);
         request.setAttribute("allItem", allItem);
+        request.setAttribute("trid", troomId);
         request.getRequestDispatcher("dashboard/jsp/ManageItemInRoom.jsp").forward(request, response);
     }
     private void updateQuantity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int itemId = Integer.parseInt(request.getParameter("id"));
-        int newQuantity = Integer.parseInt(request.getParameter("quantity"));
+        PrintWriter out = response.getWriter();
+        int itemId = Integer.parseInt(request.getParameter("itemInRoomId"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        daoItem.updateItemQuantity(itemId, quantity);
+//        response.sendRedirect("itemManageURL?action=view");
 
-        daoItem.updateItemQuantity(itemId, newQuantity);
-
-       
     }
 }

@@ -15,6 +15,7 @@ public class Room {
     private int bath;
     private int people;
     private String image;
+    private double discount;
 
     public Room() {
     }
@@ -66,6 +67,18 @@ public class Room {
         this.bath = bath;
         this.people = people;
         this.image = image;
+    }
+    
+    public Room(int room_Id, String name, double price, int size, int bed, int bath, int people, String image, double discount) {
+        this.room_Id = room_Id;
+        this.name = name;
+        this.price = price;
+        this.size = size;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+        this.image = image;
+        this.discount = discount;
     }
     
     public Room(int room_Id, String name, double price, int size, int bed, int bath, int people) {

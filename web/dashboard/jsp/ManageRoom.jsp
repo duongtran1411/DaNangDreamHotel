@@ -71,7 +71,7 @@
                                                     <a href="imageRoomURL?action=view&rid=${o.room_Id}">View</a>
                                                 </td>
                                                 <td>
-                                                    <a href="itemManageURL?action=view&rid=${o.room_Id}">View</a>
+                                                    <a href="itemManageURL?action=view&rid=${o.room_Id}&trid=${o.type_Room_Id}">View</a>
                                                 </td>
                                                 <td>${o.floor_Room_Id}</td>
                                                 <td>${o.name}</td>

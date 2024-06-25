@@ -40,6 +40,22 @@
         <servlet-name>VNpayReturn</servlet-name>
         <servlet-class>Controller.VNpayReturn</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>Controller.CartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCartController</servlet-name>
+        <servlet-class>Controller.ViewCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookingByEventController</servlet-name>
+        <servlet-class>Controller.BookingByEventController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ItemController</servlet-name>
+        <servlet-class>Controller.ItemController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -76,13 +92,29 @@
         <servlet-name>ViewRoomController</servlet-name>
         <url-pattern>/viewRoomController</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>VNpay</servlet-name>
         <url-pattern>/vnpayajax</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VNpayReturn</servlet-name>
         <url-pattern>/vnpay_return</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/cartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCartController</servlet-name>
+        <url-pattern>/viewCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingByEventController</servlet-name>
+        <url-pattern>/bookByEventController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItemController</servlet-name>
+        <url-pattern>/ItemController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
