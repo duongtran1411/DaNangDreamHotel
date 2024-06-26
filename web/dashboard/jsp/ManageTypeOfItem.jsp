@@ -119,6 +119,30 @@
             .btn-save:hover {
                 background-color: #218838;
             }
+            .pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #343a40;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #f8f9fa;
+}
+
+.pagination a.active {
+    background-color: #343a40;
+    color: white;
+}
         </style>
     </head>
 
@@ -151,12 +175,24 @@
                                     </td>
                                     <td data-label="Actions">
                                         
-                                  <a href="ItemTypeController?action=delete&id=${o.typeItem_Id}">Delete</a>
+                                <a href="UpdateTypeOfItem.jsp?id=${o.typeItem_Id}">Edit</a> | <a href="ItemTypeController?action=delete&id=${o.typeItem_Id}">Delete</a>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
+                         <!-- Pagination controls -->
+                <div class="pagination">
+                    <c:if test="${currentPage > 1}">
+                        <a href="ItemTypeController?page=${currentPage - 1}">Previous</a>
+                    </c:if>
+                    <c:forEach begin="1" end="${totalPages}" var="page">
+                        <a href="ItemTypeController?page=${page}" class="${page == currentPage ? 'active' : ''}">${page}</a>
+                    </c:forEach>
+                    <c:if test="${currentPage < totalPages}">
+                        <a href="ItemTypeController?page=${currentPage + 1}">Next</a>
+                    </c:if>
+                </div>
                 </section>
             </div>
         </div>

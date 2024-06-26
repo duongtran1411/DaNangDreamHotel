@@ -35,6 +35,59 @@ public class DAOTypeItem extends DBConnect{
         }
         return list;
     }
+    public int getTotalType(){
+        String sql = "select count(typeItem_Id) "
+                + "from typeofitem";
+        int totalTypes=0;
+        try{
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if(rs.next()){
+                totalTypes = rs.getInt(1);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(DAOTypeItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return totalTypes;
+    }
+    public List<TypeItem> getTypesWithPagin(int currentPage, int itemsPerPage) {
+        List<TypeItem> list = new ArrayList();
+        int startIndex = (currentPage - 1) * itemsPerPage;
+        String sql = "select * from typeofitem LIMIT ? OFFSET ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+
+            pre.setInt(1, itemsPerPage);
+            pre.setInt(2, startIndex);
+                        ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                TypeItem x = new TypeItem();
+                x.typeItem_Id = rs.getInt("typeItem_Id");
+                x.name = rs.getString("name");
+                list.add(x);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOTypeItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    public TypeItem getTypeItemById(int id) {
+        TypeItem typ = new TypeItem();
+        String sql = "select * from typeofitem "
+                + "where typeitem_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while(rs.next()){
+                typ.setTypeItem_Id(rs.getInt(1));
+                typ.setName(rs.getString(2));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOTypeItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return typ;
+}
     public void insertTypeItem(String name) {
         String sql = "insert into typeofitem (name)"
                 + " values(?)";
@@ -45,6 +98,19 @@ public class DAOTypeItem extends DBConnect{
         } catch (SQLException e) {
             System.out.println("Error at inserption e) {\n" +
 "            System.out.ptCustomer " + e.getMessage());
+        }
+    }
+    public void updateTypeOfItem(int id,String name){
+        String sql = "update typeofitem "
+                + "set name=? "
+                + "where typeItem_Id=?";
+        try{
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(2, id);
+            pre.setString(1, name);
+            pre.execute();
+        }catch (SQLException e) {
+            System.out.println("Error at updateTypeOfItem " + e.getMessage());
         }
     }
         public void deleteTypeOfItem(int id) {
@@ -61,8 +127,8 @@ public class DAOTypeItem extends DBConnect{
      public static void main(String[] args) {
         DAOTypeItem dao = new DAOTypeItem();
           List<TypeItem> list = new ArrayList();
-        dao.deleteTypeOfItem(7);
-
+        list  = dao.getTypesWithPagin(1,1);
+         System.out.println(list);
     
     }
 }

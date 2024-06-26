@@ -98,7 +98,6 @@
             <jsp:include page="Profile.jsp"></jsp:include>
 
             <section class="rooms-section spad">
-                <a href="AddCustomer.jsp">Add</a>
                 <table id="customerTable">
                     <thead>
                         <tr>

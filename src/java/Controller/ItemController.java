@@ -64,6 +64,9 @@ public class ItemController extends HttpServlet {
             case "delete":
                 deleteItem(request, response);
                 break;
+            case "update":
+                updateItem(request, response);
+                break;
             default:
                 listAllItem(request, response);
                 break;
@@ -77,8 +80,14 @@ public class ItemController extends HttpServlet {
     }
 
     private void listAllItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Item> allItem = daoItem.getAllItem();
+         int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
+        int itemsPerPage = 5;
+        int totalTypes = daoItem.getTotalItem();
+        int totalPages = (int) Math.ceil((double) totalTypes / itemsPerPage);
+        List<Item> allItem = daoItem.getItemsWithPagin(currentPage, itemsPerPage);
         request.setAttribute("allItem", allItem);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("dashboard/jsp/ItemManage.jsp").forward(request, response);
     }
 
@@ -90,6 +99,14 @@ public class ItemController extends HttpServlet {
 
         response.sendRedirect("ItemController");
     }
+    private void updateItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        int typeId = Integer.parseInt(request.getParameter("type"));
+        Double price = Double.parseDouble(request.getParameter("price"));
+        daoItem.updateItem(id, name, typeId, price);
+          response.sendRedirect("ItemController");
+    }
     private void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         int type = Integer.parseInt(request.getParameter("type"));
@@ -97,6 +114,7 @@ public class ItemController extends HttpServlet {
         daoItem.insertItem(name, type, price);
         response.sendRedirect("ItemController");
     }
+
     @Override
     public String getServletInfo() {
         return "Short description";

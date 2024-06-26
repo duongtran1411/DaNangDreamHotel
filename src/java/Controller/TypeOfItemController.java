@@ -5,12 +5,9 @@
 
 package Controller;
 
-import Entity.Item;
 import Entity.TypeItem;
-import Model.DAOItem;
 import Model.DAOTypeItem;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,7 +42,7 @@ public class TypeOfItemController extends HttpServlet {
                 deleteTypeOfItem(request, response);
                 break;
             case "update":
-                
+                updateTypeOfItem(request, response);
                 break;
             default:
                 listAllTypeOfItem(request, response);
@@ -59,13 +56,27 @@ public class TypeOfItemController extends HttpServlet {
         doGet(request, response);
     }
     private void listAllTypeOfItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<TypeItem> allType = daoTypeItem.getAllTypeOfItem();
+        //paging
+        int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
+        int itemsPerPage = 5;
+        int totalTypes = daoTypeItem.getTotalType();
+        int totalPages = (int) Math.ceil((double) totalTypes / itemsPerPage);
+        List<TypeItem> allType = daoTypeItem.getTypesWithPagin(currentPage, itemsPerPage);
+        //List<TypeItem> allType = daoTypeItem.getAllTypeOfItem();
         request.setAttribute("allType", allType);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("dashboard/jsp/ManageTypeOfItem.jsp").forward(request, response);
     }
     private void addTypeOfItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         daoTypeItem.insertTypeItem(name);
+          response.sendRedirect("ItemTypeController");
+    }
+    private void updateTypeOfItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        daoTypeItem.updateTypeOfItem(id,name);
           response.sendRedirect("ItemTypeController");
     }
     private void deleteTypeOfItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

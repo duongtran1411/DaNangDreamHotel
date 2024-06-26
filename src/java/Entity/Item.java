@@ -11,10 +11,10 @@ package Entity;
 
 public class Item {
 
-    private int item_Id;
-    private String name;
-    private int typeItem_Id;
-    private double price;
+    public int item_Id;
+    public String name;
+    public int typeItem_Id;
+    public double price;
 
     public Item() {
     }

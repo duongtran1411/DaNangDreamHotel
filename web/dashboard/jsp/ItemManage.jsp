@@ -119,6 +119,24 @@
             .btn-save:hover {
                 background-color: #218838;
             }
+            .pagination a {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #343a40;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #f8f9fa;
+}
+
+.pagination a.active {
+    background-color: #343a40;
+    color: white;
+}
         </style>
     </head>
 
@@ -158,14 +176,27 @@
                                         ${FormatUtils.formatPRice(o.price)}đ
                                     </td>
                                     <td data-label="Actions">
-                                        <a href="ItemController?action=delete&id=${o.item_Id}">Delete</a>
+                                      <a href="UpdateItem.jsp?id=${o.item_Id}">Edit</a> | <a href="ItemController?action=delete&id=${o.item_Id}">Delete</a>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
+                         
                 </section>
+                    <div class="pagination">
+                    <c:if test="${currentPage > 1}">
+                        <a href="ItemController?page=${currentPage - 1}">Previous</a>
+                    </c:if>
+                    <c:forEach begin="1" end="${totalPages}" var="page">
+                        <a href="ItemController?page=${page}" class="${page == currentPage ? 'active' : ''}">${page}</a>
+                    </c:forEach>
+                    <c:if test="${currentPage < totalPages}">
+                        <a href="ItemController?page=${currentPage + 1}">Next</a>
+                    </c:if>
+                </div>
             </div>
+                     
         </div>
 
 
