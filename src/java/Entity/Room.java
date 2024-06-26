@@ -15,7 +15,7 @@ public class Room {
     private int bath;
     private int people;
     private String image;
-    private int discount;
+    private double discount;
 
     public Room() {
     }
@@ -69,7 +69,7 @@ public class Room {
         this.image = image;
     }
     
-    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int discount) {
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, double discount) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
@@ -195,10 +195,22 @@ public class Room {
         this.image = image;
     }
 
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Room{" + "room_Id=" + room_Id + ", type_Room_Id=" + type_Room_Id + ", floor_Room_Id=" + floor_Room_Id + ", name=" + name + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + ", size=" + size + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + '}';
+        return "Room{" + "room_Id=" + room_Id + ", type_Room_Id=" + type_Room_Id + ", floor_Room_Id=" + floor_Room_Id + ", name=" + name + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + ", size=" + size + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + ", discount=" + discount + '}';
     }
+
+    
 
     
 }

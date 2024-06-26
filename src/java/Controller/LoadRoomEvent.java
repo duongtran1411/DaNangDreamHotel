@@ -4,20 +4,21 @@
  */
 package Controller;
 
+import Entity.Room;
+import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
  * @author GIGABYTE
  */
-@WebServlet(name = "BookingController", urlPatterns = {"/bookingController"})
-public class BookingController extends HttpServlet {
+public class LoadRoomEvent extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +37,10 @@ public class BookingController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BookingController</title>");            
+            out.println("<title>Servlet LoadRoomEvent</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BookingController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoadRoomEvent at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +58,22 @@ public class BookingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        PrintWriter out = response.getWriter();
+        String event_Id = request.getParameter("eventId");
+        int id = Integer.parseInt(event_Id);
+        DAORoom dao = new DAORoom();
+        List<Room> list = dao.getRoomByEvent(id);
+        for (Room o : list) {
+            out.print("<div class=\"room col-lg-12 \" id=\"element\" style=\"display: flex; margin-bottom: 10px; margin-top: 20px\">\n"
+                    + "                                                                                            <div class=\"col-lg-4\">\n"
+                    + "                                                                                                <img src=\""+o.getImage()+"\" alt=\"alt\"/>\n"
+                    + "                                                                                            </div>\n"
+                    + "                                                                                            <div class=\"col-lg-3\">"+o.getName()+"</div>\n"
+                    + "                                                                                            <div class=\"col-lg-3\">"+o.getPrice()+"đ</div>\n"
+                    + "                                                                                            <div class=\"col-lg-2\"><button class=\"btn btn\" style=\"background-color: #C59B24; color: white; margin-left: 10px\"><a style=\"color: white\" href=\"cartController?action=post&id=\">Select Room</a></button></div>\n"
+                    + "                                                                                        </div>\n"
+                    + "                                                                                        <hr>");
+        }
     }
 
     /**

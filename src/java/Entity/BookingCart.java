@@ -40,7 +40,7 @@ public class BookingCart {
     public int getTotalMoney(){
         int re = 0;
         for (CartItem o : list) {
-            re += o.getRoom().getPrice();
+            re += (o.getRoom().getPrice()* o.getRoom().getDiscount());
         }
         return re;
     }

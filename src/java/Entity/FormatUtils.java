@@ -30,4 +30,20 @@ public class FormatUtils {
         formatter.setMaximumFractionDigits(0);
         return formatter.format(number);
     }
+    
+    public static double formatDouble(int number) {
+        // Tạo một đối tượng NumberFormat với Locale là US để định dạng số
+        NumberFormat formatter = NumberFormat.getInstance(Locale.US);
+        
+        // Thiết lập số chữ số thập phân tối đa là 0
+        formatter.setMaximumFractionDigits(0);
+        
+        // Chuyển đổi giá trị int thành double và định dạng lại bằng formatter
+        double result = Double.parseDouble(formatter.format(number));
+        
+        return result;
+    }
+    
+    
+    
 }

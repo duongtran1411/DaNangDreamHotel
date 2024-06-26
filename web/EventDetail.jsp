@@ -34,55 +34,55 @@
         <link rel="stylesheet" href="css/event.css" type="text/css"/>
     </head>
     <body>
-         Page Preloder 
         <div id="preloder">
             <div class="loader"></div>
         </div>
 
         <!-- Header Section Begin -->
         <jsp:include page="Header.jsp"></jsp:include>
-        <!-- Header End -->
+            <!-- Header End -->
 
-        <!-- Blog Details Hero Section Begin -->
-        <section class="blog-details-hero set-bg" data-setbg="img/img_EventPage.png">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 offset-lg-1">
+            <!-- Blog Details Hero Section Begin -->
+            <section class="blog-details-hero set-bg" data-setbg="img/img_EventPage.png">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- Blog Details Hero End -->
+            </section>
+            <!-- Blog Details Hero End -->
 
-        <!-- Blog Details Section Begin -->
-        <section class="blog-details-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h3 class="event-main">${event.name}</h3>
+            <!-- Blog Details Section Begin -->
+            <section class="blog-details-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3 class="event-main">${event.name}</h3>
                         <div class="blog-details-text">
                             <div class="bd-title">
                                 <img src="${event.image}" alt="alt"/>
                                 <p>${event.description}</p>
                             </div>
                             <div class="leave-comment">
-                                <h4>Booking</h4>
-                                <form action="#" class="comment-form">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder="Name">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder="Email">
-                                        </div>
-                                        <div class="col-lg-12 text-center">
-                                            <input type="text" placeholder="Website">
-                                            <textarea placeholder="Messages"></textarea>
-                                            <button type="submit" class="site-btn" style="margin-bottom: 20px"><a href="bookByEventController?Id=${event.event_Id}" style="color: white">Booking Now</a></button>
-                                        </div>
+                                <h4>Da Nang Dream Hotel</h4>
+                                <p>Hotline: 0822 86 44 99</p>
+                                <p>  Email:danangdreamhotel@gmail.com
+                                    <br>
+                                    Website:danangdreamhotel.vn
+                                    <br>
+                                    Instagram: instagram.com/danang.hotelsandresorts
+                                    <br>
+                                    Zalo: zalo.me/3884774082846062547
+                                    <br>
+                                    Tiktok: tiktok.com/@danangdreamhotelsresorts
+                                </p>
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+                                        <button type="submit" class="site-btn" style="margin-bottom: 20px; background-color: #DFA974; border: none; width: 148px;height: 47px"><a href="bookByEventController?eventId=${event.event_Id}" style="color: white; background: ">Booking Now</a></button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -195,7 +195,7 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
-        
+
 
     </body>
 </html>

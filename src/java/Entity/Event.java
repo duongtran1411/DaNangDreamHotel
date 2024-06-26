@@ -33,7 +33,14 @@ public class Event {
         this.voucher = voucher;
     }
     
-    public Event( String image) {
+    public Event( String name , String image,int event_Id) {
+        this.name = name;
+        this.image = image;
+        this.event_Id = event_Id;
+    }
+    
+     public Event( String name , String image) {
+        this.name = name;
         this.image = image;
     }
     

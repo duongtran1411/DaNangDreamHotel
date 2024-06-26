@@ -168,7 +168,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="r-o">Size:</td>
-                                                    <td>${o.size}m2</td>
+                                                    <td>${o.size}m<sup>2</sup></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="r-o">Capacity:</td>
@@ -187,7 +187,7 @@
                                         <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div>       
                         </c:forEach>
                     </div>
                 </div>

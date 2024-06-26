@@ -89,7 +89,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="r-o">Size:</td>
-                                            <td>${room.size}m2</td>
+                                            <td>${room.size}m<sup>2</sup></td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Capacity:</td>

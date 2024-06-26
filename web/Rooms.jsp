@@ -106,7 +106,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="r-o"><i class="fa-solid fa-expand icon"></i></td>
-                                                <td>${o.size}m2</td>
+                                                <td>${o.size}m<sup>2</sup></td>
                                             </tr>
                                             <tr>
                                                 <td class="r-o"><i class="fa-solid fa-user-group"></i></td>

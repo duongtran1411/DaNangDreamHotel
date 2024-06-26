@@ -90,8 +90,28 @@ public class DAOEvent extends DBConnect {
         return list;
     }
 
-    public Event getImageEvent(int id) {
-        String sql = "select image from event \n"
+    public List<Event> getImageEvent() {
+        List<Event> list = new ArrayList<>();
+        String sql = "select e.name, e.image, e.event_Id from Event e \n"
+                + "join typeroom t on t.event_Id = e.event_Id ";
+        PreparedStatement pre;
+        try {
+            pre = conn.prepareCall(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Event(rs.getString(1),
+                rs.getString(2),
+                rs.getInt(3)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOEvent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public Event getImageByEvent(int id) {
+        
+        String sql = "select name, image from Event e \n"
                 + "where event_Id = ? ";
         PreparedStatement pre;
         try {
@@ -99,19 +119,20 @@ public class DAOEvent extends DBConnect {
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                return new Event(rs.getString(1));
+              return new Event(rs.getString(1),
+                rs.getString(2));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+    
+    
 
     public static void main(String[] args) {
         DAOEvent dao = new DAOEvent();
-        List<Event> list = dao.getTop3Event();
-        for (Event event : list) {
-            System.out.println(event);
-        }
+        Event list = dao.getImageByEvent(1);
+        System.out.println(list);
     }
 }

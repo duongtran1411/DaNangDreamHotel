@@ -57,7 +57,7 @@
                                                             <h5 class="fw-normal mb-0"><a href="cartController?action=delete&Id=${o.room.room_Id}">Cancel</a></h5>
 
 
-                                                            <h5 class="mb-0">${FormatUtils.formatPRice(o.room.price)}đ</h5>
+                                                            <h5 class="mb-0">${FormatUtils.formatPRice(o.room.price * o.room.discount)}đ</h5>
 
                                                             <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                                         </div>

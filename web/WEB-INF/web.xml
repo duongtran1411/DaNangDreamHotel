@@ -60,6 +60,10 @@
         <servlet-name>TypeOfItemController</servlet-name>
         <servlet-class>Controller.TypeOfItemController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadRoomEvent</servlet-name>
+        <servlet-class>Controller.LoadRoomEvent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -123,6 +127,10 @@
     <servlet-mapping>
         <servlet-name>TypeOfItemController</servlet-name>
         <url-pattern>/ItemTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadRoomEvent</servlet-name>
+        <url-pattern>/loadRoomEvent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

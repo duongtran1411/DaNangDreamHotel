@@ -475,7 +475,7 @@ public class DAORoom extends DBConnect {
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getInt(9)));
+                        rs.getDouble(9)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -485,8 +485,10 @@ public class DAORoom extends DBConnect {
 
     public static void main(String[] args) {
        DAORoom dao = new DAORoom();
-       List<Room> list = dao.getAllRoom();
-            System.out.println(list);
+       List<Room> list = dao.getRoomByEvent(1);
+        for (Room room : list) {
+            System.out.println(room);
+        }
         
     }
 }
