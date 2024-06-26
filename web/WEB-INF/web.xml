@@ -12,6 +12,10 @@
         <servlet-name>ChangeResetPasss</servlet-name>
         <servlet-class>Controller.ChangeResetPasss</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Comment</servlet-name>
+        <servlet-class>Controller.Comment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -34,6 +38,10 @@
         <url-pattern>/dashboard/jsp/index</url-pattern>
         <url-pattern>/dashboard/jsp/index.jsp</url-pattern>
     </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>Comment</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
