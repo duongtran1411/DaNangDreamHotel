@@ -12,7 +12,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-       
         <title>JSP Page</title>
         <style>
             @media (min-width: 1025px) {
@@ -29,7 +28,6 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body p-4">
-                                
                                 <div class="row">
                                     <a href="viewRoomController">Continue Book</a>
                                     <c:forEach items="${list}" var="o">
@@ -56,7 +54,6 @@
 
                                                             <h5 class="fw-normal mb-0"><a href="cartController?action=delete&Id=${o.room.room_Id}">Cancel</a></h5>
 
-                                                            
                                                             <h5 class="mb-0">${FormatUtils.formatPRice(o.room.price)}đ</h5>
 
                                                             <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
@@ -73,7 +70,7 @@
                                             Total: ${FormatUtils.formatPRice(total)}đ
                                         </div>
                                         <div class="col-lg-6">
-                                            <button class="btn btn" style="background-color: #C59B24; color: white; right: 0">Check Out</button>
+                                            <button class="btn btn" style="background-color: #C59B24; color: white; right: 0" onclick="redirectToAdd()">Check Out</button>
                                         </div>
                                     </div>
                                 </div>
@@ -90,4 +87,9 @@
 </div>
 </section>
 </body>
+<script>
+    function redirectToAdd() {
+        window.location.href = "vnpay_pay.jsp";
+    }
+</script>
 </html>

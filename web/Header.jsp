@@ -13,7 +13,7 @@
                 <div class="col-lg-6">
                     <ul class="tn-left">
                         <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                        <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                        <li><i class="fa fa-envelope"></i> danangdreamhotel@gmail.com</li>
                     </ul>
                 </div>
                 <div class="col-lg-6">
@@ -22,7 +22,6 @@
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
                         </div>
                         <a href="authentication-login" class="bk-btn">Login</a>
                     </div>

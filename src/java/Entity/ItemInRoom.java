@@ -14,6 +14,21 @@ public class ItemInRoom {
     public int roomId;
     public int quantity;
 
+    public ItemInRoom(int id, int itemId, int roomId, int quantity) {
+        this.id = id;
+        this.itemId = itemId;
+        this.roomId = roomId;
+        this.quantity = quantity;
+    }
+
+    public ItemInRoom(int id) {
+        this.id = id;
+    }
+
+    public ItemInRoom() {
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -46,5 +61,12 @@ public class ItemInRoom {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "ItemInRoom{" + "id=" + id + ", itemId=" + itemId + ", roomId=" + roomId + ", quantity=" + quantity + '}';
+    }
+    
+    
     
 }

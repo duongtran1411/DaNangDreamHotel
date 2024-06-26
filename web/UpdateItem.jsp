@@ -1,9 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="Model.DAOTypeItem" %>
+<%@ page import="Entity.TypeItem" %>
+<%@ page import="Model.DAOItem" %>
+<%@ page import="Entity.Item" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Add Customer</title>
+        <title>Update Item</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -75,22 +81,33 @@
     </head>
     <body>
         <div class="container">
-            <h1>Personal Information</h1>
-            <form id ="bookingForm" action="customerController?action=add" method="post">
-                <label for="firstName">First Name:</label>
-                <input required="" type="text" id="firstName" name="firstName"><br>
-                <label for="lastName">Last Name:</label>
-                <input required="" type="text" id="lastName" name="lastName"><br>
-                <label for="phoneNumber">Phone Number:</label>
-                <input required="" type="text" id="phoneNumber" name="phoneNumber"><br>
-                <label for="email">Email:</label>
-                <input required=""type="text" id="email" name="email"><br>
-                <label for="idCard">ID Card:</label>
-                <input required="" type="text" id="idCard" name="idCard"><br>
-                <input type="submit" value="Submit">
+            <h1>Update Item</h1>
+            <%
+                int currItemId = Integer.parseInt(request.getParameter("id"));
+        DAOItem daoItem = new DAOItem();
+        DAOTypeItem dao = new DAOTypeItem();
+        Item item = daoItem.getItemById(currItemId);
+        List<TypeItem> allType = dao.getAllTypeOfItem();
+            %>
+            <form id ="bookingForm" action="ItemController?action=update" method="post">
+                <label for="Id">Id:</label>
+                <input readonly="" type="text" id="id" name="id" value="<%= item.item_Id %>"><br>
+                <label for="Name">Item Name:</label>
+                <input required="" type="text" id="name" name="name" value="<%= item.name %>"><br>
+                <label for="lastName">Type: </label>
+                <select name="type" style="width: 600px; height: 35px; margin-bottom: 10px">
+                    <c:forEach items="<%= allType %>" var="t">
+                        <option value="${t.typeItem_Id}">${t.name}</option>
+                    </c:forEach>
+
+                </select>
+                <br>
+                <label for="price">Price</label>
+                <input required="" type="text" id="price" name="price" value="<%= item.price %>"><br>
+                <input type="submit" value="UPDATE" style="background-color: #C59B24; color: white">
             </form>
-            <div class="back-btn">
-                <a href="customerController">Back</a>
+            <div class="back-btn" >
+                <a href="ItemController" style="color: #C59B24">Back</a>
             </div>
         </div>
     </body>

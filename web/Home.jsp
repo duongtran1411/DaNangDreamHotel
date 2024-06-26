@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="Entity.FormatUtils" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -51,104 +52,106 @@
 
         <!-- Header Section Begin -->
         <jsp:include page="Header.jsp"></jsp:include>
-        <!-- Header End -->
+            <!-- Header End -->
 
-        <!-- Hero Section Begin -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero-text">
-                            <h1>Da Nang Dream Hotel</h1>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
-                        <div class="booking-form">
-                            <h3>Booking Your Hotel</h3>
-                            <form action="bookingController" method="get">
-                                <div class="check-date">
-                                    <label for="date-in">Check In:</label>
-                                    <input type="text" class="date-input" id="date-in" name="checkin" />
-                                    <i class="icon_calendar"></i>
-                                </div>
-                                <div class="check-date">
-                                    <label for="date-out">Check Out:</label>
-                                    <input type="text" class="date-input" id="date-out" name="checkout" />
-                                    <i class="icon_calendar"></i>
-                                </div>
-                                <div class="select-option">
-                                    <label for="guest">Guests:</label>
-                                    <select id="guest">
-                                        <option value="">2 Adults</option>
-                                        <option value="">3 Adults</option>
-                                    </select>
-                                </div>
-                                <div class="select-option">
-                                    <label for="room">Room:</label>
-                                    <select id="room">
-                                        <option value="">1 Room</option>
-                                        <option value="">2 Room</option>
-                                    </select>
-                                </div>
-                                <button type="submit">Booking Now</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-slider owl-carousel">
-                <div class="hs-item set-bg" data-setbg="img/img_HomePage01.jpg"></div>
-                <div class="hs-item set-bg" data-setbg="img/img_HomePage02.jpg"></div>
-                <div class="hs-item set-bg" data-setbg="img/img_HomePage05.jpg"></div>
-            </div>
-        </section>
-        <!-- Hero Section End -->
-
-        <!-- About Us Section Begin -->
-        <section class="aboutus-section spad">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="about-text">
-                            <div class="section-title">
-                                <span>About Us</span>
-                                <h2>Intercontinental LA <br />Westlake Hotel</h2>
-                            </div>
-                            <p class="f-para">
-                                Sona.com is a leading online accommodation site. We’re
-                                passionate about travel. Every day, we inspire and reach
-                                millions of travelers across 90 local websites in 41 languages.
-                            </p>
-                            <p class="s-para">
-                                So when it comes to booking the perfect hotel, vacation rental,
-                                resort, apartment, guest house, or tree house, we’ve got you
-                                covered.
-                            </p>
-                            <a href="#" class="primary-btn about-btn">Read More</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="about-pic">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <img src="img/about/about-1.jpg" alt="" />
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="img/about/about-2.jpg" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- About Us Section End -->
-
-        <!-- Home Room Section Begin -->  <!--BEST SELLER-->
-        <section class="hp-room-section">
-            <div class="container-fluid">
-                <div class="hp-room-items">
+            <!-- Hero Section Begin -->
+            <section class="hero-section">
+                <div class="container">
                     <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero-text">
+                                <h1>Da Nang Dream Hotel</h1>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
+                            <div class="booking-form">
+                                <h3>Booking Your Hotel</h3>
+                                <form action="bookingController" method="get">
+                                    <div class="check-date">
+                                        <label for="date-in">Check In:</label>
+                                        <input type="text" class="date-input" id="date-in" name="checkin" />
+<!--                                        <input type="date" class="date" id="date" name="checkin" />-->
+                                        <i class="icon_calendar"></i>
+                                    </div>
+                                    <div class="check-date">
+                                        <label for="date-out">Check Out:</label>
+                                        <input type="text" class="date-input" id="date-out" name="checkout" />
+                                        <i class="icon_calendar"></i>
+                                    </div>
+                                    <div class="select-option">
+                                        <label for="guest">Guests:</label>
+                                        <select id="guest">
+                                            <option value="">2 Adults</option>
+                                            <option value="">3 Adults</option>
+                                        </select>
+                                    </div>
+                                    <div class="select-option">
+                                        <label for="room">Room:</label>
+                                        <select id="room">
+                                            <option value="">1 Room</option>
+                                            <option value="">2 Room</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit">Booking Now</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-slider owl-carousel">
+                    <div class="hs-item set-bg" data-setbg="img/img_HomePage01.jpg"></div>
+                    <div class="hs-item set-bg" data-setbg="img/img_HomePage02.jpg"></div>
+                    <div class="hs-item set-bg" data-setbg="img/img_HomePage05.jpg"></div>
+                </div>
+            </section>
+            <!-- Hero Section End -->
+
+            <!-- About Us Section Begin -->
+            <section class="aboutus-section spad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="about-text">
+                                <div class="section-title">
+                                    <span>About Us</span>
+                                    <h2>Intercontinental LA <br />Westlake Hotel</h2>
+                                </div>
+                                <p class="f-para">
+                                    Sona.com is a leading online accommodation site. We’re
+                                    passionate about travel. Every day, we inspire and reach
+                                    millions of travelers across 90 local websites in 41 languages.
+                                </p>
+                                <p class="s-para">
+                                    So when it comes to booking the perfect hotel, vacation rental,
+                                    resort, apartment, guest house, or tree house, we’ve got you
+                                    covered.
+                                </p>
+                                <a href="#" class="primary-btn about-btn">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="about-pic">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <img src="img/about/about-1.jpg" alt="" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img src="img/about/about-2.jpg" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- About Us Section End -->
+
+            <!-- Home Room Section Begin -->  <!--BEST SELLER-->
+            <!-- Home Room Section Begin -->  <!--BEST SELLER-->
+            <section class="hp-room-section">
+                <div class="container-fluid">
+                    <div class="hp-room-items">
+                        <div class="row">
                         <c:forEach items="${listR}" var="o">
                             <div class="col-lg-3 col-md-6">
                                 <div
@@ -157,7 +160,10 @@
                                     >
                                     <div class="hr-text">
                                         <h3>${o.name}</h3>
-                                        <h2>${FormatUtils.formatPRice(o.price)}đ<span>/Pernight</span></h2>
+                                        <h2>
+                                            <fmt:formatNumber value="${o.price}" type="number" maxFractionDigits="0"/>đ
+                                            <span>/Pernight</span>
+                                        </h2>
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -178,7 +184,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                                <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
+                                        <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
                                     </div>
                                 </div>
                             </div>
@@ -187,6 +193,8 @@
                 </div>
             </div>
         </section>
+        <!-- Home Room Section End -->
+
         <!-- Home Room Section End -->
 
         <!-- Testimonial Section Begin -->
@@ -242,17 +250,17 @@
                 </div>
                 <div class="row">
                     <c:forEach items="${listE}" var="o">
-                    <div class="col-lg-4">
-                        <div class="blog-item set-bg" data-setbg="${o.image}">
-                            <div class="bi-text">
-                                <span class="b-tag">NEW EVENT</span>
-                                <h4 ><a class="name-Event"  href="eventController?Id=${o.event_Id}&action=listdetail">${o.name}</a></h4>
-                                <div class="b-time">
-                                    <i class="icon_clock_alt"></i> ${o.startDay}
+                        <div class="col-lg-4">
+                            <div class="blog-item set-bg" data-setbg="${o.image}">
+                                <div class="bi-text">
+                                    <span class="b-tag">NEW EVENT</span>
+                                    <h4 ><a class="name-Event"  href="eventController?Id=${o.event_Id}&action=listdetail">${o.name}</a></h4>
+                                    <div class="b-time">
+                                        <i class="icon_clock_alt"></i> ${o.startDay}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </c:forEach>
                 </div>
             </div>

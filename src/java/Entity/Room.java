@@ -6,7 +6,7 @@ public class Room {
     private int type_Room_Id;
     private int floor_Room_Id;
     private String name;
-    private double price;
+    private int price;
     private String status;
     private String created_at;
     private String updated_at;
@@ -15,7 +15,7 @@ public class Room {
     private int bath;
     private int people;
     private String image;
-    private double discount;
+    private int discount;
 
     public Room() {
     }
@@ -24,7 +24,7 @@ public class Room {
         this.name = name;
     }
 
-    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, int size) {
+    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, int price, int size) {
         this.room_Id = room_Id;
         this.type_Room_Id = type_Room_Id;
         this.floor_Room_Id = floor_Room_Id;
@@ -33,7 +33,7 @@ public class Room {
         this.size = size;
     }
 
-    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, String created_at, String updated_at, int size) {
+    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, int price, String status, String created_at, String updated_at, int size) {
         this.room_Id = room_Id;
         this.type_Room_Id = type_Room_Id;
         this.floor_Room_Id = floor_Room_Id;
@@ -45,7 +45,7 @@ public class Room {
         this.size = size;
     }
 
-    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, double price, String status, String created_at, String updated_at, int size, String image) {
+    public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, int price, String status, String created_at, String updated_at, int size, String image) {
         this.room_Id = room_Id;
         this.type_Room_Id = type_Room_Id;
         this.floor_Room_Id = floor_Room_Id;
@@ -58,7 +58,7 @@ public class Room {
         this.image = image;
     }
     
-    public Room(int room_Id, String name, double price, int size, int bed, int bath, int people, String image) {
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
@@ -69,7 +69,7 @@ public class Room {
         this.image = image;
     }
     
-    public Room(int room_Id, String name, double price, int size, int bed, int bath, int people, String image, double discount) {
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int discount) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
@@ -81,7 +81,7 @@ public class Room {
         this.discount = discount;
     }
     
-    public Room(int room_Id, String name, double price, int size, int bed, int bath, int people) {
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
@@ -123,11 +123,11 @@ public class Room {
         this.name = name;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

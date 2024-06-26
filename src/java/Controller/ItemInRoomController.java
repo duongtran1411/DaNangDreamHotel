@@ -87,49 +87,19 @@ public class ItemInRoomController extends HttpServlet {
 
     private void allItemInRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomId = Integer.parseInt(request.getParameter("rid"));
+        int troomId = Integer.parseInt(request.getParameter("trid"));
         List<RoomWithItem> allItem = daoItem.getRoomWithItem(roomId);
         request.setAttribute("allItem", allItem);
+        request.setAttribute("trid", troomId);
         request.getRequestDispatcher("dashboard/jsp/ManageItemInRoom.jsp").forward(request, response);
     }
 
     private void updateQuantity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        int itemId = Integer.parseInt(request.getParameter("id"));
-//        int newQuantity = Integer.parseInt(request.getParameter("quantity"));
-//        int roomId = Integer.parseInt(request.getParameter("roomId"));
-//        System.out.println(itemId + newQuantity + roomId);
-//        daoItem.updateItemQuantity(itemId, newQuantity, roomId);
-//        request.getRequestDispatcher("itemManageURL").forward(request, response);
         PrintWriter out = response.getWriter();
-        String[] itemId = request.getParameterValues("itemId");
-        String[] newQuantity = request.getParameterValues("quantity");
-        int roomId = Integer.parseInt(request.getParameter("roomId"));
-        for (int i = 0; i < itemId.length; i++) {
-            System.out.println(itemId[i]+'a');
-        }
-        
-        for (int i = 0; i < newQuantity.length; i++) {
-            System.out.println(newQuantity[i]+'b');
-        }
-        System.out.println(roomId+ "c");
-        int[] itemIds = null;
-        int[] quantity = null;
-        
-        System.out.println("lengt:" + itemIds.length);
-        if (itemId != null && newQuantity != null) {
-            itemIds = new int[itemId.length];
-            quantity = new int[newQuantity.length];
-            for (int i = 0; i <  10; i++) {
-               
-                    itemIds[i] = Integer.parseInt(itemId[i]);
-                    quantity[i] = Integer.parseInt(newQuantity[i]);
-                
-                System.out.println("item" + itemIds[i]);
-                System.out.println("quantity" + quantity[i]);
-                daoItem.updateItemQuantity(itemIds[i], quantity[i], roomId);
-            }
-        }
-  
-        response.sendRedirect("itemManageURL?action=view");
+        int itemId = Integer.parseInt(request.getParameter("itemInRoomId"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        daoItem.updateItemQuantity(itemId, quantity);
+//        response.sendRedirect("itemManageURL?action=view");
 
     }
 }

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : SlideBar
-    Created on : May 25, 2024, 5:31:12 PM
-    Author     : Sơnnnn
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -47,8 +43,11 @@
                             <span class="hide-menu">Manage Account</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
-                    <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
+                </c:if>
+
+                <c:if test="${sessionScope.acc.role_Id == 2}" >  
+                   <li class="sidebar-item">
+                    <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
                         <span>
                             <i class="fas fa-hotel"></i> 
                         </span>
@@ -56,7 +55,6 @@
                     </a>
                 </li>
                 </c:if>
-
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="customerController" aria-expanded="false">
                         <span>
@@ -65,8 +63,33 @@
                         <span class="hide-menu">Manage Customer</span>
                     </a>
                 </li>
+
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="itemManageURL" aria-expanded="false">
+                        <span>
+                            <i class="fas fa-user-circle"></i>
+                        </span>
+                        <span class="hide-menu">Manage Item In Room</span>
+                    </a>
+                </li>
+                <li  class="sidebar-item">
+                    <a  class="sidebar-link" href="ItemController" aria-expanded="false">
+                        <span>
+                            <i class="fas fa-user-circle"></i>
+                        </span>
+                        <span class="hide-menu">Manage Item</span>
+                    </a>
+                </li>
+                <li  class="sidebar-item">
+                    <a  class="sidebar-link" href="ItemTypeController" aria-expanded="false">
+                        <span>
+                            <i class="fas fa-user-circle"></i>
+                        </span>
+                        <span class="hide-menu">Manage Type Of Item</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
                         <span>
                             <i class="fas fa-user-circle"></i>
                         </span>
@@ -86,7 +109,6 @@
                         <span class="hide-menu">Manage Event</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
                         <span>

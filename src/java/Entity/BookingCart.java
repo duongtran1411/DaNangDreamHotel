@@ -37,12 +37,19 @@ public class BookingCart {
         return this.list;
     }
     
-    public double getTotalMoney(){
-        double re = 0;
+    public int getTotalMoney(){
+        int re = 0;
         for (CartItem o : list) {
             re += o.getRoom().getPrice();
         }
         return re;
     }
+
+    @Override
+    public String toString() {
+        return "BookingCart{" + "list=" + list + '}';
+    }
+    
+    
     
 }

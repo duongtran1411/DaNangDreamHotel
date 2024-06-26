@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="Entity.FormatUtils" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -150,6 +151,7 @@
                         <div class="row room-card">
                             <div class="col-lg-3">
                                 <h6>ƯU ĐÃI SHOCK ĐÓN CƠN LỐC HÈ - TIẾT KIỆM 55%</h6> 
+                                <img src="${event.image}" width="width" height="height" alt="alt"/>
                             </div>
                             <div class="col-lg-9">
                                 <p><small>Offer includes</small></p>
@@ -169,8 +171,8 @@
                                                 <img src="${o.image}" alt="alt"/>
                                             </div>
                                             <div class="col-lg-3">${o.name}</div>
-                                            <div class="col-lg-3">${o.price}</div>
-                                            <div class="col-lg-2"><button class="btn btn" style="background-color: #C59B24; color: white; margin-left: 10px"><a href="cartController?action=post&id=${o.room_Id}">Select Room</a></button></div>
+                                            <div class="col-lg-3">${FormatUtils.formatPRice(o.price)}đ</div>
+                                            <div class="col-lg-2"><button class="btn btn" style="background-color: #C59B24; color: white; margin-left: 10px"><a style="color: white" href="cartController?action=post&id=${o.room_Id}">Select Room</a></button></div>
                                         </div>
                                         <hr>
                                     </c:forEach>

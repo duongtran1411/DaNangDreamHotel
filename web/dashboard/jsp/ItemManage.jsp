@@ -119,6 +119,24 @@
             .btn-save:hover {
                 background-color: #218838;
             }
+            .pagination a {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #343a40;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #f8f9fa;
+}
+
+.pagination a.active {
+    background-color: #343a40;
+    color: white;
+}
         </style>
     </head>
 
@@ -126,109 +144,63 @@
         <!--  Body Wrapper -->
         <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
             <div class="sidebar">
+                
                 <jsp:include page="SlideBar.jsp"></jsp:include>
                 </div>
 
                 <div class="body-wrapper">
                 <jsp:include page="Profile.jsp"></jsp:include>
-                <a href="roomURL?action=detail&trid=${trid}" class="btn-back">Back</a>
-                <section class="rooms-section spad">
-                    <table id="customerTable">
-                        <thead>
-                            <tr>
-                                <th>Room Name</th>
-                                <th>Item Name</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:set var="currentRoomName" value="" />
+                <a href="AddItem.jsp?id=${o.item_Id}">Add</a>
+                    <section class="rooms-section spad">
+                        <table id="customerTable">
+                            <thead>
+                                <tr>
+                                    <th>Item ID</th>
+                                    <th>Item Name</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             <c:forEach items="${allItem}" var="o">
                                 <tr>
-                                    <td data-label="ID">
-                                        <c:if test="${currentRoomName != o.roomName}">
-                                            ${o.roomName}
-                                            <c:set var="currentRoomName" value="${o.roomName}" />
-                                        </c:if>
+                                    <td data-label="Item">${o.item_Id}</td>
+                                    <td data-label="Name">
+                                        ${o.name}
                                     </td>
-                                    <td data-label="Item">${o.itemName}</td>
-                                    <td data-label="Quantity" class="quantity-container">
-                                        <button class="btn-adjust btn-decrease" data-id="${o.itemId}"><i class="fas fa-minus"></i></button>
-                                        <span class="quantity" id="quantity-${o.itemId}">${o.quantity}</span>
-                                        <button class="btn-adjust btn-increase" data-id="${o.itemId}"><i class="fas fa-plus"></i></button>
+                                    <td data-label="type">
+                                        ${o.typeItem_Id}
                                     </td>
                                     <td data-label="Price">
-                                        ${FormatUtils.formatPRice(o.getItempPice())}đ
+                                        ${FormatUtils.formatPRice(o.price)}đ
                                     </td>
                                     <td data-label="Actions">
-                                        <button class="btn-save item" data-id="${o.itemInRoomId}" onclick="saveQuantity(this)">Save</button>
+                                      <a href="UpdateItem.jsp?id=${o.item_Id}">Edit</a> | <a href="ItemController?action=delete&id=${o.item_Id}">Delete</a>
                                     </td>
-
-                            <input  class="roomId" type="hidden" value="${o.roomId}" />
-                            </tr>
-                        </c:forEach>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
+                         
                 </section>
+                    <div class="pagination">
+                    <c:if test="${currentPage > 1}">
+                        <a href="ItemController?page=${currentPage - 1}">Previous</a>
+                    </c:if>
+                    <c:forEach begin="1" end="${totalPages}" var="page">
+                        <a href="ItemController?page=${page}" class="${page == currentPage ? 'active' : ''}">${page}</a>
+                    </c:forEach>
+                    <c:if test="${currentPage < totalPages}">
+                        <a href="ItemController?page=${currentPage + 1}">Next</a>
+                    </c:if>
+                </div>
             </div>
+                     
         </div>
 
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                document.querySelectorAll('.btn-decrease').forEach(button => {
-                    button.addEventListener('click', function () {
-                        let id = this.getAttribute('data-id');
-                        let quantityElement = document.getElementById('quantity-' + id);
-                        let quantity = parseInt(quantityElement.textContent);
-                        if (quantity > 0) {
-                            quantity--;
-                            quantityElement.textContent = quantity;
-                            // Cập nhật số lượng trong cơ sở dữ liệu nếu cần thiết
-                        }
-                    });
-                });
 
-                document.querySelectorAll('.btn-increase').forEach(button => {
-                    button.addEventListener('click', function () {
-                        let id = this.getAttribute('data-id');
-                        let quantityElement = document.getElementById('quantity-' + id);
-                        let quantity = parseInt(quantityElement.textContent);
-                        quantity++;
-                        quantityElement.textContent = quantity;
-                        // Cập nhật số lượng trong cơ sở dữ liệu nếu cần thiết
-                    });
-                });
-            });
-
-            function saveQuantity(button) {
-                var itemInRoomId = button.getAttribute('data-id');
-                var row = button.closest('tr');
-                var quantityElement = row.querySelector('.quantity');
-                var quantity = quantityElement.textContent;
-
-                console.log("itemInRoomId:", itemInRoomId);
-                console.log("quantity:", quantity);
-
-                $.ajax({
-                    url: '/DaNangDreamHotel/itemManageURL?action=update',
-                    type: 'GET',
-                    data: {
-                        itemInRoomId: itemInRoomId,
-                        quantity: quantity
-                    },
-                    success: function (data) {
-                        console.log("Success:", data);
-                    },
-                    error: function (xhr) {
-                        console.log("Error:", xhr);
-                    }
-                });
-            }
-
-        </script>
     </body>
 
 </html>
