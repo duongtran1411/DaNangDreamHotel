@@ -29,7 +29,7 @@
                 <form action="vnpayajax" id="frmCreateOrder" method="post">        
                     <div class="form-group">
                         <label for="amount">Số tiền</label>
-                        <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" name="amount" type="number" value="${sessionScope.total}" readonly=""/>
+                        <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000" min="1" name="amount" type="number" value="10000" />
                         <span id="amount-error" style="color: red;"></span>
                     </div>
                     <div class="form-group">
