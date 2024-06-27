@@ -21,7 +21,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-@WebServlet(name = "TypeRoomController", urlPatterns = {"/typeRoomURL"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1 MB
         maxFileSize = 1024 * 1024 * 5, // 5 MB
         maxRequestSize = 1024 * 1024 * 10) // 10 MB
@@ -52,7 +51,7 @@ public class ItemInRoomController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null || action.isEmpty() ) {
+        if (action == null || action.isEmpty()) {
             action = "listTypeRoom";
         }
         switch (action) {
@@ -60,6 +59,7 @@ public class ItemInRoomController extends HttpServlet {
                 allItemInRoom(request, response);
                 break;
             case "update":
+            
                 updateQuantity(request, response);
                 break;
             default:
@@ -84,20 +84,26 @@ public class ItemInRoomController extends HttpServlet {
         request.setAttribute("AllTypeRoom", allTypeRoom);
         request.getRequestDispatcher("dashboard/jsp/ManageTypeRoom.jsp").forward(request, response);
     }
+
     private void allItemInRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomId = Integer.parseInt(request.getParameter("rid"));
         int troomId = Integer.parseInt(request.getParameter("trid"));
+//        int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
+//        int itemsPerPage = 5;
+//        int totalItem = daoItem.getTotalItemInRoom(roomId);
+//        int totalPages = (int) Math.ceil((double) totalItem / itemsPerPage);
         List<RoomWithItem> allItem = daoItem.getRoomWithItem(roomId);
         request.setAttribute("allItem", allItem);
         request.setAttribute("trid", troomId);
+//        request.setAttribute("currentPage", currentPage);
+//        request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("dashboard/jsp/ManageItemInRoom.jsp").forward(request, response);
     }
+
     private void updateQuantity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         int itemId = Integer.parseInt(request.getParameter("itemInRoomId"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         daoItem.updateItemQuantity(itemId, quantity);
-//        response.sendRedirect("itemManageURL?action=view");
-
     }
 }

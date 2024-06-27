@@ -119,7 +119,7 @@ public class RegistrationDAO extends DBConnect {
 
     public static void main(String[] args) {
         RegistrationDAO dao = new RegistrationDAO();
-        if(dao.checkLogin("sonnt", "123")){
+        if(dao.checkLogin("TungNC", "123")){
             System.out.println("true");
         }else{
             System.out.println("false");

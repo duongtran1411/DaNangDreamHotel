@@ -367,5 +367,8 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <script>
+            $( ".date-input" ).datepicker({ dateFormat: 'yy-dd-mm' });
+        </script>
     </body>
 </html>
