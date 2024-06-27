@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Entity.FormatUtils" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,13 +24,13 @@
             <div class="header clearfix">
                 <h3 class="text-muted">VNPAY DEMO</h3>
             </div>
-            <h3>Tạo mới đơn hàng</h3>
+            <h3>Fill Information</h3>
             <div class="table-responsive">
                 <form action="vnpayajax" id="frmCreateOrder" method="post">        
                     <div class="form-group">
-                        <label for="amount">Số tiền</label>
-                        <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000" min="1" name="amount" type="number" value="<fmt:formatNumber value="${total}" type="currency"/>"/>
-                        <span id="amount-error" style="color: red;"></span>
+<!--                        <label for="amount">Số tiền</label>-->
+                        <input type="hidden" class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000" min="1" name="amount" type="number" value="${total}"/>
+<!--                        <span id="amount-error" style="color: red;"></span>-->
                     </div>
                     <div class="form-group">
                         <label for="firstName">First Name</label>
