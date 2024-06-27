@@ -20,6 +20,10 @@ public class Room {
     public Room() {
     }
 
+    public Room(int room_Id) {
+        this.room_Id = room_Id;
+    }
+
     public Room(String name) {
         this.name = name;
     }
