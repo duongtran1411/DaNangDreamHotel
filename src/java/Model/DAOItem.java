@@ -21,40 +21,23 @@ import java.util.logging.Logger;
  */
 public class DAOItem extends DBConnect {
 
-    public int getTotalItem() {
+    public int getTotalItem(){
         String sql = "select count(item_Id) "
                 + "from items";
-        int totalItems = 0;
-        try {
+        int totalItems=0;
+        try{
             PreparedStatement pre = conn.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
-            if (rs.next()) {
+            if(rs.next()){
                 totalItems = rs.getInt(1);
             }
-        } catch (SQLException ex) {
+        }catch(SQLException ex){
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
         return totalItems;
     }
-    public int getTotalItemInRoom(int roomId) {
-        String sql = "select count(item_Id)"
-                + "from item_in_room \n"
-                + "where room_id =?";
-        int totalItems = 0;
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, roomId);
-            ResultSet rs = pre.executeQuery();
-            if (rs.next()) {
-                totalItems = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return totalItems;
-    }
-
-    public List<Item> getItemsWithPagin(int currentPage, int itemsPerPage) {
+    
+        public List<Item> getItemsWithPagin(int currentPage, int itemsPerPage) {
         List<Item> list = new ArrayList();
         int startIndex = (currentPage - 1) * itemsPerPage;
         String sql = "select * from items LIMIT ? OFFSET ?";
@@ -63,7 +46,7 @@ public class DAOItem extends DBConnect {
 
             pre.setInt(1, itemsPerPage);
             pre.setInt(2, startIndex);
-            ResultSet rs = pre.executeQuery();
+                        ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 Item x = new Item();
                 x.item_Id = rs.getInt("item_Id");
@@ -77,7 +60,7 @@ public class DAOItem extends DBConnect {
         }
         return list;
     }
-
+    
     public List<ItemInRoom> getAllItemInRoom() {
         List<ItemInRoom> list = new ArrayList();
         String sql = "select * from item_in_room";
@@ -117,40 +100,12 @@ public class DAOItem extends DBConnect {
         return list;
     }
 
-//    public List<RoomWithItem> getRoomWithItem(int id,int currentPage, int itemsPerPage) {
-//        List<RoomWithItem> list = new ArrayList();
-//        int startIndex = (currentPage - 1) * itemsPerPage;
-//        String sql = "select i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name as roomName,it.name as itemName, it.price from item_in_room i\n"
-//                + "join room r on i.room_id = r.room_Id\n"
-//                + "join items it on i.item_Id = it.item_Id\n"
-//                + "where i.room_id =?\n"
-//                + "LIMIT ? OFFSET ?";
-//        try {
-//            PreparedStatement pre = conn.prepareStatement(sql);
-//            pre.setInt(1, id);
-//            pre.setInt(2, itemsPerPage);
-//            pre.setInt(3, startIndex);
-//            ResultSet rs = pre.executeQuery();
-//            while (rs.next()) {
-//                list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
-//                        rs.getInt("item_Id"),
-//                        rs.getInt("room_Id"),
-//                        rs.getString("roomName"),
-//                        rs.getString("itemName"),
-//                        rs.getInt("quantity"),
-//                        rs.getDouble("price")));
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return list;
-//    }
     public List<RoomWithItem> getRoomWithItem(int id) {
         List<RoomWithItem> list = new ArrayList();
         String sql = "select i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name as roomName,it.name as itemName, it.price from item_in_room i\n"
                 + "join room r on i.room_id = r.room_Id\n"
                 + "join items it on i.item_Id = it.item_Id\n"
-                + "where i.room_id =?\n";
+                + "where i.room_id =?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
@@ -209,7 +164,10 @@ public class DAOItem extends DBConnect {
 
     public static void main(String[] args) {
         DAOItem dao = new DAOItem();
-       
+       int i = dao.getTotalItem();
+        System.out.println(i);
+        List<Item> list = dao.getItemsWithPagin(1,5);
+        System.out.println(list);
     }
 
     public void insertItem(String name, int type, double price) {
@@ -224,25 +182,6 @@ public class DAOItem extends DBConnect {
         } catch (SQLException e) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, e);
         }
-    }
-
-    public Item getItemByName(String name) {
-        String sql = "select * from items where name=?";
-        Item it = new Item();
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, name);
-            ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                it.setItem_Id(rs.getInt(1));
-                it.setName(rs.getString(2));
-                it.setTypeItem_Id(rs.getInt(3));
-                it.setPrice(rs.getDouble(4));
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return it;
     }
 
     public void updateItem(int id, String name, int typeId, double price) {
@@ -261,7 +200,6 @@ public class DAOItem extends DBConnect {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
     public Item getItemById(int id) {
         Item it = new Item();
         String sql = "select * from items "
@@ -270,7 +208,7 @@ public class DAOItem extends DBConnect {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
+            while(rs.next()){
                 it.setItem_Id(rs.getInt(1));
                 it.setName(rs.getString(2));
                 it.setTypeItem_Id(rs.getInt(3));
@@ -280,19 +218,6 @@ public class DAOItem extends DBConnect {
             Logger.getLogger(DAOTypeItem.class.getName()).log(Level.SEVERE, null, ex);
         }
         return it;
-    }
+}
 
-    public void InsertItemInRoom(int itemId, int roomId) {
-        String sql = "insert into item_in_room(item_Id,room_id, quantity) "
-                + "values(?,?,?)";
-        try{
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, itemId);
-            pre.setInt(2, roomId);
-            pre.setInt(3, 0);
-            pre.executeUpdate();
-        }catch (SQLException ex) {
-            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    }
 }
