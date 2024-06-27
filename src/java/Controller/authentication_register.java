@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import org.example.Model.RegistrationDTO;
+import Entity.RegistrationDTO;
 
 /**
  *

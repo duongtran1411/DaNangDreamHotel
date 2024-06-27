@@ -1,4 +1,4 @@
-package org.example.Model;
+package Entity;
 
 public class RegistrationDTO {
     private String account_Id;

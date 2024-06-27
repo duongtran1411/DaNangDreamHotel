@@ -64,6 +64,14 @@
         <servlet-name>LoadRoomEvent</servlet-name>
         <servlet-class>Controller.LoadRoomEvent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addComment</servlet-name>
+        <servlet-class>Controller.addComment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>Controller.CommentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -131,6 +139,14 @@
     <servlet-mapping>
         <servlet-name>LoadRoomEvent</servlet-name>
         <url-pattern>/loadRoomEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addComment</servlet-name>
+        <url-pattern>/addComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/commentServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
