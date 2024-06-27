@@ -81,7 +81,7 @@ public class PagingController extends HttpServlet {
                     + "                                        <tbody>\n"
                     + "                                            <tr>\n"
                     + "                                                <td class=\"r-o\"><i class=\"fa-solid fa-expand icon\"></i></td>\n"
-                    + "                                                <td>" + o.getSize() + "m2</td>\n"
+                    + "                                                <td>" + o.getSize() + "m<sup>2</sup></td>\n"
                     + "                                            </tr>\n"
                     + "                                            <tr>\n"
                     + "                                                <td class=\"r-o\"><i class=\"fa-solid fa-user-group icon\"></i></td>\n"
