@@ -17,8 +17,16 @@
     <style>
        
 
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
         .page-wrapper {
             display: flex;
+            min-height: 100vh;
+            flex-direction: column;
         }
 
         .sidebar {
@@ -27,7 +35,7 @@
             top: 0;
             bottom: 0;
             left: 0;
-            background-color: #343a40;
+            background-color: #C59B24;
             color: white;
             z-index: 1000;
             padding-top: 20px;
@@ -41,7 +49,23 @@
         }
 
         .sidebar a:hover {
-            background-color: #495057;
+            background-color: #a07d1d;
+        }
+
+        .body-wrapper {
+            flex-grow: 1;
+            margin-left: 250px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         table {
@@ -49,7 +73,6 @@
             border-collapse: collapse;
             margin-top: 20px;
             background-color: white;
-            display: contents;
         }
 
         table th,
@@ -60,7 +83,7 @@
         }
 
         table thead th {
-            background-color: #343a40;
+            background-color: #C59B24;
             color: white;
         }
 
@@ -82,6 +105,84 @@
                 height: auto;
                 position: relative;
             }
+        }
+
+        .btn-adjust {
+            border: none;
+            background-color: #C59B24;
+            color: white;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-adjust:hover {
+            background-color: #a07d1d;
+        }
+
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity {
+            margin: 0 10px;
+        }
+
+        .btn-save {
+            border: none;
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-save:hover {
+            background-color: #218838;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #343a40;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #f8f9fa;
+        }
+
+        .pagination a.active {
+            background-color: #C59B24;
+            color: white;
+        }
+        .btn-add {
+            border: none;
+            background-color: #C59B24; /* Màu nền */
+            color: white; /* Màu chữ */
+            padding: 10px 20px; /* Khoảng cách bên trong nút */
+            margin: 10px 0; /* Khoảng cách bên ngoài nút */
+            cursor: pointer; /* Con trỏ chuột */
+            border-radius: 5px; /* Bo tròn góc */
+            text-decoration: none; /* Bỏ gạch chân */
+            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
+        }
+
+        .btn-add:hover {
+            background-color: #C59B24; /* Màu nền khi hover */
         }
     </style>
 </head>
