@@ -171,7 +171,7 @@
             }
 
             .btn-add:hover {
-                background-color: #218838; /* Màu nền khi hover */
+                background-color: #C59B24; /* Màu nền khi hover */
             }
         </style>
     </head>
