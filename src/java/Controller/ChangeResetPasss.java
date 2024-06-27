@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.RegistrationDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
