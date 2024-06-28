@@ -42,6 +42,9 @@ public class ItemController extends HttpServlet {
             case "add":
                 addItem(request, response);
                 break;
+                case "search":
+                searchItem(request, response);
+                break;
             case "delete":
                 deleteItem(request, response);
                 break;
@@ -70,6 +73,12 @@ public class ItemController extends HttpServlet {
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("dashboard/jsp/ItemManage.jsp").forward(request, response);
+    }
+    private void searchItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String query = request.getParameter("query");
+        List<Item> filteredItems = daoItem.searchItems(query); // Implement this method in your DAO
+            request.setAttribute("allItem", filteredItems);
+        //request.getRequestDispatcher("/partials/itemTable.jsp").forward(request, response);
     }
 
     private void deleteItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

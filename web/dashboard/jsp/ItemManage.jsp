@@ -78,6 +78,7 @@
             padding: 12px 15px;
             border: 1px solid #dee2e6;
             text-align: left;
+            cursor: pointer;
         }
 
         table thead th {
@@ -167,6 +168,7 @@
             background-color: #C59B24;
             color: white;
         }
+
         .btn-add {
             border: none;
             background-color: #C59B24; /* Màu nền */
@@ -180,10 +182,69 @@
         }
 
         .btn-add:hover {
-            background-color: #218838; /* Màu nền khi hover */
+            background-color: #a07d1d; /* Màu nền khi hover */
         }
-       
+
+        .search-input {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .sortable:after {
+            content: '\f0dc';
+            font-family: FontAwesome;
+            padding-left: 10px;
+        }
+
+        .sortable.asc:after {
+            content: '\f0de';
+        }
+
+        .sortable.desc:after {
+            content: '\f0dd';
+        }
     </style>
+    <script>
+        $(document).ready(function() {
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#itemsTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('#itemsTable th').on('click', function() {
+                var index = $(this).index();
+                var table = $(this).parents('table');
+                var rows = table.find('tbody > tr').toArray().sort(comparer(index));
+                this.asc = !this.asc;
+                if (!this.asc) {
+                    rows = rows.reverse();
+                }
+                table.find('thead th').removeClass('asc desc');
+                $(this).addClass(this.asc ? 'asc' : 'desc');
+                for (var i = 0; i < rows.length; i++) {
+                    table.append(rows[i]);
+                }
+            });
+
+            function comparer(index) {
+                return function(a, b) {
+                    var valA = getCellValue(a, index),
+                        valB = getCellValue(b, index);
+                    return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
+                };
+            }
+
+            function getCellValue(row, index) {
+                return $(row).children('td').eq(index).text();
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -195,15 +256,18 @@
         <div class="body-wrapper">
             <jsp:include page="Profile.jsp"></jsp:include>
             <a href="AddItem.jsp" class="btn-add">Add Item</a>
+            
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for items...">
+            
             <section class="rooms-section spad content">
                 <div class="table-container">
-                    <table id="customerTable">
+                    <table id="itemsTable">
                         <thead>
                             <tr>
-                                <th>Item ID</th>
-                                <th>Item Name</th>
-                                <th>Type</th>
-                                <th>Price</th>
+                                <th class="sortable">Item ID</th>
+                                <th class="sortable">Item Name</th>
+                                <th class="sortable">Type</th>
+                                <th class="sortable">Price</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -215,8 +279,8 @@
                                     <td data-label="Type">${o.typeItem_Id}</td>
                                     <td data-label="Price">${FormatUtils.formatPRice(o.price)}đ</td>
                                     <td data-label="Actions">
-                                        <a href="UpdateItem.jsp?id=${o.item_Id}"class="btn-adjust">Edit</a>
-                                        <a href="ItemController?action=delete&id=${o.item_Id}"class="btn-adjust">Delete</a>
+                                        <a href="UpdateItem.jsp?id=${o.item_Id}" class="btn-adjust">Edit</a>
+                                        <a href="ItemController?action=delete&id=${o.item_Id}" class="btn-adjust">Delete</a>
                                     </td>
                                 </tr>
                             </c:forEach>
