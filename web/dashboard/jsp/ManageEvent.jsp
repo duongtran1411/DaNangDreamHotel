@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 
@@ -13,8 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Da Nang Hotel</title>
         <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-        <link rel="stylesheet" href="../assets/css/styles.min.css" />
-        <link rel="stylesheet" href="../assets/css/styles.css" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -40,27 +41,30 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Type</th>
-                                                <th>Floor</th>
-                                                <th>NoP</th>
-                                                <th>Bed</th>
-                                                <th>Bath</th>
-                                                <th>Price</th>
+                                                <th>Name</th>
+                                                <th>Image</th>
+                                                <th>StartDay</th>
+                                                <th>EndDay</th>
+                                                <th>Description</th>
+                                                <th>Discount</th>
+                                                <th>Voucher</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${listUsers}" var="o">
+                                        <c:forEach items="${listE}" var="a">
                                         <tr>
-                                            <th scope="row">${o.userID}</th>
-                                            <td>${o.userName}</td>
-                                            <td>${o.userName}</td>
-                                            <td>${o.password}</td>
-                                            <td>${o.email}</td>
-                                            <td>${o.phone}</td>
-                                            <td>o.roleID</td>
+                                            <th scope="row">${a.event_Id}</th>
+                                            <td>${a.name}</td>
+                                            <td><img src="${a.image}" alt="alt" style="width:304px;height: 204px"/></td>
+                                            <td>${a.startDay}</td>
+                                            <td>${a.endDay}</td>
+                                            <td>${a.description}</td>
+                                            <td>${a.discount}</td>
+                                            <td>${a.voucher}</td>
                                             <td>
-                                                <a href="DeleteUser?userID=${o.userID}" title="Delete" data-toggle="tooltip"><i class="ti ti-pencil fs-7"></i></a>
-                                                <a href="LoadEditUser?userID=${o.userID}"  title="Settings" data-toggle="tooltip"><i class="ti ti-trash-off fs-7" style="color: red"></i></a>
+                                                <a href="EditEventControllerURL?id=${a.event_Id}" title="Edit" class="edit" data-toggle="tooltip"><i class="ti ti-pencil fs-7"></i></a>
+                                                <a href="DeleteEventControllerURL?id=${a.event_Id}"  title="Delete" data-toggle="tooltip"><i class="ti ti-trash-off fs-7" style="color: red"></i></a>
                                             </td>
                                         </tr>      
                                     </c:forEach>
@@ -78,36 +82,40 @@
             <div class="modal fade" id="addRoomModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="addProduct" method="post">
+                        <form action="InsertEventControllerURL" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">New Event</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">
-                                    <label>Name</label>
-                                    <input name="productName" type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Price</label>
-                                    <input name="price" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Img</label>
-                                    <input name="img" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <input name="description" type="text" class="form-control" required>
-                                </div>					
-                                <div class="form-group">
-                                    <label>Category</label>
-                                    <select name="category" class="form-select">
-                                        <c:forEach items="${listCate}" var="o">
-                                            <option value="${o.categoryID}">${o.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>					
+                        <label>Name</label>
+                        <input name="name" type="text" class="form-control"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input name="image" type="text" class="form-control"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>StartDay</label>
+                        <input name="start" type="date" class="form-control"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>EndDay</label>
+                        <input name="end" type="date" class="form-control"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input name="description" type="text" class="form-control"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Discount</label>
+                        <input name="discount" type="text" class="form-control"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Voucher</label>
+                        <input name="voucher" type="text" class="form-control" required>
+                    </div>		
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">

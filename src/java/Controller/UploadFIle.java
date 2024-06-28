@@ -1,29 +1,27 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
 package Controller;
 
-import Entity.BookingCart;
-import Entity.CartItem;
-import Entity.TypeRoom;
-import Model.DAOTypeRoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  *
- * @author CaoTung
+ * @author PC QUANG MINH
  */
-public class ViewCart extends HttpServlet {
-   
+@MultipartConfig
+@WebServlet(name="UploadFIle", urlPatterns={"/upload"})
+public class UploadFIle extends HttpServlet {
+   private static final long serialVersionUID=1L;
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -39,10 +37,10 @@ public class ViewCart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewCart</title>");  
+            out.println("<title>Servlet UploadFIle</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewCart at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UploadFIle at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,20 +57,7 @@ public class ViewCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(300);
-        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
-        if(bookingCart == null){
-            bookingCart = new BookingCart();
-        }
-        List<CartItem> list = bookingCart.getListCartItem();
-        int total = bookingCart.getTotalMoney();
-        DAOTypeRoom dao = new DAOTypeRoom();
-        List<TypeRoom> listT = dao.getAllTypeRoom();
-        session.setAttribute("listT", listT);
-        session.setAttribute("total", total);
-        request.setAttribute("list", list);
-        request.getRequestDispatcher("BookingCart.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 

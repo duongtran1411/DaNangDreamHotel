@@ -98,12 +98,49 @@
                         <span class="hide-menu white">Manage Type Room</span>
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./ManageEvent.jsp" aria-expanded="false">
                         <span>
                             <i class="far fa-star white"></i>
                         </span>
                         <span class="hide-menu white">Manage Event</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/ManageAccountControllerURL" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-file-description"></i>
+                        </span>
+                        <span class="hide-menu">Manage Account</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/ManagerJobsControllerURL" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-typography"></i>
+                        </span>
+                        <span class="hide-menu">Manage Jobs</span>
+                    </a>
+                </li>                            
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">EXTRA</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-mood-happy"></i>
+                        </span>
+                        <span class="hide-menu">Icons</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>
+                        <span class="hide-menu">Sample Page</span>
                     </a>
                 </li>
             </ul>
