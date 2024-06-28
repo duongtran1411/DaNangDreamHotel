@@ -183,8 +183,67 @@
 
         .btn-add:hover {
             background-color: #C59B24; /* Màu nền khi hover */
+        }.search-input {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .sortable:after {
+            content: '\f0dc';
+            font-family: FontAwesome;
+            padding-left: 10px;
+        }
+
+        .sortable.asc:after {
+            content: '\f0de';
+        }
+
+        .sortable.desc:after {
+            content: '\f0dd';
         }
     </style>
+    <script>
+         <script>
+        $(document).ready(function() {
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#customerTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('#customerTable th').on('click', function() {
+                var index = $(this).index();
+                var table = $(this).parents('table');
+                var rows = table.find('tbody > tr').toArray().sort(comparer(index));
+                this.asc = !this.asc;
+                if (!this.asc) {
+                    rows = rows.reverse();
+                }
+                table.find('thead th').removeClass('asc desc');
+                $(this).addClass(this.asc ? 'asc' : 'desc');
+                for (var i = 0; i < rows.length; i++) {
+                    table.append(rows[i]);
+                }
+            });
+
+            function comparer(index) {
+                return function(a, b) {
+                    var valA = getCellValue(a, index),
+                        valB = getCellValue(b, index);
+                    return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
+                };
+            }
+
+            function getCellValue(row, index) {
+                return $(row).children('td').eq(index).text();
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -197,17 +256,17 @@
 
         <div class="body-wrapper">
             <jsp:include page="Profile.jsp"></jsp:include>
-
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for customers...">
             <section class="rooms-section spad">
                 <table id="customerTable">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone Number</th>
-                            <th>Email</th>
-                            <th>ID Card</th>
+                            <th class="sortable">ID</th>
+                            <th class="sortable">First Name</th>
+                            <th class="sortable">Last Name</th>
+                            <th class="sortable">Phone Number</th>
+                            <th class="sortable">Email</th>
+                            <th class="sortable">ID Card</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
