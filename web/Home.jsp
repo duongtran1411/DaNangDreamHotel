@@ -68,15 +68,14 @@
                                 <h3>Booking Your Hotel</h3>
                                 <form action="bookingController" method="get">
                                     <div class="check-date">
-                                        <label for="date-in">Check In:</label>
-                                        <input type="text" class="date-input" id="date-in" name="checkin" />
-<!--                                        <input type="date" class="date" id="date" name="checkin" />-->
-                                        <i class="icon_calendar"></i>
+                                        <label for="checkin">Check-in</label>
+                                        <input type="date" class="form-control w-100" id="checkin" value="2024-06-18">
+<!--                                        <i class="icon_calendar"></i>-->
                                     </div>
                                     <div class="check-date">
-                                        <label for="date-out">Check Out:</label>
-                                        <input type="text" class="date-input" id="date-out" name="checkout" />
-                                        <i class="icon_calendar"></i>
+                                        <label for="checkout">Check-out</label>
+                                        <input type="date" class="form-control w-100" id="checkout" value="2024-06-20">
+                                        <!--<i class="icon_calendar"></i>-->
                                     </div>
                                     <div class="select-option">
                                         <label for="guest">Guests:</label>

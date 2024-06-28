@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!doctype html>
 <html lang="en">
 
@@ -19,6 +21,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
     </head>
 
     <body>
@@ -40,25 +44,29 @@
                                         <thead>
                                             <tr>
                                                 <th>Image</th>
-                                                <th>Items</th>
                                                 <th>Floor</th>
-                                                <th>Name</th>
-                                                <th>Price</th>
+                                                <th>Name
+                                                    <button onclick="sortNameUp()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-down"></i></button>
+                                                    <button onclick="sortNameDown()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-up"></i></button>
+                                                </th>
+                                                <th>Price
+                                                    <button onclick="sortPriceUp()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-down"></i></button>
+                                                    <button onclick="sortPriceDown()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-up"></i></button>
+                                                </th>
                                                 <th>Size</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="content">
                                         <c:forEach items="${AllRoom}" var="o">
                                             <tr>
                                                 <td>
-                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}">View</a>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}"><i class="far fa-eye successful"></i></a>
                                                 </td>
-                                              
                                                 <td>${o.floor_Room_Id}</td>
                                                 <td>${o.name}</td>
-                                                <td>${o.price}</td>
-                                                <td>${o.size}</td>
+                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber> </td>
+                                                <td>${o.size} m²</td>
                                                 <td>
                                                     <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
                                                     <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
@@ -68,15 +76,12 @@
                                         <c:forEach items="${ListRoomBID}" var="o">
                                             <tr>
                                                 <td>
-                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}">View</a>
-                                                </td>
-                                                <td>
-                                                    <a href="itemManageURL?action=view&rid=${o.room_Id}&trid=${o.type_Room_Id}">View</a>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}"><i class="far fa-eye"></i></a>
                                                 </td>
                                                 <td>${o.floor_Room_Id}</td>
                                                 <td>${o.name}</td>
-                                                <td>${o.price}</td>
-                                                <td>${o.size}</td>
+                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber> </td>
+                                                <td>${o.size} m²</td>
                                                 <td>
                                                     <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
                                                     <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
@@ -136,6 +141,75 @@
                 </div>
             </div>
         </div>
+        <script>
+            function sortNameUp() {
+                $.ajax({
+                    url: '/DaNangDreamHotel/roomURL?action=sortnameasc',
+                    type: 'GET',
+                    success: function (data) {
+                        var row = document.getElementById("content"); // Thay #content bằng id của phần tử chứa bảng dữ liệu
+                        row.innerHTML = data; // Cập nhật nội dung bảng với dữ liệu được trả về từ server
+                        console.log("success");
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });
+            }
+            function sortNameDown() {
+                $.ajax({
+                    url: '/DaNangDreamHotel/roomURL?action=sortnamedesc',
+                    type: 'GET',
+                    success: function (data) {
+                        var row = document.getElementById("content"); // Thay #content bằng id của phần tử chứa bảng dữ liệu
+                        row.innerHTML = data; // Cập nhật nội dung bảng với dữ liệu được trả về từ server
+                        console.log("success");
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });
+            }
+            function sortPriceUp() {
+                var amount = 0;
+                $.ajax({
+                    url: '/DaNangDreamHotel/roomURL?action=sortpriceup',
+                    type: 'GET',
+                    data: {
+                        size: amount
+                    },
+                    success: function (data) {
+                        var row = document.getElementById("content");
+                        row.innerHTML = data;
+                        console.log("success");
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });
+            }
+
+
+            function sortPriceDown() {
+                var amount = 0;
+                $.ajax({
+                    url: '/DaNangDreamHotel/roomURL?action=sortpricedown',
+                    type: 'GET',
+                    data: {
+                        size: amount
+                    },
+                    success: function (data) {
+                        var row = document.getElementById("content");
+                        row.innerHTML = data;
+                        console.log("success");
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });
+            }
+        </script>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

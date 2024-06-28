@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -74,6 +75,18 @@ public class RoomController extends HttpServlet {
                 break;
             case "edit":
                 editRoom(request, response);
+                break;
+            case "sortnameasc":
+                sortRoomByNameAsc(request, response);
+                break;
+            case "sortnamedesc":
+                sortRoomByNameDesc(request, response);
+                break;
+            case "sortpriceup":
+                sortRoomByPriceAsc(request, response);
+                break;
+            case "sortpricedown":
+                sortRoomByPriceDesc(request, response);
                 break;
             default:
                 listAllRoom(request, response);
@@ -158,6 +171,90 @@ public class RoomController extends HttpServlet {
         daoRoom.editRoom(trid, floor, name, price, size, roomId);
 
         response.sendRedirect("roomURL?action=");
+    }
+
+    private void sortRoomByNameAsc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        List<Room> sortedRooms = daoRoom.sortRoomsByNameAsc();
+        for (Room sort : sortedRooms) {
+            out.print("<tr>\n"
+                    + "                                                <td>\n"
+                    + "                                                    <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\">View</a>\n"
+                    + "                                                </td>\n"
+                    + "\n"
+                    + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
+                    + "                                                <td>" + sort.getName() + "</td>\n"
+                    + "                                                <td>" + sort.getPrice() + "</td>\n"
+                    + "                                                <td>" + sort.getSize() + "</td>\n"
+                    + "                                                <td>\n"
+                    + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
+                    + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
+                    + "                                                </td>\n"
+                    + "                                            </tr>");
+        }
+    }
+
+    private void sortRoomByNameDesc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        List<Room> sortedRooms = daoRoom.sortRoomsByNameDesc();
+        for (Room sort : sortedRooms) {
+            out.print("<tr>\n"
+                    + "                                                <td>\n"
+                    + "                                                    <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\">View</a>\n"
+                    + "                                                </td>\n"
+                    + "\n"
+                    + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
+                    + "                                                <td>" + sort.getName() + "</td>\n"
+                    + "                                                <td>" + sort.getPrice() + "</td>\n"
+                    + "                                                <td>" + sort.getSize() + "</td>\n"
+                    + "                                                <td>\n"
+                    + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
+                    + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
+                    + "                                                </td>\n"
+                    + "                                            </tr>");
+        }
+    }
+
+    private void sortRoomByPriceDesc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        List<Room> sortedRooms = daoRoom.sortRoomsByPriceDesc();
+        for (Room sort : sortedRooms) {
+            out.print("<tr>\n"
+                    + "                                                <td>\n"
+                    + "                                                    <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\">View</a>\n"
+                    + "                                                </td>\n"
+                    + "\n"
+                    + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
+                    + "                                                <td>" + sort.getName() + "</td>\n"
+                    + "                                                <td>" + sort.getPrice() + "</td>\n"
+                    + "                                                <td>" + sort.getSize() + "</td>\n"
+                    + "                                                <td>\n"
+                    + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
+                    + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
+                    + "                                                </td>\n"
+                    + "                                            </tr>");
+        }
+    }
+
+    private void sortRoomByPriceAsc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        List<Room> sortedRooms = daoRoom.sortRoomsByPriceAsc();
+        for (Room sort : sortedRooms) {
+            out.print("<tr>\n"
+                    + "                                                <td>\n"
+                    + "                                                    <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\">View</a>\n"
+                    + "                                                </td>\n"
+                    + "\n"
+                    + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
+                    + "                                                <td>" + sort.getName() + "</td>\n"
+                    + "                                                <td>" + sort.getPrice() + "</td>\n"
+                    + "                                                <td>" + sort.getSize() + "</td>\n"
+                    + "                                                <td>\n"
+                    + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
+                    + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
+                    + "                                                </td>\n"
+                    + "                                            </tr>");
+        }
     }
 
 }

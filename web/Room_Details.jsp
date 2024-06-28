@@ -81,7 +81,7 @@
                                 <div class="rd-title">
                                     <h3>${room.name}</h3>
                                     <div class="rdt-right">
-                                        <a href="cartController?action=post&id=${room.room_Id}">Booking Now</a>
+                                        <a href="cartController?action=&id=${room.room_Id}">Booking Now</a>
                                     </div>
                                 </div>
                                 <h2>${FormatUtils.formatPRice(room.price)}đ<span>/Pernight</span></h2>
