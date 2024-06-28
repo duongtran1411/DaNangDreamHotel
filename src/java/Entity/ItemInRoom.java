@@ -9,10 +9,11 @@ package Entity;
  * @author CaoTung
  */
 public class ItemInRoom {
-    public int id;
-    public int itemId;
-    public int roomId;
-    public int quantity;
+    private int id;
+    private int itemId;
+    private int roomId;
+    private int quantity;
+    private String itemName;
 
     public ItemInRoom(int id, int itemId, int roomId, int quantity) {
         this.id = id;
@@ -20,6 +21,14 @@ public class ItemInRoom {
         this.roomId = roomId;
         this.quantity = quantity;
     }
+    
+    public ItemInRoom( int roomId, String itemName) {
+     
+        this.roomId = roomId;
+        this.itemName = itemName;
+    }
+    
+    
 
     public ItemInRoom(int id) {
         this.id = id;
@@ -62,10 +71,20 @@ public class ItemInRoom {
         this.quantity = quantity;
     }
 
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
     @Override
     public String toString() {
-        return "ItemInRoom{" + "id=" + id + ", itemId=" + itemId + ", roomId=" + roomId + ", quantity=" + quantity + '}';
+        return "ItemInRoom{" + "id=" + id + ", itemId=" + itemId + ", roomId=" + roomId + ", quantity=" + quantity + ", item=" + itemName + '}';
     }
+
+   
     
     
     

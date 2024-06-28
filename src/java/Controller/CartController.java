@@ -35,7 +35,7 @@ public class CartController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -83,6 +83,7 @@ public class CartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(300);
         BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         String action = request.getParameter("action");
         switch (action) {
@@ -92,21 +93,27 @@ public class CartController extends HttpServlet {
             case "delete":
                 doDelete(request, response);
                 break;
-            default:
+            case "post":
                 String id = request.getParameter("id");
                 int roomId = Integer.parseInt(id);
                 DAORoom dao = new DAORoom();
-                Room room = dao.getRoomToCart(roomId);
-                CartItem cartItem = new CartItem(room);
                 List<CartItem> list = bookingCart.getListCartItem();
-//        for (CartItem o : list) {
-//            if(o.getRoom().getRoom_Id() == cartItem.getRoom().getRoom_Id()){
-//                response.sendRedirect("viewCart");
-//            }
-//        }
-                bookingCart.addRoom(cartItem);
-                session.setAttribute("cart", bookingCart);
-                response.sendRedirect("viewRoomController");
+
+                boolean roomFound = false;
+                for (CartItem cartItem : list) {
+                    if (cartItem.getRoom().getRoom_Id() == roomId) {
+                        roomFound = true;
+                        response.sendRedirect("viewCartController");
+                        break;
+                    }
+                }
+                if (!roomFound) {
+                    Room room = dao.getRoomToCart(roomId);
+                    CartItem cartItem = new CartItem(room);
+                    bookingCart.addRoom(cartItem);
+                    session.setAttribute("cart", bookingCart);
+                    response.sendRedirect("viewRoomController");
+                }
                 break;
         }
 

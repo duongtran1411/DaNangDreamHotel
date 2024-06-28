@@ -182,6 +182,9 @@ public class DAOTypeRoom extends DBConnect {
 
     public static void main(String[] args) {
         DAOTypeRoom dao = new DAOTypeRoom();
-        dao.deleteTypeRoom(4);
+        List<TypeRoom> list = dao.getAllTypeRoom();
+        for (TypeRoom typeRoom : list) {
+            System.out.println(typeRoom);
+        }
     }
 }

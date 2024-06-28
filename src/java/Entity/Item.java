@@ -25,6 +25,10 @@ public class Item {
         this.typeItem_Id = typeItem_Id;
         this.price = price;
     }
+    
+    public Item(String name) {  
+        this.name = name;
+    }
 
     public int getItem_Id() {
         return item_Id;

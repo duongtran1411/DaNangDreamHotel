@@ -80,10 +80,10 @@
         Email: <input type="text" name="email" value="<%= cus.email %>"><br>
         ID Card: <input type="text" name="idCard" value="<%= cus.idCard %>"><br>
         
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" style="background-color: #C59B24; color: white">
     </form>
         <div class="back-btn">
-            <a href="customerController">Back</a>
+            <a href="customerController" style="color: #C59B24">Back</a>
         </div>
     </div>
         

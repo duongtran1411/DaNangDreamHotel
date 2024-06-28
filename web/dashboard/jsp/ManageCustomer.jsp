@@ -17,8 +17,16 @@
     <style>
        
 
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
         .page-wrapper {
             display: flex;
+            min-height: 100vh;
+            flex-direction: column;
         }
 
         .sidebar {
@@ -27,7 +35,7 @@
             top: 0;
             bottom: 0;
             left: 0;
-            background-color: #343a40;
+            background-color: #C59B24;
             color: white;
             z-index: 1000;
             padding-top: 20px;
@@ -41,7 +49,23 @@
         }
 
         .sidebar a:hover {
-            background-color: #495057;
+            background-color: #a07d1d;
+        }
+
+        .body-wrapper {
+            flex-grow: 1;
+            margin-left: 250px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         table {
@@ -49,7 +73,6 @@
             border-collapse: collapse;
             margin-top: 20px;
             background-color: white;
-            display: contents;
         }
 
         table th,
@@ -60,7 +83,7 @@
         }
 
         table thead th {
-            background-color: #343a40;
+            background-color: #C59B24;
             color: white;
         }
 
@@ -83,7 +106,144 @@
                 position: relative;
             }
         }
+
+        .btn-adjust {
+            border: none;
+            background-color: #C59B24;
+            color: white;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-adjust:hover {
+            background-color: #a07d1d;
+        }
+
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity {
+            margin: 0 10px;
+        }
+
+        .btn-save {
+            border: none;
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-save:hover {
+            background-color: #218838;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #343a40;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #f8f9fa;
+        }
+
+        .pagination a.active {
+            background-color: #C59B24;
+            color: white;
+        }
+        .btn-add {
+            border: none;
+            background-color: #C59B24; /* Màu nền */
+            color: white; /* Màu chữ */
+            padding: 10px 20px; /* Khoảng cách bên trong nút */
+            margin: 10px 0; /* Khoảng cách bên ngoài nút */
+            cursor: pointer; /* Con trỏ chuột */
+            border-radius: 5px; /* Bo tròn góc */
+            text-decoration: none; /* Bỏ gạch chân */
+            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
+        }
+
+        .btn-add:hover {
+            background-color: #C59B24; /* Màu nền khi hover */
+        }.search-input {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .sortable:after {
+            content: '\f0dc';
+            font-family: FontAwesome;
+            padding-left: 10px;
+        }
+
+        .sortable.asc:after {
+            content: '\f0de';
+        }
+
+        .sortable.desc:after {
+            content: '\f0dd';
+        }
     </style>
+    <script>
+         <script>
+        $(document).ready(function() {
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#customerTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('#customerTable th').on('click', function() {
+                var index = $(this).index();
+                var table = $(this).parents('table');
+                var rows = table.find('tbody > tr').toArray().sort(comparer(index));
+                this.asc = !this.asc;
+                if (!this.asc) {
+                    rows = rows.reverse();
+                }
+                table.find('thead th').removeClass('asc desc');
+                $(this).addClass(this.asc ? 'asc' : 'desc');
+                for (var i = 0; i < rows.length; i++) {
+                    table.append(rows[i]);
+                }
+            });
+
+            function comparer(index) {
+                return function(a, b) {
+                    var valA = getCellValue(a, index),
+                        valB = getCellValue(b, index);
+                    return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
+                };
+            }
+
+            function getCellValue(row, index) {
+                return $(row).children('td').eq(index).text();
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -96,17 +256,17 @@
 
         <div class="body-wrapper">
             <jsp:include page="Profile.jsp"></jsp:include>
-
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for customers...">
             <section class="rooms-section spad">
                 <table id="customerTable">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone Number</th>
-                            <th>Email</th>
-                            <th>ID Card</th>
+                            <th class="sortable">ID</th>
+                            <th class="sortable">First Name</th>
+                            <th class="sortable">Last Name</th>
+                            <th class="sortable">Phone Number</th>
+                            <th class="sortable">Email</th>
+                            <th class="sortable">ID Card</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

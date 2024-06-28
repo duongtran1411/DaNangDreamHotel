@@ -84,13 +84,6 @@
                                             <option value="">3 Adults</option>
                                         </select>
                                     </div>
-                                    <div class="select-option">
-                                        <label for="room">Room:</label>
-                                        <select id="room">
-                                            <option value="">1 Room</option>
-                                            <option value="">2 Room</option>
-                                        </select>
-                                    </div>
                                     <button type="submit">Booking Now</button>
                                 </form>
                             </div>
@@ -366,5 +359,8 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <script>
+            $( ".date-input" ).datepicker({ dateFormat: 'yy-dd-mm' });
+        </script>
     </body>
 </html>

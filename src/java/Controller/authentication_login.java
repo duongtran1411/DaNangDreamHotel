@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.regex.Pattern;
-import org.example.Model.RegistrationDTO;
+import Entity.RegistrationDTO;
 
 /**
  *
@@ -81,16 +81,14 @@ public class authentication_login extends HttpServlet {
             String password = request.getParameter("txtPassword");
             String remember = request.getParameter("remember");
 
-            //String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
             String emailPattern = "^[a-zA-Z0-9._-]{5,}";
             boolean isEmailValid = Pattern.matches(emailPattern, username);
 
-            // Tạo 3 cookie: cookieU, cookieP, cookieR
             Cookie cookieU = new Cookie("cUser", username);
             Cookie cookieP = new Cookie("cPass", password);
             Cookie cookieR = new Cookie("cRem", remember);
             if (remember != null) {
-                cookieU.setMaxAge(60 * 60 * 24);  // 1 ngày
+                cookieU.setMaxAge(60 * 60 * 24);
                 cookieP.setMaxAge(60 * 60 * 24);
                 cookieR.setMaxAge(60 * 60 * 24);
             } else {
@@ -105,22 +103,35 @@ public class authentication_login extends HttpServlet {
             try {
                 RegistrationDAO dao = new RegistrationDAO();
                 boolean result = dao.checkLogin(username, password);
-
+                String role = dao.GetRoleId(username, password);
                 RegistrationDTO user = dao.getDataAccount(username, password);
+
                 if (!isEmailValid) {
-                    //request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
-                    request.setAttribute("mess1", "Username or password is incorrect!" + "<br>" + "Enter your username again");
-                    request.getRequestDispatcher("./dashboard/jsp/authentication-login.jsp").forward(request, response);
+                    request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
+                    request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
                 } else if (result) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("acc", user);
-                    request.getRequestDispatcher("typeRoomURL").forward(request, response);
+                    if ("1".equals(role)) {
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("acc", user);
+                    } else if ("2".equals(role)) {
+                        request.getRequestDispatcher("index12.jsp").forward(request, response);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("acc", user);
+                    } else if ("3".equals(role)) {
+                        response.sendRedirect("/demo_war_exploded/Roomload.jsp");
+                        HttpSession session = request.getSession();
+                        session.setAttribute("acc", user);
+                    }
                 } else {
-                    request.setAttribute("mess1", "Username or password is incorrect!" + "<br>" + "Enter your username again");
-                    request.getRequestDispatcher("../authentication-login.jsp").forward(request, response);
+                    request.setAttribute("mess1", "Username or password is incorrect!<br>Enter your username again");
+                    request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
                 }
 
             } catch (Exception e) {
+                e.printStackTrace();
+                request.setAttribute("mess1", "An unexpected error occurred: " + e.getMessage());
+                request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
             }
         }
     }
