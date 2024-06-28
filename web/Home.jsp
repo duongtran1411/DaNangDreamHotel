@@ -85,13 +85,6 @@
                                             <option value="">3 Adults</option>
                                         </select>
                                     </div>
-                                    <div class="select-option">
-                                        <label for="room">Room:</label>
-                                        <select id="room">
-                                            <option value="">1 Room</option>
-                                            <option value="">2 Room</option>
-                                        </select>
-                                    </div>
                                     <button type="submit">Booking Now</button>
                                 </form>
                             </div>

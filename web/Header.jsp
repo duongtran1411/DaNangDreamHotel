@@ -45,13 +45,16 @@
                             <ul>
                                 <li class="active"><a href="homeController">Home</a></li>
                                 <!-- <li><a href="rooms.html">Rooms</a></li> -->
-                                <li><a href="AboutUs.jsp">About Us</a></li>
+                                <li>
+                                    <a href="AboutUs.jsp">About Us</a>
+                                     <ul class="dropdown">
+                            <li><a href="Jobs.jsp">Jobs</a></li>
+                                     </ul>
                                 <li>
                                     <a href="viewRoomController">Resort</a>
                                 </li>
                                 <li><a href="eventController">Events</a></li>
                                 <li><a href="Contact.jsp">Contact</a></li>
-                                <li><a href="staffController">Staff</a></li>
                                 <li><a href="viewCartController">Booked</a></li>
                             </ul>
                         </nav>

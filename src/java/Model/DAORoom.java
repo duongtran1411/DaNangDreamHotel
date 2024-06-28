@@ -200,8 +200,8 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getInt(3), 
-                       rs.getInt(4),
+                        rs.getInt(3),
+                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
@@ -215,21 +215,23 @@ public class DAORoom extends DBConnect {
 
     public Room getRoomById(int id) {
         Room room = new Room();
-        String sql = "select r.room_Id, r.name, r.price, r.size,t.bed, t.bath, t.person from room r\n"
-                + "join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
-                + "where r.room_Id = ?";
+        String sql = "select r.room_Id, r.name, r.price, r.size,t.bed, t.bath, t.person, e.discount from room r\n"
+                + "                join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "                join event e on e.event_Id = t.event_Id\n"
+                + "                where r.room_Id = ?";
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 return new Room(rs.getInt(1),
-                        rs.getString(2), 
+                        rs.getString(2),
                         rs.getInt(3),
                         rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
-                        rs.getInt(7));
+                        rs.getInt(7),
+                        rs.getDouble(8));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -267,8 +269,8 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getInt(3), 
-                       rs.getInt(4),
+                        rs.getInt(3),
+                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
@@ -298,8 +300,8 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getInt(3), 
-                       rs.getInt(4),
+                        rs.getInt(3),
+                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
@@ -329,8 +331,8 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getInt(3), 
-                       rs.getInt(4),
+                        rs.getInt(3),
+                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
@@ -361,8 +363,8 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getInt(3), 
-                       rs.getInt(4),
+                        rs.getInt(3),
+                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
@@ -393,8 +395,8 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getInt(3), 
-                       rs.getInt(4),
+                        rs.getInt(3),
+                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
@@ -425,8 +427,8 @@ public class DAORoom extends DBConnect {
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getInt(3), 
-                       rs.getInt(4),
+                        rs.getInt(3),
+                        rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
@@ -438,15 +440,16 @@ public class DAORoom extends DBConnect {
 
         return list;
     }
-    
+
     public Room getRoomToCart(int id) {
         String sql = "with roomDetail as (\n"
-                + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
-                + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
-                + "		join imageroom i on i.room_Id = r.room_Id)\n"
-                + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
-                + "		where rn = 2 and room_Id = ?";
+                + "                	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , e.discount, t.typeRoom_Id,\n"
+                + "                	ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
+                + "                	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "                	join imageroom i on i.room_Id = r.room_Id\n"
+                + "                    join event e on e.event_Id = t.event_Id)\n"
+                + "                	select room_Id, name, price, size, bed, bath, person, image, discount,typeRoom_Id from roomDetail \n"
+                + "                		where rn = 2 and room_Id = ?";
 
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
@@ -460,7 +463,9 @@ public class DAORoom extends DBConnect {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                        rs.getString(8));
+                        rs.getString(8),
+                        rs.getDouble(9),
+                        rs.getInt(10));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -472,12 +477,12 @@ public class DAORoom extends DBConnect {
     public List<Room> getRoomByEvent(int id) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
-                + "				select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , e.discount, e.event_Id,\n"
+                + "				select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , e.discount, e.event_Id, t.typeRoom_Id,\n"
                 + "                ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
                 + "                	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
                 + "                	join imageroom i on i.room_Id = r.room_Id\n"
                 + "                    join event e on e.event_Id = t.event_Id)\n"
-                + "                	select room_Id, name, price, size, bed, bath, person, image, discount from roomDetail \n"
+                + "                	select room_Id, name, price, size, bed, bath, person, image, discount, typeRoom_Id from roomDetail \n"
                 + "                	where rn = 2 and event_Id = ?";
 
         try {
@@ -493,7 +498,8 @@ public class DAORoom extends DBConnect {
                         rs.getInt(6),
                         rs.getInt(7),
                         rs.getString(8),
-                        rs.getDouble(9)));
+                        rs.getDouble(9),
+                        rs.getInt(10)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -564,11 +570,9 @@ public class DAORoom extends DBConnect {
 //    }
 
     public static void main(String[] args) {
-       DAORoom dao = new DAORoom();
-       List<Room> list = dao.getRoomByEvent(1);
-        for (Room room : list) {
-            System.out.println(room);
-        }
-        
+        DAORoom dao = new DAORoom();
+        Room list = dao.getRoomById(1);
+        System.out.println(list);
+
     }
 }

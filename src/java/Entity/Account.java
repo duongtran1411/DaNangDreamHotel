@@ -1,49 +1,52 @@
 package Entity;
 
-public class RegistrationDTO {
-    private String account_Id;
-    private int job_Id;
+import java.util.Date;
+
+public class Account {
+
+    private int account_Id;
+    private Jobs jobId;
     private String userName;
     private String firstName;
     private String lastName;
     private String password;
     private String email;
     private String phone;
-    private String role_Id;
-    private String create_at;
-    private String update_at;
+    private Role roleId;
+    private Date create_at;
+    private Date update_at;
 
-    public RegistrationDTO() {
+    public Account() {
     }
 
-    public RegistrationDTO(String account_Id, int job_Id, String userName, String firstName, String lastName, String password, String email, String phone, String role_Id, String create_at, String update_at) {
+    public Account(int account_Id, Jobs jobId, String userName, String firstName, String lastName, String password, String email, String phone, Role roleId, Date create_at, Date update_at) {
         this.account_Id = account_Id;
-        this.job_Id = job_Id;
+        this.jobId = jobId;
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.role_Id = role_Id;
+        this.roleId = roleId;
         this.create_at = create_at;
         this.update_at = update_at;
     }
 
-    public String getAccount_Id() {
+    public int getAccount_Id() {
         return account_Id;
     }
 
-    public void setAccount_Id(String account_Id) {
+    public void setAccount_Id(int account_Id) {
         this.account_Id = account_Id;
     }
 
-    public int getJob_Id() {
-        return job_Id;
+    public Jobs getJobId() {
+        return jobId;
     }
 
-    public void setJob_Id(int job_Id) {
-        this.job_Id = job_Id;
+    public void setJobId(Jobs jobId) {
+        this.jobId = jobId;
     }
 
     public String getUserName() {
@@ -94,27 +97,45 @@ public class RegistrationDTO {
         this.phone = phone;
     }
 
-    public String getRole_Id() {
-        return role_Id;
+    public Role getRoleId() {
+        return roleId;
     }
 
-    public void setRole_Id(String role_Id) {
-        this.role_Id = role_Id;
+    public void setRoleId(Role roleId) {
+        this.roleId = roleId;
     }
 
-    public String getCreate_at() {
+    public Date getCreate_at() {
         return create_at;
     }
 
-    public void setCreate_at(String create_at) {
+    public void setCreate_at(Date create_at) {
         this.create_at = create_at;
     }
 
-    public String getUpdate_at() {
+    public Date getUpdate_at() {
         return update_at;
     }
 
-    public void setUpdate_at(String update_at) {
+    public void setUpdate_at(Date update_at) {
         this.update_at = update_at;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "account_Id=" + account_Id +
+                ", jobId=" + jobId +
+                ", userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", roleId=" + roleId +
+                ", create_at=" + create_at +
+                ", update_at=" + update_at +
+                '}';
+    }
 }
+

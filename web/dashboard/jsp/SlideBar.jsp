@@ -110,19 +110,19 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/ManageAccountControllerURL" aria-expanded="false">
                         <span>
                             <i class="ti ti-file-description"></i>
                         </span>
-                        <span class="hide-menu">Forms</span>
+                        <span class="hide-menu">Manage Account</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/ManagerJobsControllerURL" aria-expanded="false">
                         <span>
                             <i class="ti ti-typography"></i>
                         </span>
-                        <span class="hide-menu">Typography</span>
+                        <span class="hide-menu">Manage Jobs</span>
                     </a>
                 </li>                            
                 <li class="nav-small-cap">

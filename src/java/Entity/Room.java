@@ -61,7 +61,7 @@ public class Room {
         this.size = size;
         this.image = image;
     }
-    
+
     public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image) {
         this.room_Id = room_Id;
         this.name = name;
@@ -72,8 +72,8 @@ public class Room {
         this.people = people;
         this.image = image;
     }
-    
-    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, double discount) {
+
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, double discount, int typeRoom_Id) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
@@ -83,9 +83,10 @@ public class Room {
         this.people = people;
         this.image = image;
         this.discount = discount;
+        this.type_Room_Id = typeRoom_Id;
     }
-    
-    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people) {
+
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, double discount) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
@@ -93,6 +94,7 @@ public class Room {
         this.bed = bed;
         this.bath = bath;
         this.people = people;
+        this.discount = discount;
     }
 
     public int getRoom_Id() {
@@ -206,15 +208,10 @@ public class Room {
     public void setDiscount(double discount) {
         this.discount = discount;
     }
-    
-    
 
     @Override
     public String toString() {
         return "Room{" + "room_Id=" + room_Id + ", type_Room_Id=" + type_Room_Id + ", floor_Room_Id=" + floor_Room_Id + ", name=" + name + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + ", size=" + size + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + ", discount=" + discount + '}';
     }
 
-    
-
-    
 }

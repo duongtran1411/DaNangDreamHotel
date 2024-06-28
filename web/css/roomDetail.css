@@ -1,0 +1,21 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 27, 2024, 10:51:28 PM
+    Author     : GIGABYTE
+*/
+
+.column-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+}
+
+.column-list li {
+    width: 50%; 
+    box-sizing: border-box;
+   
+}
