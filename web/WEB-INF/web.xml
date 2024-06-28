@@ -76,7 +76,6 @@
     <servlet>
         <servlet-name>CommentServlet</servlet-name>
         <servlet-class>Controller.CommentServlet</servlet-class>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>

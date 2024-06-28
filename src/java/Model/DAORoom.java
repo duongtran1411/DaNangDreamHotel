@@ -535,13 +535,15 @@ public class DAORoom extends DBConnect {
                         rs.getString(8),
                         rs.getDouble(9),
                         rs.getInt(10)));
-                          } catch (SQLException ex) {
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
         return list;
+
     }
+
     public List<Room> sortRoomsByNameAsc() {
         List<Room> list = new ArrayList<>();
         String sql = "SELECT * FROM managerhotel\n"
@@ -564,7 +566,6 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
         return list;
     }

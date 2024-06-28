@@ -47,16 +47,6 @@
 
                 </li>
 
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
-                        <span>
-                            <i class="fas fa-user-circle white"></i>
-                        </span>
-                        <span class="hide-menu white">Manage Account</span>
-                    </a>
-                </li>
-
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="customerController" aria-expanded="false">
                         <span>
@@ -110,39 +100,19 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/ManageAccountControllerURL" aria-expanded="false">
                         <span>
-                            <i class="ti ti-file-description"></i>
+                            <i class="fa-solid fa-user white"></i>
                         </span>
-                        <span class="hide-menu">Manage Account</span>
+                        <span class="hide-menu white">Manage Account</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/ManagerJobsControllerURL" aria-expanded="false">
                         <span>
-                            <i class="ti ti-typography"></i>
+                            <i class="fa-solid fa-file-circle-check white"></i>
                         </span>
-                        <span class="hide-menu">Manage Jobs</span>
+                        <span class="hide-menu white">Manage Jobs</span>
                     </a>
                 </li>                            
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">EXTRA</span>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-mood-happy"></i>
-                        </span>
-                        <span class="hide-menu">Icons</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-aperture"></i>
-                        </span>
-                        <span class="hide-menu">Sample Page</span>
-                    </a>
-                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
