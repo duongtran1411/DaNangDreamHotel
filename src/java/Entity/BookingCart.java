@@ -47,22 +47,23 @@ public class BookingCart {
         }
         return filteredList;
     }
-    
-   public List<CartItem> getListByName(String name) {
-    List<CartItem> filteredList = new ArrayList<>();
-    if (list != null && name != null) {
-        String lowerCaseName = name.toLowerCase();
-        for (CartItem cartItem : list) {
-            Room room = cartItem.getRoom();
-            if (room != null && room.getName().toLowerCase().contains(lowerCaseName)) {
-                filteredList.add(cartItem);
+
+    public List<CartItem> getListByName(String name) {
+        List<CartItem> filteredList = new ArrayList<>();
+        if (list != null && name != null && !name.isEmpty()) {
+            String lowerCaseName = name.toLowerCase();
+            for (CartItem cartItem : list) {
+                Room room = cartItem.getRoom();
+                if (room != null) {
+                    String roomName = room.getName();
+                    if (roomName != null && roomName.equalsIgnoreCase(lowerCaseName)) {
+                        filteredList.add(cartItem);
+                    }
+                }
             }
         }
+        return filteredList;
     }
-    return filteredList;
-}
-
-
 
     public int getTotalMoney() {
         int re = 0;

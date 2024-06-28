@@ -5,6 +5,7 @@
 package Controller;
 
 import Entity.Event;
+import Entity.FormatUtils;
 import Entity.Room;
 import Model.DAOEvent;
 import Model.DAORoom;
@@ -81,7 +82,35 @@ public class BookingByEventController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        int id = Integer.parseInt(request.getParameter("eventId"));
+        DAORoom daoR = new DAORoom();
+        List<Room> list = daoR.SortRoomEventByPrice(id);
+        for (Room room : list) {
+            out.print("<div class=\"room col-lg-12 \" id=\"element\" style=\"display: flex; margin-bottom: 10px; margin-top: 20px\">\n"
+                    + "                                            <div class=\"col-lg-4\">\n"
+                    + "                                                <img src=\""+room.getImage()+"\" alt=\"alt\">\n"
+                    + "                                            </div>\n"
+                    + "\n"
+                    + "                                            <div class=\"col-lg-4\">\n"
+                    + "                                                <h6 style=\"font-weight:800\">"+room.getName()+"</h6><br>\n"
+                    + "                                                <div>\n"
+                    + "                                                    <i class=\"fa-solid fa-expand icon\" style=\"width: 35px;height: 16px\"></i>"+room.getSize()+" m<sup>2</sup><br>\n"
+                    + "                                                    <i class=\"fa-solid fa-bed icon\" style=\"width: 35px;height: 16px\" ></i>"+room.getBed()+" bed<br>\n"
+                    + "                                                    <i class=\"fa-solid fa-user-group\"style=\"width: 35px;height: 16px\"></i>"+room.getPeople()+" person\n"
+                    + "                                                </div>\n"
+                    + "                                            </div>\n"
+                    + "                                            <div class=\"col-lg-4\">\n"
+                    + "                                                <div>\n"
+                    + "                                                    <h6 style=\"margin-bottom: 22px;font-weight:800\">Price</h6>\n"
+                    + "                                                    <del>"+FormatUtils.formatPRice(room.getPrice())+"đ<br></del>\n"
+                    + "                                                    "+FormatUtils.formatPRice(room.getPrice()*room.getDiscount())+"đ\n"
+                    + "\n"
+                    + "                                                    <button class=\"btn btn\" style=\"background-color: #C59B24; color: white; margin-left: 10px\"><a style=\"color: white\" href=\"cartController?action=post&id="+room.getRoom_Id()+"\">Select Room</a></button>\n"
+                    + "                                                </div>\n"
+                    + "                                            </div>\n"
+                    + "                                        </div>");
+        }
     }
 
     /**

@@ -487,10 +487,46 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
+    public List<Room> SortRoomEventByPrice(int id) {
+        List<Room> list = new ArrayList<>();
+        String sql = "with roomDetail as (\n"
+                + "                	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , e.discount, e.event_Id, t.typeRoom_Id,\n"
+                + "                             ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
+                + "                              	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "                              	join imageroom i on i.room_Id = r.room_Id\n"
+                + "                                  join event e on e.event_Id = t.event_Id)\n"
+                + "                              	select room_Id, name, price, size, bed, bath, person, image, discount, typeRoom_Id from roomDetail \n"
+                + "                             	where rn = 2 and event_Id = ?\n"
+                + "								order by price desc ";
+
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getDouble(9),
+                        rs.getInt(10)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        Room list = dao.getRoomById(1);
-        System.out.println(list);
+        List<Room> list = dao.SortRoomEventByPrice(1);
+        for (Room room : list) {
+            System.out.println(room);
+        }
 
     }
 }

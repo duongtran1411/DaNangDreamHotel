@@ -33,9 +33,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2">
-                    <div class="logo">
+                    <div >
                         <a href="index.html">
-                            <img src="img/logo.png" alt="" />
+<!--                            <img src="img/logo-DaNangDream.jpg" alt="" height="100%"/>-->
+<img src="img/logo2.jpg" alt="" height="90px" width="165px"/>
                         </a>
                     </div>
                 </div>

@@ -138,10 +138,9 @@
                 </div>
                 <div class="col-md-9">
                     <div class="d-flex justify-content-between mb-3">
-                        <h5>Have to 4 search results</h5>
                         <div>
-                            <label for="sortSelect">Sorted by: </label>
-                            <select id="sortSelect" class="custom-select">
+                            <label style="transform: translateY(30px)">Sorted by: </label>
+                            <select id="roomSelect" class="custom-select" onchange="handleChange()" style="height:60px;width: 200px">
                                 <option value="price">Price</option>
                                 <option value="room">Room</option>
                             </select>
@@ -159,7 +158,6 @@
                     <div class="col-lg-9" >
                         <p><small>Offer includes</small></p>
                         <div class="d-flex justify-content-between align-items-center">
-
                             <div class="row" >
                                 <div class="col-lg-12" style="display: flex; background: white;" >
                                     <div>
@@ -178,7 +176,7 @@
                                             <div class="col-lg-4">
                                                 <img src="${o.image}" alt="alt">
                                             </div>
-                                                
+
                                             <div class="col-lg-4">
                                                 <h6 style="font-weight:800">${o.name}</h6><br>
                                                 <div>
@@ -189,13 +187,13 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div>
+                                                    <h6 style="margin-bottom: 22px;font-weight:800">Price</h6>
                                                     <del>${FormatUtils.formatPRice(o.price)}đ<br></del>
                                                     ${FormatUtils.formatPRice(o.price* o.discount )}đ
-                                                    
+
                                                     <button class="btn btn" style="background-color: #C59B24; color: white; margin-left: 10px"><a style="color: white" href="cartController?action=post&id=${o.room_Id}">Select Room</a></button>
                                                 </div>
                                             </div>
-                                            <!--                                        <div class="col-lg-2"></div>-->
                                         </div>
                                         <hr>
                                     </c:forEach>
@@ -214,11 +212,29 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#show-room-details").click(function () {
-                $("#room-details").toggle();
-            });
-        });
+                                $(document).ready(function () {
+                                    $("#show-room-details").click(function () {
+                                        $("#room-details").toggle();
+                                    });
+                                });
+                                function handleChange() {
+                                    
+                                    $.ajax({
+                                        url: '/DaNangDreamHotel/bookByEventController',
+                                        type: 'POST',
+                                        data: {
+                                          
+                                        },
+                                        success: function (data) {
+                                            var row = document.getElementById("room-details");
+                                            row.innerHTML = data;
+                                            console.log("success");
+                                        },
+                                        error: function (xhr) {
+                                            console.log(xhr);
+                                        }
+                                    });
+                                }
 
 //                                            function handleClick(e) {
 //

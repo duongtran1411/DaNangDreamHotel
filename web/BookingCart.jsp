@@ -45,7 +45,7 @@
     <body>
         <jsp:include page="Header.jsp"></jsp:include>
             <section class="h-100 h-custom" style="background-color: #eee;">
-                <div class="container py-5 h-auto">
+                <div class="container py-5 h-100">
 
                     <div class="row d-flex justify-content-center align-items-center h-100">
 
@@ -54,8 +54,8 @@
                             <c:if test="${cart.size() != 0}" >
                                 <div class="card-body p-4">
                                     <div style="padding-bottom: 10px">
-                                        <input type="text" placeholder="Search..." oninput="searchByName(this)" >
-                                        <select id="roomSelect" onchange="handleChange()">
+                                        <input type="text" placeholder="Search..." oninput="searchByName(this)"  >
+                                        <select id="roomSelect" onchange="handleChange()" style="padding-right: 50px;padding-top: 3px;padding-bottom: 3px">
                                             <option value="0">All</option>
                                             <c:forEach items="${listT}" var="o"> 
                                                 <option  value="${o.typeRoom_Id}">${o.name}</option> 
