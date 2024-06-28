@@ -64,6 +64,10 @@
         <servlet-name>LoadRoomEvent</servlet-name>
         <servlet-class>Controller.LoadRoomEvent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServiceCartController</servlet-name>
+        <servlet-class>Controller.ServiceCartController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -132,9 +136,13 @@
         <servlet-name>LoadRoomEvent</servlet-name>
         <url-pattern>/loadRoomEvent</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceCartController</servlet-name>
+        <url-pattern>/serviceCartController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            1
         </session-timeout>
     </session-config>
 </web-app>

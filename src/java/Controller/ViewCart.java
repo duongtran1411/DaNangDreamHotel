@@ -7,6 +7,8 @@ package Controller;
 
 import Entity.BookingCart;
 import Entity.CartItem;
+import Entity.TypeRoom;
+import Model.DAOTypeRoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -58,12 +60,16 @@ public class ViewCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(300);
         BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         if(bookingCart == null){
             bookingCart = new BookingCart();
         }
         List<CartItem> list = bookingCart.getListCartItem();
         int total = bookingCart.getTotalMoney();
+        DAOTypeRoom dao = new DAOTypeRoom();
+        List<TypeRoom> listT = dao.getAllTypeRoom();
+        session.setAttribute("listT", listT);
         session.setAttribute("total", total);
         request.setAttribute("list", list);
         request.getRequestDispatcher("BookingCart.jsp").forward(request, response);

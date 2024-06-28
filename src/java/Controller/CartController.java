@@ -83,6 +83,7 @@ public class CartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(300);
         BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         String action = request.getParameter("action");
         switch (action) {
@@ -92,7 +93,7 @@ public class CartController extends HttpServlet {
             case "delete":
                 doDelete(request, response);
                 break;
-            default:
+            case "post":
                 String id = request.getParameter("id");
                 int roomId = Integer.parseInt(id);
                 DAORoom dao = new DAORoom();
@@ -113,7 +114,6 @@ public class CartController extends HttpServlet {
                     session.setAttribute("cart", bookingCart);
                     response.sendRedirect("viewRoomController");
                 }
-
                 break;
         }
 
@@ -127,7 +127,7 @@ public class CartController extends HttpServlet {
         int roomId = Integer.parseInt(id);
         bookingCart.remove(roomId);
         session.setAttribute("cart", bookingCart);
-        resp.sendRedirect("viewRoomController");
+        resp.sendRedirect("viewCartController");
     }
 
     /**
