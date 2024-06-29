@@ -117,4 +117,6 @@ public class RegistrationDTO {
     public void setUpdate_at(String update_at) {
         this.update_at = update_at;
     }
+    
+    
 }

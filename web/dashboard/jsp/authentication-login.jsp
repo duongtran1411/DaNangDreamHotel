@@ -55,7 +55,7 @@
                                         <input class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" type="submit" value="Sign In" class="btn float-right login_btn" name="btAction">
                                         <div class="d-flex align-items-center justify-content-center">
                                             <p class="fs-4 mb-0 fw-bold">New to Modernize?</p>
-                                            <a class="text-primary fw-bold ms-2" href="./authentication-register.jsp">Create an account</a>
+                                            <a class="text-primary fw-bold ms-2" href="dashboard/jsp/authentication-register.jsp">Create an account</a>
                                         </div>
                                     </form>
                                     <p class="text-danger" style="color: red ;  width: auto ; margin: auto ;padding: auto ; text-align: center ; border-radius: 50px;">${mess1}

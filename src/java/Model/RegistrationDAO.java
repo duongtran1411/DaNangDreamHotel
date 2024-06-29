@@ -31,7 +31,7 @@ public class RegistrationDAO extends DBConnect {
     }
 
     public String GetRoleId(String username, String password) {
-        String sql = "SELECT role_id FROM account WHERE username = ? AND password = ?";
+        String sql = "SELECT role_Id FROM account WHERE username = ? AND password = ?";
         String role = null;
         try {
             PreparedStatement st = conn.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class RegistrationDAO extends DBConnect {
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                role = rs.getString("role_id");
+                role = rs.getString("role_Id");
                 System.out.println(role);
             }
         } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class RegistrationDAO extends DBConnect {
 
             if (rs.next()) {
                 return new RegistrationDTO(
-                        rs.getString("account_Id"),
+                        rs.getString("acoount_Id"),
                         rs.getInt("job_Id"),
                         rs.getString("userName"),
                         rs.getString("firstName"),
@@ -243,7 +243,7 @@ public class RegistrationDAO extends DBConnect {
 
     public static void main(String[] args) {
         RegistrationDAO dao = new RegistrationDAO();
-       RegistrationDTO acc = new RegistrationDTO("2", 1, "lehai", "Le", "Hai", "1234", "lem29000@gmail.com", "0123456789", "1","1990-01-01","1990-01-01");
-        dao.AddAcc(acc);
+       RegistrationDTO acc = dao.getDataAccount("Admin", "123");
+        System.out.println(acc);
     }
 }

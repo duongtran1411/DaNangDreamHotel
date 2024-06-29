@@ -3,7 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 <style>
     .white{
         color: white;
@@ -11,18 +11,14 @@
     .btn-manage:hover{
         background-color: #213e68;
         cursor: pointer;
+        animation-delay: 0.5s
     }
 </style>
 <aside class="left-sidebar" style="background-color: #213e66">
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="homeController" class="text-nowrap logo-img">
-                <img src="dashboard/assets/images/logos/dark-logo.svg" width="180" alt="" />
-            </a>
-            <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-                <i class="ti ti-x fs-8"></i>
-            </div>
+                <img src="img/logo2.jpg" alt="" width="100%" height="80px"/>
         </div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
@@ -46,7 +42,7 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
 
                 </li>
-
+                <%--<c:if test="${sessionScope.acc.role_Id == 2}">--%>
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="customerController" aria-expanded="false">
                         <span>
@@ -80,6 +76,8 @@
                         <span class="hide-menu white">Manage Type Of Item</span>
                     </a>
                 </li>
+                <%--</c:if>--%>
+                <%--<c:if test="${acc.role_Id == 3}">--%>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
                         <span>
@@ -97,6 +95,8 @@
                         <span class="hide-menu white">Manage Event</span>
                     </a>
                 </li>
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.acc.role_Id == 1}">--%>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/ManageAccountControllerURL" aria-expanded="false">
                         <span>
@@ -112,7 +112,8 @@
                         </span>
                         <span class="hide-menu white">Manage Jobs</span>
                     </a>
-                </li>                            
+                </li>
+                <%--</c:if>--%>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

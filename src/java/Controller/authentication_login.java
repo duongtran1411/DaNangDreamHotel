@@ -103,35 +103,27 @@ public class authentication_login extends HttpServlet {
             try {
                 RegistrationDAO dao = new RegistrationDAO();
                 boolean result = dao.checkLogin(username, password);
-                String role = dao.GetRoleId(username, password);
+//                String role = dao.GetRoleId(username, password);
                 RegistrationDTO user = dao.getDataAccount(username, password);
 
                 if (!isEmailValid) {
                     request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
-                    request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
+                    request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
                 } else if (result) {
-                    if ("1".equals(role)) {
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                        HttpSession session = request.getSession();
-                        session.setAttribute("acc", user);
-                    } else if ("2".equals(role)) {
-                        request.getRequestDispatcher("index12.jsp").forward(request, response);
-                        HttpSession session = request.getSession();
-                        session.setAttribute("acc", user);
-                    } else if ("3".equals(role)) {
-                        response.sendRedirect("/demo_war_exploded/Roomload.jsp");
-                        HttpSession session = request.getSession();
-                        session.setAttribute("acc", user);
-                    }
+
+                    HttpSession session = request.getSession();
+                    session.setMaxInactiveInterval(30000);
+                    session.setAttribute("acc", user);
+                    request.getRequestDispatcher("typeRoomURL").forward(request, response);
                 } else {
                     request.setAttribute("mess1", "Username or password is incorrect!<br>Enter your username again");
-                    request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
+                    request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute("mess1", "An unexpected error occurred: " + e.getMessage());
-                request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
+                request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
             }
         }
     }
