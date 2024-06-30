@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Entity.FormatUtils;
 import Entity.Room;
 import Entity.TypeRoom;
 import Model.DAOImageRoom;
@@ -184,8 +185,8 @@ public class RoomController extends HttpServlet {
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
-                    + "                                                <td>" + sort.getSize() + "</td>\n"
+                    + "                                                <td>" + sort.getPrice() + " đ</td>\n" 
+                    + "                                                <td>" + sort.getSize() + " m²</td>\n"
                     + "                                                <td>\n"
                     + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
                     + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
@@ -205,8 +206,8 @@ public class RoomController extends HttpServlet {
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
-                    + "                                                <td>" + sort.getSize() + "</td>\n"
+                    + "                                                <td>" + sort.getPrice() + " đ</td>\n"
+                    + "                                                <td>" + sort.getSize() + " m²</td>\n"
                     + "                                                <td>\n"
                     + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
                     + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
@@ -226,8 +227,8 @@ public class RoomController extends HttpServlet {
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
-                    + "                                                <td>" + sort.getSize() + "</td>\n"
+                    + "                                                <td><fmt:formatNumber type=\"number\">" + sort.getPrice() + "</fmt:formatNumber> </td>\n"
+                    + "                                                <td>" + sort.getSize() + " m²</td>\n"
                     + "                                                <td>\n"
                     + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
                     + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
@@ -247,8 +248,8 @@ public class RoomController extends HttpServlet {
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
-                    + "                                                <td>" + sort.getSize() + "</td>\n"
+                    + "                                                <td><fmt:formatNumber type=\"number\">" + sort.getPrice() + "</fmt:formatNumber> </td>\n"
+                    + "                                                <td>" + sort.getSize() + " m²</td>\n"
                     + "                                                <td>\n"
                     + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
                     + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"

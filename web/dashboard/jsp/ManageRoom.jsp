@@ -65,7 +65,7 @@
                                                 </td>
                                                 <td>${o.floor_Room_Id}</td>
                                                 <td>${o.name}</td>
-                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber> </td>
+                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber>  đ</td>
                                                 <td>${o.size} m²</td>
                                                 <td>
                                                     <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
@@ -80,7 +80,7 @@
                                                 </td>
                                                 <td>${o.floor_Room_Id}</td>
                                                 <td>${o.name}</td>
-                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber> </td>
+                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber> đ</td>
                                                 <td>${o.size} m²</td>
                                                 <td>
                                                     <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
