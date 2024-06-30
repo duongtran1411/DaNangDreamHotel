@@ -105,10 +105,10 @@
                         <span class="hide-menu white">Manage Account</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+               <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/ManagerJobsControllerURL" aria-expanded="false">
                         <span>
-                            <i class="fa-solid fa-file-circle-check white"></i>
+                            <i class="fa-solid fa-user white"></i>
                         </span>
                         <span class="hide-menu white">Manage Jobs</span>
                     </a>
