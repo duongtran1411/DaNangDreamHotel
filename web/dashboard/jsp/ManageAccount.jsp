@@ -97,7 +97,7 @@
     <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="InsertControllerURL" method="post">
+                <form action="InsertJobsControllerURL" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="addAccountModalLabel">Add Information Account</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

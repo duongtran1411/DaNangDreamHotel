@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-body">
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addRoomModal">
-                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>New Event</p>                  
+                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Jobs</p>                  
                             </button>
                             <div class="container-fluid">
                                 <div class="table-wrapper">
