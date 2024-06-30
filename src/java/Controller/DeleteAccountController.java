@@ -36,7 +36,7 @@ public class DeleteAccountController extends HttpServlet {
         int id;
         try {
             id=Integer.parseInt(id_raw);
-            dao.deleteAccountByID(id);
+            dao.deletedAccountById(id);
             response.sendRedirect("ManageAccountControllerURL");
         } catch (Exception e) {
         }

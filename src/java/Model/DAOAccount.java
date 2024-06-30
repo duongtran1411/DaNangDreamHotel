@@ -21,7 +21,8 @@ public class DAOAccount extends DBConnect {
     public List<Account> getAllAccount() {
         List<Account> list = new ArrayList<>();
         String sql = "select a.account_Id,a.userName,a.firstName,a.lastName,a.email,a.password,a.phone,a.create_at,a.update_at,r.role_Id,r.name from Account a\n"
-                + "            join role r on a.role_Id=r.role_Id ;";
+                + "         join role r on a.role_Id=r.role_Id\n"
+                + "         where is_deleted=false;";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
@@ -95,14 +96,15 @@ public class DAOAccount extends DBConnect {
         }
     }
 
-    public void deleteAccountByID(int id) {
-        String sql = "delete from Account where account_Id=?";
+    public void deletedAccountById(int id) {
+        String sql = "UPDATE Account SET is_deleted = ? WHERE account_Id = ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, id);
+            st.setBoolean(1, true);
+            st.setInt(2, id);
             st.executeUpdate();
         } catch (SQLException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -159,12 +161,12 @@ public class DAOAccount extends DBConnect {
     }
 
     public static void main(String[] args) {
-        DAOAccount dao=new DAOAccount();
-        List<Account>list=dao.getAllAccount();
+        DAOAccount dao = new DAOAccount();
+        List<Account> list = dao.getAllAccount();
         for (Account account : list) {
             System.out.println(account);
         }
-    
+
     }
 }
 /*
@@ -200,4 +202,4 @@ public class DAOAccount extends DBConnect {
         int jobId = a.getJobId().getJob_Id()+1;
 
         dao.insertAccount(jobId, userName, firstName, lastName, password, email, phone, roleId, create_at, update_at, accountId);
-*/
+ */
