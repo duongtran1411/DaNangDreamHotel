@@ -61,7 +61,7 @@ public class DAOCustomer extends DBConnect{
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
 
-            pre.setInt(1, currentPage);
+            pre.setInt(1, cusPerPage);
             pre.setInt(2, startIndex);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {

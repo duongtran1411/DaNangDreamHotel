@@ -57,11 +57,11 @@ public class CustomerController extends HttpServlet {
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
         int cusPerPage = 6;
-         int totalCus = daoCustomer.getTotalCustomer();
-         int totalPages = (int) Math.ceil((double) totalCus / cusPerPage);
-         List<Customer> allCus = daoCustomer.getCusWithPagin(currentPage, cusPerPage);
+        int totalCus = daoCustomer.getTotalCustomer();
+        int totalPages = (int) Math.ceil((double) totalCus / cusPerPage);
+        List<Customer> allCus = daoCustomer.getCusWithPagin(currentPage, cusPerPage);
         request.setAttribute("allCustomer", allCus);
-         request.setAttribute("currentPage", currentPage);
+        request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);
     }
