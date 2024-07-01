@@ -133,7 +133,7 @@
             <div class="modal fade" id="addItemModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="ItemController?action=add" method="post">
+                        <form id="addItemForm" action="ItemController?action=add" method="post">
                             <div class="modal-header">			
                                 <%
                                     DAOTypeItem dao = new DAOTypeItem();
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="form-group" style="margin-bottom: 12px">
                                     <label>Price</label>
-                                    <input name="price" type="number" class="form-control" required>
+                                    <input id="price" name="price" type="number" class="form-control" required>
                                 </div>				
                                 <div class="form-group" style="margin-bottom: 12px">
                                     <label>Type Item</label>
@@ -172,6 +172,17 @@
         </div>
         <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+        <script>
+            document.getElementById("addItemForm").addEventListener("submit", function (event) {
+                var priceInput = document.getElementById("price");
+                var price = parseFloat(priceInput.value);
+
+                if (isNaN(price) || price < 0) {
+                alert("Please enter a valid number for the price.");
+                event.preventDefault();
+                }
+                });
+        </script>
         <script>
             $(document).ready(function () {
                 $("#searchInput").on("keyup", function () {
@@ -211,7 +222,7 @@
         </script>
         <script>
             function confirmDelete() {
-                return confirm("Are you sure you want to delete this item?");
+                return confirm("Are you sure you want to remove this item?");
             }
         </script>
     </body>
