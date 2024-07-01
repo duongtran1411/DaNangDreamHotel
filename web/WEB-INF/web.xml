@@ -16,6 +16,10 @@
         <servlet-name>Comment</servlet-name>
         <servlet-class>Controller.Comment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageComment</servlet-name>
+        <servlet-class>Controller.ManageComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -41,6 +45,10 @@
     <servlet-mapping>
         <servlet-name>Comment</servlet-name>
         <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageComment</servlet-name>
+        <url-pattern>/manageComment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
