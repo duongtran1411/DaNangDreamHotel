@@ -15,135 +15,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-        }
-
-        .page-wrapper {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-
-        .sidebar {
-            width: 250px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            background-color: #C59B24;
-            color: white;
-            z-index: 1000;
-            padding-top: 20px;
-        }
-
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            padding: 10px 20px;
-        }
-
-        .sidebar a:hover {
-            background-color: #a07d1d;
-        }
-
-        .body-wrapper {
-            flex-grow: 1;
-            margin-left: 250px;
-            padding: 20px;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: white;
-        }
-
-        table th,
-        table td {
-            padding: 12px 15px;
-            border: 1px solid #dee2e6;
-            text-align: left;
-            cursor: pointer;
-        }
-
-        table thead th {
-            background-color: #C59B24;
-            color: white;
-        }
-
-        table tbody tr:nth-of-type(even) {
-            background-color: #f8f9fa;
-        }
-
-        table tbody tr:hover {
-            background-color: #e9ecef;
-        }
-
-        @media (max-width: 768px) {
-            .body-wrapper {
-                margin-left: 0;
-            }
-
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-        }
-
-        .btn-adjust {
-            border: none;
-            background-color: #C59B24;
-            color: white;
-            padding: 5px 10px;
-            margin: 0 5px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-adjust:hover {
-            background-color: #a07d1d;
-        }
-
-        .quantity-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity {
-            margin: 0 10px;
-        }
-
-        .btn-save {
-            border: none;
-            background-color: #28a745;
-            color: white;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-save:hover {
-            background-color: #218838;
-        }
-
         .pagination-container {
             display: flex;
             justify-content: center;
@@ -168,23 +39,6 @@
             background-color: #C59B24;
             color: white;
         }
-
-        .btn-add {
-            border: none;
-            background-color: #C59B24; /* Màu nền */
-            color: white; /* Màu chữ */
-            padding: 10px 20px; /* Khoảng cách bên trong nút */
-            margin: 10px 0; /* Khoảng cách bên ngoài nút */
-            cursor: pointer; /* Con trỏ chuột */
-            border-radius: 5px; /* Bo tròn góc */
-            text-decoration: none; /* Bỏ gạch chân */
-            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
-        }
-
-        .btn-add:hover {
-            background-color: #a07d1d; /* Màu nền khi hover */
-        }
-
         .search-input {
             margin-bottom: 20px;
             padding: 10px;
@@ -208,43 +62,7 @@
             content: '\f0dd';
         }
     </style>
-        <script>
-        $(document).ready(function() {
-            $("#searchInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#typeTable tbody tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-
-            $('#typeTable th').on('click', function() {
-                var index = $(this).index();
-                var table = $(this).parents('table');
-                var rows = table.find('tbody > tr').toArray().sort(comparer(index));
-                this.asc = !this.asc;
-                if (!this.asc) {
-                    rows = rows.reverse();
-                }
-                table.find('thead th').removeClass('asc desc');
-                $(this).addClass(this.asc ? 'asc' : 'desc');
-                for (var i = 0; i < rows.length; i++) {
-                    table.append(rows[i]);
-                }
-            });
-
-            function comparer(index) {
-                return function(a, b) {
-                    var valA = getCellValue(a, index),
-                        valB = getCellValue(b, index);
-                    return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
-                };
-            }
-
-            function getCellValue(row, index) {
-                return $(row).children('td').eq(index).text();
-            }
-        });
-    </script>
+        
     </head>
 
     <body>
@@ -299,6 +117,43 @@
                 </section>
             </div>
         </div>
+                    <script>
+        $(document).ready(function() {
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#typeTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('#typeTable th').on('click', function() {
+                var index = $(this).index();
+                var table = $(this).parents('table');
+                var rows = table.find('tbody > tr').toArray().sort(comparer(index));
+                this.asc = !this.asc;
+                if (!this.asc) {
+                    rows = rows.reverse();
+                }
+                table.find('thead th').removeClass('asc desc');
+                $(this).addClass(this.asc ? 'asc' : 'desc');
+                for (var i = 0; i < rows.length; i++) {
+                    table.append(rows[i]);
+                }
+            });
+
+            function comparer(index) {
+                return function(a, b) {
+                    var valA = getCellValue(a, index),
+                        valB = getCellValue(b, index);
+                    return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
+                };
+            }
+
+            function getCellValue(row, index) {
+                return $(row).children('td').eq(index).text();
+            }
+        });
+    </script>
     </body>
 
 </html>

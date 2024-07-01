@@ -21,26 +21,6 @@ import java.util.logging.Logger;
  */
 public class DAOItem extends DBConnect {
 
-    public List<Item> searchItems(String query) {
-        List<Item> items = new ArrayList<>();
-        String sql = "SELECT * FROM items WHERE name LIKE ?";
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, query + "%");
-            ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                Item item = new Item();
-                item.setItem_Id(rs.getInt("item_Id"));
-                item.setName(rs.getString("name"));
-                item.setTypeItem_Id(rs.getInt("typeItem_Id"));
-                item.setPrice(rs.getDouble("price"));
-                items.add(item);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return items;
-    }
 
     public int getTotalItem() {
         String sql = "select count(item_Id) "

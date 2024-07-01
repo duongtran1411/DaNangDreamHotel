@@ -1,300 +1,176 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Da Nang Hotel</title>
-    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-    <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
-    <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <style>
-       
-
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-        }
-
-        .page-wrapper {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-
-        .sidebar {
-            width: 250px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            background-color: #C59B24;
-            color: white;
-            z-index: 1000;
-            padding-top: 20px;
-        }
-
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            padding: 10px 20px;
-        }
-
-        .sidebar a:hover {
-            background-color: #a07d1d;
-        }
-
-        .body-wrapper {
-            flex-grow: 1;
-            margin-left: 250px;
-            padding: 20px;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: white;
-        }
-
-        table th,
-        table td {
-            padding: 12px 15px;
-            border: 1px solid #dee2e6;
-            text-align: left;
-        }
-
-        table thead th {
-            background-color: #C59B24;
-            color: white;
-        }
-
-        table tbody tr:nth-of-type(even) {
-            background-color: #f8f9fa;
-        }
-
-        table tbody tr:hover {
-            background-color: #e9ecef;
-        }
-
-        @media (max-width: 768px) {
-            .body-wrapper {
-                margin-left: 0;
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Da Nang Hotel</title>
+         <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+        <style>
+            .pagination-container {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
             }
 
-            .sidebar {
+            .pagination a {
+                margin: 0 5px;
+                padding: 10px 15px;
+                text-decoration: none;
+                color: #343a40;
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+            .pagination a:hover {
+                background-color: #f8f9fa;
+            }
+
+            .pagination a.active {
+                background-color: #C59B24;
+                color: white;
+            }
+            .search-input {
+                margin-bottom: 20px;
+                padding: 10px;
                 width: 100%;
-                height: auto;
-                position: relative;
-            }
-        }
-
-        .btn-adjust {
-            border: none;
-            background-color: #C59B24;
-            color: white;
-            padding: 5px 10px;
-            margin: 0 5px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-adjust:hover {
-            background-color: #a07d1d;
-        }
-
-        .quantity-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity {
-            margin: 0 10px;
-        }
-
-        .btn-save {
-            border: none;
-            background-color: #28a745;
-            color: white;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-save:hover {
-            background-color: #218838;
-        }
-
-        .pagination-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .pagination a {
-            margin: 0 5px;
-            padding: 10px 15px;
-            text-decoration: none;
-            color: #343a40;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .pagination a:hover {
-            background-color: #f8f9fa;
-        }
-
-        .pagination a.active {
-            background-color: #C59B24;
-            color: white;
-        }
-        .btn-add {
-            border: none;
-            background-color: #C59B24; /* Màu nền */
-            color: white; /* Màu chữ */
-            padding: 10px 20px; /* Khoảng cách bên trong nút */
-            margin: 10px 0; /* Khoảng cách bên ngoài nút */
-            cursor: pointer; /* Con trỏ chuột */
-            border-radius: 5px; /* Bo tròn góc */
-            text-decoration: none; /* Bỏ gạch chân */
-            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
-        }
-
-        .btn-add:hover {
-            background-color: #C59B24; /* Màu nền khi hover */
-        }.search-input {
-            margin-bottom: 20px;
-            padding: 10px;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-        }
-
-        .sortable:after {
-            content: '\f0dc';
-            font-family: FontAwesome;
-            padding-left: 10px;
-        }
-
-        .sortable.asc:after {
-            content: '\f0de';
-        }
-
-        .sortable.desc:after {
-            content: '\f0dd';
-        }
-    </style>
-    <script>
-         <script>
-        $(document).ready(function() {
-            $("#searchInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#customerTable tbody tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-
-            $('#customerTable th').on('click', function() {
-                var index = $(this).index();
-                var table = $(this).parents('table');
-                var rows = table.find('tbody > tr').toArray().sort(comparer(index));
-                this.asc = !this.asc;
-                if (!this.asc) {
-                    rows = rows.reverse();
-                }
-                table.find('thead th').removeClass('asc desc');
-                $(this).addClass(this.asc ? 'asc' : 'desc');
-                for (var i = 0; i < rows.length; i++) {
-                    table.append(rows[i]);
-                }
-            });
-
-            function comparer(index) {
-                return function(a, b) {
-                    var valA = getCellValue(a, index),
-                        valB = getCellValue(b, index);
-                    return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
-                };
+                box-sizing: border-box;
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
             }
 
-            function getCellValue(row, index) {
-                return $(row).children('td').eq(index).text();
+            .sortable:after {
+                content: '\f0dc';
+                font-family: FontAwesome;
+                padding-left: 10px;
             }
-        });
-    </script>
-</head>
 
-<body>
-    <!--  Body Wrapper -->
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-        data-sidebar-position="fixed" data-header-position="fixed">
-        <div class="sidebar">
+            .sortable.asc:after {
+                content: '\f0de';
+            }
+
+            .sortable.desc:after {
+                content: '\f0dd';
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <!--  Body Wrapper -->
+        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+             data-sidebar-position="fixed" data-header-position="fixed">
             <jsp:include page="SlideBar.jsp"></jsp:include>
+                <div class="body-wrapper">
+                <jsp:include page="Profile.jsp"></jsp:include>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container-fluid" style="height: 800px;width: 1300px">
+                                <input type="text" id="searchInput" class="search-input" placeholder="Search for customers...">
+                                <h1 class="h3 mb-2 text-gray-800">Table Customers</h1>
+                                <div class="card shadow mb-4">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="sortable">First Name</th>
+                                                        <th class="sortable">Last Name</th>
+                                                        <th class="sortable">Phone Number</th>
+                                                        <th class="sortable">Email</th>
+                                                        <th class="sortable">ID Card</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="content">
+                                                <c:forEach items="${allCustomer}" var="o">
+                                                    <tr>
+                                                        <td data-label="First Name">${o.firstName}</td>
+                                                        <td data-label="Last Name">${o.lastName}</td>
+                                                        <td data-label="Phone Number">${o.phoneNumber}</td>
+                                                        <td data-label="Email">${o.email}</td>
+                                                        <td data-label="ID Card">${o.idCard}</td>
+                                                        <td data-label="Actions">
+                                                            <a href="UpdateCustomer.jsp?id=${o.customerId}"class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a> 
+                                                            <a href="customerController?action=delete&id=${o.customerId}"class="delete" title="Delete" data-toggle="tooltip" 
+                                                               onclick="return confirmDelete();"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="pagination-container">
+                                        <div class="pagination">
+                                            <c:if test="${currentPage > 1}">
+                                                <a href="customerController?page=${currentPage - 1}">Previous</a>
+                                            </c:if>
+                                            <c:forEach begin="1" end="${totalPages}" var="page">
+                                                <a href="customerController?page=${page}" class="${page == currentPage ? 'active' : ''}">${page}</a>
+                                            </c:forEach>
+                                            <c:if test="${currentPage < totalPages}">
+                                                <a href="customerController?page=${currentPage + 1}">Next</a>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <script>
+            function confirmDelete() {
+                return confirm("Are you sure you want to remove this item?");
+            }
+        </script>
+        <script>
+                                                                   $(document).ready(function () {
+                                                                       $("#searchInput").on("keyup", function () {
+                                                                           var value = $(this).val().toLowerCase();
+                                                                           $("#content tr").filter(function () {
+                                                                               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                           });
+                                                                       });
 
-        <div class="body-wrapper">
-            <jsp:include page="Profile.jsp"></jsp:include>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search for customers...">
-            <section class="rooms-section spad">
-                <table id="customerTable">
-                    <thead>
-                        <tr>
-                            <th class="sortable">ID</th>
-                            <th class="sortable">First Name</th>
-                            <th class="sortable">Last Name</th>
-                            <th class="sortable">Phone Number</th>
-                            <th class="sortable">Email</th>
-                            <th class="sortable">ID Card</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${allCustomer}" var="o">
-                            <tr>
-                                <td data-label="ID">${o.customerId}</td>
-                                <td data-label="First Name">${o.firstName}</td>
-                                <td data-label="Last Name">${o.lastName}</td>
-                                <td data-label="Phone Number">${o.phoneNumber}</td>
-                                <td data-label="Email">${o.email}</td>
-                                <td data-label="ID Card">${o.idCard}</td>
-                                <td data-label="Actions">
-                                    <a href="UpdateCustomer.jsp?id=${o.customerId}">Edit</a> | <a href="customerController?action=delete&id=${o.customerId}">Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </section>
-        </div>
-    </div>
+                                                                       $('#dataTable th').on('click', function () {
+                                                                           var index = $(this).index();
+                                                                           var table = $(this).parents('table');
+                                                                           var rows = table.find('tbody > tr').toArray().sort(comparer(index));
+                                                                           this.asc = !this.asc;
+                                                                           if (!this.asc) {
+                                                                               rows = rows.reverse();
+                                                                           }
+                                                                           table.find('thead th').removeClass('asc desc');
+                                                                           $(this).addClass(this.asc ? 'asc' : 'desc');
+                                                                           for (var i = 0; i < rows.length; i++) {
+                                                                               table.append(rows[i]);
+                                                                           }
+                                                                       });
 
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-</body>
+                                                                       function comparer(index) {
+                                                                           return function (a, b) {
+                                                                               var valA = getCellValue(a, index),
+                                                                                       valB = getCellValue(b, index);
+                                                                               return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
+                                                                           };
+                                                                       }
+
+                                                                       function getCellValue(row, index) {
+                                                                           return $(row).children('td').eq(index).text();
+                                                                       }
+                                                                   });
+        </script>
+    </body>
 
 </html>

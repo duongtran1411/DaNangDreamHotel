@@ -39,6 +39,46 @@ public class DAOCustomer extends DBConnect{
         }
         return list;
     }
+    public int getTotalCustomer() {
+        String sql = "select count(customer_Id) "
+                + "from customer";
+        int totalCus = 0;
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                totalCus = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return totalCus;
+    }
+    public List<Customer> getCusWithPagin(int currentPage, int cusPerPage) {
+        List<Customer> list = new ArrayList();
+        int startIndex = (currentPage - 1) * cusPerPage;
+        String sql = "SELECT * from customer limit ? offset ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+
+            pre.setInt(1, currentPage);
+            pre.setInt(2, startIndex);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                Customer x = new Customer();
+                x.customerId = rs.getInt("customer_Id");
+                x.firstName = rs.getString("firstName");
+                x.lastName = rs.getString("lastName");
+                x.phoneNumber = rs.getString("phone");
+                x.email = rs.getString("email");
+                x.idCard = rs.getString("idCard");
+                list.add(x);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
     public Customer getCustomerById(int id) {
         Customer cus = new Customer();
         String sql = "select * from customer "
