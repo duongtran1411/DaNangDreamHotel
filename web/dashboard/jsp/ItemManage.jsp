@@ -102,7 +102,8 @@
                                                         <td data-label="Price">${FormatUtils.formatPRice(o.price)}đ</td>
                                                         <td data-label="Actions">
                                                             <a href="UpdateItem.jsp?id=${o.item_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
-                                                            <a href="ItemController?action=delete&id=${o.item_Id}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirmDelete();"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                            <a href="ItemController?action=delete&id=${o.item_Id}" class="delete" title="Delete" data-toggle="tooltip" 
+                                                               onclick="return confirmDelete();"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
