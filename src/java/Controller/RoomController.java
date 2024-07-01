@@ -137,7 +137,7 @@ public class RoomController extends HttpServlet {
     private void addRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         int floor = Integer.parseInt(request.getParameter("floor"));
-        double price = Double.parseDouble(request.getParameter("price"));
+        int price = Integer.parseInt(request.getParameter("price"));
         int size = Integer.parseInt(request.getParameter("size"));
         int trid = Integer.parseInt(request.getParameter("type_Room_Id"));
 

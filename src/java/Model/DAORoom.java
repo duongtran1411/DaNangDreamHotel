@@ -14,25 +14,24 @@ public class DAORoom extends DBConnect {
     public List<Room> getAllRoom() {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
-                + "		select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
-                + "		ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
-                + "		join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
-                + "		join imageroom i on i.room_Id = r.room_Id)\n"
-                + "		select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
-                + "		where rn = 2";
+                + "                	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image ,\n"
+                + "                	ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
+                + "                	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "                	join imageroom i on i.room_Id = r.room_Id)\n"
+                + "                	select room_Id, name, price, size, bed, bath, person, image from roomDetail \n"
+                + "                	where rn = 2       ";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
-                        rs.getInt(2),
+                        rs.getString(2),
                         rs.getInt(3),
-                        rs.getString(4),
+                        rs.getInt(4),
                         rs.getInt(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getInt(9)));
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,7 +82,7 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
-    public void addRoom(String name, int floor, double price, int size, int typeRoom) {
+    public void addRoom(String name, int floor, int price, int size, int typeRoom) {
         String sql = "INSERT INTO `managerhotel`.`room`\n"
                 + "(`name`,\n"
                 + "`floor_Room_Id`,\n"
@@ -96,7 +95,7 @@ public class DAORoom extends DBConnect {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, name);
             pre.setInt(2, floor);
-            pre.setDouble(3, price);
+            pre.setInt(3, price);
             pre.setInt(4, size);
             pre.setInt(5, typeRoom);
             pre.executeUpdate();
@@ -643,6 +642,11 @@ public class DAORoom extends DBConnect {
         }
 
         return list;
+    }
+
+    public static void main(String[] args) {
+        DAORoom dao = new DAORoom();
+        System.out.println(dao.getAllRoom());
     }
 
 }
