@@ -88,7 +88,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ManageEvent.jsp" aria-expanded="false">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/ManageEventControllerURL" aria-expanded="false">
                         <span>
                             <i class="far fa-star white"></i>
                         </span>
