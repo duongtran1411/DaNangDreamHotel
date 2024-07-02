@@ -147,112 +147,92 @@
                         </div>
                     </div>
 
-                    <div class="name-event" style="background: #f8f8f8; width:100% ;padding: 10px 20px"><h5 style="font-weight: 700;">${event.name}</h5></div>    
-                <div class="row room-card">
 
-                    <div class="col-lg-3">
-                        <img src="${event.image}" width="width" height="height" alt="alt"/>
-                    </div>
-                    <br>
+                <c:forEach items="${listE}" var="o">
+                    <div class="name-event" style="background: #f8f8f8; width:100% ;padding: 10px 20px"><h5 style="font-weight: 700;">${o.name}</h5></div>
+                    <div class="row room-card">
 
-                    <div class="col-lg-9" >
-                        <p><small>Offer includes</small></p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="row" >
-                                <div class="col-lg-12" style="display: flex; background: white;" >
-                                    <div>
-                                        <p class="mb-0 original-price">3,889,000 VND/night</p>
-                                        <p class="mb-0 room-price">1,750,050 VND/night (Including tax and service charge)</p>
+                        <div class="col-lg-3">
+                            <img src="${o.image}" width="width" height="height" alt="alt"/>
+                        </div>
+                        <br>
 
-                                    </div>
-                                    <div style="padding-top: 7px">
-                                        <button class="btn btn btnRoom " id="show-room-details" style="background-color: #C59B24; color: white; margin-left: 10px;">Room details</button>
-                                    </div>
+                        <div class="col-lg-9" >
+                            <p><small>Offer includes</small></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="row" >
+                                    <div class="col-lg-12" style="display: flex; background: white;" >
+                                        <div>
+                                            <p class="mb-0 original-price">3,889,000 VND/night</p>
+                                            <p class="mb-0 room-price">1,750,050 VND/night (Including tax and service charge)</p>
 
-                                </div> 
-                                <div id="room-details" style="display: none;">
-                                    <c:forEach items="${listR}" var="o">
-                                        <div class="room col-lg-12 " id="element" style="display: flex; margin-bottom: 10px; margin-top: 20px">
-                                            <div class="col-lg-4">
-                                                <img src="${o.image}" alt="alt">
-                                            </div>
-
-                                            <div class="col-lg-4">
-                                                <h6 style="font-weight:800">${o.name}</h6><br>
-                                                <div>
-                                                    <i class="fa-solid fa-expand icon" style="width: 35px;height: 16px"></i>${o.size} m<sup>2</sup><br>
-                                                    <i class="fa-solid fa-bed icon" style="width: 35px;height: 16px" ></i>${o.bed} bed<br>
-                                                    <i class="fa-solid fa-user-group"style="width: 35px;height: 16px"></i>${o.people} person
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <h6 style="margin-bottom: 22px;font-weight:800">Price</h6>
-                                                    <del>${FormatUtils.formatPRice(o.price)}đ<br></del>
-                                                    ${FormatUtils.formatPRice(o.price* o.discount )}đ
-
-                                                    <button class="btn btn" style="background-color: #C59B24; color: white; margin-left: 10px"><a style="color: white" href="cartController?action=post&id=${o.room_Id}">Select Room</a></button>
-                                                </div>
-                                            </div>
                                         </div>
-                                        <hr>
-                                    </c:forEach>
+                                        <div style="padding-top: 7px">
+                                            <button class="btn btn btnRoom " id="show-room-details" style="background-color: #C59B24; color: white; margin-left: 10px;" onclick="handleEvent(${o.event_Id})" >Room details</button>
+                                        </div>
+                                        
+                                    </div> 
+                                    <div id="room-details-${o.event_Id}" style="display: block;">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
+                    </div>
+                </c:forEach>
 
 
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
                                 $(document).ready(function () {
-                                    $("#show-room-details").click(function () {
+                                    $("#show-room-details").click(function (e) {
                                         $("#room-details").toggle();
                                     });
                                 });
-                                function handleChange() {
-                                    
-                                    $.ajax({
-                                        url: '/DaNangDreamHotel/bookByEventController',
-                                        type: 'POST',
-                                        data: {
-                                          
-                                        },
-                                        success: function (data) {
-                                            var row = document.getElementById("room-details");
-                                            row.innerHTML = data;
-                                            console.log("success");
-                                        },
-                                        error: function (xhr) {
-                                            console.log(xhr);
-                                        }
-                                    });
-                                }
-
-//                                            function handleClick(e) {
+//                                function handleChange() {
 //
-//                                                $.ajax({
-//                                                    url: '/DaNangDreamHotel/loadRoomEvent',
-//                                                    type: 'GET',
-//                                                    data: {
-//                                                        eventId: e
-//                                                    },
-//                                                    success: function (data) {
-//                                                        $('#room-details').html(data);
-//                                                        console.log("success");
-//                                                    },
-//                                                    error: function (xhr) {
-//                                                        console.log(xhr);
-//                                                    }
-//                                                });
-//                                            }
+//                                    $.ajax({
+//                                        url: '/DaNangDreamHotel/bookByEventController',
+//                                        type: 'POST',
+//                                        data: {
+//
+//                                        },
+//                                        success: function (data) {
+//                                            var row = document.getElementById("room-details");
+//                                            row.innerHTML = data;
+//                                            console.log("success");
+//                                        },
+//                                        error: function (xhr) {
+//                                            console.log(xhr);
+//                                        }
+//                                    });
+//                                }
+
+                                                function handleEvent(e) {
+//                                                var event = document.getElementById('inputEvent').value.split(',');
+                                                    console.log(e);
+                                                    $.ajax({
+                                                        url: '/DaNangDreamHotel/loadRoomEvent',
+                                                        type: 'GET',
+                                                        data: {
+                                                            eventId: e
+                                                        },
+                                                        success: function (data) {
+                                                            var row = document.getElementById('room-details-'+e);   
+                                                                row.innerHTML = data;
+                                                        },
+                                                        error: function (xhr) {
+                                                            console.log(xhr, event);
+                                                        }
+                                                    });
+                                                }
 
 //                                            $(document).ready(function () {
 //                                                $(".show-room-details").click(function () {

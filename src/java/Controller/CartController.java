@@ -112,7 +112,7 @@ public class CartController extends HttpServlet {
                     CartItem cartItem = new CartItem(room);
                     bookingCart.addRoom(cartItem);
                     session.setAttribute("cart", bookingCart);
-                    response.sendRedirect("viewRoomController");
+                    response.sendRedirect("bookByEventController");
                 }
                 break;
         }

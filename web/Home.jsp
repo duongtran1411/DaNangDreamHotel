@@ -399,7 +399,7 @@
                                         var minDate = year + '-' + tmonth + '-' + tdate;
                                         var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
                                         var showDateIn = document.getElementById('checkin').setAttribute('value', minDate);
-                                        var tdateMin = date.getDate() + 2;
+                                        var tdateMin = date.getDate() + 1;
                                         var tmonthMin = date.getMonth() + 1;
                                         if (tdateMin < 10) {
                                             tdateMin = '0' + tdateMin;

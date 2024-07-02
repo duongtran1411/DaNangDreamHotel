@@ -61,14 +61,15 @@ public class BookingByEventController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("eventId"));
+            
         DAOEvent daoE = new DAOEvent();
-        DAORoom daoR = new DAORoom();
-        Event event = daoE.getImageByEvent(id);
-        List<Room> list = daoR.getRoomByEvent(id);
-        request.setAttribute("event", event);
-        request.setAttribute("listR", list);
+        DAORoom daoR = new DAORoom();      
+        List<Event> listE = daoE.getImageEvent();
+//        List<Room> list = daoR.getRoomByEvent(2);
+        request.setAttribute("listE", listE);
+//        request.setAttribute("listR", list);
         request.getRequestDispatcher("Booking.jsp").forward(request, response);
+        
     }
 
     /**

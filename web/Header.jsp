@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div >
-                        <a href="index.html">
+                        <a href="homeController">
 <!--                            <img src="img/logo-DaNangDream.jpg" alt="" height="100%"/>-->
 <img src="img/logo2.jpg" alt="" height="90px" width="165px"/>
                         </a>
