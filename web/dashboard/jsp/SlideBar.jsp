@@ -11,14 +11,17 @@
     .btn-manage:hover{
         background-color: #213e68;
         cursor: pointer;
-        animation-delay: 0.5s
     }
+    .btnshow{
+        border: solid 1px #ffffff
+    }
+    
 </style>
 <aside class="left-sidebar" style="background-color: #213e66">
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-                <img src="img/logo2.jpg" alt="" width="100%" height="80px"/>
+            <img src="img/logo2.jpg" alt="" width="100%" height="80px"/>
         </div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
@@ -35,7 +38,7 @@
                 </li>
             </ul>
 
-            <button class="btn hide-menu btn-manage" id="show"><label class="white btn-manage" >MANAGER<i class="fa-solid fa-angle-down btn-manage" style="padding-left: 20px"></i></label></button>
+            <button class="btn hide-menu btn-manage btnshow" id="show"><label class="white btn-manage" >MANAGER<i class="fa-solid fa-angle-down btn-manage" style="padding-left: 20px"></i></label></button>
 
             <ul id="sidebarnav" class="list" style="display: block">
                 <li class="nav-small-cap">
@@ -71,7 +74,7 @@
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="ItemTypeController" aria-expanded="false">
                         <span>
-                           <i class="fa-solid fa-cookie-bite white"></i>
+                            <i class="fa-solid fa-cookie-bite white"></i>
                         </span>
                         <span class="hide-menu white">Manage Type Of Item</span>
                     </a>

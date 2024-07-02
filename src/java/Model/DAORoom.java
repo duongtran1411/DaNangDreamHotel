@@ -25,9 +25,9 @@ public class DAORoom extends DBConnect {
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
+                       rs.getString(2), 
+                       rs.getInt(3), 
+                       rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
@@ -646,7 +646,11 @@ public class DAORoom extends DBConnect {
 
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        System.out.println(dao.getAllRoom());
+        List<Room> list = dao.getAllRoom();
+        for (Room room : list) {
+            System.out.println(room);
+        }
+
     }
 
 }
