@@ -105,7 +105,7 @@
                                                          <td data-label="status">${o.status}</td>
                                                         <td data-label="Actions">
                                                             <a href="BookingDetailURL?id=${o.bookingId}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
-                                                            <a href="bookingController?action=delete&id=${o.bookingId}" class="delete" title="Delete" data-toggle="tooltip" 
+                                                            <a href="BookingDetailURL?action=delete&id=${o.bookingDetailId}" class="delete" title="Delete" data-toggle="tooltip" 
                                                                onclick="return confirmDelete();"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
                                                         </td>
                                                     </tr>

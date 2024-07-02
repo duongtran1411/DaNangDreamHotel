@@ -116,6 +116,34 @@ public class DAOBooking extends DBConnect {
         }
     }
 
+    public void deleteBookingDetail2(int id) {
+        String sql = "delete from bookingdetail "
+                + "where bookingDetail_Id= ? ";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int getBookingIdByDetailId(int id) {
+        String sql = "select booking_Id from bookingdetail where bookingDetail_Id =?";
+        int x = 0;
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+             while (rs.next()) {
+                x = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return x;
+    }
+
     public Booking getBookingById(int id) {
         Booking bo = new Booking();
         String sql = "select * from booking "
@@ -168,7 +196,7 @@ public class DAOBooking extends DBConnect {
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
         List<BookingDetail> list = dao.getBookingDetail(1);
-        int x = dao.getTotalBooking();
+        int x = dao.getBookingIdByDetailId(5);
         System.out.println(x);
         for (BookingDetail k : list) {
             System.out.println(k);
