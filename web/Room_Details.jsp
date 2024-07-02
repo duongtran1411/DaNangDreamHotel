@@ -80,10 +80,10 @@
 
                             <div class="rd-text">
                                 <div class="rd-title">
-                                    <h3>${room.name}</h3>
-                                    <div class="rdt-right">
+<!--                                    <h3>${room.name}</h3>-->
+<!--                                    <div class="rdt-right">
                                         <a href="cartController?action=&id=${room.room_Id}">Booking Now</a>
-                                    </div>
+                                    </div>-->
                                     <h3 style="font-weight: 700">${room.name}</h3>
                                 </div>
                                 <div class="row">
