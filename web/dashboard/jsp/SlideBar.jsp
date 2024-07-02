@@ -1,5 +1,4 @@
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -18,7 +17,7 @@
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-                <img src="img/logo2.jpg" alt="" width="100%" height="80px"/>
+            <img src="img/logo2.jpg" alt="" width="100%" height="80px"/>
         </div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
@@ -51,7 +50,14 @@
                         <span class="hide-menu white">Manage Customer</span>
                     </a>
                 </li>
-
+                <li  class="sidebar-item">
+                    <a  class="sidebar-link" href="bookingController" aria-expanded="false">
+                        <span>
+                            <i class="fa-solid fa-users white"></i>
+                        </span>
+                        <span class="hide-menu white">Manage Booking</span>
+                    </a>
+                </li>
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="itemManageURL" aria-expanded="false">
                         <span>
@@ -60,6 +66,7 @@
                         <span class="hide-menu white">Manage Item In Room</span>
                     </a>
                 </li>
+          
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="ItemController" aria-expanded="false">
                         <span>
@@ -71,7 +78,7 @@
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="ItemTypeController" aria-expanded="false">
                         <span>
-                           <i class="fa-solid fa-cookie-bite white"></i>
+                            <i class="fa-solid fa-cookie-bite white"></i>
                         </span>
                         <span class="hide-menu white">Manage Type Of Item</span>
                     </a>
@@ -105,7 +112,7 @@
                         <span class="hide-menu white">Manage Account</span>
                     </a>
                 </li>
-               <li class="sidebar-item">
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/ManagerJobsControllerURL" aria-expanded="false">
                         <span>
                             <i class="fa-solid fa-user white"></i>
@@ -122,9 +129,9 @@
 </aside>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $("#show").click(function () {
-            $(".list").toggle();
-        });
-    });
+                        $(document).ready(function () {
+                            $("#show").click(function () {
+                                $(".list").toggle();
+                            });
+                        });
 </script>

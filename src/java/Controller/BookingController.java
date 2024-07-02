@@ -4,13 +4,15 @@
  */
 package Controller;
 
+import Entity.Booking;
+import Model.DAOBooking;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -19,66 +21,57 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "BookingController", urlPatterns = {"/bookingController"})
 public class BookingController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    DAOBooking daoBooking = new DAOBooking();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BookingController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BookingController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+           String action = request.getParameter("action");
+        if (action == null || action.isEmpty()) {
+            action = "listBooking";
+        }
+        switch (action) {
+            case "delete":
+                deleteBooking(request, response);
+                break;
+            case "update":      
+         
+                break;
+            default:
+                listBooking(request, response);
+                break;
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
+    }
+    private void listBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
+        int itemsPerPage = 6;
+        int totalBooking = daoBooking.getTotalBooking();
+        int totalPages = (int) Math.ceil((double) totalBooking / itemsPerPage);
+        List<Booking> allBooking = daoBooking.getBookingsWithPagin(currentPage, itemsPerPage);
+        request.setAttribute("allBooking", allBooking);
+         request.setAttribute("currentPage", currentPage);
+        request.setAttribute("totalPages", totalPages);
+        request.getRequestDispatcher("dashboard/jsp/ManageBooking.jsp").forward(request, response);
+    }
+    private void deleteBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        daoBooking.deleteBookingDetail(id);
+        daoBooking.deleteBooking(id);
+        response.sendRedirect("bookingController");
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
