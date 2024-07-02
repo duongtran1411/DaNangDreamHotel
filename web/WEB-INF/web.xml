@@ -65,17 +65,20 @@
         <servlet-class>Controller.LoadRoomEvent</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ServiceCartController</servlet-name>
         <servlet-class>Controller.ServiceCartController</servlet-class>
-     </servlet> 
-     <servlet>  
+    </servlet>
+    <servlet>
         <servlet-name>addComment</servlet-name>
         <servlet-class>Controller.addComment</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CommentServlet</servlet-name>
         <servlet-class>Controller.CommentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookingDetailController</servlet-name>
+        <servlet-class>Controller.BookingDetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
@@ -146,10 +149,9 @@
         <url-pattern>/loadRoomEvent</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ServiceCartController</servlet-name>
         <url-pattern>/serviceCartController</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>addComment</servlet-name>
         <url-pattern>/addComment</url-pattern>
@@ -157,7 +159,10 @@
     <servlet-mapping>
         <servlet-name>CommentServlet</servlet-name>
         <url-pattern>/commentServlet</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingDetailController</servlet-name>
+        <url-pattern>/BookingDetailURL</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
