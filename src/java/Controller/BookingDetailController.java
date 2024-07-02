@@ -1,6 +1,8 @@
 
 package Controller;
 
+import Entity.BookingDetail;
+import Model.DAOBooking;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -8,11 +10,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 
 @WebServlet(name = "BookingController", urlPatterns = {"/BookingDetailURL"})
 public class BookingDetailController extends HttpServlet {
-   
+       DAOBooking daoBooking = new DAOBooking();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -26,7 +29,7 @@ public class BookingDetailController extends HttpServlet {
     throws ServletException, IOException {
             String action = request.getParameter("action");
         if (action == null || action.isEmpty()) {
-            action = "listBooking";
+            action = "listDetail";
         }
         switch (action) {
             case "delete":
@@ -48,7 +51,10 @@ public class BookingDetailController extends HttpServlet {
         doGet(request, response);
     }
  private void listDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     
+     int bookingId =  Integer.parseInt(request.getParameter("id"));
+     List<BookingDetail> allBooking = daoBooking.getBookingDetail(bookingId);
+      request.setAttribute("allBooking", allBooking);
+       request.getRequestDispatcher("dashboard/jsp/ManageBookingDetail.jsp").forward(request, response);
     }
     @Override
     public String getServletInfo() {

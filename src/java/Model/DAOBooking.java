@@ -5,6 +5,7 @@
 package Model;
 
 import Entity.Booking;
+import Entity.BookingDetail;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -59,7 +60,7 @@ public class DAOBooking extends DBConnect {
             pre.setInt(2, startIndex);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-              list.add(new Booking(rs.getInt("booking_Id"),
+                list.add(new Booking(rs.getInt("booking_Id"),
                         rs.getInt("customer_Id"),
                         rs.getDate("startDay"),
                         rs.getDate("endDay"),
@@ -67,7 +68,7 @@ public class DAOBooking extends DBConnect {
                         rs.getDate("created_At"),
                         rs.getString("firstName"),
                         rs.getString("lastName")
-                      ));
+                ));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,6 +91,7 @@ public class DAOBooking extends DBConnect {
         }
         return totalBookings;
     }
+
     public void deleteBooking(int id) {
         String sql = "delete from booking "
                 + "where booking_Id= ? ";
@@ -101,6 +103,7 @@ public class DAOBooking extends DBConnect {
             Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void deleteBookingDetail(int id) {
         String sql = "delete from bookingdetail "
                 + "where booking_Id= ? ";
@@ -112,7 +115,8 @@ public class DAOBooking extends DBConnect {
             Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     public Booking getBookingById(int id) {
+
+    public Booking getBookingById(int id) {
         Booking bo = new Booking();
         String sql = "select * from booking "
                 + "where booking_Id = ?";
@@ -129,16 +133,44 @@ public class DAOBooking extends DBConnect {
                 bo.setCreatedAt(rs.getDate(6));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOTypeItem.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
         }
         return bo;
     }
+
+    public List<BookingDetail> getBookingDetail(int id) {
+        List<BookingDetail> list = new ArrayList();
+        String sql = "select i.bookingDetail_Id, i.room_Id, i.booking_Id, r.name as roomName, r.status, r.price, r.type_Room_Id, b.startDay, b.endDay from bookingdetail i\n"
+                + "join room r on i.room_id = r.room_Id\n"
+                + "join booking b on i.booking_Id = b.booking_Id\n"
+                + "where i.booking_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new BookingDetail(rs.getInt("bookingDetail_Id"),
+                        rs.getInt("room_Id"),
+                        rs.getInt("booking_Id"),
+                        rs.getString("roomName"),
+                        rs.getString("status"),
+                        rs.getDouble("price"),
+                        rs.getInt("type_Room_Id"),
+                        rs.getDate("startDay"),
+                        rs.getDate("endDay")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-        List<Booking> list = dao.getBookingsWithPagin(1,1);
+        List<BookingDetail> list = dao.getBookingDetail(1);
         int x = dao.getTotalBooking();
         System.out.println(x);
-        for(Booking k : list){
+        for (BookingDetail k : list) {
             System.out.println(k);
         }
     }
