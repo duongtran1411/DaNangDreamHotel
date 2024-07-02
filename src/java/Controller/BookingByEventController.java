@@ -15,6 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -61,13 +62,16 @@ public class BookingByEventController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
+        HttpSession session = request.getSession();
+        String checkIn = request.getParameter("checkIn");
+        String checkOut = request.getParameter("checkOut");
+        System.out.println(checkOut);
         DAOEvent daoE = new DAOEvent();
         DAORoom daoR = new DAORoom();      
         List<Event> listE = daoE.getImageEvent();
-//        List<Room> list = daoR.getRoomByEvent(2);
         request.setAttribute("listE", listE);
-//        request.setAttribute("listR", list);
+        session.setAttribute("checkInDay", checkIn);
+        session.setAttribute("checkOutDay", checkOut);
         request.getRequestDispatcher("Booking.jsp").forward(request, response);
         
     }

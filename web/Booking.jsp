@@ -74,78 +74,76 @@
         <div class="container mt-5">
             <!-- Header Section -->
             <div class="header-box mb-4">
-                <form class="form-inline row align-items-end">
-                    <div class="form-group col-md-3">
+                <form class="form-inline row align-items-end" >
+                    <div class="form-group col-md-4">
                         <label for="destination">Destination</label>
-                        <input type="text" class="form-control w-100" id="destination" placeholder="Destination" value="Da Nang Dream Hotel">
+                        <input type="text" class="form-control w-100" id="destination" placeholder="Destination" value="Da Nang Dream Hotel" readonly="" name="dateIn">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="checkin">Check-in</label>
-                        <input type="date" class="form-control w-100" id="checkin" value="2024-06-18">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="checkout">Check-out</label>
-                        <input type="date" class="form-control w-100" id="checkout" value="2024-06-20">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="rooms">No. of Rooms</label>
-                        <input type="number" class="form-control w-100" id="rooms" placeholder="No. of Rooms" value="1">
-                    </div>
-                    <div class="form-group col-md-1" style="padding-right: 5px">
-                        <button type="submit" class="btn btn w-100" style="background-color: #C59B24; color: white">Update</button>
-                    </div>
-                </form>
-            </div>
-            <!-- End of Header Section -->
+                        <input type="date" class="form-control w-100" id="checkin" value="${checkInDay}" name="dateOut">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="checkout">Check-out</label>
+                    <input type="date" class="form-control w-100" id="checkout" value="${checkOutDay}">
+                </div>
+                <div class="form-group col-md-2" style="padding-right: 5px;align-items: center">
+                    <button type="submit" class="btn btn w-100" style="background-color: #C59B24; color: white" >Update</button>
+                </div>
+               <input type="hidden" name="action" value="updateDate">
 
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="filter-box">
-                        <h5>Filter</h5>
-                        <div class="form-group">
-                            <label for="priceRange">Price per night</label>
-                            <input type="range" class="form-control-range" id="priceRange" min="1000000" max="5000000">
+            </form>
+        </div>
+        <!-- End of Header Section -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="filter-box">
+                    <h5>Filter</h5>
+                    <div class="form-group">
+                        <label for="priceRange">Price per night</label>
+                        <input type="range" class="form-control-range" id="priceRange" min="1000000" max="5000000">
+                    </div>
+                    <div class="form-group">
+                        <label>Recreation</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="doubleBed">
+                            <label class="form-check-label" for="doubleBed">Double bed</label>
                         </div>
-                        <div class="form-group">
-                            <label>Recreation</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="doubleBed">
-                                <label class="form-check-label" for="doubleBed">Double bed</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="twoSingleBeds">
-                                <label class="form-check-label" for="twoSingleBeds">2 Single Beds</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="oceanView">
-                                <label class="form-check-label" for="oceanView">Ocean View</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="cityView">
-                                <label class="form-check-label" for="cityView">City View</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="bathtub">
-                                <label class="form-check-label" for="bathtub">Bathtub</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="livingRoom">
-                                <label class="form-check-label" for="livingRoom">Living room</label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="twoSingleBeds">
+                            <label class="form-check-label" for="twoSingleBeds">2 Single Beds</label>
                         </div>
-                        <button class="btn btn" style="background-color: #C59B24; color: white">Filter</button>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="oceanView">
+                            <label class="form-check-label" for="oceanView">Ocean View</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="cityView">
+                            <label class="form-check-label" for="cityView">City View</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="bathtub">
+                            <label class="form-check-label" for="bathtub">Bathtub</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="livingRoom">
+                            <label class="form-check-label" for="livingRoom">Living room</label>
+                        </div>
+                    </div>
+                    <button class="btn btn" style="background-color: #C59B24; color: white">Filter</button>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <label style="transform: translateY(30px)">Sorted by: </label>
+                        <select id="roomSelect" class="custom-select" onchange="handleChange()" style="height:60px;width: 200px">
+                            <option value="price">Price</option>
+                            <option value="room">Room</option>
+                        </select>
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <div class="d-flex justify-content-between mb-3">
-                        <div>
-                            <label style="transform: translateY(30px)">Sorted by: </label>
-                            <select id="roomSelect" class="custom-select" onchange="handleChange()" style="height:60px;width: 200px">
-                                <option value="price">Price</option>
-                                <option value="room">Room</option>
-                            </select>
-                        </div>
-                    </div>
 
 
                 <c:forEach items="${listE}" var="o">
@@ -170,7 +168,7 @@
                                         <div style="padding-top: 7px">
                                             <button class="btn btn btnRoom " id="show-room-details" style="background-color: #C59B24; color: white; margin-left: 10px;" onclick="handleEvent(${o.event_Id})" >Room details</button>
                                         </div>
-                                        
+
                                     </div> 
                                     <div id="room-details-${o.event_Id}" style="display: block;">
 
@@ -191,42 +189,48 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-                                $(document).ready(function () {
-                                    $("#show-room-details").click(function (e) {
-                                        $("#room-details").toggle();
-                                    });
-                                });
-//                                function handleChange() {
-//
-//                                    $.ajax({
-//                                        url: '/DaNangDreamHotel/bookByEventController',
-//                                        type: 'POST',
-//                                        data: {
-//
-//                                        },
-//                                        success: function (data) {
-//                                            var row = document.getElementById("room-details");
-//                                            row.innerHTML = data;
-//                                            console.log("success");
-//                                        },
-//                                        error: function (xhr) {
-//                                            console.log(xhr);
-//                                        }
-//                                    });
-//                                }
+                                                $(document).ready(function () {
+                                                    $("#show-room-details").click(function (e) {
+                                                        $("#room-details").toggle();
+                                                    });
+                                                });
+                                                
+//                                                function handleDate(){
+//                                                    var checkIn = document.getElementById('checkin').value;
+//                                                    var checkOut = document.getElementById('checkout').value;
+//                                                    $.ajax({
+//                                                        url: '/DaNangDreamHotel/loadRoomEvent',
+//                                                        type: 'GET',
+//                                                        data: {
+//                                                            checkIn: checkIn,
+//                                                            checkOut: checkOut,
+//                                                            eventId: e
+//                                                        },
+//                                                        success: function (data) {
+//                                                            var row = document.getElementById('room-details-' + e);
+//                                                            row.innerHTML = data;
+//                                                        },
+//                                                        error: function (xhr) {
+//                                                            console.log(xhr, event);
+//                                                        }
+//                                                    });
+//                                                }
 
                                                 function handleEvent(e) {
-//                                                var event = document.getElementById('inputEvent').value.split(',');
+                                                    var checkIn = document.getElementById('checkin').value;
+                                                    var checkOut = document.getElementById('checkout').value;
                                                     console.log(e);
                                                     $.ajax({
-                                                        url: '/DaNangDreamHotel/loadRoomEvent',
+                                                        url: '/DaNangDreamHotel/loadRoomEvent?action=list',
                                                         type: 'GET',
                                                         data: {
+                                                            checkIn: checkIn,
+                                                            checkOut: checkOut,
                                                             eventId: e
                                                         },
                                                         success: function (data) {
-                                                            var row = document.getElementById('room-details-'+e);   
-                                                                row.innerHTML = data;
+                                                            var row = document.getElementById('room-details-' + e);
+                                                            row.innerHTML = data;
                                                         },
                                                         error: function (xhr) {
                                                             console.log(xhr, event);
@@ -234,26 +238,43 @@
                                                     });
                                                 }
 
-//                                            $(document).ready(function () {
-//                                                $(".show-room-details").click(function () {
-//                                                    var roomDetails = $(this).closest('.row').find('.room-details');
-//                                                    var eventId = $(this).data('event-id');
-//
-//                                                    $.ajax({
-//                                                        url: '/DaNangDreamHotel/loadRoomEvent',
-//                                                        type: 'GET',
-//                                                        data: {
-//                                                            eventId: eventId
-//                                                        },
-//                                                        success: function (data) {
-//                                                            roomDetails.html(data);
-//                                                            console.log("success");
-//                                                        },
-//                                                        error: function (xhr) {
-//                                                            console.log(xhr);
-//                                                        }
-//                                                    });
-//                                                });
-//                                            });
+                                                var date = new Date();
+                                                var tdate = date.getDate();
+                                                var tmonth = date.getMonth() + 1;
+                                                if (tdate < 10) {
+                                                    tdate = '0' + tdate;
+                                                }
+                                                if (tmonth < 10) {
+                                                    tmonth = '0' + tmonth;
+                                                }
+                                                var year = date.getUTCFullYear();
+                                                var minDate = year + '-' + tmonth + '-' + tdate;
+                                                var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
+                                                var tdateMin = date.getDate() + 1;
+                                                var tmonthMin = date.getMonth() + 1;
+                                                if (tdateMin < 10) {
+                                                    tdateMin = '0' + tdateMin;
+                                                }
+                                                if (tmonthMin < 10) {
+                                                    tmonthMin = '0' + tmonthMin;
+                                                }
+                                                var yearMin = date.getUTCFullYear();
+                                                var min = yearMin + '-' + tmonthMin + '-' + tdateMin;
+                                                var checkOut = document.getElementById('checkout').setAttribute('min', min);
+                                                document.getElementById('checkin').addEventListener('input', function (e) {
+                                                    if (e.target.value === '') {
+                                                        e.preventDefault();
+                                                        e.target.value = e.target.defaultValue;
+                                                    }
+                                                });
+
+                                                document.getElementById('checkout').addEventListener('input', function (e) {
+                                                    if (e.target.value === '') {
+                                                        e.preventDefault();
+                                                        e.target.value = e.target.defaultValue;
+                                                    }
+                                                });
+
     </script>
+
 </body>
