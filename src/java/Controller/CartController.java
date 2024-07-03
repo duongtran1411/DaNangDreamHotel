@@ -111,8 +111,13 @@ public class CartController extends HttpServlet {
                     Room room = dao.getRoomToCart(roomId);
                     CartItem cartItem = new CartItem(room);
                     bookingCart.addRoom(cartItem);
+                    String checkIn = (String)session.getAttribute("checkInDay");
+                    String checkOut = (String)session.getAttribute("checkOutDay");
+                    System.out.println(checkIn + "  " +checkOut);
+                    session.setAttribute("checkInDay", checkIn);
+                    session.setAttribute("checkOutDay", checkOut);
                     session.setAttribute("cart", bookingCart);
-                    response.sendRedirect("bookByEventController");
+                    request.getRequestDispatcher("viewCartController").forward(request, response);
                 }
                 break;
         }
