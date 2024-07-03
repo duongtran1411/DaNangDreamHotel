@@ -112,6 +112,7 @@
                                                 </c:forEach>
                                             </tbody>
                                         </table>
+                                            <a href="bookingController">Back</a>
                                     </div>    
                                 </div>
                             </div>

@@ -102,7 +102,7 @@
                                                         <td data-label="endDay">${o.endDay}</td>
                                                          <td data-label="Expenses">${o.expenses}</td>
                                                         <td data-label="Actions">
-                                                            <a href="BookingDetailURL?id=${o.bookingId}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                            <a href="BookingDetailURL?id=${o.bookingId}" class="settings" title="Detail" data-toggle="tooltip"><i class='far fa-edit'></i></a>
                                                             <a href="bookingController?action=delete&id=${o.bookingId}" class="delete" title="Delete" data-toggle="tooltip" 
                                                                onclick="return confirmDelete();"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
                                                         </td>
