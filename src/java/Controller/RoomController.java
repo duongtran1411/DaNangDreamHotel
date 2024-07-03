@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Entity.FormatUtils;
 import Entity.Room;
 import Entity.TypeRoom;
 import Model.DAOImageRoom;
@@ -28,6 +29,7 @@ public class RoomController extends HttpServlet {
     private DAOTypeRoom daoTypeRoom = new DAOTypeRoom();
     private DAORoom daoRoom = new DAORoom();
     private DAOImageRoom daoImageRoom = new DAOImageRoom();
+    private FormatUtils format = new FormatUtils();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -184,7 +186,7 @@ public class RoomController extends HttpServlet {
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
+                    + "                                                <td>" + format.formatPRice(sort.getPrice()) + " đ</td>\n"
                     + "                                                <td>" + sort.getSize() + "</td>\n"
                     + "                                                <td>\n"
                     + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
@@ -205,7 +207,7 @@ public class RoomController extends HttpServlet {
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
+                    + "                                                <td>" + format.formatPRice(sort.getPrice()) + " đ</td>\n"
                     + "                                                <td>" + sort.getSize() + "</td>\n"
                     + "                                                <td>\n"
                     + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
@@ -226,7 +228,7 @@ public class RoomController extends HttpServlet {
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
+                    + "                                                <td>" + format.formatPRice(sort.getPrice()) + " đ</td>\n"
                     + "                                                <td>" + sort.getSize() + "</td>\n"
                     + "                                                <td>\n"
                     + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
@@ -247,7 +249,7 @@ public class RoomController extends HttpServlet {
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
+                    + "                                                <td>" + format.formatPRice(sort.getPrice()) + " đ</td>\n"
                     + "                                                <td>" + sort.getSize() + "</td>\n"
                     + "                                                <td>\n"
                     + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"

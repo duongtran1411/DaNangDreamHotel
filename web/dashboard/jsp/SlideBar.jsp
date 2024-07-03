@@ -15,7 +15,7 @@
     .btnshow{
         border: solid 1px #ffffff
     }
-    
+
 </style>
 <aside class="left-sidebar" style="background-color: #213e66">
     <!-- Sidebar scroll-->
@@ -108,7 +108,7 @@
                         <span class="hide-menu white">Manage Account</span>
                     </a>
                 </li>
-               <li class="sidebar-item">
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/ManagerJobsControllerURL" aria-expanded="false">
                         <span>
                             <i class="fa-solid fa-user white"></i>
@@ -117,6 +117,14 @@
                     </a>
                 </li>
                 <%--</c:if>--%>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/bookingURL" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-address-card white" aria-hidden="true"></i>
+                        </span>
+                        <span class="hide-menu white">Manage Booking</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

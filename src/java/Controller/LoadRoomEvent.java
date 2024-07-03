@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -60,41 +61,59 @@ public class LoadRoomEvent extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String[] event_Id = request.getParameterValues("eventId");
-        for (String string : event_Id) {
-            System.out.println(string);
-        }
-        DAORoom dao = new DAORoom();
-        for (int i = 0; i < event_Id.length; i++) {
-            int id = Integer.parseInt(event_Id[i]);
-            List<Room> list = dao.getRoomByEvent(id);
-            for (Room o : list) {
-                out.print("<div class=\"room col-lg-12 \" id=\"element\" style=\"display: flex; margin-bottom: 10px; margin-top: 20px\">\n"
-                        + "                                                <div class=\"col-lg-4\">\n"
-                        + "                                                    <img src=\""+o.getImage()+"\" alt=\"alt\">\n"
-                        + "                                                </div>\n"
-                        + "\n"
-                        + "                                                <div class=\"col-lg-4\">\n"
-                        + "                                                    <h6 style=\"font-weight:800\">"+o.getName()+"</h6><br>\n"
-                        + "                                                    <div>\n"
-                        + "                                                        <i class=\"fa-solid fa-expand icon\" style=\"width: 35px;height: 16px\"></i>"+o.getSize()+" m<sup>2</sup><br>\n"
-                        + "                                                        <i class=\"fa-solid fa-bed icon\" style=\"width: 35px;height: 16px\" ></i>"+o.getBed()+" bed<br>\n"
-                        + "                                                        <i class=\"fa-solid fa-user-group\"style=\"width: 35px;height: 16px\"></i>"+o.getPeople()+" person\n"
-                        + "                                                    </div>\n"
-                        + "                                                </div>\n"
-                        + "                                                <div class=\"col-lg-4\">\n"
-                        + "                                                    <div>\n"
-                        + "                                                        <h6 style=\"margin-bottom: 22px;font-weight:800\">Price</h6>\n"
-                        + "                                                        <del>"+FormatUtils.formatPRice(o.getPrice()) +"đ<br></del>\n"
-                        + "                                                        "+FormatUtils.formatPRice(o.getPrice()*o.getDiscount())+"đ\n"
-                        + "\n"
-                        + "                                                        <button class=\"btn btn\" style=\"background-color: #C59B24; color: white; margin-left: 10px\"><a style=\"color: white\" href=\"cartController?action=post&id="+o.getRoom_Id()+"\">Select Room</a></button>\n"
-                        + "                                                    </div>\n"
-                        + "                                                </div>\n"
-                        + "                                            </div>\n"
-                        + "                                            <hr>");
+//        String action = request.getParameter("action");
+//        if (action.equals("updateDate")) {
+//            String checkIn = request.getParameter("dateIn");
+//            String checkOut = request.getParameter("dateOut");
+//            HttpSession session = request.getSession();
+//            session.setAttribute("checkInDay", checkIn);
+//            session.setAttribute("checkOutDay", checkOut);
+//            request.getRequestDispatcher("bookByEventController").forward(request, response);
+//        }
+//
+//        if (action == null) {
+//            action = "list";
+//        }
+//        
+//        if(action.equals("list")){
+            String checkIn = request.getParameter("checkIn");
+            String checkOut = request.getParameter("checkOut");
+            String[] event_Id = request.getParameterValues("eventId");
+            for (String string : event_Id) {
+                System.out.println(string);
             }
-        }
+            DAORoom dao = new DAORoom();
+            for (int i = 0; i < event_Id.length; i++) {
+                int id = Integer.parseInt(event_Id[i]);
+                List<Room> list = dao.checkRoom(checkIn, checkOut, id);
+                for (Room o : list) {
+                    out.print("<div class=\"room col-lg-12 \" id=\"element\" style=\"display: flex; margin-bottom: 10px; margin-top: 20px\">\n"
+                            + "                                                <div class=\"col-lg-4\">\n"
+                            + "                                                    <img src=\"" + o.getImage() + "\" alt=\"alt\">\n"
+                            + "                                                </div>\n"
+                            + "\n"
+                            + "                                                <div class=\"col-lg-4\">\n"
+                            + "                                                    <h6 style=\"font-weight:800\">" + o.getName() + "</h6><br>\n"
+                            + "                                                    <div>\n"
+                            + "                                                        <i class=\"fa-solid fa-expand icon\" style=\"width: 35px;height: 16px\"></i>" + o.getSize() + " m<sup>2</sup><br>\n"
+                            + "                                                        <i class=\"fa-solid fa-bed icon\" style=\"width: 35px;height: 16px\" ></i>" + o.getBed() + " bed<br>\n"
+                            + "                                                        <i class=\"fa-solid fa-user-group\"style=\"width: 35px;height: 16px\"></i>" + o.getPeople() + " person\n"
+                            + "                                                    </div>\n"
+                            + "                                                </div>\n"
+                            + "                                                <div class=\"col-lg-4\">\n"
+                            + "                                                    <div>\n"
+                            + "                                                        <h6 style=\"margin-bottom: 22px;font-weight:800\">Price</h6>\n"
+                            + "                                                        <del>" + FormatUtils.formatPRice(o.getPrice()) + "đ<br></del>\n"
+                            + "                                                        " + FormatUtils.formatPRice(o.getPrice() * o.getDiscount()) + "đ\n"
+                            + "\n"
+                            + "                                                        <button class=\"btn btn\" style=\"background-color: #C59B24; color: white; margin-left: 10px\"><a style=\"color: white\" href=\"cartController?action=post&id=" + o.getRoom_Id() + "\">Select Room</a></button>\n"
+                            + "                                                    </div>\n"
+                            + "                                                </div>\n"
+                            + "                                            </div>\n"
+                            + "                                            <hr>");
+                }
+            }
+//        }
 
     }
 

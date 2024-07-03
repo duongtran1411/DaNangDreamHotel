@@ -51,7 +51,7 @@ public class VNpayReturn extends HttpServlet {
             BookingCart bookingCart = (BookingCart) req.getSession().getAttribute("cart");
             List<CartItem> list = bookingCart.getListCartItem();
             DAOCustomer daoC = new DAOCustomer();
-            daoC.insertCustomer(firstName, lastName, phone, email, card);
+            daoC.insertCustomer(firstName, lastName, phone, email, card, card);
 
             if (email != null && !email.equals("")) {
                 String to = email; // recipient's email

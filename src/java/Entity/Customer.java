@@ -9,21 +9,35 @@ package Entity;
  * @author CaoTung
  */
 public class Customer {
+
     public int customerId;
     public String firstName;
     public String lastName;
     public String phoneNumber;
     public String email;
     public String idCard;
+    public String reservationCode;
 
- 
+    public Customer(int customerId, String firstName, String lastName, String phoneNumber, String email, String idCard, String reservationCode) {
+        this.customerId = customerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.idCard = idCard;
+        this.reservationCode = reservationCode;
+    }
+
+    public String getReservationCode() {
+        return reservationCode;
+    }
+
+    public void setReservationCode(String reservationCode) {
+        this.reservationCode = reservationCode;
+    }
 
     public Customer() {
     }
-
-   
-
-    
 
     public int getCustomerId() {
         return customerId;
@@ -72,5 +86,10 @@ public class Customer {
     public void setIdCard(String idCard) {
         this.idCard = idCard;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Customer{" + "customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", idCard=" + idCard + ", reservationCode=" + reservationCode + '}';
+    }
+
 }

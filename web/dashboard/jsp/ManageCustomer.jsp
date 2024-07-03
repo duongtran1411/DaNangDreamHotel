@@ -1,300 +1,207 @@
+<%-- 
+    Document   : ManageRoom
+    Created on : May 26, 2024, 5:49:23 PM
+    Author     : Sơnnnn
+--%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Da Nang Hotel</title>
-    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-    <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
-    <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <style>
-       
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Da Nang Hotel</title>
+        <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
+        <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-        }
+    </head>
 
-        .page-wrapper {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-        }
+    <body>
+        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+             data-sidebar-position="fixed" data-header-position="fixed">
+            <jsp:include page="SlideBar.jsp"></jsp:include>
+                <div class="body-wrapper">
+                <jsp:include page="Profile.jsp"></jsp:include>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container-fluid" style="height: 800px;width: 1300px">
+                                <!-- Page Heading -->
+                                <h1 class="h3 mb-2 text-gray-800">CUSTOMERS</h1>
+                            <c:if test="${not empty customer}">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addCustomer">
+                                    <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Customer</p>
+                                </button>
+                            </c:if>
+                            <div class="card shadow mb-4">
 
-        .sidebar {
-            width: 250px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            background-color: #C59B24;
-            color: white;
-            z-index: 1000;
-            padding-top: 20px;
-        }
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="sortable">ID</th>
+                                                    <th class="sortable">First Name</th>
+                                                    <th class="sortable">Last Name</th>
+                                                    <th class="sortable">Phone Number</th>
+                                                    <th class="sortable">Email</th>
+                                                    <th class="sortable">ID Card</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${allCustomer}" var="o">
+                                                    <tr>
+                                                        <td data-label="ID">${o.customerId}</td>
+                                                        <td data-label="First Name">${o.firstName}</td>
+                                                        <td data-label="Last Name">${o.lastName}</td>
+                                                        <td data-label="Phone Number">${o.phoneNumber}</td>
+                                                        <td data-label="Email">${o.email}</td>
+                                                        <td data-label="ID Card">${o.idCard}</td>
+                                                        <td data-label="Actions">
+                                                            <a href="UpdateCustomer.jsp?id=${o.customerId}"class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                                <c:forEach items="${customer}" var="o">
+                                                    <tr>
+                                                        <td>${o.customerId}</td>
+                                                        <td>${o.firstName}</td>
+                                                        <td>${o.lastName}</td>
+                                                        <td>${o.phoneNumber}</td>
+                                                        <td >${o.email}</td>
+                                                        <td>${o.idCard}</td>
+                                                        <td data-label="Actions">
+                                                            <a href="UpdateCustomer.jsp?id=${o.customerId}"class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                            <a href="customerController?action=delete&id=${o.customerId}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
 
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            padding: 10px 20px;
-        }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        .sidebar a:hover {
-            background-color: #a07d1d;
-        }
+        <div class="container-fluid">
+            <div class="modal fade" id="addCustomer">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="customerController?action=add" method="post">        
+                            <div class="modal-header">						
+                                <h4 class="modal-title">Add Customer</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">					
+                                <div class="form-group">
+                                    <input class="form-control" id="firstName" name="firstName" type="text"  placeholder="First Name"/>
+                                    <span id="firstName-error" style="color: red;"></span>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input class="form-control" id="lastName" name="lastName" type="text" placeholder="Last Name"/>
+                                    <span id="lastName-error" style="color: red;"></span>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input class="form-control" id="phone" name="phoneNumber" type="text" placeholder="Phone Number"/>
+                                    <span id="phone-error" style="color: red;"></span>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input class="form-control" id="email" name="email" type="email" placeholder="Your Email"/>
+                                    <span id="email-error" style="color: red;"></span>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input class="form-control" id="card" name="idCard" type="text" placeholder="Card"/>
+                                    <span id="card-error" style="color: red;"></span>
+                                </div>
+                                <br>
+                                <% String rCode = request.getParameter("rCode"); %>
+                                <input class="form-control" id="rCode" name="rCode" hidden value="<%= rCode %>"/>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                <input type="submit" class="btn btn-success" value="Add">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-        .body-wrapper {
-            flex-grow: 1;
-            margin-left: 250px;
-            padding: 20px;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-        }
+        </div>
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function () {
+                function validateField(field, regex, errorElement, errorMessage) {
+                    var value = field.val();
+                    if (!regex.test(value)) {
+                        errorElement.text(errorMessage);
+                    } else {
+                        errorElement.text("");
+                    }
+                }
 
-        .content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+                $("#firstName").on("input", function () {
+                    validateField(
+                            $(this),
+                            /^[A-Z]/,
+                            $("#firstName-error"),
+                            "The first letter with uppercase."
+                            );
+                });
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: white;
-        }
+                $("#lastName").on("input", function () {
+                    validateField(
+                            $(this),
+                            /^[A-Z]/,
+                            $("#lastName-error"),
+                            "The first letter with uppercase."
+                            );
+                });
 
-        table th,
-        table td {
-            padding: 12px 15px;
-            border: 1px solid #dee2e6;
-            text-align: left;
-        }
+                $("#card").on("input", function () {
+                    validateField(
+                            $(this),
+                            /^\d{12}$/,
+                            $("#card-error"),
+                            "Card number must be exactly 12 digits."
+                            );
+                });
 
-        table thead th {
-            background-color: #C59B24;
-            color: white;
-        }
-
-        table tbody tr:nth-of-type(even) {
-            background-color: #f8f9fa;
-        }
-
-        table tbody tr:hover {
-            background-color: #e9ecef;
-        }
-
-        @media (max-width: 768px) {
-            .body-wrapper {
-                margin-left: 0;
-            }
-
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-        }
-
-        .btn-adjust {
-            border: none;
-            background-color: #C59B24;
-            color: white;
-            padding: 5px 10px;
-            margin: 0 5px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-adjust:hover {
-            background-color: #a07d1d;
-        }
-
-        .quantity-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity {
-            margin: 0 10px;
-        }
-
-        .btn-save {
-            border: none;
-            background-color: #28a745;
-            color: white;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-save:hover {
-            background-color: #218838;
-        }
-
-        .pagination-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .pagination a {
-            margin: 0 5px;
-            padding: 10px 15px;
-            text-decoration: none;
-            color: #343a40;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .pagination a:hover {
-            background-color: #f8f9fa;
-        }
-
-        .pagination a.active {
-            background-color: #C59B24;
-            color: white;
-        }
-        .btn-add {
-            border: none;
-            background-color: #C59B24; /* Màu nền */
-            color: white; /* Màu chữ */
-            padding: 10px 20px; /* Khoảng cách bên trong nút */
-            margin: 10px 0; /* Khoảng cách bên ngoài nút */
-            cursor: pointer; /* Con trỏ chuột */
-            border-radius: 5px; /* Bo tròn góc */
-            text-decoration: none; /* Bỏ gạch chân */
-            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
-        }
-
-        .btn-add:hover {
-            background-color: #C59B24; /* Màu nền khi hover */
-        }.search-input {
-            margin-bottom: 20px;
-            padding: 10px;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-        }
-
-        .sortable:after {
-            content: '\f0dc';
-            font-family: FontAwesome;
-            padding-left: 10px;
-        }
-
-        .sortable.asc:after {
-            content: '\f0de';
-        }
-
-        .sortable.desc:after {
-            content: '\f0dd';
-        }
-    </style>
-    <script>
-         <script>
-        $(document).ready(function() {
-            $("#searchInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#customerTable tbody tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                $("#phone").on("input", function () {
+                    validateField(
+                            $(this),
+                            /^0\d{9}$/,
+                            $("#phone-error"),
+                            "Phone number must be exactly 10 digits."
+                            );
                 });
             });
+        </script>
 
-            $('#customerTable th').on('click', function() {
-                var index = $(this).index();
-                var table = $(this).parents('table');
-                var rows = table.find('tbody > tr').toArray().sort(comparer(index));
-                this.asc = !this.asc;
-                if (!this.asc) {
-                    rows = rows.reverse();
-                }
-                table.find('thead th').removeClass('asc desc');
-                $(this).addClass(this.asc ? 'asc' : 'desc');
-                for (var i = 0; i < rows.length; i++) {
-                    table.append(rows[i]);
-                }
-            });
-
-            function comparer(index) {
-                return function(a, b) {
-                    var valA = getCellValue(a, index),
-                        valB = getCellValue(b, index);
-                    return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
-                };
-            }
-
-            function getCellValue(row, index) {
-                return $(row).children('td').eq(index).text();
-            }
-        });
-    </script>
-</head>
-
-<body>
-    <!--  Body Wrapper -->
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-        data-sidebar-position="fixed" data-header-position="fixed">
-        <div class="sidebar">
-            <jsp:include page="SlideBar.jsp"></jsp:include>
-        </div>
-
-        <div class="body-wrapper">
-            <jsp:include page="Profile.jsp"></jsp:include>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search for customers...">
-            <section class="rooms-section spad">
-                <table id="customerTable">
-                    <thead>
-                        <tr>
-                            <th class="sortable">ID</th>
-                            <th class="sortable">First Name</th>
-                            <th class="sortable">Last Name</th>
-                            <th class="sortable">Phone Number</th>
-                            <th class="sortable">Email</th>
-                            <th class="sortable">ID Card</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${allCustomer}" var="o">
-                            <tr>
-                                <td data-label="ID">${o.customerId}</td>
-                                <td data-label="First Name">${o.firstName}</td>
-                                <td data-label="Last Name">${o.lastName}</td>
-                                <td data-label="Phone Number">${o.phoneNumber}</td>
-                                <td data-label="Email">${o.email}</td>
-                                <td data-label="ID Card">${o.idCard}</td>
-                                <td data-label="Actions">
-                                    <a href="UpdateCustomer.jsp?id=${o.customerId}">Edit</a> | <a href="customerController?action=delete&id=${o.customerId}">Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </section>
-        </div>
-    </div>
-
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-</body>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="dashboard/assets/js/sidebarmenu.js"></script>
+        <script src="dashboard/assets/js/app.min.js"></script>
+        <script src="dashboard/assets/libs/simplebar/dist/simplebar.js"></script>
+    </body>
 
 </html>

@@ -14,7 +14,7 @@ public class DBConnect {
         String userName = "root";
 
 
-        String password = "12345";
+        String password = "123456";
 
 
         try {

@@ -79,21 +79,39 @@
                     }
                 }
 
+                $("#firstName").on("input", function () {
+                    validateField(
+                            $(this),
+                            /^[A-Z]/,
+                            $("#firstName-error"),
+                            "The first letter with uppercase."
+                            );
+                });
+
+                $("#lastName").on("input", function () {
+                    validateField(
+                            $(this),
+                            /^[A-Z]/,
+                            $("#lastName-error"),
+                            "The first letter with uppercase."
+                            );
+                });
+
                 $("#card").on("input", function () {
                     validateField(
                             $(this),
                             /^\d{12}$/,
                             $("#card-error"),
-                            "Invalid card number. Card number must be exactly 12 digits."
+                            "Card number must be exactly 12 digits."
                             );
                 });
 
                 $("#phone").on("input", function () {
                     validateField(
                             $(this),
-                            /^\d{10}$/,
+                            /^0\d{9}$/,
                             $("#phone-error"),
-                            "Invalid phone number. Phone number must be exactly 10 digits."
+                            "Phone number must be exactly 10 digits."
                             );
                 });
 
