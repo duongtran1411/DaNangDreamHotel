@@ -96,7 +96,7 @@ public class DAORoom extends DBConnect {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, name);
             pre.setInt(2, floor);
-            pre.setInt(3, price);
+            pre.setDouble(3, price);
             pre.setInt(4, size);
             pre.setInt(5, typeRoom);
             pre.executeUpdate();
