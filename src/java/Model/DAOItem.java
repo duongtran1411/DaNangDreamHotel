@@ -21,26 +21,7 @@ import java.util.logging.Logger;
  */
 public class DAOItem extends DBConnect {
 
-    public List<Item> searchItems(String query) {
-        List<Item> items = new ArrayList<>();
-        String sql = "SELECT * FROM items WHERE name LIKE ?";
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, query + "%");
-            ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                Item item = new Item();
-                item.setItem_Id(rs.getInt("item_Id"));
-                item.setName(rs.getString("name"));
-                item.setTypeItem_Id(rs.getInt("typeItem_Id"));
-                item.setPrice(rs.getDouble("price"));
-                items.add(item);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return items;
-    }
+
     public int getTotalItem() {
         String sql = "select count(item_Id) "
                 + "from items";
@@ -60,7 +41,16 @@ public class DAOItem extends DBConnect {
     public List<Item> getItemsWithPagin(int currentPage, int itemsPerPage) {
         List<Item> list = new ArrayList();
         int startIndex = (currentPage - 1) * itemsPerPage;
-        String sql = "select * from items LIMIT ? OFFSET ?";
+        String sql = "SELECT \n"
+                + "    i.item_id, \n"
+                + "    i.name ,\n"
+                + "    i.price, \n"
+                + "    t.typeItem_Id, \n"
+                + "    t.name AS type_name\n"
+                + "FROM \n"
+                + "    (SELECT * FROM items ORDER BY item_id LIMIT ? OFFSET ?) i\n"
+                + "JOIN \n"
+                + "    typeofitem t ON i.typeItem_Id = t.typeItem_Id;";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
 
@@ -69,9 +59,10 @@ public class DAOItem extends DBConnect {
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 Item x = new Item();
-                x.item_Id = rs.getInt("item_Id");
+                x.item_Id = rs.getInt("item_id");
                 x.name = rs.getString("name");
                 x.typeItem_Id = rs.getInt("typeItem_Id");
+                x.typeName = rs.getString("type_name");
                 x.price = rs.getDouble("price");
                 list.add(x);
             }
@@ -89,10 +80,10 @@ public class DAOItem extends DBConnect {
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 ItemInRoom x = new ItemInRoom();
-               int id = rs.getInt("item_In_Room_Id");
-               int item_Id= rs.getInt("item_Id");
-               int room_Id = rs.getInt("room_Id");
-               int quantity = rs.getInt("quantity");
+                int id = rs.getInt("item_In_Room_Id");
+                int item_Id = rs.getInt("item_Id");
+                int room_Id = rs.getInt("room_Id");
+                int quantity = rs.getInt("quantity");
                 list.add(x);
             }
         } catch (SQLException ex) {
@@ -310,14 +301,14 @@ public class DAOItem extends DBConnect {
     public void InsertItemInRoom(int itemId, int roomId) {
         String sql = "insert into item_in_room(item_Id,room_id, quantity) "
                 + "values(?,?,?)";
-        try{
+        try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, itemId);
             pre.setInt(2, roomId);
             pre.setInt(3, 0);
             pre.executeUpdate();
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        }
     }
 }

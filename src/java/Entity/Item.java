@@ -14,6 +14,7 @@ public class Item {
     public int item_Id;
     public String name;
     public int typeItem_Id;
+    public String typeName;
     public double price;
 
     public Item() {
@@ -24,6 +25,22 @@ public class Item {
         this.name = name;
         this.typeItem_Id = typeItem_Id;
         this.price = price;
+    }
+
+    public Item(int item_Id, String name, int typeItem_Id, String typeName, double price) {
+        this.item_Id = item_Id;
+        this.name = name;
+        this.typeItem_Id = typeItem_Id;
+        this.typeName = typeName;
+        this.price = price;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
     
     public Item(String name) {  

@@ -1,26 +1,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Entity.FormatUtils" %>
+<%@ page import="Model.DAOTypeItem" %>
+<%@ page import="Entity.TypeItem" %>
+<%@ page import="java.util.List" %>
 <!doctype html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Da Nang Hotel - Item Types</title>
-        <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+        <title>Da Nang Hotel</title>
+        <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
         <style>
             .pagination-container {
                 display: flex;
                 justify-content: center;
                 margin-top: 20px;
             }
-
             .pagination a {
                 margin: 0 5px;
                 padding: 10px 15px;
@@ -30,7 +33,6 @@
                 border-radius: 5px;
                 transition: background-color 0.3s;
             }
-
             .pagination a:hover {
                 background-color: #f8f9fa;
             }
@@ -62,93 +64,62 @@
                 content: '\f0dd';
             }
         </style>
-
     </head>
-
     <body>
-        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+             data-sidebar-position="fixed" data-header-position="fixed">
             <jsp:include page="SlideBar.jsp"></jsp:include>
 
                 <div class="body-wrapper">
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTypeModal">
-                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Type</p>                  
-                            </button>
                             <div class="container-fluid" style="height: 800px;width: 1300px">
 
-                                <input type="text" id="searchInput" class="search-input" placeholder="Search for items...">
+                                <input type="text" id="searchInput" class="search-input" placeholder="Search for bookings...">
 
-                                <h1 class="h3 mb-2 text-gray-800">Tables Type Of Item</h1>
+                                <h1 class="h3 mb-2 text-gray-800">Tables Booking Detail</h1>
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
-                                                    <tr>
-                                                        <th class="sortable">Name</th>
+                                                    <tr>    
+                                                        <th class="sortable">Room Name</th>
+                                                        <th class="sortable">Type</th>
+                                                        <th class="sortable">Start Day</th>
+                                                        <th class="sortable">End Day</th>
+                                                        <th class="sortable">Price</th>
+                                                        <th class="sortable">Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="content">
-                                                <c:forEach items="${allType}" var="type">
+                                                <c:forEach items="${allBooking}" var="o">
                                                     <tr>
-                                                        <td data-label="Type Name">${type.name}</td>
+                                                        <td data-label="FirstName">${o.roomName}</td>
+                                                        <td data-label="LastName">${o.typeRoomId}</td>
+                                                        <td data-label="StartDay">${o.startDay}</td>
+                                                        <td data-label="endDay">${o.endDay}</td>
+                                                         <td data-label="price">${FormatUtils.formatPRice(o.price)}đ</td>
+                                                         <td data-label="status">${o.status}</td>
                                                         <td data-label="Actions">
-                                                            <a href="UpdateTypeOfItem.jsp?id=${type.typeItem_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
-                                                            <a href="ItemTypeController?action=delete&id=${type.typeItem_Id}" class="delete" title="Delete" data-toggle="tooltip" 
+                                                            <a href="BookingDetailURL?id=${o.bookingId}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                            <a href="BookingDetailURL?action=delete&id=${o.bookingDetailId}" class="delete" title="Delete" data-toggle="tooltip" 
                                                                onclick="return confirmDelete();"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
                                         </table>
-                                    </div>
-                                    <div class="pagination-container">
-                                        <div class="pagination">
-                                            <c:if test="${currentPage > 1}">
-                                                <a href="ItemTypeController?page=${currentPage - 1}">Previous</a>
-                                            </c:if>
-                                            <c:forEach begin="1" end="${totalPages}" var="page">
-                                                <a href="ItemTypeController?page=${page}" class="${page == currentPage ? 'active' : ''}">${page}</a>
-                                            </c:forEach>
-                                            <c:if test="${currentPage < totalPages}">
-                                                <a href="ItemTypeController?page=${currentPage + 1}">Next</a>
-                                            </c:if>
-                                        </div>
-                                    </div>
+                                            <a href="bookingController">Back</a>
+                                    </div>    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid">
-            <div class="modal fade" id="addTypeModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form id="addItemForm" action="ItemTypeController?action=add" method="post">
-                            <div class="modal-header">			
-                                <h4 class="modal-title">Add Type</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">					
-                                <div class="form-group" style="margin-bottom: 12px">
-                                    <label>Name</label>
-                                    <input name="name" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                                <input type="submit" class="btn btn-success" value="Add">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
         </div>
         <script>
             $(document).ready(function () {
@@ -189,7 +160,7 @@
         </script>
         <script>
             function confirmDelete() {
-                return confirm("Are you sure you want to remove this item?");
+                return confirm("Are you sure you want to remove this booking?");
             }
         </script>
     </body>
