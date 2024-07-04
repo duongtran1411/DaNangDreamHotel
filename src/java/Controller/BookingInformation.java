@@ -6,8 +6,6 @@ package Controller;
 
 import Entity.BookingCart;
 import Entity.CartItem;
-import Entity.Room;
-import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,13 +13,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 /**
  *
- * @author CaoTung
+ * @author GIGABYTE
  */
-public class CartController extends HttpServlet {
+public class BookingInformation extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class CartController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CartController</title>");
+            out.println("<title>Servlet BookingInformation</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CartController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BookingInformation at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,8 +67,18 @@ public class CartController extends HttpServlet {
         if (bookingCart == null) {
             bookingCart = new BookingCart();
         }
-        session.setAttribute("cart", bookingCart);
-        doPost(request, response);
+        String checkIn = (String) session.getAttribute("checkInDay");
+        String checkOut = (String) session.getAttribute("checkOutDay");
+        int total = bookingCart.getTotalMoney();
+        LocalDate dateIn = LocalDate.parse(checkIn);
+        LocalDate dateOut = LocalDate.parse(checkOut);
+        long daysBetween = ChronoUnit.DAYS.between(dateIn, dateOut);
+        session.setAttribute("cart", bookingCart.getListCartItem());
+        session.setAttribute("total", total * daysBetween);
+        session.setAttribute("checkInDay", checkIn);
+        session.setAttribute("checkOutDay", checkOut);
+        request.getRequestDispatcher("vnpay_pay.jsp").forward(request, response);
+
     }
 
     /**
@@ -82,57 +92,7 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(3000);
-        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
-        String action = request.getParameter("action");
-        switch (action) {
-            case "get":
-                response.sendRedirect("viewCart");
-                break;
-            case "delete":
-                doDelete(request, response);
-                break;
-            case "post":
-                String id = request.getParameter("id");
-                int roomId = Integer.parseInt(id);
-                DAORoom dao = new DAORoom();
-                List<CartItem> list = bookingCart.getListCartItem();
-
-                boolean roomFound = false;
-                for (CartItem cartItem : list) {
-                    if (cartItem.getRoom().getRoom_Id() == roomId) {
-                        roomFound = true;
-                        response.sendRedirect("viewCartController");
-                        break;
-                    }
-                }
-                if (!roomFound) {
-                    Room room = dao.getRoomToCart(roomId);
-                    CartItem cartItem = new CartItem(room);
-                    bookingCart.addRoom(cartItem);
-                    String checkIn = (String)session.getAttribute("checkInDay");
-                    String checkOut = (String)session.getAttribute("checkOutDay");
-                    System.out.println(checkIn + "  " +checkOut);
-                    session.setAttribute("checkInDay", checkIn);
-                    session.setAttribute("checkOutDay", checkOut);
-                    session.setAttribute("cart", bookingCart);
-                    request.getRequestDispatcher("viewCartController").forward(request, response);
-                }
-                break;
-        }
-
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
-        String id = req.getParameter("Id");
-        int roomId = Integer.parseInt(id);
-        bookingCart.remove(roomId);
-        session.setAttribute("cart", bookingCart);
-        resp.sendRedirect("viewCartController");
+        processRequest(request, response);
     }
 
     /**

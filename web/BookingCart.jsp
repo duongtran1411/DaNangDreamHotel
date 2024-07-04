@@ -46,7 +46,7 @@
     <body>
         <jsp:include page="Header.jsp"></jsp:include>
             <section class="h-100 h-custom" style="background-color: #eee;">
-
+                <button id="backButton">Back</button>
                 <div class="container py-5 h-100">
 
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -132,7 +132,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
     <script>
                                                     function redirectToAdd() {
-                                                        window.location.href = "vnpay_pay.jsp";
+                                                        window.location.href = "bookingInformationController";
                                                     }
                                                     function handleChange() {
                                                         var selectElement = document.getElementById("roomSelect");
@@ -173,6 +173,9 @@
                                                             }
                                                         });
                                                     }
+                                                    document.getElementById("backButton").addEventListener("click", function () {
+                                                        window.history.back();
+                                                    });
 //        var sessionTimeout = setTimeout(function() {
 //            alert("timeout");
 //        }, 1000);

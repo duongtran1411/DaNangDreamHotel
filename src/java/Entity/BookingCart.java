@@ -7,10 +7,7 @@ package Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author CaoTung
- */
+
 public class BookingCart {
 
     private List<CartItem> list;
