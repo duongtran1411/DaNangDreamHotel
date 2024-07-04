@@ -132,7 +132,7 @@
                                     <span id="card-error" style="color: red;"></span>
                                 </div>
                                 <br>
-                                <% int rCode = Integer.parseInt(request.getParameter("rCode")); %>
+                                <% String rCode = request.getParameter("rCode"); %>
                                 <input class="form-control" id="rCode" name="rCode" hidden value="<%= rCode %>"/>
                             </div>
                             <div class="modal-footer">

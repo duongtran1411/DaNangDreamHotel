@@ -34,6 +34,9 @@ public class CustomerController extends HttpServlet {
             case "edit":
                 editCustomer(request, response);
                 break;
+            case "add":
+                addCustomer(request, response);
+                break;
             case "delete":
                 deleteCustomer(request, response);
                 break;
@@ -55,14 +58,8 @@ public class CustomerController extends HttpServlet {
     }// </editor-fold>
 
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
-        int cusPerPage = 6;
-        int totalCus = daoCustomer.getTotalCustomer();
-        int totalPages = (int) Math.ceil((double) totalCus / cusPerPage);
-        List<Customer> allCus = daoCustomer.getCusWithPagin(currentPage, cusPerPage);
-        request.setAttribute("allCustomer", allCus);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("totalPages", totalPages);
+        List<Customer> allCustomer = daoCustomer.getAllCustomer();
+        request.setAttribute("allCustomer", allCustomer);
         request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);
     }
 

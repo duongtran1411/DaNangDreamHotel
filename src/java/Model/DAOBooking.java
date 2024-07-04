@@ -163,7 +163,5 @@ public class DAOBooking extends DBConnect {
 
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-        //        System.out.println(dao.getAllBooking());
-        dao.addCustomerAndBooking("Minh", "Nguyen", "19230192", "son@gmail.com", "224232", "2024-07-07", "2024-07-07", 800000);
     }
 }

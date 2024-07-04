@@ -736,7 +736,6 @@ public class DAORoom extends DBConnect {
     
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        System.out.println(dao.checkRoom("2024-07-03", "2024-07-03", 1));
     }
     
 }

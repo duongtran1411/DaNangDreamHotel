@@ -1,4 +1,5 @@
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -53,14 +54,7 @@
                         <span class="hide-menu white">Manage Customer</span>
                     </a>
                 </li>
-                <li  class="sidebar-item">
-                    <a  class="sidebar-link" href="bookingController" aria-expanded="false">
-                        <span>
-                            <i class="fa-solid fa-users white"></i>
-                        </span>
-                        <span class="hide-menu white">Manage Booking</span>
-                    </a>
-                </li>
+
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="itemManageURL" aria-expanded="false">
                         <span>
@@ -69,7 +63,6 @@
                         <span class="hide-menu white">Manage Item In Room</span>
                     </a>
                 </li>
-          
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="ItemController" aria-expanded="false">
                         <span>
@@ -140,9 +133,9 @@
 </aside>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script>
-                        $(document).ready(function () {
-                            $("#show").click(function () {
-                                $(".list").toggle();
-                            });
-                        });
+    $(document).ready(function () {
+        $("#show").click(function () {
+            $(".list").toggle();
+        });
+    });
 </script>

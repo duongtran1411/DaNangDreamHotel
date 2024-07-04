@@ -5,7 +5,6 @@
 package Model;
 
 import Entity.Customer;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,7 +63,7 @@ public class DAOCustomer extends DBConnect {
         return cus;
     }
 
-    public void insertCustomer(String firstName, String lastName, String phoneNumber, String email, String idCard, int rCode) {
+    public void insertCustomer(String firstName, String lastName, String phoneNumber, String email, String idCard, String rCode) {
         String sql = "insert into customer(firstName, lastName, phone, email, idCard, reservationCode)"
                 + " values(?,?,?,?,?,?)";
         try {
@@ -74,37 +73,8 @@ public class DAOCustomer extends DBConnect {
             pre.setString(3, phoneNumber);
             pre.setString(4, email);
             pre.setString(5, idCard);
-            pre.setInt(6, rCode);
+            pre.setString(6, rCode);
             pre.execute();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void addCustomerVNPAY(String firstName, String lastName, String phoneNumber, String email, String idCard) {
-        String insertSql = "INSERT INTO customer (firstName, lastName, phone, email, idCard) VALUES (?, ?, ?, ?, ?)";
-        String updateSql = "UPDATE customer SET reservationCode = customer_Id WHERE customer_Id = ?";
-
-        try {
-            // Chèn bản ghi mới vào bảng customer
-            PreparedStatement insertStmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
-            insertStmt.setString(1, firstName);
-            insertStmt.setString(2, lastName);
-            insertStmt.setString(3, phoneNumber);
-            insertStmt.setString(4, email);
-            insertStmt.setString(5, idCard);
-            insertStmt.executeUpdate();
-
-            // Lấy giá trị customer_Id tự tăng vừa chèn
-            ResultSet rs = insertStmt.getGeneratedKeys();
-            if (rs.next()) {
-                int customerId = rs.getInt(1);
-
-                // Cập nhật reservationCode bằng giá trị customer_Id vừa lấy
-                PreparedStatement updateStmt = conn.prepareStatement(updateSql);
-                updateStmt.setInt(1, customerId);
-                updateStmt.executeUpdate();
-            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -142,6 +112,5 @@ public class DAOCustomer extends DBConnect {
 
     public static void main(String[] args) {
         DAOCustomer dao = new DAOCustomer();
-
     }
 }
