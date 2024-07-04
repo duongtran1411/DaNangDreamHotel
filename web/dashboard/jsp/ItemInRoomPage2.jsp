@@ -47,15 +47,13 @@
                                                     <th>Action</th>
                                                     <th>Floor</th>
                                                     <th>Name
-                                                        <button onclick="sortNameUp()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-down"></i></button>
-                                                        <button onclick="sortNameDown()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-up"></i></button>
+                                                  
                                                     </th>
                                                     <th>Price
-                                                        <button onclick="sortPriceUp()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-down"></i></button>
-                                                        <button onclick="sortPriceDown()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-up"></i></button>
+                                                   
                                                     </th>
                                                     <th>Size</th>
-                                                    <th>Image</th>
+                                           
                                                 </tr>
                                             </thead>
                                             <tbody id="content">
@@ -68,9 +66,7 @@
                                                         <td>${o.name}</td>
                                                         <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber> </td>
                                                         <td>${o.size} m²</td>
-                                                        <td>
-                                                            <a href="imageRoomURL?action=view&rid=${o.room_Id}"><i class="far fa-eye successful"></i></a>
-                                                        </td>
+                                                    
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -90,86 +86,7 @@
         </div>
         <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-        <script>
-                                                            $(document).ready(function () {
-                                                                $('#dataTable').DataTable({
-                                                                    "paging": true,
-                                                                    "lengthChange": true,
-                                                                    "searching": true,
-                                                                    "ordering": true,
-                                                                    "info": true,
-                                                                    "autoWidth": false,
-                                                                    "lengthMenu": [[10], [10]]
-                                                                });
-                                                            });
 
-                                                            function sortNameUp() {
-                                                                $.ajax({
-                                                                    url: '/DaNangDreamHotel/roomURL?action=sortnameasc',
-                                                                    type: 'GET',
-                                                                    success: function (data) {
-                                                                        var row = document.getElementById("content"); // Thay #content bằng id của phần tử chứa bảng dữ liệu
-                                                                        row.innerHTML = data; // Cập nhật nội dung bảng với dữ liệu được trả về từ server
-                                                                        console.log("success");
-                                                                    },
-                                                                    error: function (xhr) {
-                                                                        console.log(xhr);
-                                                                    }
-                                                                });
-                                                            }
-                                                            function sortNameDown() {
-                                                                $.ajax({
-                                                                    url: '/DaNangDreamHotel/roomURL?action=sortnamedesc',
-                                                                    type: 'GET',
-                                                                    success: function (data) {
-                                                                        var row = document.getElementById("content"); // Thay #content bằng id của phần tử chứa bảng dữ liệu
-                                                                        row.innerHTML = data; // Cập nhật nội dung bảng với dữ liệu được trả về từ server
-                                                                        console.log("success");
-                                                                    },
-                                                                    error: function (xhr) {
-                                                                        console.log(xhr);
-                                                                    }
-                                                                });
-                                                            }
-                                                            function sortPriceUp() {
-                                                                var amount = 0;
-                                                                $.ajax({
-                                                                    url: '/DaNangDreamHotel/roomURL?action=sortpriceup',
-                                                                    type: 'GET',
-                                                                    data: {
-                                                                        size: amount
-                                                                    },
-                                                                    success: function (data) {
-                                                                        var row = document.getElementById("content");
-                                                                        row.innerHTML = data;
-                                                                        console.log("success");
-                                                                    },
-                                                                    error: function (xhr) {
-                                                                        console.log(xhr);
-                                                                    }
-                                                                });
-                                                            }
-
-
-                                                            function sortPriceDown() {
-                                                                var amount = 0;
-                                                                $.ajax({
-                                                                    url: '/DaNangDreamHotel/roomURL?action=sortpricedown',
-                                                                    type: 'GET',
-                                                                    data: {
-                                                                        size: amount
-                                                                    },
-                                                                    success: function (data) {
-                                                                        var row = document.getElementById("content");
-                                                                        row.innerHTML = data;
-                                                                        console.log("success");
-                                                                    },
-                                                                    error: function (xhr) {
-                                                                        console.log(xhr);
-                                                                    }
-                                                                });
-                                                            }
-        </script>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>

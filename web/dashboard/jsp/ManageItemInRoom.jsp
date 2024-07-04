@@ -112,43 +112,43 @@
                         <div class="card-body">
                             <div class="container-fluid" style="height: 800px;width: 1300px">
                                 <input type="text" id="searchInput" class="search-input" placeholder="Search for item...">
-                               <%
-    try {
-        int roomId = Integer.parseInt(request.getParameter("rid"));
-        DAORoom dao = new DAORoom();
-        Room r = dao.getNameByRoomId(roomId);
+                            <%
+ try {
+     int roomId = Integer.parseInt(request.getParameter("rid"));
+     DAORoom dao = new DAORoom();
+     Room r = dao.getNameByRoomId(roomId);
 
-        if (r != null) {
-            out.println("<h1 class='h3 mb-2 text-gray-800'>Table Item In " + r.getName() + "</h1>");
-        } else {
-            out.println("<h1 class='h3 mb-2 text-gray-800'>Room not found</h1>");
-        }
-    } catch (NumberFormatException e) {
-        out.println("<h1 class='h3 mb-2 text-gray-800'>Invalid room ID</h1>");
-        e.printStackTrace();
-    } catch (Exception e) {
-        out.println("<h1 class='h3 mb-2 text-gray-800'>Error retrieving room</h1>");
-        e.printStackTrace();
-    }
-%>
-                            
-                                <div class="card shadow mb-4">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                                <thead>
-                                                    <tr> 
-                                                        <th class="sortable">Item Name</th>
-                                                        <th class="sortable">Quantity</th>
-                                                        <th class="sortable">Price</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                  <tbody id="content">
+     if (r != null) {
+         out.println("<h1 class='h3 mb-2 text-gray-800'>Table Item In " + r.getName() + "</h1>");
+     } else {
+         out.println("<h1 class='h3 mb-2 text-gray-800'>Room not found</h1>");
+     }
+ } catch (NumberFormatException e) {
+     out.println("<h1 class='h3 mb-2 text-gray-800'>Invalid room ID</h1>");
+     e.printStackTrace();
+ } catch (Exception e) {
+     out.println("<h1 class='h3 mb-2 text-gray-800'>Error retrieving room</h1>");
+     e.printStackTrace();
+ }
+                            %>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr> 
+                                                    <th class="sortable">Item Name</th>
+                                                    <th class="sortable">Quantity</th>
+                                                    <th class="sortable">Price</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="content">
                                                 <c:set var="currentRoomName" value="" />
                                                 <c:forEach items="${allItem}" var="o">
                                                     <tr>
-                                                
+
                                                         <td data-label="Item">${o.itemName}</td>
                                                         <td data-label="Quantity" class="quantity-container">
                                                             <button class="btn-adjust btn-decrease" data-id="${o.itemId}"><i class="fas fa-minus"></i></button>
