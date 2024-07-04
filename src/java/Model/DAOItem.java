@@ -292,10 +292,8 @@ public class DAOItem extends DBConnect {
     public static void main(String[] args) {
         DAOItem dao = new DAOItem();
         int i = dao.getTotalItem();
-        List<ItemInRoom> list = dao.getItemInRoom(1);
-        for (ItemInRoom itemInRoom : list) {
-            System.out.println(itemInRoom);
-        }
+    dao.updateItemQuantity(35,2);
+ 
     }
 
     public void InsertItemInRoom(int itemId, int roomId) {

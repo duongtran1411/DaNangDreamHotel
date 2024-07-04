@@ -735,10 +735,10 @@ public class DAORoom extends DBConnect {
     
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        List<Room> list = dao.checkRoom("2024-07-07", "2024-07-08", 2);
-        for (Room room : list) {
-            System.out.println(room);
-        }
+        Room r = dao.getNameByRoomId(1);
+ 
+            System.out.println(r);
+      
         
     }
     
