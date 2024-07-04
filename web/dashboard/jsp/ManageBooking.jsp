@@ -111,7 +111,7 @@
                                                 <c:forEach items="${listB}" var="o">
                                                     <tr>
                                                         <td>
-                                                            <a href="bookingURL?action=view&rCode=${o.idCard}"><i class="far fa-eye successful"></i></a>
+                                                            <a href="bookingURL?action=view&rCode=${o.customer_Id}"><i class="far fa-eye successful"></i></a>
                                                         </td>
                                                         <td>${o.idCard}</td>
                                                         <td>${o.checkIn}</td>
@@ -119,7 +119,6 @@
                                                         <td><fmt:formatNumber type="number">${o.expenses}</fmt:formatNumber> đ</td>
                                                         <td>
                                                             <a href="roomURL?action=loadEdit&rid=" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
-                                                            <a href="roomURL?action=delete&rid=" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>

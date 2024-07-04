@@ -58,7 +58,7 @@
             label{
                 font-weight: 500;
             }
-            
+
             .colo-main{
                 color: #C59B24
             }
@@ -82,9 +82,9 @@
                 padding-top: 25px
             }
             .total{
-               padding-top: 10px 
+                padding-top: 10px
             }
-            
+
             .total span{
                 font-weight: 500
             }
@@ -109,7 +109,7 @@
                         <div>
                             <form action="vnpayajax" id="frmCreateOrder" method="post">        
                                 <div class="form-group">
-                                    <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" name="amount" type="hidden" value="${total}" readonly=""/>
+                                    <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" name="amount" type="" value="${total}" readonly=""/>
                                 <span id="amount-error" style="color: red;"></span>
 
                             </div>
@@ -160,41 +160,29 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">${checkInDay}  ${checkOutDay}</div>
+                        <div class="col-lg-12">${checkInDay} to ${checkOutDay}</div>
                     </div>
                     <div class="row list-room" >
-                        <%--<c:forEach items="${cart}" var="o">--%>
-
-                        <!--                            <div class="col-lg-12 booking-infor" >
-                                                        <div class="row">
-                                                            <div class="col-lg-12">${o.room.name}</div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">more details</div>
-                                                            <div class="col-lg-6">${o.room.price * o.room.discount}</div>
-                                                        </div>
-                                                        <div>
-                        
-                                                        </div>
-                                                    </div>-->
-                        <%--</c:forEach>--%>
-                        <div class="col-lg-12 cart" >
-                            <div class="row booking-infor infor" >
-                                <div class="col-lg-12 conten">
-                                    <div class="name-room">Family Suite</div>
-                                    <div class="detail">
-                                        <div class="col-lg-6"><strong>Show details</strong></div>
-                                        <div class="col-lg-6 price">3.000.000d</div>
+                        <c:forEach items="${ListCart}" var="o">
+                            <div class="col-lg-12 cart" >
+                                <div class="row booking-infor infor" >
+                                    <div class="col-lg-12 conten">
+                                        <div class="name-room">${o.room.name}</div>
+                                        <div class="detail">
+                                            <div class="col-lg-6"><strong>Show details</strong></div>
+                                            <div class="col-lg-6 price">${o.room.price * o.room.discount}d</div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="row total">
+                                    <div class="col-lg-12">
+                                        <span>Total room price: ${total}</span>
+                                        <p>Including all taxes and service fees</p>
                                     </div>
                                 </div>
-                            </div> 
-                            <div class="row total">
-                                <div class="col-lg-12">
-                                    <span>Total room price:</span>
-                                    <p>Including all taxes and service fees</p>
-                                </div>
                             </div>
-                        </div>
+                        </c:forEach>
+
                     </div>
                 </div>
             </div>

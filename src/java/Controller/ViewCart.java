@@ -79,11 +79,11 @@ public class ViewCart extends HttpServlet {
         }
         LocalDate dateIn = LocalDate.parse(checkIn);
         LocalDate dateOut = LocalDate.parse(checkOut);
-        long daysBetween = ChronoUnit.DAYS.between(dateIn, dateOut);
+        int daysBetween = (int) ChronoUnit.DAYS.between(dateIn, dateOut);
         session.setAttribute("listT", listT);
         session.setAttribute("total", total * daysBetween);
         session.setAttribute("numberDay", daysBetween);
-        request.setAttribute("list", bookingCart.getListCartItem());
+        session.setAttribute("list", bookingCart.getListCartItem());
         request.getRequestDispatcher("BookingCart.jsp").forward(request, response);
     }
 

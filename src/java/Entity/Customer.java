@@ -16,9 +16,9 @@ public class Customer {
     public String phoneNumber;
     public String email;
     public String idCard;
-    public String reservationCode;
+    public int reservationCode;
 
-    public Customer(int customerId, String firstName, String lastName, String phoneNumber, String email, String idCard, String reservationCode) {
+    public Customer(int customerId, String firstName, String lastName, String phoneNumber, String email, String idCard, int reservationCode) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,11 +28,11 @@ public class Customer {
         this.reservationCode = reservationCode;
     }
 
-    public String getReservationCode() {
+    public int getReservationCode() {
         return reservationCode;
     }
 
-    public void setReservationCode(String reservationCode) {
+    public void setReservationCode(int reservationCode) {
         this.reservationCode = reservationCode;
     }
 

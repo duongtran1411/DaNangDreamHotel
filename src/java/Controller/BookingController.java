@@ -82,7 +82,7 @@ public class BookingController extends HttpServlet {
     }// </editor-fold>
 
     private void viewCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String rCode = request.getParameter("rCode");
+        int rCode = Integer.parseInt(request.getParameter("rCode"));
         List<Customer> viewCustomer = daoB.getCustomerSameBooking(rCode);
         request.setAttribute("customer", viewCustomer);
         request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);

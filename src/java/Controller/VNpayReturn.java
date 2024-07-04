@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.BookingCart;
 import Entity.CartItem;
+import Model.DAOBooking;
 import Model.DAOCustomer;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -48,10 +49,15 @@ public class VNpayReturn extends HttpServlet {
             String phone = (String) req.getSession().getAttribute("phone");
             String email = (String) req.getSession().getAttribute("email");
             String card = (String) req.getSession().getAttribute("card");
+            String checkIn = (String) req.getSession().getAttribute("checkInDay");
+            String checkOut = (String) req.getSession().getAttribute("checkOutDay");
+            Long totalLong = (Long) req.getSession().getAttribute("total");
+            int total = totalLong.intValue();
             BookingCart bookingCart = (BookingCart) req.getSession().getAttribute("cart");
             List<CartItem> list = bookingCart.getListCartItem();
-            DAOCustomer daoC = new DAOCustomer();
-            daoC.insertCustomer(firstName, lastName, phone, email, card, card);
+            DAOBooking daoB = new DAOBooking();
+//            daoC.addCustomerVNPAY(firstName, lastName, phone, email, card);
+            daoB.addCustomerAndBooking(firstName, lastName, phone, email, card, checkIn, checkOut, total);
 
             if (email != null && !email.equals("")) {
                 String to = email; // recipient's email
@@ -88,7 +94,7 @@ public class VNpayReturn extends HttpServlet {
                             + "<ul>"
                             + "<li><b>Booking ID:</b> 1</li>"
                             + "<li><b>Date:</b> " + formattedDate + " </li>"
-                            + "<li><b>Room:</b> "+ list +" </li>"
+                            + "<li><b>Room:</b> " + list + " </li>"
                             + "</ul>"
                             + "<p>We look forward to serving you.</p>"
                             + "<p>Best regards,</p>"
@@ -111,7 +117,7 @@ public class VNpayReturn extends HttpServlet {
             req.getSession().removeAttribute("email");
             req.getSession().removeAttribute("card");
             req.getSession().removeAttribute("cart");
-            
+
         }
 
         // Redirect to a confirmation page or display a message

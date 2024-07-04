@@ -19,6 +19,16 @@ public class Booking {
         this.create_at = create_at;
     }
 
+    public Booking(int booking_Id, String checkIn, String checkOut, int expenses, String create_at, String idCard, int customer_Id) {
+        this.booking_Id = booking_Id;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.expenses = expenses;
+        this.create_at = create_at;
+        this.idCard = idCard;
+        this.customer_Id = customer_Id;
+    }
+    
     public Booking(int booking_Id, String checkIn, String checkOut, int expenses, String create_at, String idCard) {
         this.booking_Id = booking_Id;
         this.checkIn = checkIn;
