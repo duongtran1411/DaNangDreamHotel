@@ -91,23 +91,26 @@
                         <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                             <div class="booking-form">
                                 <h3>Booking Your Hotel</h3>
-                                <form action="bookingController" method="get">
+                                <form action="bookByEventController" method="get">
                                     <div class="check-date date-picker">
                                         <label for="checkin">Check-in</label>
 
-                                        <input type="date" class="form-control w-100 dateCheck" id="checkin" >
+                                        <input type="date" class="form-control w-100 dateCheck" id="checkin" name="checkIn">
                                         <!--                                        <i class="icon_calendar"></i>-->
                                     </div>
                                     <div class="check-date date-picker">
                                         <label for="checkout">Check-out</label>
-                                        <input type="date" class="form-control w-100 dateCheck" id="checkout" >
+                                        <input type="date" class="form-control w-100 dateCheck" id="checkout" name="checkOut">
                                         <!--<i class="icon_calendar"></i>-->
                                     </div>
                                     <div class="select-option">
                                         <label for="guest">Guests:</label>
                                         <select id="guest">
-                                            <option value="">2 Adults</option>
-                                            <option value="">3 Adults</option>
+                                            <option value="1">1 Adults</option>
+                                            <option value="2">2 Adults</option>
+                                            <option value="3">3 Adults</option>
+                                            <option value="3">4 Adults</option>
+                                            <option value="3">5 Adults</option>
                                         </select>
                                     </div>
                                     <button type="submit">Check Availability</button>
@@ -399,7 +402,7 @@
                                         var minDate = year + '-' + tmonth + '-' + tdate;
                                         var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
                                         var showDateIn = document.getElementById('checkin').setAttribute('value', minDate);
-                                        var tdateMin = date.getDate() + 2;
+                                        var tdateMin = date.getDate() + 1;
                                         var tmonthMin = date.getMonth() + 1;
                                         if (tdateMin < 10) {
                                             tdateMin = '0' + tdateMin;
@@ -425,7 +428,7 @@
                                             }
                                         });
 
-
+                                        
 
         </script>
     </body>

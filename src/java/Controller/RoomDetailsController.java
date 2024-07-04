@@ -65,12 +65,15 @@ public class RoomDetailsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int room_Id = Integer.parseInt(request.getParameter("Id"));
+        int typeRoom_Id = Integer.parseInt(request.getParameter("typeRoom"));
         DAORoom daoR = new DAORoom();
         DAOItem daoItem = new DAOItem();
         DAOImageRoom daoI = new DAOImageRoom();
         Room room = daoR.getRoomById(room_Id);
         List<ImageRoom> list = daoI.getImageByRoomId(room_Id);
         List<ItemInRoom> listI = daoItem.getItemInRoom(room_Id);
+        List<Room> listR = daoR.getRoomByTypeRoom(typeRoom_Id);
+        request.setAttribute("listR", listR);
         request.setAttribute("room", room);
         request.setAttribute("listImage", list);
         request.setAttribute("listI", listI);
