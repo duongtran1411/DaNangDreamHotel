@@ -74,28 +74,27 @@
         <div class="container mt-5">
             <!-- Header Section -->
             <div class="header-box mb-4">
-                <form class="form-inline row align-items-end" >
+                <div class="form-inline row align-items-end "  >
                     <div class="form-group col-md-4">
                         <label for="destination">Destination</label>
                         <input type="text" class="form-control w-100" id="destination" placeholder="Destination" value="Da Nang Dream Hotel" readonly="" name="dateIn">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="checkin">Check-in</label>
-                        <input type="date" class="form-control w-100" id="checkin" value="${checkInDay}" name="dateOut">
+                        <input type="date" class="form-control w-100" id="checkin" value="${sessionScope.checkInDay}" name="dateIn" >
                 </div>
                 <div class="form-group col-md-3">
                     <label for="checkout">Check-out</label>
-                    <input type="date" class="form-control w-100" id="checkout" value="${checkOutDay}">
+                    <input type="date" class="form-control w-100" id="checkout" value="${sessionScope.checkOutDay}" name="dateOut" >
                 </div>
                 <div class="form-group col-md-2" style="padding-right: 5px;align-items: center">
-                    <button type="submit" class="btn btn w-100" style="background-color: #C59B24; color: white" >Update</button>
+                    <button  class="btn btn w-100" style="background-color: #C59B24; color: white" id="updateButton" >Update</button>
                 </div>
-               <input type="hidden" name="action" value="updateDate">
-
-            </form>
+                <input type="hidden" name="action" value="updateDate">
+            </div>
         </div>
         <!-- End of Header Section -->
-
+        <c:if test="${checkOutDay > checkInDay}">
         <div class="row">
             <div class="col-md-3">
                 <div class="filter-box">
@@ -183,6 +182,11 @@
 
             </div>
         </div>
+        </c:if>
+        <c:if test="${checkOutDay < checkInDay}">
+            <h2 style="color: red">Check-in date is less than check-out date</h2>
+            <a href="homeController" style="color: black">Back to home</a>
+        </c:if>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -194,27 +198,26 @@
                                                         $("#room-details").toggle();
                                                     });
                                                 });
-                                                
-//                                                function handleDate(){
-//                                                    var checkIn = document.getElementById('checkin').value;
-//                                                    var checkOut = document.getElementById('checkout').value;
-//                                                    $.ajax({
-//                                                        url: '/DaNangDreamHotel/loadRoomEvent',
-//                                                        type: 'GET',
-//                                                        data: {
-//                                                            checkIn: checkIn,
-//                                                            checkOut: checkOut,
-//                                                            eventId: e
-//                                                        },
-//                                                        success: function (data) {
-//                                                            var row = document.getElementById('room-details-' + e);
-//                                                            row.innerHTML = data;
-//                                                        },
-//                                                        error: function (xhr) {
-//                                                            console.log(xhr, event);
-//                                                        }
-//                                                    });
-//                                                }
+
+                                                function handleChange() {
+                                                    var checkIn = document.getElementById('checkin').value;
+                                                    var checkOut = document.getElementById('checkout').value;
+                                                    $.ajax({
+                                                        url: '/DaNangDreamHotel/loadRoomEvent',
+                                                        type: 'POST',
+                                                        data: {
+                                                            checkIn: checkIn,
+                                                            checkOut: checkOut
+                                                        },
+                                                        success: function (data) {
+                                                            var row = document.getElementById('dateCheck');
+                                                            row.innerHTML = data;
+                                                        },
+                                                        error: function (xhr) {
+                                                            console.log(xhr);
+                                                        }
+                                                    });
+                                                }
 
                                                 function handleEvent(e) {
                                                     var checkIn = document.getElementById('checkin').value;
@@ -268,12 +271,7 @@
                                                     }
                                                 });
 
-                                                document.getElementById('checkout').addEventListener('input', function (e) {
-                                                    if (e.target.value === '') {
-                                                        e.preventDefault();
-                                                        e.target.value = e.target.defaultValue;
-                                                    }
-                                                });
+                                                
 
     </script>
 

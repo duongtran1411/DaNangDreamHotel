@@ -220,16 +220,12 @@
 
                             </div>
                         </div>
-                        <div class="rdt-right">
-                            <button style="background-color: #DFA974; border: none; padding: 10px 20px;"><a style="color: white" href="cartController?action=post&id=${room.room_Id}">Booking Now</a></button>
-                        </div>
-
                     </div>
 
                     <div class="col-lg-4">
                         <div class="room-booking">
                             <h3>Your Reservation</h3>
-                            <!--                            <form action="#">
+                                                        <form action="#">
                                                             <div class="check-date">
                                                                 <label for="date-in">Check In:</label>
                                                                 <input type="text" class="date-input" id="date-in">
@@ -247,15 +243,7 @@
                                                                 </select>
                                                             </div>
                                                             <button type="submit">Check Availability</button>
-                                                        </form>-->
-                            <div style="padding-top: 35px">
-                                <h5>Services in room:</h5><br>       
-                                <ul class="column-list">
-                                    <c:forEach items="${listI}" var="o">
-                                        <li style="list-style: none"><i class="fa-solid fa-check"></i> ${o.itemName}</li>
-                                        </c:forEach>
-                                </ul> 
-                            </div>
+                                                        </form>
                         </div>
                     </div>
                 </div>

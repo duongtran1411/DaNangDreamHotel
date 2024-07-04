@@ -16,6 +16,8 @@ public class Room {
     private int people;
     private String image;
     private double discount;
+    private String checkIn;
+    private String checkOut;
 
     public Room() {
     }
