@@ -14,7 +14,7 @@ public class DAORoom extends DBConnect {
     public List<Room> getAllRoom() {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
-                + "                	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , r.type_Room_Id\n"
+                + "                	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , r.type_Room_Id,\n"
                 + "                	ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
                 + "                	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
                 + "                	join imageroom i on i.room_Id = r.room_Id)\n"
@@ -698,9 +698,9 @@ public class DAORoom extends DBConnect {
                 + "    SELECT bt.room_Id\n"
                 + "    FROM booking b\n"
                 + "    JOIN bookingdetail bt ON bt.booking_Id = b.booking_Id\n"
-                + "    WHERE (? BETWEEN b.startDay AND b.endDay)\n"
-                + "       OR (? BETWEEN b.startDay AND b.endDay)\n"
-                + "       OR (b.startDay >= ? AND b.endDay <= ?)\n"
+                + "    WHERE (? BETWEEN b.checkIn AND b.checkOut)\n"
+                + "       OR (? BETWEEN b.checkIn AND b.checkOut)\n"
+                + "       OR (b.checkIn >= ? AND b.checkOut <= ?)\n"
                 + ")\n"
                 + "SELECT room_Id, name, price, size, bed, bath, person, image, discount, typeRoom_Id\n"
                 + "FROM roomDetail\n"
@@ -715,7 +715,7 @@ public class DAORoom extends DBConnect {
             pre.setString(4, checkOut);
             pre.setInt(5, event_Id);
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
                         rs.getInt(3),
@@ -733,9 +733,41 @@ public class DAORoom extends DBConnect {
         return list;
     }
     
+    public List<Room> getRoomByFloor(int id) {
+        List<Room> list = new ArrayList<>();
+        String sql = "with roomDetail as (\n"
+                + "                    	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , r.type_Room_Id,r.floor_Room_Id,\n"
+                + "                               	ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
+                + "                             	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "                                join floor l on l.floor_Id = r.floor_Room_Id\n"
+                + "                              	join imageroom i on i.room_Id = r.room_Id)\n"
+                + "                               	select room_Id, name, price, size, bed, bath, person, image, type_Room_Id, floor_Room_Id  from roomDetail \n"
+                + "                                	where rn = 2 and  floor_Room_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        List<Room> list = dao.checkRoom("2024-07-07", "2024-07-08", 2);
+        List<Room> list = dao.getRoomByFloor(1);
         for (Room room : list) {
             System.out.println(room);
         }

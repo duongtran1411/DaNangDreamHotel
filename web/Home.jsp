@@ -26,6 +26,7 @@
             href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap"
             rel="stylesheet"
             />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
         <title>Da Nang Dream Hotel</title>
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />

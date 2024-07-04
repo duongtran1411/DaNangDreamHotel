@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" />
         <link href="css/paging.css" rel="stylesheet" type="text/css"/>
         <link href="css/home.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
         <title>Information</title>
         <link href="/vnpay_jsp/assets/bootstrap.min.css" rel="stylesheet"/>
         <link href="/vnpay_jsp/assets/jumbotron-narrow.css" rel="stylesheet">      
@@ -33,10 +34,10 @@
         <style>
             .information{
                 border: 1px solid #ddd;
+                height: 500px;
             }
             .booking{
                 border: 1px solid #ddd;
-
             }
             .text-muted{
                 text-align: center
@@ -58,15 +59,16 @@
             label{
                 font-weight: 500;
             }
-            
+
             .colo-main{
                 color: #C59B24
             }
             .main{
-                height: 600px
+                height: 600px;
             }
             .cart{
-                margin-left: 13px
+                margin-left: 13px;
+                margin-bottom: 10px;
             }
             .infor{
                 padding-bottom: 10px
@@ -82,28 +84,26 @@
                 padding-top: 25px
             }
             .total{
-               padding-top: 10px 
+                padding-top: 10px;
+                padding-left: 15px
             }
-            
+
             .total span{
                 font-weight: 500
             }
             body{
                 padding: 0px;
             }
-            .list-room{
-                margin-top: 30px
-            }
         </style>
-    </head>
-
-    <body>
         <jsp:include page="Header.jsp"></jsp:include>
+        </head>
+
+        <body >
             <div class="container main">
                 <div class="header clearfix">
                     <h3 class="text-muted">BOOKING INFORMATION</h3>
                 </div>
-                <div class="row" style="height: 500px;overflow: hidden;">
+                <div class="row" style="height: 500px;">
                     <div class="col-lg-8 information">
                         <h5 class="text-muted">GUEST INFORMATION</h5>
                         <div>
@@ -160,46 +160,33 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">${checkInDay}  ${checkOutDay}</div>
+                        <div class="col-lg-12"><i class="fa-regular fa-calendar-days" style="padding-right: 5px;padding-top: 10px"></i>${checkInDay} to ${checkOutDay}</div>
                     </div>
                     <div class="row list-room" >
-                        <%--<c:forEach items="${cart}" var="o">--%>
-
-                        <!--                            <div class="col-lg-12 booking-infor" >
-                                                        <div class="row">
-                                                            <div class="col-lg-12">${o.room.name}</div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">more details</div>
-                                                            <div class="col-lg-6">${o.room.price * o.room.discount}</div>
-                                                        </div>
-                                                        <div>
-                        
-                                                        </div>
-                                                    </div>-->
-                        <%--</c:forEach>--%>
-                        <div class="col-lg-12 cart" >
-                            <div class="row booking-infor infor" >
-                                <div class="col-lg-12 conten">
-                                    <div class="name-room">Family Suite</div>
-                                    <div class="detail">
-                                        <div class="col-lg-6"><strong>Show details</strong></div>
-                                        <div class="col-lg-6 price">3.000.000d</div>
+                        <c:forEach items="${list}" var="o">
+                            <div class="col-lg-12 cart" >
+                                <div class="row booking-infor infor" >
+                                    <div class="col-lg-12 conten">
+                                        <div class="name-room">${o.room.name}</div>
+                                        <div class="detail">
+                                            <div class="col-lg-6"><strong>Show details</strong></div>
+                                            <div class="col-lg-6 price">${FormatUtils.formatPRice(o.room.price * o.room.discount)}đ</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> 
-                            <div class="row total">
-                                <div class="col-lg-12">
-                                    <span>Total room price:</span>
-                                    <p>Including all taxes and service fees</p>
-                                </div>
+                                </div>    
+                            </div>
+                        </c:forEach>
+                        <div class="row total" >
+                            <div class="col-lg-12">
+                                <span>Total room price: ${FormatUtils.formatPRice(total)}đ</span>
+                                <p>Including all taxes and service fees</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <jsp:include page="Footer.jsp"></jsp:include>           
+
         <link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet" />
         <script src="https://pay.vnpay.vn/lib/vnpay/vnpay.min.js"></script>
         <script type="text/javascript">
@@ -273,4 +260,5 @@
             });
         </script>       
     </body>
+    <jsp:include page="Footer.jsp"></jsp:include>       
 </html>

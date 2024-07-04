@@ -17,7 +17,7 @@
     }
     
 </style>
-<aside class="left-sidebar" style="background-color: #213e66">
+<aside class="left-sidebar" style="background-color: #213e66;height: 100%" >
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
@@ -45,7 +45,7 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
 
                 </li>
-                <%--<c:if test="${sessionScope.acc.role_Id == 2}">--%>
+                <c:if test="${sessionScope.acc.role_Id == 2}">
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="customerController" aria-expanded="false">
                         <span>
@@ -79,7 +79,15 @@
                         <span class="hide-menu white">Manage Type Of Item</span>
                     </a>
                 </li>
-                <%--</c:if>--%>
+                <li  class="sidebar-item">
+                    <a  class="sidebar-link" href="statusRoomController" aria-expanded="false">
+                        <span>
+                            <i class="fa-solid fa-map white"></i>
+                        </span>
+                        <span class="hide-menu white">Room Diagram</span>
+                    </a>
+                </li>
+                </c:if>
                 <%--<c:if test="${acc.role_Id == 3}">--%>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
