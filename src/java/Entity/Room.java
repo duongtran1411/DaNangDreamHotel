@@ -16,6 +16,8 @@ public class Room {
     private int people;
     private String image;
     private double discount;
+    private String checkIn;
+    private String checkOut;
 
     public Room() {
     }
@@ -62,7 +64,7 @@ public class Room {
         this.image = image;
     }
 
-    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image) {
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int type_Room_Id) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
@@ -71,6 +73,7 @@ public class Room {
         this.bath = bath;
         this.people = people;
         this.image = image;
+        this.type_Room_Id = type_Room_Id;
     }
 
     public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, double discount, int typeRoom_Id) {
