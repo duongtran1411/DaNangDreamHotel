@@ -1,5 +1,7 @@
 package Controller;
 
+import Entity.BookingCart;
+import Entity.CartItem;
 import Entity.Config;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -19,6 +21,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -31,6 +36,7 @@ public class VNpay extends HttpServlet {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "150000";
+
         long amount = Integer.parseInt(req.getParameter("amount")) * 100;
 
         String vnp_TxnRef = Config.getRandomNumber(8);
@@ -95,7 +101,7 @@ public class VNpay extends HttpServlet {
         job.addProperty("data", paymentUrl);
         Gson gson = new Gson();
         resp.getWriter().write(gson.toJson(job));
-        
+
         // Save customer details in session
         req.getSession().setAttribute("firstName", req.getParameter("firstName"));
         req.getSession().setAttribute("lastName", req.getParameter("lastName"));
@@ -104,4 +110,5 @@ public class VNpay extends HttpServlet {
         req.getSession().setAttribute("card", req.getParameter("card"));
         req.getSession().setAttribute("vnp_TxnRef", vnp_TxnRef);
     }
+
 }

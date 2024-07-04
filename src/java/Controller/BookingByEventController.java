@@ -63,7 +63,7 @@ public class BookingByEventController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(300);
+        session.setMaxInactiveInterval(3000);
         String checkIn = request.getParameter("checkIn");
         String checkOut = request.getParameter("checkOut");
         System.out.println(checkIn +"bookByEvent"+ checkOut);

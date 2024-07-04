@@ -35,8 +35,7 @@
                 <div class="col-lg-2">
                     <div >
                         <a href="homeController">
-<!--                            <img src="img/logo-DaNangDream.jpg" alt="" height="100%"/>-->
-<img src="img/logo2.jpg" alt="" height="90px" width="165px"/>
+                            <img src="img/logo2.jpg" alt="" height="90px" width="165px"/>
                         </a>
                     </div>
                 </div>
@@ -44,19 +43,18 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="active"><a href="homeController">Home</a></li>
-                                <!-- <li><a href="rooms.html">Rooms</a></li> -->
+                                <li class="active"><a href="homeController" style="text-decoration: none">Home</a></li>
                                 <li>
-                                    <a href="AboutUs.jsp">About Us</a>
-                                     <ul class="dropdown">
-                            <li><a href="Jobs.jsp">Jobs</a></li>
-                                     </ul>
+                                    <a href="AboutUs.jsp" style="text-decoration: none">About Us</a>
+                                    <ul class="dropdown">
+                                        <li><a href="Jobs.jsp">Jobs</a></li>
+                                    </ul>
                                 <li>
-                                    <a href="viewRoomController">Resort</a>
+                                    <a href="viewRoomController" style="text-decoration: none">Resort</a>
                                 </li>
-                                <li><a href="eventController">Events</a></li>
-                                <li><a href="Contact.jsp">Contact</a></li>
-                                <li><a href="viewCartController">Booked</a></li>
+                                <li><a href="eventController" style="text-decoration: none">Events</a></li>
+                                <li><a href="Contact.jsp" style="text-decoration: none">Contact</a></li>
+                                <li><a href="viewCartController" style="text-decoration: none">Booked</a></li>
                             </ul>
                         </nav>
                     </div>

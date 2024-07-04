@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -65,12 +64,11 @@ public class ViewCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(300);
+        session.setMaxInactiveInterval(3000);
         BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         if (bookingCart == null) {
             bookingCart = new BookingCart();
         }
-        List<CartItem> list = bookingCart.getListCartItem();
         int total = bookingCart.getTotalMoney();
         DAOTypeRoom dao = new DAOTypeRoom();
         List<TypeRoom> listT = dao.getAllTypeRoom();
@@ -85,7 +83,7 @@ public class ViewCart extends HttpServlet {
         session.setAttribute("listT", listT);
         session.setAttribute("total", total * daysBetween);
         session.setAttribute("numberDay", daysBetween);
-        request.setAttribute("list", list);
+        request.setAttribute("list", bookingCart.getListCartItem());
         request.getRequestDispatcher("BookingCart.jsp").forward(request, response);
     }
 
