@@ -19,9 +19,7 @@
                 <div class="col-lg-6">
                     <div class="tn-right">
                         <div class="top-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                           
                         </div>
                         <a href="authentication-login" class="bk-btn">Login</a>
                     </div>

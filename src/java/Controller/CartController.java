@@ -62,7 +62,7 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(3000);
+        session.setMaxInactiveInterval(300);
         BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         if (bookingCart == null) {
             bookingCart = new BookingCart();
@@ -83,7 +83,7 @@ public class CartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(3000);
+        session.setMaxInactiveInterval(300);
         BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         String action = request.getParameter("action");
         switch (action) {

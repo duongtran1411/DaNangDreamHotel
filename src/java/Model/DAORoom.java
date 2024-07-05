@@ -757,10 +757,38 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-
-    public static void main(String[] args) {
-        DAORoom dao = new DAORoom();
-        System.out.println(dao.getAllRoom());
+    
+    public List<Room> getRoomByFloor(int id) {
+        List<Room> list = new ArrayList<>();
+        String sql = "with roomDetail as (\n"
+                + "                    	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , r.type_Room_Id,r.floor_Room_Id,\n"
+                + "                               	ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
+                + "                             	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "                                join floor l on l.floor_Id = r.floor_Room_Id\n"
+                + "                              	join imageroom i on i.room_Id = r.room_Id)\n"
+                + "                               	select room_Id, name, price, size, bed, bath, person, image, type_Room_Id, floor_Room_Id  from roomDetail \n"
+                + "                                	where rn = 2 and  floor_Room_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
+
 
 }

@@ -4,24 +4,25 @@
  */
 package Controller;
 
-import Entity.BookingCart;
-import Entity.CartItem;
+import Entity.Floor;
+import Entity.Room;
+import Entity.TypeRoom;
+import Model.DAOFloor;
+import Model.DAORoom;
+import Model.DAOTypeRoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 /**
  *
  * @author GIGABYTE
  */
-public class BookingInformation extends HttpServlet {
+public class StatusRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +41,10 @@ public class BookingInformation extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BookingInformation</title>");
+            out.println("<title>Servlet StatusRoomController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BookingInformation at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet StatusRoomController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,24 +62,16 @@ public class BookingInformation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
-        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
-        if (bookingCart == null) {
-            bookingCart = new BookingCart();
-        }
-        String checkIn = (String) session.getAttribute("checkInDay");
-        String checkOut = (String) session.getAttribute("checkOutDay");
-        int total = bookingCart.getTotalMoney();
-        LocalDate dateIn = LocalDate.parse(checkIn);
-        LocalDate dateOut = LocalDate.parse(checkOut);
-        long daysBetween = ChronoUnit.DAYS.between(dateIn, dateOut);
-        request.setAttribute("ListCart", bookingCart.getListCartItem());
-        session.setAttribute("total", total * daysBetween);
-        session.setAttribute("checkInDay", checkIn);
-        session.setAttribute("checkOutDay", checkOut);
-        request.getRequestDispatcher("vnpay_pay.jsp").forward(request, response);
-
+        DAORoom dao = new DAORoom();
+        DAOTypeRoom daoT = new DAOTypeRoom();
+        DAOFloor daoL = new DAOFloor();
+        List<Room> list = dao.getAllRoom();
+        List<TypeRoom> listT = daoT.getAllTypeRoom();
+        List<Floor> listF = daoL.getAllFloor();
+        request.setAttribute("list", list);
+        request.setAttribute("listType", listT);
+        request.setAttribute("listFloor", listF);
+        request.getRequestDispatcher("dashboard/jsp/ManageStatusRoom.jsp").forward(request, response);
     }
 
     /**

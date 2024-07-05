@@ -46,7 +46,6 @@
     <body>
         <jsp:include page="Header.jsp"></jsp:include>
             <section class="h-100 h-custom" style="background-color: #eee;">
-                <button id="backButton">Back</button>
                 <div class="container py-5 h-100">
 
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -63,6 +62,7 @@
                                                 <option  value="${o.typeRoom_Id}">${o.name}</option> 
                                             </c:forEach>
                                         </select>
+                                        <button id="backButton" style="border: none; background-color:#C59B24;color: white">Back</button>
                                     </div>
                                     <div class="row" id="content">
 
@@ -75,7 +75,7 @@
                                                             <div class="col-lg-3">
                                                                 <img
                                                                     src="${o.room.image}"
-                                                                    class="img-fluid rounded-3" width="150px" height="100%">
+                                                                    class="img-fluid rounded-3" width="100%" height="100%">
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <strong>Da Nang Dream Hotel</strong>
