@@ -7,7 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,28 +18,33 @@ import java.util.logging.Logger;
 public class DAOBooking extends DBConnect {
 
     public List<Booking> getAllBooking() {
-        List<Booking> list = new ArrayList();
-        String sql = "SELECT \n"
-                + "               b.booking_Id, \n"
-                + "               DATE_FORMAT(b.checkIn, '%m/%d/%Y') AS formatted_checkIn, \n"
-                + "               DATE_FORMAT(b.checkOut, '%m/%d/%Y') AS formatted_checkOut,\n"
-                + "               b.expenses, \n"
-                + "               b.created_at,\n"
-                + "               c.idCard,"
-                + "               c.customer_Id\n"
-                + "               FROM booking b\n"
-                + "               JOIN customer c ON c.customer_Id = b.customer_Id;";
+        List<Booking> list = new ArrayList<>();
+        String sql = "SELECT "
+                + "   b.booking_Id, "
+                + "   b.checkIn, "
+                + "   b.checkOut, "
+                + "   b.expenses, "
+                + "   b.created_at, "
+                + "   c.idCard, "
+                + "   c.customer_Id "
+                + "FROM booking b "
+                + "JOIN customer c ON c.customer_Id = b.customer_Id";
+
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                list.add(new Booking(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getInt(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(7)));
+                // Parse dates directly from ResultSet
+                Date checkIn = rs.getTimestamp("checkIn");
+                Date checkOut = rs.getTimestamp("checkOut");
+
+                list.add(new Booking(rs.getInt("booking_Id"),
+                        new java.sql.Date(checkIn.getTime()),
+                        new java.sql.Date(checkOut.getTime()),
+                        rs.getInt("expenses"),
+                        rs.getString("created_at"),
+                        rs.getString("idCard"),
+                        rs.getInt("customer_Id")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,36 +137,41 @@ public class DAOBooking extends DBConnect {
         return list;
     }
 
-    public List<Booking> searchBookingByCID(String txtSearch) {
-        List<Booking> list = new ArrayList<>();
-        String sql = "SELECT b.booking_Id,"
-                + " DATE_FORMAT(b.checkIn, '%m/%d/%Y') AS formatted_checkIn,"
-                + " DATE_FORMAT(b.checkOut, '%m/%d/%Y') AS formatted_checkOut,"
-                + " b.expenses, b.created_at, c.idCard \n"
-                + "FROM customer c\n"
-                + "LEFT JOIN booking b ON c.customer_Id = b.customer_Id\n"
-                + "WHERE c.idCard LIKE ?\n"
-                + "AND b.booking_Id IS NOT NULL\n"
-                + "AND b.checkIn IS NOT NULL\n"
-                + "AND b.checkOut IS NOT NULL\n"
-                + "AND b.expenses IS NOT NULL\n"
-                + "AND b.created_at IS NOT NULL;";
+    public void updateBooking(int id, String checkIn, String checkOut) {
+        String sql = "UPDATE booking "
+                + "SET checkIn=STR_TO_DATE(?, '%Y-%m-%d'), checkOut=STR_TO_DATE(?, '%Y-%m-%d') "
+                + "WHERE booking_Id=?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, "%" + txtSearch + "%");
+            pre.setString(1, checkIn);
+            pre.setString(2, checkOut);
+            pre.setInt(3, id);
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error updating booking: " + e.getMessage());
+        }
+    }
+
+    public Booking getBookingById(int id) {
+        Booking booking = new Booking();
+        String sql = "select * from Booking "
+                + "where booking_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                list.add(new Booking(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getInt(4),
-                        rs.getString(5),
-                        rs.getString(6)));
+                booking.setBooking_Id(rs.getInt(1));
+                booking.setCustomer_Id(rs.getInt(2));
+                booking.setCheckIn(rs.getDate(3));
+                booking.setCheckOut(rs.getDate(4));
+                booking.setExpenses(rs.getInt(5));
+                booking.setCreated_at(rs.getString(6));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        return booking;
     }
 
     public static void main(String[] args) {

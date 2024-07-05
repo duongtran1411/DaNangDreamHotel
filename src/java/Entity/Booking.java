@@ -1,40 +1,42 @@
 package Entity;
 
+import java.util.Date;
+
 public class Booking {
 
     private int booking_Id;
     private int customer_Id;
-    private String checkIn;
-    private String checkOut;
+    private Date checkIn;
+    private Date checkOut;
     private int expenses;
-    private String create_at;
+    private String created_at;
     private String idCard;
 
-    public Booking(int booking_Id, int customer_Id, String checkIn, String checkOut, int expenses, String create_at) {
+    public Booking(int booking_Id, int customer_Id, Date checkIn, Date checkOut, int expenses, String created_at) {
         this.booking_Id = booking_Id;
         this.customer_Id = customer_Id;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.expenses = expenses;
-        this.create_at = create_at;
+        this.created_at = created_at;
     }
 
-    public Booking(int booking_Id, String checkIn, String checkOut, int expenses, String create_at, String idCard, int customer_Id) {
+    public Booking(int booking_Id, Date checkIn, Date checkOut, int expenses, String created_at, String idCard, int customer_Id) {
         this.booking_Id = booking_Id;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.expenses = expenses;
-        this.create_at = create_at;
+        this.created_at = created_at;
         this.idCard = idCard;
         this.customer_Id = customer_Id;
     }
-    
-    public Booking(int booking_Id, String checkIn, String checkOut, int expenses, String create_at, String idCard) {
+
+    public Booking(int booking_Id, Date checkIn, Date checkOut, int expenses, String created_at, String idCard) {
         this.booking_Id = booking_Id;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.expenses = expenses;
-        this.create_at = create_at;
+        this.created_at = created_at;
         this.idCard = idCard;
     }
 
@@ -65,28 +67,20 @@ public class Booking {
         this.customer_Id = customer_Id;
     }
 
-    public String getCheckIn() {
+    public Date getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(String checkIn) {
+    public void setCheckIn(Date checkIn) {
         this.checkIn = checkIn;
     }
 
-    public String getCheckOut() {
+    public Date getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(String checkOut) {
+    public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
-    }
-
-    public String getCreate_at() {
-        return create_at;
-    }
-
-    public void setCreate_at(String create_at) {
-        this.create_at = create_at;
     }
 
     public int getExpenses() {
@@ -97,9 +91,17 @@ public class Booking {
         this.expenses = expenses;
     }
 
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
     @Override
     public String toString() {
-        return "Booking{" + "booking_Id=" + booking_Id + ", customer_Id=" + customer_Id + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", expenses=" + expenses + ", create_at=" + create_at + ", idCard=" + idCard + '}';
+        return "Booking{" + "booking_Id=" + booking_Id + ", customer_Id=" + customer_Id + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", expenses=" + expenses + ", created_at=" + created_at + ", idCard=" + idCard + '}';
     }
 
 }
