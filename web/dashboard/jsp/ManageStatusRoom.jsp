@@ -26,7 +26,10 @@
                 background-color: white;
                 padding: 0px 5px;
                 width: 170px;
-                height: 50px
+                height: 50px;
+                font-size: 18px;
+                font-weight: 600;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
             }
             .icon-padding{
                 padding-right: 5px
@@ -35,13 +38,22 @@
                 color: white
             }
             .clean{
-                background-color: green;
+                color: #0ACF97;
+                background-color: #E7FAF5;
+                font-size: 18px;
+                font-weight: 600;
             }
             .fix{
-                background-color: red;
+                color: #FA5C7C;
+                background-color: #FFEFF2;
+                font-size: 18px;
+                font-weight: 600;
             }
             .dirty{
-                background-color: #cccc00;
+                color: #FFC35A;
+                background-color: #FFF9EF;
+                font-weight: 600;
+                font-size: 18px
             }
             .red{
                 color: red;
@@ -55,6 +67,45 @@
             }
             .text{
                 font-weight: 600;
+            }
+            .element{
+                padding: 10px 0px;
+                display: flex;
+                width: 100px;
+                height: 300px
+            }
+            .item-room{
+                border: 1.5px solid gainsboro;
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+                position: relative;
+            }
+            .ri-text{
+                padding: 10px;
+                text-align: left;
+                width: 100%;
+            }
+            .ri-text img{
+                width:300px;
+                height: 202px;
+                border-radius: 15px 15px 0 0;
+            }
+            .name-room{
+                margin-bottom: 3px
+            }
+            .content-room{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+            }
+            .icon-room{
+                margin-right: 8px;
+                font-size: 1.2em;
+            }
+            .main-content{
+                font-size: 0.95rem;
             }
         </style>
     </head>
@@ -86,9 +137,9 @@
                     </div>
                     <div >
                         <button onclick="getAll()">All</button>
-                        <button><i class="fa-solid fa-person-walking-arrow-right icon-padding green"></i>Prepare to arrive</button>
+                        <button><i class="fa-solid fa-person-walking-arrow-right icon-padding green"></i>Prepare arrive</button>
                         <button><i class="fa-solid fa-house icon-padding blue"></i>Live</button>
-                        <button><i class="fa-solid fa-person-walking-arrow-right icon-padding red"></i>Prepare to leave</button>
+                        <button><i class="fa-solid fa-person-walking-arrow-right icon-padding red"></i>Prepare leave</button>
                         <button class=""><i class="fa-solid fa-square-check icon-padding"></i>Availability</button>
                         <button class="status-room clean">Clean Room</button>
                         <button class="status-room dirty">Dirty Room</button>
@@ -97,14 +148,14 @@
                 </div>
                 <div class="row" id="main-room">
                     <c:forEach items="${list}" var="o">
-                        <div class="col-lg-3 col-md-6  justify-content-center" style="padding: 10px 0px;display: flex; width: 100px;height: 300px">
-                            <div class="room-item" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
-                                <div class="ri-text" style="padding: 10px; text-align: left; width: 100%;">
-                                    <img src="${o.image}" style="width:300px; height: 202px; border-radius: 15px 15px 0 0;" alt="">
-                                    <h4 class="text-center" style="margin-bottom: 3px">${o.name}</h4>
-                                    <div class="content-icon d-flex align-items-between justify-content-between" style="font-size: 0.95rem;">
-                                        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
-                                            <i class="fa fa-users" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>
+                        <div class="col-lg-3 col-md-6  justify-content-center element">
+                            <div class="room-item item-room">
+                                <div class="ri-text">
+                                    <img src="${o.image}" alt="">
+                                    <h4 class="text-center name-room">${o.name}</h4>
+                                    <div class="content-icon d-flex align-items-between justify-content-between main-content">
+                                        <div class="content-room">
+                                            <i class="fa fa-users icon-room" aria-hidden="true"></i>
                                             <c:if test="${o.people == 1}">
                                                 <span>${o.people} Person</span>
                                             </c:if>
@@ -112,8 +163,8 @@
                                                 <span>${o.people} People</span>
                                             </c:if>
                                         </div>
-                                        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
-                                            <i class="fa fa-bed" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>
+                                        <div class="content-room">
+                                            <i class="fa fa-bed icon-room" aria-hidden="true"></i>
                                             <c:if test="${o.bed == 1}">
                                                 <span>${o.bed} Bed</span>
                                             </c:if>
@@ -121,8 +172,8 @@
                                                 <span>${o.bed} Beds</span>
                                             </c:if>
                                         </div>
-                                        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
-                                            <i class="fa fa-bath" aria-hidden="true" style="margin-right: 8px; font-size: 1.2em;"></i>
+                                        <div class="content-room">
+                                            <i class="fa fa-bath icon-room" aria-hidden="true" ></i>
                                             <c:if test="${o.bath == 1}">
                                                 <span>${o.bath} Bath</span>
                                             </c:if>
@@ -141,51 +192,51 @@
         </div>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>
-                                function handleChange() {
-                                    var selectElement = document.getElementById("select-type");
-                                    var selectedValue = selectElement.value;
-                                    $.ajax({
-                                        url: '/DaNangDreamHotel/serviceStatusController?action=type',
-                                        type: 'GET',
-                                        data: {
-                                            typeId: selectedValue
-                                        },
-                                        success: function (data) {
-                                            var row = document.getElementById("main-room");
-                                            row.innerHTML = data;
-                                            console.log(selectedValue);
-                                            console.log("success");
-                                        },
-                                        error: function (xhr) {
-                                            console.log(xhr);
-                                        }
-                                    });
-                                }
-                                
-                                function changeFloor(){
-                                    var selectElement = document.getElementById("select-floor");
-                                    var selectedValue = selectElement.value;
-                                    $.ajax({
-                                        url: '/DaNangDreamHotel/serviceStatusController?action=floor',
-                                        type: 'GET',
-                                        data: {
-                                            floorId: selectedValue
-                                        },
-                                        success: function (data) {
-                                            var row = document.getElementById("main-room");
-                                            row.innerHTML = data;
-                                            console.log(selectedValue);
-                                            console.log("success");
-                                        },
-                                        error: function (xhr) {
-                                            console.log(xhr, selectedValue);
-                                        }
-                                    });
-                                }
-                                
-                                function getAll(){
-                                    window.location.href = "statusRoomController";
-                                }
+                            function handleChange() {
+                                var selectElement = document.getElementById("select-type");
+                                var selectedValue = selectElement.value;
+                                $.ajax({
+                                    url: '/DaNangDreamHotel/serviceStatusController?action=type',
+                                    type: 'GET',
+                                    data: {
+                                        typeId: selectedValue
+                                    },
+                                    success: function (data) {
+                                        var row = document.getElementById("main-room");
+                                        row.innerHTML = data;
+                                        console.log(selectedValue);
+                                        console.log("success");
+                                    },
+                                    error: function (xhr) {
+                                        console.log(xhr);
+                                    }
+                                });
+                            }
+
+                            function changeFloor() {
+                                var selectElement = document.getElementById("select-floor");
+                                var selectedValue = selectElement.value;
+                                $.ajax({
+                                    url: '/DaNangDreamHotel/serviceStatusController?action=floor',
+                                    type: 'GET',
+                                    data: {
+                                        floorId: selectedValue
+                                    },
+                                    success: function (data) {
+                                        var row = document.getElementById("main-room");
+                                        row.innerHTML = data;
+                                        console.log(selectedValue);
+                                        console.log("success");
+                                    },
+                                    error: function (xhr) {
+                                        console.log(xhr, selectedValue);
+                                    }
+                                });
+                            }
+
+                            function getAll() {
+                                window.location.href = "statusRoomController";
+                            }
         </script>
     </body>
 </html>

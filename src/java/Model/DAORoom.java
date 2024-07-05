@@ -1,5 +1,6 @@
 package Model;
 
+import Entity.MaintenanceStatus;
 import Entity.Room;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DAORoom extends DBConnect {
-    
+
     public List<Room> getAllRoom() {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -37,10 +38,10 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
+
     public List<Room> getRoomByTypeRoomId(int typeRoomId) {
         List<Room> list = new ArrayList();
         String sql = "select distinct r.* from room r\n"
@@ -66,7 +67,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Room> getAllRoomId() {
         String sql = "select room_Id from room";
         List<Room> list = new ArrayList();
@@ -82,7 +83,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public void addRoom(String name, int floor, double price, int size, int typeRoom) {
         String sql = "INSERT INTO `managerhotel`.`room`\n"
                 + "(`name`,\n"
@@ -104,7 +105,7 @@ public class DAORoom extends DBConnect {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public Room getNameByRoomId(int roomId) {
         String sql = "select r.name from room r\n"
                 + "where r.room_Id = ?";
@@ -120,7 +121,7 @@ public class DAORoom extends DBConnect {
         }
         return null;
     }
-    
+
     public void deleteRoom(int rid) {
         try {
             // Delete from item_in_room table
@@ -144,7 +145,7 @@ public class DAORoom extends DBConnect {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void editRoom(int trid, int floor, String name, double price, int size, int rid) {
         String sql = "UPDATE room\n"
                 + "   SET type_Room_Id = ?,\n"
@@ -167,7 +168,7 @@ public class DAORoom extends DBConnect {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public Room getRoomByID(int rid) {
         String sql = "select room_Id, type_Room_Id, floor_Room_Id, name, price, size from room\n"
                 + "where room_Id = ?";
@@ -183,7 +184,7 @@ public class DAORoom extends DBConnect {
         }
         return null;
     }
-    
+
     public List<Room> getNewRoom() {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -214,7 +215,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public Room getRoomById(int id) {
         Room room = new Room();
         String sql = "select r.room_Id, r.name, r.price, r.size,t.bed, t.bath, t.person, e.discount from room r\n"
@@ -240,7 +241,7 @@ public class DAORoom extends DBConnect {
         }
         return null;
     }
-    
+
     public int countRoom() {
         String sql = "select count(*) from room";
         try {
@@ -254,7 +255,7 @@ public class DAORoom extends DBConnect {
         }
         return 0;
     }
-    
+
     public List<Room> searchRoomByText(String txt) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -284,7 +285,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Room> getTop3Room(int numberRoom) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -295,7 +296,7 @@ public class DAORoom extends DBConnect {
                 + "		select room_Id, name, price, size, bed, bath, person, image, type_Room_Id from roomDetail \n"
                 + "		where rn = 2\n"
                 + "        limit 6 offset ?";
-        
+
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setInt(1, numberRoom * 6 - 6);
@@ -316,7 +317,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Room> getNext3Room(int numberRoom) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -327,7 +328,7 @@ public class DAORoom extends DBConnect {
                 + "		select room_Id, name, price, size, bed, bath, person, image, type_Room_Id from roomDetail \n"
                 + "		where rn = 2\n"
                 + "        limit 3 offset ?";
-        
+
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setInt(1, numberRoom);
@@ -348,7 +349,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Room> sortRoomByPrice(int sizeRoom, int numberRoom) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -381,7 +382,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Room> sortRoomByPriceDown(int sizeRoom, int numberRoom) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -414,7 +415,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Room> getRoomByType(int numberRoom, int idType) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -445,10 +446,10 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
+
     public List<Room> getRoomByTypeRoom(int numberRoom) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -477,10 +478,10 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
+
     public Room getRoomToCart(int id) {
         String sql = "with roomDetail as (\n"
                 + "                	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , e.discount, t.typeRoom_Id,\n"
@@ -490,7 +491,7 @@ public class DAORoom extends DBConnect {
                 + "                    join event e on e.event_Id = t.event_Id)\n"
                 + "                	select room_Id, name, price, size, bed, bath, person, image, discount,typeRoom_Id from roomDetail \n"
                 + "                		where rn = 2 and room_Id = ?";
-        
+
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
@@ -510,10 +511,10 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
     }
-    
+
     public List<Room> getRoomByEvent(int id) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -524,7 +525,7 @@ public class DAORoom extends DBConnect {
                 + "                    join event e on e.event_Id = t.event_Id)\n"
                 + "                	select room_Id, name, price, size, bed, bath, person, image, discount, typeRoom_Id from roomDetail \n"
                 + "                	where rn = 2 and event_Id = ?";
-        
+
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setInt(1, id);
@@ -546,7 +547,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Room> SortRoomEventByPrice(int id) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -558,7 +559,7 @@ public class DAORoom extends DBConnect {
                 + "                              	select room_Id, name, price, size, bed, bath, person, image, discount, typeRoom_Id from roomDetail \n"
                 + "                             	where rn = 2 and event_Id = ?\n"
                 + "								order by price desc ";
-        
+
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setInt(1, id);
@@ -578,11 +579,11 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
-        
+
     }
-    
+
     public List<Room> sortRoomsByNameAsc() {
         List<Room> list = new ArrayList<>();
         String sql = "SELECT * FROM managerhotel\n"
@@ -600,15 +601,15 @@ public class DAORoom extends DBConnect {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getInt(9)));
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
+
     public List<Room> sortRoomsByNameDesc() {
         List<Room> list = new ArrayList<>();
         String sql = "SELECT * FROM managerhotel\n"
@@ -630,10 +631,10 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
+
     public List<Room> sortRoomsByPriceAsc() {
         List<Room> list = new ArrayList<>();
         String sql = "SELECT * FROM managerhotel\n"
@@ -655,10 +656,10 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
+
     public List<Room> sortRoomsByPriceDesc() {
         List<Room> list = new ArrayList<>();
         String sql = "SELECT * FROM managerhotel\n"
@@ -680,10 +681,10 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return list;
     }
-    
+
     public List<Room> checkRoom(String checkIn, String checkOut, int event_Id) {
         List<Room> list = new ArrayList<>();
         String sql = "WITH roomDetail AS (\n"
@@ -732,7 +733,7 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Room> getRoomByFloor(int id) {
         List<Room> list = new ArrayList<>();
         String sql = "with roomDetail as (\n"
@@ -764,14 +765,66 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
+
+    public List<Room> getRoomStatus(String status) {
+        List<Room> list = new ArrayList<>();
+        String sql = "with roomDetail as (\n"
+                + "                    	select r.room_Id, r.name, r.price, r.size, t.bed, t.bath , t.person, i.image , r.type_Room_Id,r.floor_Room_Id, r.maintenance_status,\n"
+                + "                               	ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id desc) AS rn from room r\n"
+                + "                             	join typeroom t on t.typeRoom_Id = r.type_Room_Id\n"
+                + "                                join floor l on l.floor_Id = r.floor_Room_Id\n"
+                + "                              	join imageroom i on i.room_Id = r.room_Id)\n"
+                + "                               	select room_Id, name, price, size, bed, bath, person, image, type_Room_Id, floor_Room_Id,maintenance_status  from roomDetail \n"
+                + "                                	where rn = 2 and maintenance_status = ?";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setString(1, status);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        MaintenanceStatus.fromString(rs.getString(11))));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int updateStatus(String status, int id) {
+        int a = 0;
+        String sql = "update room\n"
+                + " set maintenance_status =?,\n"
+                + " updated_at = NOW()\n"
+                + " where room_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, status);
+            pre.setInt(2, id);
+            a = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return a;
+    }
+
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        List<Room> list = dao.getRoomByFloor(1);
-        for (Room room : list) {
-            System.out.println(room);
+        int a = dao.updateStatus("dirty room",2);
+        if(a > 0){
+            System.out.println("ok");
+        }else{
+            System.out.println("not ok");
         }
-        
+
     }
-    
+
 }

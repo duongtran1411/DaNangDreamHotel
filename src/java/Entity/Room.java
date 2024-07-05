@@ -18,6 +18,7 @@ public class Room {
     private double discount;
     private String checkIn;
     private String checkOut;
+    private MaintenanceStatus maintenance_status;
 
     public Room() {
     }
@@ -87,6 +88,20 @@ public class Room {
         this.image = image;
         this.type_Room_Id = type_Room_Id;
         this.floor_Room_Id = floor_Room_Id;
+    }
+    
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int type_Room_Id, int floor_Room_Id,MaintenanceStatus maintenance_status ) {
+        this.room_Id = room_Id;
+        this.name = name;
+        this.price = price;
+        this.size = size;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+        this.image = image;
+        this.type_Room_Id = type_Room_Id;
+        this.floor_Room_Id = floor_Room_Id;
+        this.maintenance_status = maintenance_status;
     }
 
     public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, double discount, int typeRoom_Id) {
@@ -224,6 +239,34 @@ public class Room {
     public void setDiscount(double discount) {
         this.discount = discount;
     }
+
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public String getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public MaintenanceStatus getMaintenance_status() {
+        return maintenance_status;
+    }
+
+    public void setMaintenance_status(MaintenanceStatus maintenance_status) {
+        this.maintenance_status = maintenance_status;
+    }
+
+  
+    
+    
 
     @Override
     public String toString() {

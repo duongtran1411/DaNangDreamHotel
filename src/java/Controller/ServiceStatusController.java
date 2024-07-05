@@ -68,43 +68,47 @@ public class ServiceStatusController extends HttpServlet {
             int typeId = Integer.parseInt(type);
             list = dao.getRoomByTypeRoom(typeId);
             for (Room o : list) {
-                out.print("<div class=\"col-lg-3 col-md-6  justify-content-center\" style=\"padding: 10px 0px;display: flex; width: 100px;height: 300px\">\n"
-                        + "                            <div class=\"room-item\" style=\"border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;\">\n"
-                        + "                                <div class=\"ri-text\" style=\"padding: 10px; text-align: left; width: 100%;\">\n"
-                        + "                                    <img src=\"" + o.getImage() + "\" style=\"width:300px; height: 202px; border-radius: 15px 15px 0 0;\" alt=\"\">\n"
-                        + "                                    <h4 class=\"text-center\" style=\"margin-bottom: 3px\">" + o.getName() + "</h4>\n"
-                        + "                                    <div class=\"content-icon d-flex align-items-between justify-content-between\" style=\"font-size: 0.95rem;\">\n"
-                        + "                                        <div style=\"display: flex; align-items: center; justify-content: center; margin-top: 10px;\">\n"
-                        + "                                            <i class=\"fa fa-users\" aria-hidden=\"true\" style=\"margin-right: 8px; font-size: 1.2em;\"></i>\n"
-                        + "                                            <c:if test=\"${" + o.getPeople() + " == 1}\">\n"
-                        + "                                                <span>" + o.getPeople() + " Person</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                            <c:if test=\"${" + o.getPeople() + " > 1}\">\n"
-                        + "                                                <span>" + o.getPeople() + " People</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                        </div>\n"
-                        + "                                        <div style=\"display: flex; align-items: center; justify-content: center; margin-top: 10px;\">\n"
-                        + "                                            <i class=\"fa fa-bed\" aria-hidden=\"true\" style=\"margin-right: 8px; font-size: 1.2em;\"></i>\n"
-                        + "                                            <c:if test=\"${" + o.getPeople() + " == 1}\">\n"
-                        + "                                                <span>" + o.getBed() + " Bed</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                            <c:if test=\"${" + o.getBed() + " > 1}\">\n"
-                        + "                                                <span>" + o.getBed() + " Beds</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                        </div>\n"
-                        + "                                        <div style=\"display: flex; align-items: center; justify-content: center; margin-top: 10px;\">\n"
-                        + "                                            <i class=\"fa fa-bath\" aria-hidden=\"true\" style=\"margin-right: 8px; font-size: 1.2em;\"></i>\n"
-                        + "                                            <c:if test=\"${" + o.getBath() + " == 1}\">\n"
-                        + "                                                <span>" + o.getBath() + " Bath</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                            <c:if test=\"${" + o.getBath() + " > 1}\">\n"
-                        + "                                                <span>" + o.getBath() + " Baths</span>\n"
-                        + "                                            </c:if>             \n"
-                        + "                                        </div>\n"
-                        + "                                    </div>\n"
-                        + "                                </div>\n"
-                        + "                            </div>\n"
-                        + "                        </div>");
+                out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
+                        + "    <div class=\"room-item item-room\">\n"
+                        + "        <div class=\"ri-text\">\n"
+                        + "            <img src=\"" + o.getImage() + "\" alt=\"\">\n"
+                        + "            <h4 class=\"text-center name-room\">" + o.getName() + "</h4>\n"
+                        + "            <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
+                        + "                <div class=\"content-room\">\n"
+                        + "                    <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getPeople() == 1) {
+                    out.print("                    <span>" + o.getPeople() + " Person</span>\n");
+                } else {
+                    out.print("                    <span>" + o.getPeople() + " People</span>\n");
+                }
+
+                out.print("                </div>\n"
+                        + "                <div class=\"content-room\">\n"
+                        + "                    <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getBed() == 1) {
+                    out.print("                    <span>" + o.getBed() + " Bed</span>\n");
+                } else {
+                    out.print("                    <span>" + o.getBed() + " Beds</span>\n");
+                }
+
+                out.print("                </div>\n"
+                        + "                <div class=\"content-room\">\n"
+                        + "                    <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getBath() == 1) {
+                    out.print("                    <span>" + o.getBath() + " Bath</span>\n");
+                } else {
+                    out.print("                    <span>" + o.getBath() + " Baths</span>\n");
+                }
+
+                out.print("                </div>\n"
+                        + "            </div>\n"
+                        + "        </div>\n"
+                        + "    </div>\n"
+                        + "</div>");
+
             }
         }
 
@@ -112,43 +116,46 @@ public class ServiceStatusController extends HttpServlet {
             int floorId = Integer.parseInt(request.getParameter("floorId"));
             list = dao.getRoomByFloor(floorId);
             for (Room o : list) {
-                out.print("<div class=\"col-lg-3 col-md-6  justify-content-center\" style=\"padding: 10px 0px;display: flex; width: 100px;height: 300px\">\n"
-                        + "                            <div class=\"room-item\" style=\"border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;\">\n"
-                        + "                                <div class=\"ri-text\" style=\"padding: 10px; text-align: left; width: 100%;\">\n"
-                        + "                                    <img src=\"" + o.getImage() + "\" style=\"width:300px; height: 202px; border-radius: 15px 15px 0 0;\" alt=\"\">\n"
-                        + "                                    <h4 class=\"text-center\" style=\"margin-bottom: 3px\">" + o.getName() + "</h4>\n"
-                        + "                                    <div class=\"content-icon d-flex align-items-between justify-content-between\" style=\"font-size: 0.95rem;\">\n"
-                        + "                                        <div style=\"display: flex; align-items: center; justify-content: center; margin-top: 10px;\">\n"
-                        + "                                            <i class=\"fa fa-users\" aria-hidden=\"true\" style=\"margin-right: 8px; font-size: 1.2em;\"></i>\n"
-                        + "                                            <c:if test=\"${" + o.getPeople() + " == 1}\">\n"
-                        + "                                                <span>" + o.getPeople() + " Person</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                            <c:if test=\"${" + o.getPeople() + " > 1}\">\n"
-                        + "                                                <span>" + o.getPeople() + " People</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                        </div>\n"
-                        + "                                        <div style=\"display: flex; align-items: center; justify-content: center; margin-top: 10px;\">\n"
-                        + "                                            <i class=\"fa fa-bed\" aria-hidden=\"true\" style=\"margin-right: 8px; font-size: 1.2em;\"></i>\n"
-                        + "                                            <c:if test=\"${" + o.getPeople() + " == 1}\">\n"
-                        + "                                                <span>" + o.getBed() + " Bed</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                            <c:if test=\"${" + o.getBed() + " > 1}\">\n"
-                        + "                                                <span>" + o.getBed() + " Beds</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                        </div>\n"
-                        + "                                        <div style=\"display: flex; align-items: center; justify-content: center; margin-top: 10px;\">\n"
-                        + "                                            <i class=\"fa fa-bath\" aria-hidden=\"true\" style=\"margin-right: 8px; font-size: 1.2em;\"></i>\n"
-                        + "                                            <c:if test=\"${" + o.getBath() + " == 1}\">\n"
-                        + "                                                <span>" + o.getBath() + " Bath</span>\n"
-                        + "                                            </c:if>\n"
-                        + "                                            <c:if test=\"${" + o.getBath() + " > 1}\">\n"
-                        + "                                                <span>" + o.getBath() + " Baths</span>\n"
-                        + "                                            </c:if>             \n"
-                        + "                                        </div>\n"
-                        + "                                    </div>\n"
-                        + "                                </div>\n"
-                        + "                            </div>\n"
-                        + "                        </div>");
+                out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
+                        + "    <div class=\"room-item item-room\">\n"
+                        + "        <div class=\"ri-text\">\n"
+                        + "            <img src=\"" + o.getImage() + "\" alt=\"\">\n"
+                        + "            <h4 class=\"text-center name-room\">" + o.getName() + "</h4>\n"
+                        + "            <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
+                        + "                <div class=\"content-room\">\n"
+                        + "                    <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getPeople() == 1) {
+                    out.print("                    <span>" + o.getPeople() + " Person</span>\n");
+                } else {
+                    out.print("                    <span>" + o.getPeople() + " People</span>\n");
+                }
+
+                out.print("                </div>\n"
+                        + "                <div class=\"content-room\">\n"
+                        + "                    <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getBed() == 1) {
+                    out.print("                    <span>" + o.getBed() + " Bed</span>\n");
+                } else {
+                    out.print("                    <span>" + o.getBed() + " Beds</span>\n");
+                }
+
+                out.print("                </div>\n"
+                        + "                <div class=\"content-room\">\n"
+                        + "                    <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getBath() == 1) {
+                    out.print("                    <span>" + o.getBath() + " Bath</span>\n");
+                } else {
+                    out.print("                    <span>" + o.getBath() + " Baths</span>\n");
+                }
+
+                out.print("                </div>\n"
+                        + "            </div>\n"
+                        + "        </div>\n"
+                        + "    </div>\n"
+                        + "</div>");
             }
         }
     }
