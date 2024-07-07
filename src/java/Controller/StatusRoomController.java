@@ -16,6 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -62,12 +63,14 @@ public class StatusRoomController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         DAORoom dao = new DAORoom();
         DAOTypeRoom daoT = new DAOTypeRoom();
         DAOFloor daoL = new DAOFloor();
         List<Room> list = dao.getAllRoom();
         List<TypeRoom> listT = daoT.getAllTypeRoom();
         List<Floor> listF = daoL.getAllFloor();
+        request.setAttribute("list", session.getAttribute("listArrive"));
         request.setAttribute("list", list);
         request.setAttribute("listType", listT);
         request.setAttribute("listFloor", listF);

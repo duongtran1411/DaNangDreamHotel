@@ -18,7 +18,7 @@ public class Room {
     private double discount;
     private String checkIn;
     private String checkOut;
-    private MaintenanceStatus maintenance_status;
+    private String maintenance_status;
 
     public Room() {
     }
@@ -90,7 +90,7 @@ public class Room {
         this.floor_Room_Id = floor_Room_Id;
     }
     
-    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int type_Room_Id, int floor_Room_Id,MaintenanceStatus maintenance_status ) {
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int type_Room_Id, int floor_Room_Id,String maintenance_status ) {
         this.room_Id = room_Id;
         this.name = name;
         this.price = price;
@@ -256,21 +256,19 @@ public class Room {
         this.checkOut = checkOut;
     }
 
-    public MaintenanceStatus getMaintenance_status() {
+    public String getMaintenance_status() {
         return maintenance_status;
     }
 
-    public void setMaintenance_status(MaintenanceStatus maintenance_status) {
+    public void setMaintenance_status(String maintenance_status) {
         this.maintenance_status = maintenance_status;
     }
 
-  
-    
-    
-
     @Override
     public String toString() {
-        return "Room{" + "room_Id=" + room_Id + ", type_Room_Id=" + type_Room_Id + ", floor_Room_Id=" + floor_Room_Id + ", name=" + name + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + ", size=" + size + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + ", discount=" + discount + '}';
+        return "Room{" + "room_Id=" + room_Id + ", type_Room_Id=" + type_Room_Id + ", floor_Room_Id=" + floor_Room_Id + ", name=" + name + ", price=" + price + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + ", size=" + size + ", bed=" + bed + ", bath=" + bath + ", people=" + people + ", image=" + image + ", maintenance_status=" + maintenance_status + '}';
     }
+
+    
 
 }
