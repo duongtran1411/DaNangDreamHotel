@@ -26,7 +26,8 @@ public class DAOBooking extends DBConnect {
                 + "   b.expenses, "
                 + "   b.created_at, "
                 + "   c.idCard, "
-                + "   c.customer_Id "
+                + "   c.customer_Id,"
+                + "   b.status "
                 + "FROM booking b "
                 + "JOIN customer c ON c.customer_Id = b.customer_Id";
 
@@ -44,7 +45,8 @@ public class DAOBooking extends DBConnect {
                         rs.getInt("expenses"),
                         rs.getString("created_at"),
                         rs.getString("idCard"),
-                        rs.getInt("customer_Id")));
+                        rs.getInt("customer_Id"),
+                        rs.getString("status")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,18 +139,32 @@ public class DAOBooking extends DBConnect {
         return list;
     }
 
-    public void updateBooking(int id, String checkIn, String checkOut) {
-        String sql = "UPDATE booking "
-                + "SET checkIn=STR_TO_DATE(?, '%Y-%m-%d'), checkOut=STR_TO_DATE(?, '%Y-%m-%d') "
-                + "WHERE booking_Id=?";
+    public void updateBooking(int id, String checkIn, String checkOut, double dailyRate) {
         try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, checkIn);
-            pre.setString(2, checkOut);
-            pre.setInt(3, id);
-            pre.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Error updating booking: " + e.getMessage());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate = dateFormat.parse(checkIn);
+            Date checkOutDate = dateFormat.parse(checkOut);
+
+            long timeDifference = checkOutDate.getTime() - checkInDate.getTime();
+            long daysDifference = timeDifference / (1000 * 3600 * 24);
+
+            double newExpenses = daysDifference * dailyRate;
+
+            String sql = "UPDATE booking "
+                    + "SET checkIn=STR_TO_DATE(?, '%Y-%m-%d'), checkOut=STR_TO_DATE(?, '%Y-%m-%d'), expenses=? "
+                    + "WHERE booking_Id=?;";
+
+            try (PreparedStatement pre = conn.prepareStatement(sql)) {
+                pre.setString(1, checkIn);
+                pre.setString(2, checkOut);
+                pre.setDouble(3, newExpenses);
+                pre.setInt(4, id);
+                pre.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("Error updating booking: " + e.getMessage());
+            }
+        } catch (ParseException e) {
+            System.out.println("Error parsing dates: " + e.getMessage());
         }
     }
 
@@ -172,6 +188,19 @@ public class DAOBooking extends DBConnect {
             Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return booking;
+    }
+
+    public void updateBookingStatus(int bookingId, String status) {
+        String sql = "UPDATE booking SET status = ? WHERE booking_Id = ?";
+
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, status);
+            pre.setInt(2, bookingId);
+            pre.execute();
+        } catch (SQLException e) {
+            System.out.println("Error at Update Status Booking " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {

@@ -11,6 +11,7 @@ public class Booking {
     private int expenses;
     private String created_at;
     private String idCard;
+    private String status;
 
     public Booking(int booking_Id, int customer_Id, Date checkIn, Date checkOut, int expenses, String created_at) {
         this.booking_Id = booking_Id;
@@ -21,7 +22,7 @@ public class Booking {
         this.created_at = created_at;
     }
 
-    public Booking(int booking_Id, Date checkIn, Date checkOut, int expenses, String created_at, String idCard, int customer_Id) {
+    public Booking(int booking_Id, Date checkIn, Date checkOut, int expenses, String created_at, String idCard, int customer_Id, String status) {
         this.booking_Id = booking_Id;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
@@ -29,6 +30,7 @@ public class Booking {
         this.created_at = created_at;
         this.idCard = idCard;
         this.customer_Id = customer_Id;
+        this.status = status;
     }
 
     public Booking(int booking_Id, Date checkIn, Date checkOut, int expenses, String created_at, String idCard) {
@@ -38,6 +40,14 @@ public class Booking {
         this.expenses = expenses;
         this.created_at = created_at;
         this.idCard = idCard;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getIdCard() {
@@ -101,7 +111,7 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking{" + "booking_Id=" + booking_Id + ", customer_Id=" + customer_Id + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", expenses=" + expenses + ", created_at=" + created_at + ", idCard=" + idCard + '}';
+        return "Booking{" + "booking_Id=" + booking_Id + ", customer_Id=" + customer_Id + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", expenses=" + expenses + ", created_at=" + created_at + ", idCard=" + idCard + ", status=" + status + '}';
     }
 
 }

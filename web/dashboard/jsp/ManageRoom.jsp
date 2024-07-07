@@ -89,7 +89,7 @@
                                                                     onclick="updateRoom('${o.room_Id}', '${o.floor_Room_Id}', '${o.name}', '${o.price}', '${o.size}')">
                                                                 <p class="mb-0 fs-3">Update</p>
                                                             </button>
-                                                            <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                            <a href="roomURL?action=delete&rid=${o.room_Id}" class="btn btn-danger delete" title="Delete" data-toggle="tooltip">Delete</a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>

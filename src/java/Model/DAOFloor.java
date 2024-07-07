@@ -34,11 +34,4 @@ public class DAOFloor extends DBConnect {
         }
         return list;
     }
-    public static void main(String[] args) {
-        DAOFloor dao = new DAOFloor();
-        List<Floor> list = dao.getAllFloor();
-        for (Floor floor : list) {
-            System.out.println(floor);
-        }
-    }
 }
