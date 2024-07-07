@@ -107,7 +107,8 @@
                     <c:forEach items="${list}" var="o">
                         <div class="col-lg-3 col-md-6  justify-content-center element">
                             <input value="${o.room_Id}" type="hidden" id="room-id" class="RID"/>
-                            <div class="room-item item-room">
+                            <div class="room-item item-room" style="background-color: <c:if test="${o.maintenance_status == 'dirty room'}">#FFF9EF</c:if>
+                                 <c:if test="${o.maintenance_status == 'fix room'}">#FFEFF2</c:if> <c:if test="${o.maintenance_status == 'clean room'}">#E7FAF5</c:if>">
                                 <div class="ri-text">
                                     <img src="${o.image}" alt="" class="image-room" id="unique-image">
                                     <h4 class="text-center name-room" id="room-name">
@@ -155,7 +156,7 @@
             <div class="overlay" id="overlay" onclick="hidePopup()"></div>
             <div class="popup" id="popup" style="border: 1px solid #ddd; border-radius: 5px;">
                 <h2 id="roomInfo"></h2>
-                <input type="hidden" value="" />
+                <!--                <input type="hidden" id="currentRoomId" value="" />-->
                 <div style="padding-left: 35px">
                     <button class="btn-status" style="background-color:#E7FAF5" onclick="updateRoomStatus(this)" value="clean room">Clean Room</button>
                     <button class="btn-status"  style="background-color:#FFF9EF" onclick="updateRoomStatus(this)" value="dirty room" >Dirty Room</button>
@@ -356,7 +357,8 @@
                                 },
                                 success: function (data) {
                                     var row = document.getElementById("roomInfo");
-                                    row.innerHTML = data;
+                                    row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
+//                                    row.innerHTML = data;
 
                                     console.log("success" + id);
                                 },
@@ -367,21 +369,24 @@
 
                             currentRoomElement = this;
                             showPopup(id);
-                            updateRoomStatus(id);
+//                            updateRoomStatus(id);
                         });
                     });
 
-                    function updateRoomStatus(e, id) {
+                    function updateRoomStatus(e) {
                         const statusRoom = e.value;
+                        const roomId = document.getElementById('currentRoomId').value;
                         $.ajax({
                             url: '/DaNangDreamHotel/serviceStatusController?action=updateRoom',
                             type: 'GET',
                             data: {
                                 status: statusRoom,
-                                roomId: id
+                                roomId: roomId
                             },
                             success: function (data) {
-                                
+                                var row = document.getElementById("roomInfo");
+                                row.innerHTML = data;
+                                hidePopup();
                             },
                             error: function (xhr) {
                                 console.log(xhr, statusRoom);

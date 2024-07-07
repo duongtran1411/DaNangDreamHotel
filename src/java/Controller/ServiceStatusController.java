@@ -62,7 +62,7 @@ public class ServiceStatusController extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        
+
         String action = request.getParameter("action");
         DAORoom dao = new DAORoom();
         List<Room> list = new ArrayList<>();
@@ -209,11 +209,11 @@ public class ServiceStatusController extends HttpServlet {
                         + "</div>");
             }
         }
-        
+
         if (action.equals("leave")) {
             String date = request.getParameter("date");
             list = dao.getRoomCheckOut(date);
-            
+
             for (Room o : list) {
                 out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
                         + "    <div class=\"room-item item-room\">\n"
@@ -257,16 +257,21 @@ public class ServiceStatusController extends HttpServlet {
                         + "</div>");
             }
         }
-        if(action.equals("getRoom")){
+        if (action.equals("getRoom")) {
             int id = Integer.parseInt(request.getParameter("roomId"));
             Room room = dao.getNameById(id);
-            out.print("Room: "+room.getName()+"");
-            out.print("<input type=\"hidden\" value=\""+id+"\" />");
-            if(action.equals("updateRoom")){
-               String status = request.getParameter("status");
-               dao.updateStatus(status, id);
-                System.out.println(status);
-            }
+            out.print("Room: " + room.getName() + "");
+//            out.print("<input type=\"hidden\" id=\"currentRoomId\" value="+id+"\"\" />");
+
+        }
+
+        if (action.equals("updateRoom")) {
+            String status = request.getParameter("status");
+            int id = Integer.parseInt(request.getParameter("roomId"));
+            System.out.println(status);
+            System.out.println(id);
+            dao.updateStatus(status, id);
+            response.sendRedirect("statusRoomController");
         }
     }
 

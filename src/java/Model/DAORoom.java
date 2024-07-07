@@ -944,8 +944,8 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
-    public int updateStatus(String status, int id) {
-        int a = 0;
+    public void updateStatus(String status, int id) {
+  
         String sql = "update room\n"
                 + " set maintenance_status =?,\n"
                 + " updated_at = NOW()\n"
@@ -954,11 +954,11 @@ public class DAORoom extends DBConnect {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, status);
             pre.setInt(2, id);
-            a = pre.executeUpdate();
+            pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return a;
+       
     }
 
     public static void main(String[] args) {
