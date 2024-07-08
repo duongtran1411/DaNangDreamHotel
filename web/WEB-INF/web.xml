@@ -88,6 +88,10 @@
         <servlet-name>ServiceStatusController</servlet-name>
         <servlet-class>Controller.ServiceStatusController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UseSuppliesController</servlet-name>
+        <servlet-class>Controller.UseSuppliesController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -179,6 +183,10 @@
     <servlet-mapping>
         <servlet-name>ServiceStatusController</servlet-name>
         <url-pattern>/serviceStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UseSuppliesController</servlet-name>
+        <url-pattern>/useSuppliesURL</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

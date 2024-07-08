@@ -3,6 +3,7 @@ package Controller;
 import Entity.Booking;
 import Entity.Customer;
 import Entity.FormatUtils;
+import Entity.Room;
 import Model.DAOBooking;
 import java.io.IOException;
 import java.util.List;
@@ -37,6 +38,9 @@ public class BookingController extends HttpServlet {
             case "status":
                 updateBookingStatus(request, response);
                 break;
+            case "detail":
+                listBookingDetail(request, response);
+                break;
             case "update":
                 updateBooking(request, response);
                 break;
@@ -63,6 +67,12 @@ public class BookingController extends HttpServlet {
         List<Booking> bookings = daoBooking.getAllBooking();
         request.setAttribute("listB", bookings);
         request.getRequestDispatcher("dashboard/jsp/ManageBooking.jsp").forward(request, response);
+    }
+    private void listBookingDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int bookingId = Integer.parseInt(request.getParameter("id"));
+        List<Room> rooms = daoBooking.getRoomsByBookingId(bookingId);
+        request.setAttribute("rooms", rooms);
+        request.getRequestDispatcher("dashboard/jsp/ManageBookingDetail.jsp").forward(request, response);
     }
 
     private void updateBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

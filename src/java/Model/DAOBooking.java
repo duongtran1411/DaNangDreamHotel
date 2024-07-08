@@ -2,6 +2,7 @@ package Model;
 
 import Entity.Booking;
 import Entity.Customer;
+import Entity.Room;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -154,7 +155,7 @@ public class DAOBooking extends DBConnect {
                     + "SET checkIn=STR_TO_DATE(?, '%Y-%m-%d'), checkOut=STR_TO_DATE(?, '%Y-%m-%d'), expenses=? "
                     + "WHERE booking_Id=?;";
 
-            try (PreparedStatement pre = conn.prepareStatement(sql)) {
+            try ( PreparedStatement pre = conn.prepareStatement(sql)) {
                 pre.setString(1, checkIn);
                 pre.setString(2, checkOut);
                 pre.setDouble(3, newExpenses);
@@ -203,8 +204,35 @@ public class DAOBooking extends DBConnect {
         }
     }
 
+    public List<Room> getRoomsByBookingId(int id) {
+        List<Room> list = new ArrayList();
+        String sql = "SELECT r.room_Id, r.type_Room_Id, r.floor_Room_Id, r.name, r.price, r.status, r.created_at, r.updated_at, r.size\n"
+                + "FROM managerhotel.room r\n"
+                + "JOIN managerhotel.bookingdetail bd ON r.room_Id = bd.room_Id\n"
+                + "WHERE bd.booking_Id = ?;";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-        System.out.println(dao.getCustomerSameBooking(6));
+        System.out.println(dao.getRoomsByBookingId(2));
     }
 }

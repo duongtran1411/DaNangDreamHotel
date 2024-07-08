@@ -99,7 +99,7 @@
                                                 <c:forEach items="${allItem}" var="o">
                                                     <tr>
                                                         <td data-label="Name">${o.name}</td>
-                                                        <td data-label="Type">${o.typeName}</td>
+                                                        <td data-label="Type">${o.typeItem_Id}</td>
                                                         <td data-label="Price">${FormatUtils.formatPRice(o.price)}đ</td>
                                                         <td data-label="Actions">
                                                             <a href="UpdateItem.jsp?id=${o.item_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>

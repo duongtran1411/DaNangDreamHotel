@@ -72,6 +72,14 @@
                     </a>
                 </li>
                 <li  class="sidebar-item">
+                    <a  class="sidebar-link" href="useSuppliesURL" aria-expanded="false">
+                        <span>
+                            <i class="fa-solid fa-store white"></i>
+                        </span>
+                        <span class="hide-menu white">CheckOut</span>
+                    </a>
+                </li>
+                <li  class="sidebar-item">
                     <a  class="sidebar-link" href="ItemTypeController" aria-expanded="false">
                         <span>
                             <i class="fa-solid fa-cookie-bite white"></i>

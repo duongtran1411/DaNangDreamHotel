@@ -1074,12 +1074,38 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
+    public List<Room> getRoomByStatus(String status){
+        List<Room> list = new ArrayList<>();
+        String sql = "select * from room where status = ?";
+        try{
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setString(1, status);
+            ResultSet rs = pre.executeQuery();
+            while(rs.next()){
+               list.add(new Room(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9)));
+                }
+        }catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        Room r = dao.getNameByRoomId(1);
+        String s = "Unavailable";
+        List<Room> list = dao.getRoomByStatus(s);
  
-            System.out.println(r);
+           for (Room room : list) {
+               System.out.println(room);
+        }
       
         
     }
