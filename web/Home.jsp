@@ -26,6 +26,7 @@
             href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap"
             rel="stylesheet"
             />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
         <title>Da Nang Dream Hotel</title>
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -94,14 +95,11 @@
                                 <form action="bookByEventController" method="get">
                                     <div class="check-date date-picker">
                                         <label for="checkin">Check-in</label>
-
                                         <input type="date" class="form-control w-100 dateCheck" id="checkin" name="checkIn">
-                                        <!--                                        <i class="icon_calendar"></i>-->
                                     </div>
                                     <div class="check-date date-picker">
                                         <label for="checkout">Check-out</label>
                                         <input type="date" class="form-control w-100 dateCheck" id="checkout" name="checkOut">
-                                        <!--<i class="icon_calendar"></i>-->
                                     </div>
                                     <div class="select-option">
                                         <label for="guest">Guests:</label>

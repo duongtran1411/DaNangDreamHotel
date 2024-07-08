@@ -74,7 +74,7 @@
 
                             <c:forEach items="${listTypeRoom}" var="o">
                                 <button class="btnType" name="typeRoom" onclick="loadType(this)" value="${o.typeRoom_Id}"><li>${o.name}</li></button>
-                                    </c:forEach>   
+                            </c:forEach>   
                         </ul>
                     </div>
 

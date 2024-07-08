@@ -80,6 +80,14 @@
         <servlet-name>BookingInformation</servlet-name>
         <servlet-class>Controller.BookingInformation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StatusRoomController</servlet-name>
+        <servlet-class>Controller.StatusRoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceStatusController</servlet-name>
+        <servlet-class>Controller.ServiceStatusController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -163,6 +171,14 @@
     <servlet-mapping>
         <servlet-name>BookingInformation</servlet-name>
         <url-pattern>/bookingInformationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatusRoomController</servlet-name>
+        <url-pattern>/statusRoomController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceStatusController</servlet-name>
+        <url-pattern>/serviceStatusController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

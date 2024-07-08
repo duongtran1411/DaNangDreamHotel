@@ -62,7 +62,7 @@ public class BookingInformation extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(3000);
+        session.setMaxInactiveInterval(300);
         BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         if (bookingCart == null) {
             bookingCart = new BookingCart();
@@ -73,7 +73,7 @@ public class BookingInformation extends HttpServlet {
         LocalDate dateIn = LocalDate.parse(checkIn);
         LocalDate dateOut = LocalDate.parse(checkOut);
         long daysBetween = ChronoUnit.DAYS.between(dateIn, dateOut);
-        session.setAttribute("cart", bookingCart.getListCartItem());
+        session.setAttribute("list", bookingCart.getListCartItem());
         session.setAttribute("total", total * daysBetween);
         session.setAttribute("checkInDay", checkIn);
         session.setAttribute("checkOutDay", checkOut);

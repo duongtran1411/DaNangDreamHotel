@@ -4,9 +4,11 @@
  */
 package Controller;
 
-import Entity.BookingCart;
-import Entity.CartItem;
+import Entity.Floor;
+import Entity.Room;
 import Entity.TypeRoom;
+import Model.DAOFloor;
+import Model.DAORoom;
 import Model.DAOTypeRoom;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,16 +17,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 /**
  *
- * @author CaoTung
+ * @author GIGABYTE
  */
-public class ViewCart extends HttpServlet {
+public class StatusRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +42,10 @@ public class ViewCart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewCart</title>");
+            out.println("<title>Servlet StatusRoomController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewCart at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet StatusRoomController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,29 +64,17 @@ public class ViewCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
-        if (bookingCart == null) {
-            bookingCart = new BookingCart();
-        }
-        int total = bookingCart.getTotalMoney();
-        DAOTypeRoom dao = new DAOTypeRoom();
-        List<TypeRoom> listT = dao.getAllTypeRoom();
-        String checkIn = (String) session.getAttribute("checkInDay");
-        String checkOut = (String) session.getAttribute("checkOutDay");
-        if(checkIn == null && checkOut == null){
-            response.sendRedirect("homeController");
-        }
-        LocalDate dateIn = LocalDate.parse(checkIn);
-        LocalDate dateOut = LocalDate.parse(checkOut);
-        if(dateIn == null && dateOut == null){
-            response.sendRedirect("homeController");
-        }
-        long daysBetween = ChronoUnit.DAYS.between(dateIn, dateOut);
-        session.setAttribute("listT", listT);
-        session.setAttribute("total", total * daysBetween);
-        session.setAttribute("numberDay", daysBetween);
-        session.setAttribute("list", bookingCart.getListCartItem());
-        request.getRequestDispatcher("BookingCart.jsp").forward(request, response);
+        DAORoom dao = new DAORoom();
+        DAOTypeRoom daoT = new DAOTypeRoom();
+        DAOFloor daoL = new DAOFloor();
+        List<Room> list = dao.getAllRoom();
+        List<TypeRoom> listT = daoT.getAllTypeRoom();
+        List<Floor> listF = daoL.getAllFloor();
+        request.setAttribute("list", session.getAttribute("listArrive"));
+        request.setAttribute("list", list);
+        request.setAttribute("listType", listT);
+        request.setAttribute("listFloor", listF);
+        request.getRequestDispatcher("dashboard/jsp/ManageStatusRoom.jsp").forward(request, response);
     }
 
     /**
