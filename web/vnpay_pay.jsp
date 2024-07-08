@@ -181,7 +181,7 @@
                                 <span>Total room price: ${FormatUtils.formatPRice(total)}đ</span>
                                 <p>Including all taxes and service fees</p>
                             </div>
-                        </c:forEach>
+
 
                     </div>
                 </div>
