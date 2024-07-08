@@ -66,6 +66,7 @@ public class BookingByEventController extends HttpServlet {
         session.setMaxInactiveInterval(300);
         String checkIn = request.getParameter("checkIn");
         String checkOut = request.getParameter("checkOut");
+        String person = request.getParameter("numberPerson");
         System.out.println(checkIn +"bookByEvent"+ checkOut);
         DAOEvent daoE = new DAOEvent();
         DAORoom daoR = new DAORoom();
@@ -73,6 +74,7 @@ public class BookingByEventController extends HttpServlet {
         request.setAttribute("listE", listE);
         session.setAttribute("checkInDay", checkIn);
         session.setAttribute("checkOutDay", checkOut);
+        session.setAttribute("numberPerson", person);
         request.getRequestDispatcher("Booking.jsp").forward(request, response);
 
     }

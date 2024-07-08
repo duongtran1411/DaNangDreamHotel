@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="select-option">
                                         <label for="guest">Guests:</label>
-                                        <select id="guest">
+                                        <select id="guest" name="numberPerson">
                                             <option value="1">1 Adults</option>
                                             <option value="2">2 Adults</option>
                                             <option value="3">3 Adults</option>

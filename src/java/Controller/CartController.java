@@ -132,6 +132,7 @@ public class CartController extends HttpServlet {
         int roomId = Integer.parseInt(id);
         bookingCart.remove(roomId);
         session.setAttribute("cart", bookingCart);
+        session.setAttribute("total", bookingCart.getTotalMoney());
         resp.sendRedirect("viewCartController");
     }
 
