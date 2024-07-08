@@ -75,7 +75,7 @@
             <!-- Header Section -->
             <div class="header-box mb-4">
                 <div class="form-inline row align-items-end "  >
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="destination">Destination</label>
                         <input type="text" class="form-control w-100" id="destination" placeholder="Destination" value="Da Nang Dream Hotel" readonly="" name="dateIn">
                     </div>
@@ -86,6 +86,10 @@
                 <div class="form-group col-md-3">
                     <label for="checkout">Check-out</label>
                     <input type="date" class="form-control w-100" id="checkout" value="${sessionScope.checkOutDay}" name="dateOut" >
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="checkout">Person</label>
+                    <input type="text" class="form-control w-100" value="${sessionScope.numberPerson}" style="padding-left: 25px" >
                 </div>
                 <div class="form-group col-md-2" style="padding-right: 5px;align-items: center">
                     <button  class="btn btn w-100" style="background-color: #C59B24; color: white" id="updateButton" >Update</button>
@@ -134,16 +138,6 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="d-flex justify-content-between mb-3">
-                    <div>
-                        <label style="transform: translateY(30px)">Sorted by: </label>
-                        <select id="roomSelect" class="custom-select" onchange="handleChange()" style="height:60px;width: 200px">
-                            <option value="price">Price</option>
-                            <option value="room">Room</option>
-                        </select>
-                    </div>
-                </div>
-
 
                 <c:forEach items="${listE}" var="o">
                     <div class="name-event" style="background: #f8f8f8; width:100% ;padding: 10px 20px"><h5 style="font-weight: 700;">${o.name}</h5></div>
@@ -162,12 +156,10 @@
                                         <div>
                                             <p class="mb-0 original-price">3,889,000 VND/night</p>
                                             <p class="mb-0 room-price">1,750,050 VND/night (Including tax and service charge)</p>
-
                                         </div>
                                         <div style="padding-top: 7px">
                                             <button class="btn btn btnRoom " id="show-room-details" style="background-color: #C59B24; color: white; margin-left: 10px;" onclick="handleEvent(${o.event_Id})" >Room details</button>
                                         </div>
-
                                     </div> 
                                     <div id="room-details-${o.event_Id}" style="display: block;">
 
