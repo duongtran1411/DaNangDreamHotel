@@ -1077,10 +1077,11 @@ public class DAORoom extends DBConnect {
 
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        List<Room> list = dao.checkRoom("2024-07-08","2024-07-10",1);
-        for (Room room : list) {
-            System.out.println(room);
-        }
+        Room r = dao.getNameByRoomId(1);
+ 
+            System.out.println(r);
+      
+        
     }
 
 }
