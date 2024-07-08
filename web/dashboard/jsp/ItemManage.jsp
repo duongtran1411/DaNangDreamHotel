@@ -88,7 +88,7 @@
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>    
-                                                        <th class="sortable">Item Name</th>
+                                                        <th class="sortable">Name of items</th>
                                                         <th class="sortable">Type</th>
                                                         <th class="sortable">Price</th>
                                                         <th>Action</th>
