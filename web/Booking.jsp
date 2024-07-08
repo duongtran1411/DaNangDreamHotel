@@ -75,7 +75,7 @@
             <!-- Header Section -->
             <div class="header-box mb-4">
                 <div class="form-inline row align-items-end "  >
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="destination">Destination</label>
                         <input type="text" class="form-control w-100" id="destination" placeholder="Destination" value="Da Nang Dream Hotel" readonly="" name="dateIn">
                     </div>
@@ -85,6 +85,10 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="checkout">Check-out</label>
+                    <input type="date" class="form-control w-100" id="checkout" value="${sessionScope.checkOutDay}" name="dateOut" >
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="checkout">Person</label>
                     <input type="date" class="form-control w-100" id="checkout" value="${sessionScope.checkOutDay}" name="dateOut" >
                 </div>
                 <div class="form-group col-md-2" style="padding-right: 5px;align-items: center">

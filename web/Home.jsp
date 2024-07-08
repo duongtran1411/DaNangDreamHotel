@@ -95,14 +95,11 @@
                                 <form action="bookByEventController" method="get">
                                     <div class="check-date date-picker">
                                         <label for="checkin">Check-in</label>
-
                                         <input type="date" class="form-control w-100 dateCheck" id="checkin" name="checkIn">
-                                        <!--                                        <i class="icon_calendar"></i>-->
                                     </div>
                                     <div class="check-date date-picker">
                                         <label for="checkout">Check-out</label>
                                         <input type="date" class="form-control w-100 dateCheck" id="checkout" name="checkOut">
-                                        <!--<i class="icon_calendar"></i>-->
                                     </div>
                                     <div class="select-option">
                                         <label for="guest">Guests:</label>

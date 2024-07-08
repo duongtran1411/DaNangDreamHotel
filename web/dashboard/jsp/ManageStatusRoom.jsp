@@ -73,9 +73,9 @@
     </head>
     <body>
         <jsp:include page="SlideBar.jsp"></jsp:include>
-            <div>
-                <div style="margin-left: 280px;border: 1px solid #ddd;">
-                    <div class="row" style="padding-left: 30px">
+        <div style="border: 1px solid #ddd;">
+                <div style="margin-left: 280px;">
+                    <div class="row" style="padding-left: 20px;width: 1600px;">
                         <h4><i class="fa-solid fa-map"style="padding-right: 10px"></i>Map Room</h4>
                         <div style="padding-bottom: 10px;padding-top: 10px">
                             <label class="text">Type Room:</label>
@@ -108,7 +108,7 @@
                         <button class="btn-hover status-room fix" onclick="FixRoom()"><i class="fa-solid fa-wrench icon-padding"></i>Fix Room</button>
                     </div>
                 </div>
-                <div class="row" id="main-room">
+                    <div class="row" id="main-room" style="width: 1600px">
                     <c:forEach items="${list}" var="o">
                         <div class="col-lg-3 col-md-6  justify-content-center element">
                             <input value="${o.room_Id}" type="hidden" id="room-id" class="RID"/>
@@ -155,6 +155,9 @@
                         </div>
                     </c:forEach>
                 </div>
+                <div id="pagination-info" class="text-center mt-2" style="padding-bottom: 10px;">
+
+                </div>
                 <div id="pagination-container" class="text-center mt-4 justify-content-center" style="padding-bottom: 10px">
                 </div>
 
@@ -178,375 +181,339 @@
         <script src="js/now-date.js"></script>
         <script>
                     function handleChange() {
-                    var selectElement = document.getElementById("select-type");
-                    var selectedValue = selectElement.value;
-                    $.ajax({
-                    url: '/DaNangDreamHotel/serviceStatusController?action=type',
+                        var selectElement = document.getElementById("select-type");
+                        var selectedValue = selectElement.value;
+                        $.ajax({
+                            url: '/DaNangDreamHotel/serviceStatusController?action=type',
                             type: 'GET',
                             data: {
-                            typeId: selectedValue
+                                typeId: selectedValue
                             },
                             success: function (data) {
-                            var row = document.getElementById("main-room");
-                            row.innerHTML = data;
-                            document.querySelectorAll('.element').forEach(item => {
-                            item.addEventListener('click', function () {
-                            console.log(item);
-                            const id = this.querySelector('.RID').value;
-                            console.log(id);
-                            $.ajax({
-                            url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
-                                    type: 'GET',
-                                    data: {
-                                    roomId: id
-                                    },
-                                    success: function (data) {
-                                    var row = document.getElementById("roomInfo");
-                                    row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
-                                    console.log("success" + id);
-                                    },
-                                    error: function (xhr) {
-                                    console.log(xhr);
-                                    }
-                            });
-                            currentRoomElement = this;
-                            showPopup(id);
-                            });
-                            });
-                            console.log(selectedValue);
-                            console.log("success");
+                                var row = document.getElementById("main-room");
+                                row.innerHTML = data;
+                                handlePage();
+
+                                console.log(selectedValue);
+                                console.log("success");
                             },
                             error: function (xhr) {
-                            console.log(xhr);
+                                console.log(xhr);
                             }
-                    });
+                        });
                     }
 
                     function changeFloor() {
-                    var selectElement = document.getElementById("select-floor");
-                    var selectedValue = selectElement.value;
-                    $.ajax({
-                    url: '/DaNangDreamHotel/serviceStatusController?action=floor',
+                        var selectElement = document.getElementById("select-floor");
+                        var selectedValue = selectElement.value;
+                        $.ajax({
+                            url: '/DaNangDreamHotel/serviceStatusController?action=floor',
                             type: 'GET',
                             data: {
-                            floorId: selectedValue
+                                floorId: selectedValue
                             },
                             success: function (data) {
-                            var row = document.getElementById("main-room");
-                            row.innerHTML = data;
-                            document.querySelectorAll('.element').forEach(item => {
-                            item.addEventListener('click', function () {
-                            console.log(item);
-                            const id = this.querySelector('.RID').value;
-                            console.log(id);
-                            $.ajax({
-                            url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
-                                    type: 'GET',
-                                    data: {
-                                    roomId: id
-                                    },
-                                    success: function (data) {
-                                    var row = document.getElementById("roomInfo");
-                                    row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
-                                    console.log("success" + id);
-                                    },
-                                    error: function (xhr) {
-                                    console.log(xhr);
-                                    }
-                            });
-                            currentRoomElement = this;
-                            showPopup(id);
-                            });
-                            });
-                            console.log(selectedValue);
-                            console.log("success");
+                                var row = document.getElementById("main-room");
+                                row.innerHTML = data;
+                                handlePage();
+                                console.log(selectedValue);
+                                console.log("success");
                             },
                             error: function (xhr) {
-                            console.log(xhr, selectedValue);
+                                console.log(xhr, selectedValue);
                             }
-                    });
-                    }
-
-                    function handlePage(param) {
-                    var numberPage = param.value;
-                    $.ajax({
-                    url: '/DaNangDreamHotel/serviceStatusController?action=paging',
-                            type: 'GET',
-                            data: {
-                            page: numberPage
-                            },
-                            success: function (data, value) {
-                            var row = document.getElementById("main-room");
-                            row.innerHTML = data;
-                            var page = document.getElementById("list-page");
-                            page.innerHTML = value;
-                            },
-                            error: function (xhr) {
-                            console.log(xhr);
-                            }
-                    });
+                        });
                     }
 
                     function handleArrive() {
-                    var date = document.getElementById("now-date");
-                    var value = date.value;
-                    console.log(date);
-                    $.ajax({
-                    url: '/DaNangDreamHotel/serviceStatusController?action=arrive',
+                        var date = document.getElementById("now-date");
+                        var value = date.value;
+                        console.log(date);
+                        $.ajax({
+                            url: '/DaNangDreamHotel/serviceStatusController?action=arrive',
                             type: 'GET',
                             data: {
-                            date: value
+                                date: value
                             },
                             success: function (data) {
-                            var row = document.getElementById("main-room");
-                            row.innerHTML = data;
-                            document.querySelectorAll('.element').forEach(item => {
-                            item.addEventListener('click', function () {
-                            console.log(item);
-                            const id = this.querySelector('.RID').value;
-                            console.log(id);
-                            $.ajax({
-                            url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
-                                    type: 'GET',
-                                    data: {
-                                    roomId: id
-                                    },
-                                    success: function (data) {
-                                    var row = document.getElementById("roomInfo");
-                                    row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
-                                    console.log("success" + id);
-                                    },
-                                    error: function (xhr) {
-                                    console.log(xhr);
-                                    }
-                            });
-                            currentRoomElement = this;
-                            showPopup(id);
-                            });
-                            });
-                            console.log("success");
+                                var row = document.getElementById("main-room");
+                                row.innerHTML = data;
+                                handlePage();
+                                console.log("success");
                             },
                             error: function (xhr) {
-                            console.log(xhr);
+                                console.log(xhr);
                             }
-                    });
+                        });
                     }
 
                     function handleLeave() {
-                    var date = document.getElementById("now-date");
-                    var value = date.value;
-                    console.log(date);
-                    $.ajax({
-                    url: '/DaNangDreamHotel/serviceStatusController?action=leave',
+                        var date = document.getElementById("now-date");
+                        var value = date.value;
+                        console.log(date);
+                        $.ajax({
+                            url: '/DaNangDreamHotel/serviceStatusController?action=leave',
                             type: 'GET',
                             data: {
-                            date: value
+                                date: value
                             },
                             success: function (data) {
-                            var row = document.getElementById("main-room");
-                            row.innerHTML = data;
-                            document.querySelectorAll('.element').forEach(item => {
-                            item.addEventListener('click', function () {
-                            console.log(item);
-                            const id = this.querySelector('.RID').value;
-                            console.log(id);
-                            $.ajax({
-                            url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
-                                    type: 'GET',
-                                    data: {
-                                    roomId: id
-                                    },
-                                    success: function (data) {
-                                    var row = document.getElementById("roomInfo");
-                                    row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
-                                    console.log("success" + id);
-                                    },
-                                    error: function (xhr) {
-                                    console.log(xhr);
-                                    }
-                            });
-                            currentRoomElement = this;
-                            showPopup(id);
-                            });
-                            });
-                            console.log("success");
+                                var row = document.getElementById("main-room");
+                                row.innerHTML = data;
+                                handlePage();
+                                console.log("success");
                             },
                             error: function (xhr) {
-                            console.log(xhr);
+                                console.log(xhr);
                             }
-                    });
-                    }
-
-                    var buttons = document.querySelectorAll('.btn-hover');
-                    buttons.forEach(function (button) {
-                    button.addEventListener('click', function () {
-
-                    buttons.forEach(function (btn) {
-                    btn.classList.remove('select');
-                    });
-                    this.classList.add('select');
-                    });
-                    });
-                    function getAll() {
-                    window.location.href = "statusRoomController";
-                    }
-
-                    let currentRoomElement;
-                    function showPopup(id) {
-                    const popup = document.getElementById('popup');
-                    const overlay = document.getElementById('overlay');
-                    const roomInfo = document.getElementById('roomInfo');
-                    popup.classList.add('active');
-                    overlay.classList.add('active');
-                    }
-
-                    function hidePopup() {
-                    const popup = document.getElementById('popup');
-                    const overlay = document.getElementById('overlay');
-                    popup.classList.remove('active');
-                    overlay.classList.remove('active');
+                        });
                     }
 
 
-                    document.querySelectorAll('.element').forEach(item => {
-                    item.addEventListener('click', function () {
-                    console.log(item);
-                    const id = this.querySelector('.RID').value;
-                    console.log(id);
-                    $.ajax({
-                    url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
-                            type: 'GET',
-                            data: {
-                            roomId: id
-                            },
-                            success: function (data) {
-                            var row = document.getElementById("roomInfo");
-                            row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
-                            console.log("success" + id);
-                            },
-                            error: function (xhr) {
-                            console.log(xhr);
-                            }
-                    });
-                    currentRoomElement = this;
-                    showPopup(id);
-                    });
-                    });
                     function updateRoomStatus(e) {
-                    const statusRoom = e.value;
-                    const roomId = document.getElementById('currentRoomId').value;
-                    $.ajax({
-                    url: '/DaNangDreamHotel/serviceStatusController?action=updateRoom',
+                        const statusRoom = e.value;
+                        const roomId = document.getElementById('currentRoomId').value;
+                        $.ajax({
+                            url: '/DaNangDreamHotel/serviceStatusController?action=updateRoom',
                             type: 'GET',
                             data: {
-                            status: statusRoom,
-                                    roomId: roomId
+                                status: statusRoom,
+                                roomId: roomId
                             },
                             success: function (data) {
-                            var row = document.getElementById("roomInfo");
-                            row.innerHTML = data;
-                            Swal.fire({
-                            position: "center",
+                                var row = document.getElementById("roomInfo");
+                                row.innerHTML = data;
+                                Swal.fire({
+                                    position: "center",
                                     icon: "success",
                                     title: "Your work has been saved",
                                     showConfirmButton: false,
                                     timer: 2000
-                            });
-                            setTimeout(() => {
-                            location.reload();
-                            }, 2000);
-                            hidePopup();
+                                });
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1000);
+                                hidePopup();
                             },
                             error: function (xhr) {
-                            console.log(xhr, statusRoom);
+                                console.log(xhr, statusRoom);
                             }
-                    });
+                        });
                     }
                     function handlAvai() {
-                    var date = document.getElementById("now-date");
-                    var dateNow = date.value;
-                    $.ajax({
-                    url: '/DaNangDreamHotel/serviceStatusController?action=checkAvailable',
+                        var date = document.getElementById("now-date");
+                        var dateNow = date.value;
+                        $.ajax({
+                            url: '/DaNangDreamHotel/serviceStatusController?action=checkAvailable',
                             type: 'GET',
                             data: {
-                            date: dateNow
+                                date: dateNow
                             },
                             success: function (data) {
-                            var row = document.getElementById("main-room");
-                            row.innerHTML = data;
-                            document.querySelectorAll('.element').forEach(item => {
-                            item.addEventListener('click', function () {
-                            console.log(item);
-                            const id = this.querySelector('.RID').value;
-                            console.log(id);
-                            $.ajax({
-                            url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
-                                    type: 'GET',
-                                    data: {
-                                    roomId: id
-                                    },
-                                    success: function (data) {
-                                    var row = document.getElementById("roomInfo");
-                                    row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
-                                    console.log("success" + id);
-                                    },
-                                    error: function (xhr) {
-                                    console.log(xhr);
-                                    }
-                            });
-                            currentRoomElement = this;
-                            showPopup(id);
-                            });
-                            });
+                                var row = document.getElementById("main-room");
+                                row.innerHTML = data;
+                                handlePage();
                             },
                             error: function (xhr) {
-                            console.log(xhr, statusRoom);
+                                console.log(xhr, statusRoom);
                             }
-                    });
+                        });
                     }
 
                     function handleUnavai() {
-                    var date = document.getElementById("now-date");
-                    var dateNow = date.value;
-                    $.ajax({
-                    url: '/DaNangDreamHotel/serviceStatusController?action=checkUnavai',
+                        var date = document.getElementById("now-date");
+                        var dateNow = date.value;
+                        $.ajax({
+                            url: '/DaNangDreamHotel/serviceStatusController?action=checkUnavai',
                             type: 'GET',
                             data: {
-                            date: dateNow
+                                date: dateNow
                             },
                             success: function (data) {
-                            var row = document.getElementById("main-room");
-                            row.innerHTML = data;
-                            document.querySelectorAll('.element').forEach(item => {
-                            item.addEventListener('click', function () {
+                                var row = document.getElementById("main-room");
+                                row.innerHTML = data;
+                                handlePage();
+                                document.querySelectorAll('.element').forEach(item => {
+                                    item.addEventListener('click', function () {
+                                        console.log(item);
+                                        const id = this.querySelector('.RID').value;
+                                        console.log(id);
+                                        $.ajax({
+                                            url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
+                                            type: 'GET',
+                                            data: {
+                                                roomId: id
+                                            },
+                                            success: function (data) {
+                                                var row = document.getElementById("roomInfo");
+                                                row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
+                                                console.log("success" + id);
+                                            },
+                                            error: function (xhr) {
+                                                console.log(xhr);
+                                            }
+                                        });
+                                        currentRoomElement = this;
+                                        showPopup(id);
+                                    });
+                                });
+                            },
+                            error: function (xhr) {
+                                console.log(xhr, statusRoom);
+                            }
+                        });
+                    }
+
+                    var buttons = document.querySelectorAll('.btn-hover');
+                    buttons.forEach(function (button) {
+                        button.addEventListener('click', function () {
+
+                            buttons.forEach(function (btn) {
+                                btn.classList.remove('select');
+                            });
+                            this.classList.add('select');
+                        });
+                    });
+                    function getAll() {
+                        window.location.href = "statusRoomController";
+                    }
+
+                    let currentRoomElement;
+                    function showPopup(id) {
+                        const popup = document.getElementById('popup');
+                        const overlay = document.getElementById('overlay');
+                        const roomInfo = document.getElementById('roomInfo');
+                        popup.classList.add('active');
+                        overlay.classList.add('active');
+                    }
+
+                    function hidePopup() {
+                        const popup = document.getElementById('popup');
+                        const overlay = document.getElementById('overlay');
+                        popup.classList.remove('active');
+                        overlay.classList.remove('active');
+                    }
+
+
+                    document.querySelectorAll('.element').forEach(item => {
+                        item.addEventListener('click', function () {
                             console.log(item);
                             const id = this.querySelector('.RID').value;
                             console.log(id);
                             $.ajax({
-                            url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
-                                    type: 'GET',
-                                    data: {
+                                url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
+                                type: 'GET',
+                                data: {
                                     roomId: id
-                                    },
-                                    success: function (data) {
+                                },
+                                success: function (data) {
                                     var row = document.getElementById("roomInfo");
                                     row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
                                     console.log("success" + id);
-                                    },
-                                    error: function (xhr) {
+                                },
+                                error: function (xhr) {
                                     console.log(xhr);
-                                    }
+                                }
                             });
                             currentRoomElement = this;
                             showPopup(id);
-                            });
-                            });
-                            },
-                            error: function (xhr) {
-                            console.log(xhr, statusRoom);
-                            }
+                        });
                     });
+
+                    function handlePage() {
+                        const itemsPerPage = 6;
+                        const paginationContainer = document.getElementById('pagination-container');
+                        const pageInfo = document.getElementById('pagination-info');
+
+                        function showPage(page) {
+                            const items = document.querySelectorAll('#main-room .element');
+                            const start = (page - 1) * itemsPerPage;
+                            const end = start + itemsPerPage;
+
+                            items.forEach((item, index) => {
+                                if (index >= start && index < end) {
+                                    item.style.display = 'flex';
+                                } else {
+                                    item.style.display = 'none';
+                                }
+                            });
+
+                            const pageItems = paginationContainer.querySelectorAll('li');
+                            pageItems.forEach((item, index) => {
+                                if (index === (page - 1)) {
+                                    item.classList.add('active');
+                                } else {
+                                    item.classList.remove('active');
+                                }
+                            });
+
+//                            const totalPages = Math.ceil(items.length / itemsPerPage);
+//                            pageInfo.innerText = `Page ${page} of ${totalPages}`;
+
+                            document.querySelectorAll('.element').forEach(item => {
+                                item.addEventListener('click', function () {
+                                    console.log(item);
+                                    const id = this.querySelector('.RID').value;
+                                    console.log(id);
+                                    $.ajax({
+                                        url: '/DaNangDreamHotel/serviceStatusController?action=getRoom',
+                                        type: 'GET',
+                                        data: {
+                                            roomId: id
+                                        },
+                                        success: function (data) {
+                                            var row = document.getElementById("roomInfo");
+                                            row.innerHTML = data + "<input type=\"hidden\" id=\"currentRoomId\" value=\"" + id + "\" />";
+                                            console.log("success" + id);
+                                        },
+                                        error: function (xhr) {
+                                            console.log(xhr);
+                                        }
+                                    });
+                                    currentRoomElement = this;
+                                    showPopup(id);
+                                });
+                            });
+                        }
+
+                        function setupPagination() {
+                            const items = document.querySelectorAll('#main-room .element');
+                            const totalPages = Math.ceil(items.length / itemsPerPage);
+                            paginationContainer.innerHTML = '';
+                            const ul = document.createElement('ul');
+                            ul.className = 'pagination justify-content-center';
+
+                            for (let i = 1; i <= totalPages; i++) {
+                                const li = document.createElement('li');
+                                li.className = 'page-item';
+
+                                const link = document.createElement('a');
+                                link.className = 'page-link';
+                                link.href = '#';
+                                link.innerText = i;
+                                (function (page) {
+                                    link.addEventListener('click', function (event) {
+                                        event.preventDefault();
+                                        showPage(page);
+                                    });
+                                })(i);
+
+                                li.appendChild(link);
+                                ul.appendChild(li);
+                                if (i === 1) {
+                                    li.classList.add('active');
+                                }
+                            }
+
+                            paginationContainer.appendChild(ul);
+//                            pageInfo.innerText = `Page 1 of ${totalPages}`;
+                        }
+
+                        setupPagination();
+                        showPage(1);
                     }
+                    document.addEventListener('DOMContentLoaded', handlePage);
+
 
 
         </script>
