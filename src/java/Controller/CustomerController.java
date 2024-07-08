@@ -34,6 +34,9 @@ public class CustomerController extends HttpServlet {
             case "edit":
                 editCustomer(request, response);
                 break;
+            case "add":
+                addCustomer(request, response);
+                break;
             case "delete":
                 deleteCustomer(request, response);
                 break;
@@ -55,25 +58,20 @@ public class CustomerController extends HttpServlet {
     }// </editor-fold>
 
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
-        int cusPerPage = 6;
-        int totalCus = daoCustomer.getTotalCustomer();
-        int totalPages = (int) Math.ceil((double) totalCus / cusPerPage);
-        List<Customer> allCus = daoCustomer.getCusWithPagin(currentPage, cusPerPage);
-        request.setAttribute("allCustomer", allCus);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("totalPages", totalPages);
+        List<Customer> allCustomer = daoCustomer.getAllCustomer();
+        request.setAttribute("allCustomer", allCustomer);
         request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);
     }
 
     private void addCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String rCode = request.getParameter("rCode");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String phoneNumber = request.getParameter("phoneNumber");
         String email = request.getParameter("email");
         String idCard = request.getParameter("idCard");
-        daoCustomer.insertCustomer(firstName, lastName, phoneNumber, email, idCard);
-        response.sendRedirect("customerController?action=listCustomer");
+        daoCustomer.insertCustomer(firstName, lastName, phoneNumber, email, idCard, rCode);
+        response.sendRedirect("bookingURL?action=view&rCode=" + rCode + "");
     }
 
     private void editCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

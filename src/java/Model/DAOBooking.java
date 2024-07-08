@@ -1,205 +1,210 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 import Entity.Booking;
-import Entity.BookingDetail;
+import Entity.Customer;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author CaoTung
- */
 public class DAOBooking extends DBConnect {
 
     public List<Booking> getAllBooking() {
-        List<Booking> list = new ArrayList();
-        String sql = "select * from booking\n"
-                + "join customer c \n"
-                + "where booking.customer_Id = c.customer_Id";
+        List<Booking> list = new ArrayList<>();
+        String sql = "SELECT "
+                + "   b.booking_Id, "
+                + "   b.checkIn, "
+                + "   b.checkOut, "
+                + "   b.expenses, "
+                + "   b.created_at, "
+                + "   c.idCard, "
+                + "   c.customer_Id,"
+                + "   b.status "
+                + "FROM booking b "
+                + "JOIN customer c ON c.customer_Id = b.customer_Id";
+
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
+                // Parse dates directly from ResultSet
+                Date checkIn = rs.getTimestamp("checkIn");
+                Date checkOut = rs.getTimestamp("checkOut");
+
                 list.add(new Booking(rs.getInt("booking_Id"),
+                        new java.sql.Date(checkIn.getTime()),
+                        new java.sql.Date(checkOut.getTime()),
+                        rs.getInt("expenses"),
+                        rs.getString("created_at"),
+                        rs.getString("idCard"),
                         rs.getInt("customer_Id"),
-                        rs.getDate("startDay"),
-                        rs.getDate("endDay"),
-                        rs.getDouble("expenses"),
-                        rs.getDate("created_At"),
-                        rs.getString("firstName"),
-                        rs.getString("lastName")
-                ));
+                        rs.getString("status")));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
 
-    public List<Booking> getBookingsWithPagin(int currentPage, int itemsPerPage) {
-        List<Booking> list = new ArrayList();
-        int startIndex = (currentPage - 1) * itemsPerPage;
-        String sql = "SELECT *\n"
-                + "FROM booking\n"
-                + "JOIN customer c ON booking.customer_Id = c.customer_Id\n"
-                + "ORDER BY booking.booking_Id\n"
-                + "LIMIT ? OFFSET ?;";
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
+    public void addCustomerAndBooking(String firstName, String lastName, String phoneNumber, String email, String idCard,
+            String checkIn, String checkOut, int expenses) {
+        String insertCustomerSql = "INSERT INTO customer (firstName, lastName, phone, email, idCard) VALUES (?, ?, ?, ?, ?)";
+        String insertBookingSql = "INSERT INTO booking (customer_Id, checkIn, checkOut, expenses, created_at) VALUES (?, ?, ?, ?, NOW())";
+        String updateCustomerSql = "UPDATE customer SET reservationCode = ? WHERE customer_Id = ?";
 
-            pre.setInt(1, itemsPerPage);
-            pre.setInt(2, startIndex);
-            ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                list.add(new Booking(rs.getInt("booking_Id"),
-                        rs.getInt("customer_Id"),
-                        rs.getDate("startDay"),
-                        rs.getDate("endDay"),
-                        rs.getDouble("expenses"),
-                        rs.getDate("created_At"),
-                        rs.getString("firstName"),
-                        rs.getString("lastName")
-                ));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-
-    public int getTotalBooking() {
-        String sql = "select count(booking_Id) "
-                + "from booking";
-        int totalBookings = 0;
         try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            ResultSet rs = pre.executeQuery();
+            // Bắt đầu một transaction
+            conn.setAutoCommit(false);
+
+            // Thực hiện insert customer
+            PreparedStatement insertCustomerStmt = conn.prepareStatement(insertCustomerSql, Statement.RETURN_GENERATED_KEYS);
+            insertCustomerStmt.setString(1, firstName);
+            insertCustomerStmt.setString(2, lastName);
+            insertCustomerStmt.setString(3, phoneNumber);
+            insertCustomerStmt.setString(4, email);
+            insertCustomerStmt.setString(5, idCard);
+            insertCustomerStmt.executeUpdate();
+
+            // Lấy giá trị customer_Id tự tăng vừa chèn
+            ResultSet rs = insertCustomerStmt.getGeneratedKeys();
+            int customerId = -1;
             if (rs.next()) {
-                totalBookings = rs.getInt(1);
+                customerId = rs.getInt(1);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return totalBookings;
-    }
 
-    public void deleteBooking(int id) {
-        String sql = "delete from booking "
-                + "where booking_Id= ? ";
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, id);
-            pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+            // Thực hiện insert booking với customerId
+            PreparedStatement insertBookingStmt = conn.prepareStatement(insertBookingSql);
+            insertBookingStmt.setInt(1, customerId);
+            insertBookingStmt.setString(2, checkIn);
+            insertBookingStmt.setString(3, checkOut);
+            insertBookingStmt.setInt(4, expenses);
+            insertBookingStmt.executeUpdate();
 
-    public void deleteBookingDetail(int id) {
-        String sql = "delete from bookingdetail "
-                + "where booking_Id= ? ";
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, id);
-            pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+            // Cập nhật reservationCode cho customer
+            PreparedStatement updateCustomerStmt = conn.prepareStatement(updateCustomerSql);
+            updateCustomerStmt.setInt(1, customerId);
+            updateCustomerStmt.setInt(2, customerId);
+            updateCustomerStmt.executeUpdate();
 
-    public void deleteBookingDetail2(int id) {
-        String sql = "delete from bookingdetail "
-                + "where bookingDetail_Id= ? ";
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, id);
-            pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
+            // Commit transaction
+            conn.commit();
+
+        } catch (SQLException e) {
+            try {
+                // Rollback nếu có lỗi
+                conn.rollback();
+            } catch (SQLException rollbackEx) {
+                System.out.println("Rollback failed! " + rollbackEx.getMessage());
+            }
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                // Đặt lại auto commit về true sau khi hoàn thành
+                conn.setAutoCommit(true);
+            } catch (SQLException setAutoCommitEx) {
+                System.out.println("Setting auto commit failed! " + setAutoCommitEx.getMessage());
+            }
         }
     }
 
-    public int getBookingIdByDetailId(int id) {
-        String sql = "select booking_Id from bookingdetail where bookingDetail_Id =?";
-        int x = 0;
+    public List<Customer> getCustomerSameBooking(int rCode) {
+        List<Customer> list = new ArrayList();
+        String sql = "select * from customer c\n"
+                + "left join booking b on c.customer_Id = b.customer_Id\n"
+                + "where c.reservationCode = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, id);
+            pre.setInt(1, rCode);
             ResultSet rs = pre.executeQuery();
-             while (rs.next()) {
-                x = rs.getInt(1);
+            while (rs.next()) {
+                list.add(new Customer(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return x;
+        return list;
+    }
+
+    public void updateBooking(int id, String checkIn, String checkOut, double dailyRate) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate = dateFormat.parse(checkIn);
+            Date checkOutDate = dateFormat.parse(checkOut);
+
+            long timeDifference = checkOutDate.getTime() - checkInDate.getTime();
+            long daysDifference = timeDifference / (1000 * 3600 * 24);
+
+            double newExpenses = daysDifference * dailyRate;
+
+            String sql = "UPDATE booking "
+                    + "SET checkIn=STR_TO_DATE(?, '%Y-%m-%d'), checkOut=STR_TO_DATE(?, '%Y-%m-%d'), expenses=? "
+                    + "WHERE booking_Id=?;";
+
+            try (PreparedStatement pre = conn.prepareStatement(sql)) {
+                pre.setString(1, checkIn);
+                pre.setString(2, checkOut);
+                pre.setDouble(3, newExpenses);
+                pre.setInt(4, id);
+                pre.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("Error updating booking: " + e.getMessage());
+            }
+        } catch (ParseException e) {
+            System.out.println("Error parsing dates: " + e.getMessage());
+        }
     }
 
     public Booking getBookingById(int id) {
-        Booking bo = new Booking();
-        String sql = "select * from booking "
+        Booking booking = new Booking();
+        String sql = "select * from Booking "
                 + "where booking_Id = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
-                bo.setBookingId(rs.getInt(1));
-                bo.setCustomerId(rs.getInt(2));
-                bo.setStartDay(rs.getDate(3));
-                bo.setEndDay(rs.getDate(4));
-                bo.setExpenses(rs.getDouble(5));
-                bo.setCreatedAt(rs.getDate(6));
+                booking.setBooking_Id(rs.getInt(1));
+                booking.setCustomer_Id(rs.getInt(2));
+                booking.setCheckIn(rs.getDate(3));
+                booking.setCheckOut(rs.getDate(4));
+                booking.setExpenses(rs.getInt(5));
+                booking.setCreated_at(rs.getString(6));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return bo;
+        return booking;
     }
 
-    public List<BookingDetail> getBookingDetail(int id) {
-        List<BookingDetail> list = new ArrayList();
-        String sql = "select i.bookingDetail_Id, i.room_Id, i.booking_Id, r.name as roomName, r.status, r.price, r.type_Room_Id, b.startDay, b.endDay from bookingdetail i\n"
-                + "join room r on i.room_id = r.room_Id\n"
-                + "join booking b on i.booking_Id = b.booking_Id\n"
-                + "where i.booking_Id = ?";
+    public void updateBookingStatus(int bookingId, String status) {
+        String sql = "UPDATE booking SET status = ? WHERE booking_Id = ?";
+
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, id);
-            ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                list.add(new BookingDetail(rs.getInt("bookingDetail_Id"),
-                        rs.getInt("room_Id"),
-                        rs.getInt("booking_Id"),
-                        rs.getString("roomName"),
-                        rs.getString("status"),
-                        rs.getDouble("price"),
-                        rs.getInt("type_Room_Id"),
-                        rs.getDate("startDay"),
-                        rs.getDate("endDay")));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOBooking.class.getName()).log(Level.SEVERE, null, ex);
+            pre.setString(1, status);
+            pre.setInt(2, bookingId);
+            pre.execute();
+        } catch (SQLException e) {
+            System.out.println("Error at Update Status Booking " + e.getMessage());
         }
-        return list;
     }
 
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-        List<BookingDetail> list = dao.getBookingDetail(1);
-        int x = dao.getBookingIdByDetailId(5);
-        System.out.println(x);
-        for (BookingDetail k : list) {
-            System.out.println(k);
-        }
+        System.out.println(dao.getCustomerSameBooking(6));
     }
 }

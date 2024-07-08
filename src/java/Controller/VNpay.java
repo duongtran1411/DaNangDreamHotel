@@ -35,9 +35,9 @@ public class VNpay extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
-        String orderType = "150000";
+        String orderType = "170000";
 
-        long amount = Integer.parseInt(req.getParameter("amount")) * 100;
+        long amount = Long.parseLong(req.getParameter("amount")) * 100;
 
         String vnp_TxnRef = Config.getRandomNumber(8);
         String vnp_IpAddr = Config.getIpAddress(req);

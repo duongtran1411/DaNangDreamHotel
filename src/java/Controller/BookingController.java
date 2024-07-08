@@ -1,47 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controller;
 
 import Entity.Booking;
+import Entity.Customer;
+import Entity.FormatUtils;
 import Model.DAOBooking;
 import java.io.IOException;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.io.PrintWriter;
 
-/**
- *
- * @author GIGABYTE
- */
-@WebServlet(name = "BookingController", urlPatterns = {"/bookingController"})
+@WebServlet(name = "BookingController", urlPatterns = {"/bookingURL"})
 public class BookingController extends HttpServlet {
 
-    DAOBooking daoBooking = new DAOBooking();
+    private DAOBooking daoBooking = new DAOBooking();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-           String action = request.getParameter("action");
+        String action = request.getParameter("action");
         if (action == null || action.isEmpty()) {
-            action = "listBooking";
+            action = "list";
         }
         switch (action) {
-            case "delete":
-                deleteBooking(request, response);
+            case "view":
+                viewCustomer(request, response);
                 break;
-            case "update":      
-         
+            case "status":
+                updateBookingStatus(request, response);
+                break;
+            case "update":
+                updateBooking(request, response);
                 break;
             default:
                 listBooking(request, response);
@@ -54,27 +51,50 @@ public class BookingController extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
+
+    private void viewCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int rCode = Integer.parseInt(request.getParameter("rCode"));
+        List<Customer> customers = daoBooking.getCustomerSameBooking(rCode);
+            request.setAttribute("customers", customers);
+        request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);
+    }
+
     private void listBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-          int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
-        int itemsPerPage = 6;
-        int totalBooking = daoBooking.getTotalBooking();
-        int totalPages = (int) Math.ceil((double) totalBooking / itemsPerPage);
-        List<Booking> allBooking = daoBooking.getBookingsWithPagin(currentPage, itemsPerPage);
-        request.setAttribute("allBooking", allBooking);
-         request.setAttribute("currentPage", currentPage);
-        request.setAttribute("totalPages", totalPages);
+        List<Booking> bookings = daoBooking.getAllBooking();
+        request.setAttribute("listB", bookings);
         request.getRequestDispatcher("dashboard/jsp/ManageBooking.jsp").forward(request, response);
     }
-    private void deleteBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        daoBooking.deleteBookingDetail(id);
-        daoBooking.deleteBooking(id);
-        response.sendRedirect("bookingController");
+
+    private void updateBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int bookingId = Integer.parseInt(request.getParameter("bid"));
+        String checkInStr = request.getParameter("checkIn");
+        String checkOutStr = request.getParameter("checkOut");
+        double dailyRate = Double.parseDouble(request.getParameter("dailyRate"));
+
+        daoBooking.updateBooking(bookingId, checkInStr, checkOutStr, dailyRate);
+
+        response.sendRedirect("bookingURL?action=updateSuccess");
+    }
+
+    private void updateBookingStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String bookingId = request.getParameter("bookingId");
+        String status = request.getParameter("status");
+
+        if (bookingId != null && status != null) {
+            try {
+                daoBooking.updateBookingStatus(Integer.parseInt(bookingId), status);
+                response.sendRedirect("bookingURL?action=statusUpdate&statusUpdate=success");
+            } catch (IOException e) {
+                response.sendRedirect("bookingURL?action=statusUpdate&statusUpdate=error");
+            }
+        } else {
+            response.sendRedirect("bookingURL?action=statusUpdate&statusUpdate=error");
+        }
     }
 
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Booking Controller Servlet";
+    }
+    
 }

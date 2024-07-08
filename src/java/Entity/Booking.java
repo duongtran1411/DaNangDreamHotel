@@ -1,102 +1,117 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entity;
 
 import java.util.Date;
 
-/**
- *
- * @author CaoTung
- */
 public class Booking {
-    public int bookingId;
-    public int customerId;
-    public Date startDay;
-    public Date endDay;
-    public double expenses;
-    public Date createdAt;
-    public String firstName;
-    public String lastName;
 
-    public Booking(int bookingId, int customerId, Date startDay, Date endDay, double expenses, Date createdAt, String firstName, String lastName) {
-        this.bookingId = bookingId;
-        this.customerId = customerId;
-        this.startDay = startDay;
-        this.endDay = endDay;
+    private int booking_Id;
+    private int customer_Id;
+    private Date checkIn;
+    private Date checkOut;
+    private int expenses;
+    private String created_at;
+    private String idCard;
+    private String status;
+
+    public Booking(int booking_Id, int customer_Id, Date checkIn, Date checkOut, int expenses, String created_at) {
+        this.booking_Id = booking_Id;
+        this.customer_Id = customer_Id;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
         this.expenses = expenses;
-        this.createdAt = createdAt;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.created_at = created_at;
+    }
+
+    public Booking(int booking_Id, Date checkIn, Date checkOut, int expenses, String created_at, String idCard, int customer_Id, String status) {
+        this.booking_Id = booking_Id;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.expenses = expenses;
+        this.created_at = created_at;
+        this.idCard = idCard;
+        this.customer_Id = customer_Id;
+        this.status = status;
+    }
+
+    public Booking(int booking_Id, Date checkIn, Date checkOut, int expenses, String created_at, String idCard) {
+        this.booking_Id = booking_Id;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.expenses = expenses;
+        this.created_at = created_at;
+        this.idCard = idCard;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     public Booking() {
     }
 
-    public int getBookingId() {
-        return bookingId;
+    public int getBooking_Id() {
+        return booking_Id;
     }
 
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
+    public void setBooking_Id(int booking_Id) {
+        this.booking_Id = booking_Id;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getCustomer_Id() {
+        return customer_Id;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer_Id(int customer_Id) {
+        this.customer_Id = customer_Id;
     }
 
-    public Date getStartDay() {
-        return startDay;
+    public Date getCheckIn() {
+        return checkIn;
     }
 
-    public void setStartDay(Date startDay) {
-        this.startDay = startDay;
+    public void setCheckIn(Date checkIn) {
+        this.checkIn = checkIn;
     }
 
-    public Date getEndDay() {
-        return endDay;
+    public Date getCheckOut() {
+        return checkOut;
     }
 
-    public void setEndDay(Date endDay) {
-        this.endDay = endDay;
+    public void setCheckOut(Date checkOut) {
+        this.checkOut = checkOut;
     }
 
-
-    public double getExpenses() {
+    public int getExpenses() {
         return expenses;
     }
 
-    public void setExpenses(double expenses) {
+    public void setExpenses(int expenses) {
         this.expenses = expenses;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
-    public String getFirstName() {
-        return firstName;
+    @Override
+    public String toString() {
+        return "Booking{" + "booking_Id=" + booking_Id + ", customer_Id=" + customer_Id + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", expenses=" + expenses + ", created_at=" + created_at + ", idCard=" + idCard + ", status=" + status + '}';
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    
-    }
+}

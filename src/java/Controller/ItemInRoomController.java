@@ -9,11 +9,16 @@ import Model.DAOTypeRoom;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import java.io.File;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1 MB
@@ -53,7 +58,8 @@ public class ItemInRoomController extends HttpServlet {
             case "view":
                 allItemInRoom(request, response);
                 break;
-            case "update":      
+            case "update":
+            
                 updateQuantity(request, response);
                 break;
             default:
@@ -82,9 +88,15 @@ public class ItemInRoomController extends HttpServlet {
     private void allItemInRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomId = Integer.parseInt(request.getParameter("rid"));
         int troomId = Integer.parseInt(request.getParameter("trid"));
+//        int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
+//        int itemsPerPage = 5;
+//        int totalItem = daoItem.getTotalItemInRoom(roomId);
+//        int totalPages = (int) Math.ceil((double) totalItem / itemsPerPage);
         List<RoomWithItem> allItem = daoItem.getRoomWithItem(roomId);
         request.setAttribute("allItem", allItem);
         request.setAttribute("trid", troomId);
+//        request.setAttribute("currentPage", currentPage);
+//        request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("dashboard/jsp/ManageItemInRoom.jsp").forward(request, response);
     }
 

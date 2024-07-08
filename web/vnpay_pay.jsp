@@ -109,7 +109,7 @@
                         <div>
                             <form action="vnpayajax" id="frmCreateOrder" method="post">        
                                 <div class="form-group">
-                                    <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" name="amount" type="hidden" value="${total}" readonly=""/>
+                                    <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" name="amount" type="" value="${total}" readonly=""/>
                                 <span id="amount-error" style="color: red;"></span>
 
                             </div>
@@ -181,7 +181,8 @@
                                 <span>Total room price: ${FormatUtils.formatPRice(total)}đ</span>
                                 <p>Including all taxes and service fees</p>
                             </div>
-                        </div>
+                        </c:forEach>
+
                     </div>
                 </div>
             </div>
@@ -200,21 +201,39 @@
                     }
                 }
 
+                $("#firstName").on("input", function () {
+                    validateField(
+                            $(this),
+                            /^[A-Z]/,
+                            $("#firstName-error"),
+                            "The first letter with uppercase."
+                            );
+                });
+
+                $("#lastName").on("input", function () {
+                    validateField(
+                            $(this),
+                            /^[A-Z]/,
+                            $("#lastName-error"),
+                            "The first letter with uppercase."
+                            );
+                });
+
                 $("#card").on("input", function () {
                     validateField(
                             $(this),
                             /^\d{12}$/,
                             $("#card-error"),
-                            "Invalid card number. Card number must be exactly 12 digits."
+                            "Card number must be exactly 12 digits."
                             );
                 });
 
                 $("#phone").on("input", function () {
                     validateField(
                             $(this),
-                            /^\d{10}$/,
+                            /^0\d{9}$/,
                             $("#phone-error"),
-                            "Invalid phone number. Phone number must be exactly 10 digits."
+                            "Phone number must be exactly 10 digits."
                             );
                 });
 
