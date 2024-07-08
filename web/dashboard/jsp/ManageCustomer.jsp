@@ -130,7 +130,7 @@
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
-                                                <c:forEach items="${customer}" var="o">
+                                                <c:forEach items="${customers}" var="o">
                                                     <tr>
                                                         <td>${o.customerId}</td>
                                                         <td>${o.firstName}</td>

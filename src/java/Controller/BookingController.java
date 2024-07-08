@@ -55,7 +55,7 @@ public class BookingController extends HttpServlet {
     private void viewCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int rCode = Integer.parseInt(request.getParameter("rCode"));
         List<Customer> customers = daoBooking.getCustomerSameBooking(rCode);
-        request.setAttribute("customers", customers);
+            request.setAttribute("customers", customers);
         request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);
     }
 
