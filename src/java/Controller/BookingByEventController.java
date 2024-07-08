@@ -76,6 +76,7 @@ public class BookingByEventController extends HttpServlet {
         session.setAttribute("checkOutDay", checkOut);
         session.setAttribute("numberPerson", person);
         request.getRequestDispatcher("Booking.jsp").forward(request, response);
+        
 
     }
 
