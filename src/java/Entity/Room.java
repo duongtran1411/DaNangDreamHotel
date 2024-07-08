@@ -103,6 +103,20 @@ public class Room {
         this.floor_Room_Id = floor_Room_Id;
         this.maintenance_status = maintenance_status;
     }
+    
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int type_Room_Id, String status,String maintenance_status ) {
+        this.room_Id = room_Id;
+        this.name = name;
+        this.price = price;
+        this.size = size;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+        this.image = image;
+        this.type_Room_Id = type_Room_Id;
+        this.status = status;
+        this.maintenance_status = maintenance_status;
+    }
 
     public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, double discount, int typeRoom_Id) {
         this.room_Id = room_Id;

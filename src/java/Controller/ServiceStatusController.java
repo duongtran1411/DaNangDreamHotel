@@ -62,7 +62,6 @@ public class ServiceStatusController extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-
         String action = request.getParameter("action");
         DAORoom dao = new DAORoom();
         List<Room> list = new ArrayList<>();
@@ -72,46 +71,64 @@ public class ServiceStatusController extends HttpServlet {
             list = dao.getRoomByTypeRoom(typeId);
             for (Room o : list) {
                 out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
-                        + "    <div class=\"room-item item-room\">\n"
-                        + "        <div class=\"ri-text\">\n"
-                        + "            <img src=\"" + o.getImage() + "\" alt=\"\">\n"
-                        + "            <h4 class=\"text-center name-room\">" + o.getName() + "</h4>\n"
-                        + "            <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
+                        + "    <input value=\"" + o.getRoom_Id() + "\" type=\"hidden\" id=\"room-id\" class=\"RID\"/>\n");
+
+                String maintenanceStatus = o.getMaintenance_status();
+
+                if ("clean room".equals(maintenanceStatus)) {
+                    out.print("<div class=\"room-item item-room clean-room\" style=\"background-color: #E7FAF5\">\n");
+                    System.out.println("ok cleanroom");
+                } else if ("fix room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room fix-room\" style=\"background-color: #FFEFF2\">\n");
+                } else if ("dirty room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room dirty-room\" style=\"background-color: #FFF9EF\">\n");
+                } else {
+                    out.print("<div class=\"room-item item-room\">\n");
+                    System.out.println("null case");
+                }
+
+                out.print("<div class=\"ri-text\">\n"
+                        + "    <img src=\"" + o.getImage() + "\" alt=\"\" class=\"image-room\" id=\"unique-image\">\n"
+                        + "    <h4 class=\"text-center name-room\" id=\"room-name\">\n"
+                        + "        " + o.getName() + "\n"
+                        + "    </h4>\n"
+                        + "    <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getPeople() == 1) {
-                    out.print("                    <span>" + o.getPeople() + " Person</span>\n");
+                    out.print("            <span>" + o.getPeople() + " Person</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getPeople() + " People</span>\n");
+                    out.print("            <span>" + o.getPeople() + " People</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getBed() == 1) {
-                    out.print("                    <span>" + o.getBed() + " Bed</span>\n");
+                    out.print("            <span>" + o.getBed() + " Bed</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getBed() + " Beds</span>\n");
+                    out.print("            <span>" + o.getBed() + " Beds</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getBath() == 1) {
-                    out.print("                    <span>" + o.getBath() + " Bath</span>\n");
+                    out.print("            <span>" + o.getBath() + " Bath</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getBath() + " Baths</span>\n");
+                    out.print("            <span>" + o.getBath() + " Baths</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "            </div>\n"
-                        + "        </div>\n"
+                out.print("        </div>\n"
                         + "    </div>\n"
+                        + "</div>\n"
+                        + "</div>\n"
                         + "</div>");
-
             }
         }
 
@@ -120,44 +137,63 @@ public class ServiceStatusController extends HttpServlet {
             list = dao.getRoomByFloor(floorId);
             for (Room o : list) {
                 out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
-                        + "    <div class=\"room-item item-room\">\n"
-                        + "        <div class=\"ri-text\">\n"
-                        + "            <img src=\"" + o.getImage() + "\" alt=\"\">\n"
-                        + "            <h4 class=\"text-center name-room\">" + o.getName() + "</h4>\n"
-                        + "            <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
+                        + "    <input value=\"" + o.getRoom_Id() + "\" type=\"hidden\" id=\"room-id\" class=\"RID\"/>\n");
+
+                String maintenanceStatus = o.getMaintenance_status();
+
+                if ("clean room".equals(maintenanceStatus)) {
+                    out.print("<div class=\"room-item item-room clean-room\" style=\"background-color: #E7FAF5\">\n");
+                    System.out.println("ok cleanroom");
+                } else if ("fix room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room fix-room\" style=\"background-color: #FFEFF2\">\n");
+                } else if ("dirty room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room dirty-room\" style=\"background-color: #FFF9EF\">\n");
+                } else {
+                    out.print("<div class=\"room-item item-room\">\n");
+                    System.out.println("null case");
+                }
+
+                out.print("<div class=\"ri-text\">\n"
+                        + "    <img src=\"" + o.getImage() + "\" alt=\"\" class=\"image-room\" id=\"unique-image\">\n"
+                        + "    <h4 class=\"text-center name-room\" id=\"room-name\">\n"
+                        + "        " + o.getName() + "\n"
+                        + "    </h4>\n"
+                        + "    <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getPeople() == 1) {
-                    out.print("                    <span>" + o.getPeople() + " Person</span>\n");
+                    out.print("            <span>" + o.getPeople() + " Person</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getPeople() + " People</span>\n");
+                    out.print("            <span>" + o.getPeople() + " People</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getBed() == 1) {
-                    out.print("                    <span>" + o.getBed() + " Bed</span>\n");
+                    out.print("            <span>" + o.getBed() + " Bed</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getBed() + " Beds</span>\n");
+                    out.print("            <span>" + o.getBed() + " Beds</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getBath() == 1) {
-                    out.print("                    <span>" + o.getBath() + " Bath</span>\n");
+                    out.print("            <span>" + o.getBath() + " Bath</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getBath() + " Baths</span>\n");
+                    out.print("            <span>" + o.getBath() + " Baths</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "            </div>\n"
-                        + "        </div>\n"
+                out.print("        </div>\n"
                         + "    </div>\n"
+                        + "</div>\n"
+                        + "</div>\n"
                         + "</div>");
             }
         }
@@ -168,44 +204,63 @@ public class ServiceStatusController extends HttpServlet {
             session.setAttribute("listArrive", list.size());
             for (Room o : list) {
                 out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
-                        + "    <div class=\"room-item item-room\">\n"
-                        + "        <div class=\"ri-text\">\n"
-                        + "            <img src=\"" + o.getImage() + "\" alt=\"\">\n"
-                        + "            <h4 class=\"text-center name-room\">" + o.getName() + "</h4>\n"
-                        + "            <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
+                        + "    <input value=\"" + o.getRoom_Id() + "\" type=\"hidden\" id=\"room-id\" class=\"RID\"/>\n");
+
+                String maintenanceStatus = o.getMaintenance_status();
+
+                if ("clean room".equals(maintenanceStatus)) {
+                    out.print("<div class=\"room-item item-room clean-room\" style=\"background-color: #E7FAF5\">\n");
+                    System.out.println("ok cleanroom");
+                } else if ("fix room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room fix-room\" style=\"background-color: #FFEFF2\">\n");
+                } else if ("dirty room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room dirty-room\" style=\"background-color: #FFF9EF\">\n");
+                } else {
+                    out.print("<div class=\"room-item item-room\">\n");
+                    System.out.println("null case");
+                }
+
+                out.print("<div class=\"ri-text\">\n"
+                        + "    <img src=\"" + o.getImage() + "\" alt=\"\" class=\"image-room\" id=\"unique-image\">\n"
+                        + "    <h4 class=\"text-center name-room\" id=\"room-name\">\n"
+                        + "        " + o.getName() + "\n"
+                        + "    </h4>\n"
+                        + "    <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getPeople() == 1) {
-                    out.print("                    <span>" + o.getPeople() + " Person</span>\n");
+                    out.print("            <span>" + o.getPeople() + " Person</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getPeople() + " People</span>\n");
+                    out.print("            <span>" + o.getPeople() + " People</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getBed() == 1) {
-                    out.print("                    <span>" + o.getBed() + " Bed</span>\n");
+                    out.print("            <span>" + o.getBed() + " Bed</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getBed() + " Beds</span>\n");
+                    out.print("            <span>" + o.getBed() + " Beds</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getBath() == 1) {
-                    out.print("                    <span>" + o.getBath() + " Bath</span>\n");
+                    out.print("            <span>" + o.getBath() + " Bath</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getBath() + " Baths</span>\n");
+                    out.print("            <span>" + o.getBath() + " Baths</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "            </div>\n"
-                        + "        </div>\n"
+                out.print("        </div>\n"
                         + "    </div>\n"
+                        + "</div>\n"
+                        + "</div>\n"
                         + "</div>");
             }
         }
@@ -216,44 +271,63 @@ public class ServiceStatusController extends HttpServlet {
 
             for (Room o : list) {
                 out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
-                        + "    <div class=\"room-item item-room\">\n"
-                        + "        <div class=\"ri-text\">\n"
-                        + "            <img src=\"" + o.getImage() + "\" alt=\"\">\n"
-                        + "            <h4 class=\"text-center name-room\">" + o.getName() + "</h4>\n"
-                        + "            <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
+                        + "    <input value=\"" + o.getRoom_Id() + "\" type=\"hidden\" id=\"room-id\" class=\"RID\"/>\n");
+
+                String maintenanceStatus = o.getMaintenance_status();
+
+                if ("clean room".equals(maintenanceStatus)) {
+                    out.print("<div class=\"room-item item-room clean-room\" style=\"background-color: #E7FAF5\">\n");
+                    System.out.println("ok cleanroom");
+                } else if ("fix room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room fix-room\" style=\"background-color: #FFEFF2\">\n");
+                } else if ("dirty room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room dirty-room\" style=\"background-color: #FFF9EF\">\n");
+                } else {
+                    out.print("<div class=\"room-item item-room\">\n");
+                    System.out.println("null case");
+                }
+
+                out.print("<div class=\"ri-text\">\n"
+                        + "    <img src=\"" + o.getImage() + "\" alt=\"\" class=\"image-room\" id=\"unique-image\">\n"
+                        + "    <h4 class=\"text-center name-room\" id=\"room-name\">\n"
+                        + "        " + o.getName() + "\n"
+                        + "    </h4>\n"
+                        + "    <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getPeople() == 1) {
-                    out.print("                    <span>" + o.getPeople() + " Person</span>\n");
+                    out.print("            <span>" + o.getPeople() + " Person</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getPeople() + " People</span>\n");
+                    out.print("            <span>" + o.getPeople() + " People</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getBed() == 1) {
-                    out.print("                    <span>" + o.getBed() + " Bed</span>\n");
+                    out.print("            <span>" + o.getBed() + " Bed</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getBed() + " Beds</span>\n");
+                    out.print("            <span>" + o.getBed() + " Beds</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "                <div class=\"content-room\">\n"
-                        + "                    <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
 
                 if (o.getBath() == 1) {
-                    out.print("                    <span>" + o.getBath() + " Bath</span>\n");
+                    out.print("            <span>" + o.getBath() + " Bath</span>\n");
                 } else {
-                    out.print("                    <span>" + o.getBath() + " Baths</span>\n");
+                    out.print("            <span>" + o.getBath() + " Baths</span>\n");
                 }
 
-                out.print("                </div>\n"
-                        + "            </div>\n"
-                        + "        </div>\n"
+                out.print("        </div>\n"
                         + "    </div>\n"
+                        + "</div>\n"
+                        + "</div>\n"
                         + "</div>");
             }
         }
@@ -263,6 +337,137 @@ public class ServiceStatusController extends HttpServlet {
             out.print("Room: " + room.getName() + "");
 //            out.print("<input type=\"hidden\" id=\"currentRoomId\" value="+id+"\"\" />");
 
+        }
+
+        if (action.equals("checkAvailable")) {
+            String dateNow = request.getParameter("date");
+            list = dao.getRoomAvailable(dateNow);
+            for (Room o : list) {
+                out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
+                        + "    <input value=\"" + o.getRoom_Id() + "\" type=\"hidden\" id=\"room-id\" class=\"RID\"/>\n");
+
+                String maintenanceStatus = o.getMaintenance_status();
+
+                if ("clean room".equals(maintenanceStatus)) {
+                    out.print("<div class=\"room-item item-room clean-room\" >\n");
+                    System.out.println("ok cleanroom");
+                } else if ("fix room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room fix-room\" style=\"background-color: #FFEFF2\">\n");
+                } else if ("dirty room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room dirty-room\" style=\"background-color: #FFF9EF\">\n");
+                } else {
+                    out.print("<div class=\"room-item item-room\">\n");
+                    System.out.println("null case");
+                }
+
+                out.print("<div class=\"ri-text\">\n"
+                        + "    <img src=\"" + o.getImage() + "\" alt=\"\" class=\"image-room\" id=\"unique-image\">\n"
+                        + "    <h4 class=\"text-center name-room\" id=\"room-name\">\n"
+                        + "        " + o.getName() + "\n"
+                        + "    </h4>\n"
+                        + "    <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getPeople() == 1) {
+                    out.print("            <span>" + o.getPeople() + " Person</span>\n");
+                } else {
+                    out.print("            <span>" + o.getPeople() + " People</span>\n");
+                }
+
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getBed() == 1) {
+                    out.print("            <span>" + o.getBed() + " Bed</span>\n");
+                } else {
+                    out.print("            <span>" + o.getBed() + " Beds</span>\n");
+                }
+
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getBath() == 1) {
+                    out.print("            <span>" + o.getBath() + " Bath</span>\n");
+                } else {
+                    out.print("            <span>" + o.getBath() + " Baths</span>\n");
+                }
+
+                out.print("        </div>\n"
+                        + "    </div>\n"
+                        + "</div>\n"
+                        + "</div>\n"
+                        + "</div>");
+            }
+        }
+        if(action.equals("checkUnavai")){
+            String dateNow = request.getParameter("date");
+            list = dao.getRoomUnavai(dateNow);
+            for (Room o : list) {
+                out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
+                        + "    <input value=\"" + o.getRoom_Id() + "\" type=\"hidden\" id=\"room-id\" class=\"RID\"/>\n");
+
+                String maintenanceStatus = o.getMaintenance_status();
+
+                if ("clean room".equals(maintenanceStatus)) {
+                    out.print("<div class=\"room-item item-room clean-room\" >\n");
+                    System.out.println("ok cleanroom");
+                } else if ("fix room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room fix-room\" style=\"background-color: #FFEFF2\">\n");
+                } else if ("dirty room".equals(maintenanceStatus)) {
+                    System.out.println(maintenanceStatus);
+                    out.print("<div class=\"room-item item-room dirty-room\" style=\"background-color: #FFF9EF\">\n");
+                } else {
+                    out.print("<div class=\"room-item item-room\">\n");
+                    System.out.println("null case");
+                }
+
+                out.print("<div class=\"ri-text\">\n"
+                        + "    <img src=\"" + o.getImage() + "\" alt=\"\" class=\"image-room\" id=\"unique-image\">\n"
+                        + "    <h4 class=\"text-center name-room\" id=\"room-name\">\n"
+                        + "        " + o.getName() + "\n"
+                        + "    </h4>\n"
+                        + "    <div class=\"content-icon d-flex align-items-between justify-content-between main-content\">\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-users icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getPeople() == 1) {
+                    out.print("            <span>" + o.getPeople() + " Person</span>\n");
+                } else {
+                    out.print("            <span>" + o.getPeople() + " People</span>\n");
+                }
+
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bed icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getBed() == 1) {
+                    out.print("            <span>" + o.getBed() + " Bed</span>\n");
+                } else {
+                    out.print("            <span>" + o.getBed() + " Beds</span>\n");
+                }
+
+                out.print("        </div>\n"
+                        + "        <div class=\"content-room\">\n"
+                        + "            <i class=\"fa fa-bath icon-room\" aria-hidden=\"true\"></i>\n");
+
+                if (o.getBath() == 1) {
+                    out.print("            <span>" + o.getBath() + " Bath</span>\n");
+                } else {
+                    out.print("            <span>" + o.getBath() + " Baths</span>\n");
+                }
+
+                out.print("        </div>\n"
+                        + "    </div>\n"
+                        + "</div>\n"
+                        + "</div>\n"
+                        + "</div>");
+            }
         }
 
         if (action.equals("updateRoom")) {
