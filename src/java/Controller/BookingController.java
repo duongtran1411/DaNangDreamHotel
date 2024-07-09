@@ -2,8 +2,8 @@ package Controller;
 
 import Entity.Booking;
 import Entity.Customer;
-import Entity.FormatUtils;
 import Model.DAOBooking;
+import Model.DAORoom;
 import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.ServletException;
@@ -11,11 +11,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 
 @WebServlet(name = "BookingController", urlPatterns = {"/bookingURL"})
 public class BookingController extends HttpServlet {
 
+    private DAORoom daoRoom = new DAORoom();
     private DAOBooking daoBooking = new DAOBooking();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -55,7 +55,7 @@ public class BookingController extends HttpServlet {
     private void viewCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int rCode = Integer.parseInt(request.getParameter("rCode"));
         List<Customer> customers = daoBooking.getCustomerSameBooking(rCode);
-            request.setAttribute("customers", customers);
+        request.setAttribute("customers", customers);
         request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);
     }
 
@@ -77,12 +77,17 @@ public class BookingController extends HttpServlet {
     }
 
     private void updateBookingStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String bookingId = request.getParameter("bookingId");
+        String bookingIdStr = request.getParameter("bookingId");
         String status = request.getParameter("status");
 
-        if (bookingId != null && status != null) {
+        if (bookingIdStr != null && status != null) {
             try {
-                daoBooking.updateBookingStatus(Integer.parseInt(bookingId), status);
+                int bookingId = Integer.parseInt(bookingIdStr);
+                daoBooking.updateBookingStatus(bookingId, status);
+                if ("Done".equalsIgnoreCase(status)) {
+                    daoRoom.updateRoomStatusByBookingId(bookingId, "Available");
+                }
+
                 response.sendRedirect("bookingURL?action=statusUpdate&statusUpdate=success");
             } catch (IOException e) {
                 response.sendRedirect("bookingURL?action=statusUpdate&statusUpdate=error");
@@ -96,5 +101,4 @@ public class BookingController extends HttpServlet {
     public String getServletInfo() {
         return "Booking Controller Servlet";
     }
-    
 }

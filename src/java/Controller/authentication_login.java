@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+     * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package Controller;
 
@@ -103,14 +103,12 @@ public class authentication_login extends HttpServlet {
             try {
                 RegistrationDAO dao = new RegistrationDAO();
                 boolean result = dao.checkLogin(username, password);
-//                String role = dao.GetRoleId(username, password);
                 RegistrationDTO user = dao.getDataAccount(username, password);
 
                 if (!isEmailValid) {
                     request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
                     request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
                 } else if (result) {
-
                     HttpSession session = request.getSession();
                     session.setMaxInactiveInterval(30000);
                     session.setAttribute("acc", user);

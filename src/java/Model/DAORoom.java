@@ -109,7 +109,8 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
- public Room getNameById(int id) {
+
+    public Room getNameById(int id) {
         String sql = "SELECT \n"
                 + "    r.room_Id, r.name, r.price, r.size, t.bed, t.bath, t.person, MAX(i.image) AS image, r.type_Room_Id, r.floor_Room_Id, r.maintenance_status\n"
                 + "FROM \n"
@@ -143,6 +144,7 @@ public class DAORoom extends DBConnect {
         }
         return null;
     }
+
     public void addRoom(String name, int floor, int price, int size, int typeRoom) {
         String sql = "INSERT INTO `managerhotel`.`room`\n"
                 + "(`name`,\n"
@@ -344,7 +346,6 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-
 
     public List<Room> get6Room(int numberRoom) {
         List<Room> list = new ArrayList<>();
@@ -1012,10 +1013,10 @@ public class DAORoom extends DBConnect {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setString(1, date);
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getInt(3),
+                        rs.getInt(3),
                         rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -1056,10 +1057,10 @@ public class DAORoom extends DBConnect {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setString(1, date);
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
                         rs.getString(2),
-                       rs.getInt(3),
+                        rs.getInt(3),
                         rs.getInt(4),
                         rs.getInt(5),
                         rs.getInt(6),
@@ -1075,12 +1076,36 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
+    public void updateStatusRoom(int rid, String status) {
+        String sql = "UPDATE room\n"
+                + " set status = ?"
+                + " WHERE room_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, status);
+            pre.setInt(2, rid);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateRoomStatusByBookingId(int bid, String status) {
+        String sql = "UPDATE room r JOIN bookingdetail bd ON r.room_Id = bd.room_Id "
+                + " SET r.status = ? WHERE bd.booking_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, status);
+            pre.setInt(2, bid);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        List<Room> list = dao.getRoomUnavai("2024-07-08");
-        for (Room room : list) {
-            System.out.println(room);
-        }
+        dao.updateRoomStatusByBookingId(7, "Available");
     }
 
 }

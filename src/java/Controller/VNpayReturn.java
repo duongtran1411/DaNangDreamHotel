@@ -4,11 +4,13 @@ import Entity.BookingCart;
 import Entity.CartItem;
 import Model.DAOBooking;
 import Model.DAOCustomer;
+import Model.DAORoom;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -37,8 +39,11 @@ public class VNpayReturn extends HttpServlet {
 
     public static final String APP_PASSWORD = "nwnv qoet tkwi dyoo"; // your password
 
+    public DAORoom daoR = new DAORoom();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession sess = req.getSession();
         String vnp_ResponseCode = req.getParameter("vnp_ResponseCode");
         String vnp_TxnRef = req.getParameter("vnp_TxnRef");
 
@@ -53,10 +58,13 @@ public class VNpayReturn extends HttpServlet {
             String checkOut = (String) req.getSession().getAttribute("checkOutDay");
             Long totalLong = (Long) req.getSession().getAttribute("total");
             int total = totalLong.intValue();
+            List<CartItem> cart = (List) sess.getAttribute("ListCart");
+            for (CartItem cartItem : cart) {
+                daoR.updateStatusRoom(cartItem.getRoom().getRoom_Id(), "Unavailble");
+            }
+            DAOBooking daoB = new DAOBooking();
             BookingCart bookingCart = (BookingCart) req.getSession().getAttribute("cart");
             List<CartItem> list = bookingCart.getListCartItem();
-            DAOBooking daoB = new DAOBooking();
-//            daoC.addCustomerVNPAY(firstName, lastName, phone, email, card);
             daoB.addCustomerAndBooking(firstName, lastName, phone, email, card, checkIn, checkOut, total);
 
             if (email != null && !email.equals("")) {
