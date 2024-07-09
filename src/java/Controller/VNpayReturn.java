@@ -5,6 +5,7 @@ import Entity.CartItem;
 import Model.DAOBooking;
 import Model.DAOCustomer;
 import Model.DAORoom;
+import java.util.ArrayList; // Import ArrayList
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -40,6 +41,7 @@ public class VNpayReturn extends HttpServlet {
     public static final String APP_PASSWORD = "nwnv qoet tkwi dyoo"; // your password
 
     public DAORoom daoR = new DAORoom();
+    public DAOBooking daoB = new DAOBooking();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -59,13 +61,14 @@ public class VNpayReturn extends HttpServlet {
             Long totalLong = (Long) req.getSession().getAttribute("total");
             int total = totalLong.intValue();
             List<CartItem> cart = (List) sess.getAttribute("ListCart");
+
+            List<Integer> roomIds = new ArrayList<>();
             for (CartItem cartItem : cart) {
+                roomIds.add(cartItem.getRoom().getRoom_Id());
                 daoR.updateStatusRoom(cartItem.getRoom().getRoom_Id(), "Unavailble");
             }
-            DAOBooking daoB = new DAOBooking();
-            BookingCart bookingCart = (BookingCart) req.getSession().getAttribute("cart");
-            List<CartItem> list = bookingCart.getListCartItem();
-            daoB.addCustomerAndBooking(firstName, lastName, phone, email, card, checkIn, checkOut, total);
+
+            daoB.addCustomerAndBooking(firstName, lastName, phone, email, card, checkIn, checkOut, total, roomIds);
 
             if (email != null && !email.equals("")) {
                 String to = email; // recipient's email
@@ -88,6 +91,7 @@ public class VNpayReturn extends HttpServlet {
                 // Định dạng ngày tháng năm theo format dd/MM/yyyy
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String formattedDate = currentDate.format(formatter);
+
                 // compose message
                 try {
                     MimeMessage message = new MimeMessage(session);
@@ -102,7 +106,7 @@ public class VNpayReturn extends HttpServlet {
                             + "<ul>"
                             + "<li><b>Booking ID:</b> 1</li>"
                             + "<li><b>Date:</b> " + formattedDate + " </li>"
-                            + "<li><b>Room:</b> " + list + " </li>"
+                            + "<li><b>Room:</b> " + cart + " </li>"
                             + "</ul>"
                             + "<p>We look forward to serving you.</p>"
                             + "<p>Best regards,</p>"
@@ -128,7 +132,7 @@ public class VNpayReturn extends HttpServlet {
 
         }
 
-        // Redirect to a confirmation page or display a message
         resp.sendRedirect("PaymentConfirmation.jsp?responseCode=" + vnp_ResponseCode);
     }
+
 }

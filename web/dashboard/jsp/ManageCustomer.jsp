@@ -96,7 +96,7 @@
                                         <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
-                            <c:if test="${not empty customer}">
+                            <c:if test="${not empty customers}">
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addCustomer">
                                     <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Customer</p>
                                 </button>
@@ -107,7 +107,7 @@
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th class="sortable">ID</th>
+                                                    <!--<th class="sortable">ID</th>-->
                                                     <th class="sortable">First Name</th>
                                                     <th class="sortable">Last Name</th>
                                                     <th class="sortable">Phone Number</th>
@@ -119,7 +119,7 @@
                                             <tbody>
                                                 <c:forEach items="${allCustomer}" var="o">
                                                     <tr>
-                                                        <td data-label="ID">${o.customerId}</td>
+                                                        <!--<td data-label="ID">${o.customerId}</td>-->
                                                         <td data-label="First Name">${o.firstName}</td>
                                                         <td data-label="Last Name">${o.lastName}</td>
                                                         <td data-label="Phone Number">${o.phoneNumber}</td>
@@ -132,7 +132,7 @@
                                                 </c:forEach>
                                                 <c:forEach items="${customers}" var="o">
                                                     <tr>
-                                                        <td>${o.customerId}</td>
+                                                        <!--<td>${o.customerId}</td>-->
                                                         <td>${o.firstName}</td>
                                                         <td>${o.lastName}</td>
                                                         <td>${o.phoneNumber}</td>
