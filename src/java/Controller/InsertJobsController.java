@@ -115,7 +115,7 @@ public class InsertJobsController extends HttpServlet {
         int id = dao.getLastJobs().getJob_Id();
         dao.insertJobs(id+1 , firstName, lastName, create_at, phone, email, fileName, status);
 
-        response.sendRedirect("Jobs.jsp");
+        response.sendRedirect("ManagerJobsControllerURL");
     }
 
     // Extracts file name from HTTP header content-disposition

@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -65,6 +64,7 @@ public class ViewCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(3000);
         BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         if (bookingCart == null) {
             bookingCart = new BookingCart();
@@ -79,10 +79,7 @@ public class ViewCart extends HttpServlet {
         }
         LocalDate dateIn = LocalDate.parse(checkIn);
         LocalDate dateOut = LocalDate.parse(checkOut);
-        if(dateIn == null && dateOut == null){
-            response.sendRedirect("homeController");
-        }
-        long daysBetween = ChronoUnit.DAYS.between(dateIn, dateOut);
+        int daysBetween = (int) ChronoUnit.DAYS.between(dateIn, dateOut);
         session.setAttribute("listT", listT);
         session.setAttribute("total", total * daysBetween);
         session.setAttribute("numberDay", daysBetween);

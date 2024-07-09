@@ -36,7 +36,7 @@
         </style>
     </head>
     <body>
-        <div class="table-wrapper">
+        <div class="contact-form">
             <div class="table-title" style="background-color: #000; padding: 15px;">
                 <div class="row">
                     <div class="col-sm-12 text-left">

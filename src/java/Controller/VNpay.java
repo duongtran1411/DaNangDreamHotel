@@ -1,7 +1,5 @@
 package Controller;
 
-import Entity.BookingCart;
-import Entity.CartItem;
 import Entity.Config;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -21,10 +19,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-
 /**
  *
  * @author CTT VNPAY
@@ -35,9 +29,9 @@ public class VNpay extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
-        String orderType = "150000";
+        String orderType = "170000";
 
-        long amount = Integer.parseInt(req.getParameter("amount")) * 100;
+        long amount = Long.parseLong(req.getParameter("amount")) * 100;
 
         String vnp_TxnRef = Config.getRandomNumber(8);
         String vnp_IpAddr = Config.getIpAddress(req);

@@ -124,10 +124,29 @@ public class DAOJobs extends DBConnect {
 
     public static void main(String[] args) {
         DAOJobs dao=new DAOJobs();
-       List<Jobs>list=dao.getAllJobs();
-        for (Jobs jobs : list) {
-            System.out.println(jobs);
-        }
+      Jobs job=dao.getLastJobs();
+      String createAtString ="2024-06-05";
+
+    // Define the date format
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    // Parse the date strings
+    java.sql.Date create_at = null;
+    try {
+        java.util.Date createDate = sdf.parse(createAtString);
+        create_at = new java.sql.Date(createDate.getTime());
+    } catch (ParseException e) {
+        e.printStackTrace();
+        return;
+    }
+        int id=job.getJob_Id()+1;
+        String first="minh";
+        String last="pham";
+        String phone="123456789";
+        String email="minh@gmail.com";
+        String cv="aaaaaa";
+        String status="wait";
+        dao.insertJobs(id, first, last, create_at, phone, email, cv, status);
 
     // Define the date format
     

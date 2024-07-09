@@ -24,8 +24,8 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addRoomModal">
-                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>New Event</p>                  
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addAccountModal">
+                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Jobs</p>                  
                             </button>
                             <div class="container-fluid">
                                 <div class="table-wrapper">
@@ -82,9 +82,77 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="modal" id="loadImage">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">All Image</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row" style="margin-left: 35px">
+                                            <img src="" style="width: 32%; margin-bottom: 20px" alt="alt"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <form action="InsertJobsControllerURL" method="post" enctype="multipart/form-data">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="addAccountModalLabel">Add Information Jobs</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
 
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    <input name="firstname" type="text" class="form-control" placeholder="Enter first name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input name="lastname" type="text" class="form-control" placeholder="Enter last name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Date of birth</label>
+                                                    <input name="dob" type="date" class="form-control" placeholder="Enter date of birth" required>
+                                                </div>
+          
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input name="phone" type="text" class="form-control" placeholder="Enter phone" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input name="email" type="email" class="form-control" placeholder="Enter email" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>CV</label>
+                                                    <input name="cv" class="input-file" type="file"  placeholder="Enter CV" required="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Status</label>
+                                                    <input id="status" name="status" class="form-control" value="wait" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                                <button type="submit" class="btn btn-success">Add</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
                         <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
                         </body>
 
                         </html>
+          

@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Entity.FormatUtils;
 import Entity.Room;
 import Entity.TypeRoom;
 import Model.DAOImageRoom;
@@ -28,6 +29,7 @@ public class RoomController extends HttpServlet {
     private DAOTypeRoom daoTypeRoom = new DAOTypeRoom();
     private DAORoom daoRoom = new DAORoom();
     private DAOImageRoom daoImageRoom = new DAOImageRoom();
+    private FormatUtils format = new FormatUtils();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,10 +72,7 @@ public class RoomController extends HttpServlet {
             case "delete":
                 deleteRoom(request, response);
                 break;
-            case "loadEdit":
-                loadEdit(request, response);
-                break;
-            case "edit":
+            case "update":
                 editRoom(request, response);
                 break;
             case "sortnameasc":
@@ -118,7 +117,7 @@ public class RoomController extends HttpServlet {
     }// </editor-fold>
 
     private void listAllRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Room> allRoom = daoRoom.getAllRoom();
+        List<Room> allRoom = daoRoom.listAllRoom();
         request.setAttribute("AllRoom", allRoom);
         List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
         request.setAttribute("AllTypeRoom", allTypeRoom);
@@ -137,7 +136,7 @@ public class RoomController extends HttpServlet {
     private void addRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         int floor = Integer.parseInt(request.getParameter("floor"));
-        double price = Double.parseDouble(request.getParameter("price"));
+        int price = Integer.parseInt(request.getParameter("price"));
         int size = Integer.parseInt(request.getParameter("size"));
         int trid = Integer.parseInt(request.getParameter("type_Room_Id"));
 
@@ -149,15 +148,6 @@ public class RoomController extends HttpServlet {
         int roomId = Integer.parseInt(request.getParameter("rid"));
         daoRoom.deleteRoom(roomId);
         response.sendRedirect("roomURL?action=");
-    }
-
-    private void loadEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int roomId = Integer.parseInt(request.getParameter("rid"));
-        Room room = daoRoom.getRoomByID(roomId);
-        List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
-        request.setAttribute("AllTypeRoom", allTypeRoom);
-        request.setAttribute("RoomByID", room);
-        request.getRequestDispatcher("dashboard/jsp/EditRoom.jsp").forward(request, response);
     }
 
     private void editRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -179,17 +169,20 @@ public class RoomController extends HttpServlet {
         for (Room sort : sortedRooms) {
             out.print("<tr>\n"
                     + "                                                <td>\n"
-                    + "                                                    <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\">View</a>\n"
+                    + "                                                            <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\"><i class=\"far fa-eye successful\"></i></a>\n"
                     + "                                                </td>\n"
-                    + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
-                    + "                                                <td>" + sort.getSize() + "</td>\n"
-                    + "                                                <td>\n"
-                    + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
-                    + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
-                    + "                                                </td>\n"
+                    + "                                                <td>" + format.formatPRice(sort.getPrice()) + " đ</td>\n"
+                    + "                                                <td>" + sort.getSize() + " m²</td>\n"
+                    + "<td class=\"text-center\">\n"
+                    + "                                                            <button type=\"button\" class=\"btn btn-primary\"\n"
+                    + "                                                                    data-bs-toggle=\"modal\" data-bs-target=\"#updateRoom\"\n"
+                    + "                                                                    onclick=\"updateRoom('${o.room_Id}', '${o.floor_Room_Id}', '${o.name}', '${o.price}', '${o.size}')\">\n"
+                    + "                                                                <p class=\"mb-0 fs-3\">Update</p>\n"
+                    + "                                                            </button>                                                            \n"
+                    + "                                                            <a href=\"roomURL?action=delete&rid=${o.room_Id}\" class=\"btn btn-danger delete\" title=\"Delete\" data-toggle=\"tooltip\">Delete</a>\n"
+                    + "                                                        </td>"
                     + "                                            </tr>");
         }
     }
@@ -200,17 +193,21 @@ public class RoomController extends HttpServlet {
         for (Room sort : sortedRooms) {
             out.print("<tr>\n"
                     + "                                                <td>\n"
-                    + "                                                    <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\">View</a>\n"
+                    + "                                                            <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\"><i class=\"far fa-eye successful\"></i></a>\n"
                     + "                                                </td>\n"
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
-                    + "                                                <td>" + sort.getSize() + "</td>\n"
-                    + "                                                <td>\n"
-                    + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
-                    + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
-                    + "                                                </td>\n"
+                    + "                                                <td>" + format.formatPRice(sort.getPrice()) + " đ</td>\n"
+                    + "                                                <td>" + sort.getSize() + " m²</td>\n"
+                    + "<td class=\"text-center\">\n"
+                    + "                                                            <button type=\"button\" class=\"btn btn-primary\"\n"
+                    + "                                                                    data-bs-toggle=\"modal\" data-bs-target=\"#updateRoom\"\n"
+                    + "                                                                    onclick=\"updateRoom('${o.room_Id}', '${o.floor_Room_Id}', '${o.name}', '${o.price}', '${o.size}')\">\n"
+                    + "                                                                <p class=\"mb-0 fs-3\">Update</p>\n"
+                    + "                                                            </button>                                                            \n"
+                    + "                                                            <a href=\"roomURL?action=delete&rid=${o.room_Id}\" class=\"btn btn-danger delete\" title=\"Delete\" data-toggle=\"tooltip\">Delete</a>\n"
+                    + "                                                        </td>"
                     + "                                            </tr>");
         }
     }
@@ -221,17 +218,21 @@ public class RoomController extends HttpServlet {
         for (Room sort : sortedRooms) {
             out.print("<tr>\n"
                     + "                                                <td>\n"
-                    + "                                                    <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\">View</a>\n"
+                    + "                                                            <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\"><i class=\"far fa-eye successful\"></i></a>\n"
                     + "                                                </td>\n"
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
-                    + "                                                <td>" + sort.getSize() + "</td>\n"
-                    + "                                                <td>\n"
-                    + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
-                    + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
-                    + "                                                </td>\n"
+                    + "                                                <td>" + format.formatPRice(sort.getPrice()) + " đ</td>\n"
+                    + "                                                <td>" + sort.getSize() + " m²</td>\n"
+                    + "<td class=\"text-center\">\n"
+                    + "                                                            <button type=\"button\" class=\"btn btn-primary\"\n"
+                    + "                                                                    data-bs-toggle=\"modal\" data-bs-target=\"#updateRoom\"\n"
+                    + "                                                                    onclick=\"updateRoom('${o.room_Id}', '${o.floor_Room_Id}', '${o.name}', '${o.price}', '${o.size}')\">\n"
+                    + "                                                                <p class=\"mb-0 fs-3\">Update</p>\n"
+                    + "                                                            </button>                                                            \n"
+                    + "                                                            <a href=\"roomURL?action=delete&rid=${o.room_Id}\" class=\"btn btn-danger delete\" title=\"Delete\" data-toggle=\"tooltip\">Delete</a>\n"
+                    + "                                                        </td>"
                     + "                                            </tr>");
         }
     }
@@ -242,17 +243,21 @@ public class RoomController extends HttpServlet {
         for (Room sort : sortedRooms) {
             out.print("<tr>\n"
                     + "                                                <td>\n"
-                    + "                                                    <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\">View</a>\n"
+                    + "                                                            <a href=\"imageRoomURL?action=view&rid=" + sort.getRoom_Id() + "\"><i class=\"far fa-eye successful\"></i></a>\n"
                     + "                                                </td>\n"
                     + "\n"
                     + "                                                <td>" + sort.getFloor_Room_Id() + "</td>\n"
                     + "                                                <td>" + sort.getName() + "</td>\n"
-                    + "                                                <td>" + sort.getPrice() + "</td>\n"
-                    + "                                                <td>" + sort.getSize() + "</td>\n"
-                    + "                                                <td>\n"
-                    + "                                                    <a href=\"roomURL?action=loadEdit&rid=" + sort.getRoom_Id() + "\" class=\"settings\" title=\"Settings\" data-toggle=\"tooltip\"><i class='far fa-edit'></i></a>\n"
-                    + "                                                    <a href=\"roomURL?action=delete&rid=" + sort.getRoom_Id() + "\" class=\"delete\" title=\"Delete\" data-toggle=\"tooltip\"><i class='far fa-trash-alt' style=\"color: #c80000\"></i></a>\n"
-                    + "                                                </td>\n"
+                    + "                                                <td>" + format.formatPRice(sort.getPrice()) + " đ</td>\n"
+                    + "                                                <td>" + sort.getSize() + " m²</td>\n"
+                    + "<td class=\"text-center\">\n"
+                    + "                                                            <button type=\"button\" class=\"btn btn-primary\"\n"
+                    + "                                                                    data-bs-toggle=\"modal\" data-bs-target=\"#updateRoom\"\n"
+                    + "                                                                    onclick=\"updateRoom('${o.room_Id}', '${o.floor_Room_Id}', '${o.name}', '${o.price}', '${o.size}')\">\n"
+                    + "                                                                <p class=\"mb-0 fs-3\">Update</p>\n"
+                    + "                                                            </button>                                                            \n"
+                    + "                                                            <a href=\"roomURL?action=delete&rid=${o.room_Id}\" class=\"btn btn-danger delete\" title=\"Delete\" data-toggle=\"tooltip\">Delete</a>\n"
+                    + "                                                        </td>"
                     + "                                            </tr>");
         }
     }

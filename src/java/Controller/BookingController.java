@@ -1,87 +1,104 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controller;
 
+import Entity.Booking;
+import Entity.Customer;
+import Model.DAOBooking;
+import Model.DAORoom;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author GIGABYTE
- */
-@WebServlet(name = "BookingController", urlPatterns = {"/bookingController"})
+@WebServlet(name = "BookingController", urlPatterns = {"/bookingURL"})
 public class BookingController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private DAORoom daoRoom = new DAORoom();
+    private DAOBooking daoBooking = new DAOBooking();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BookingController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BookingController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String action = request.getParameter("action");
+        if (action == null || action.isEmpty()) {
+            action = "list";
+        }
+        switch (action) {
+            case "view":
+                viewCustomer(request, response);
+                break;
+            case "status":
+                updateBookingStatus(request, response);
+                break;
+            case "update":
+                updateBooking(request, response);
+                break;
+            default:
+                listBooking(request, response);
+                break;
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    private void viewCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int rCode = Integer.parseInt(request.getParameter("rCode"));
+        List<Customer> customers = daoBooking.getCustomerSameBooking(rCode);
+        request.setAttribute("customers", customers);
+        request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);
+    }
+
+    private void listBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Booking> bookings = daoBooking.getAllBooking();
+        request.setAttribute("listB", bookings);
+        request.getRequestDispatcher("dashboard/jsp/ManageBooking.jsp").forward(request, response);
+    }
+
+    private void updateBooking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int bookingId = Integer.parseInt(request.getParameter("bid"));
+        String checkInStr = request.getParameter("checkIn");
+        String checkOutStr = request.getParameter("checkOut");
+        double dailyRate = Double.parseDouble(request.getParameter("dailyRate"));
+
+        daoBooking.updateBooking(bookingId, checkInStr, checkOutStr, dailyRate);
+
+        response.sendRedirect("bookingURL?action=updateSuccess");
+    }
+
+    private void updateBookingStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String bookingIdStr = request.getParameter("bookingId");
+        String status = request.getParameter("status");
+
+        if (bookingIdStr != null && status != null) {
+            try {
+                int bookingId = Integer.parseInt(bookingIdStr);
+                daoBooking.updateBookingStatus(bookingId, status);
+                if ("Done".equalsIgnoreCase(status)) {
+                    daoRoom.updateRoomStatusByBookingId(bookingId, "Available");
+                }
+
+                response.sendRedirect("bookingURL?action=statusUpdate&statusUpdate=success");
+            } catch (IOException e) {
+                response.sendRedirect("bookingURL?action=statusUpdate&statusUpdate=error");
+            }
+        } else {
+            response.sendRedirect("bookingURL?action=statusUpdate&statusUpdate=error");
+        }
+    }
+
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Booking Controller Servlet";
+    }
 }

@@ -44,6 +44,30 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
+    public List<Room> listAllRoom() {
+        List<Room> list = new ArrayList<>();
+        String sql = "select * from room";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
     public List<Room> getRoomByTypeRoomId(int typeRoomId) {
         List<Room> list = new ArrayList();
         String sql = "select distinct r.* from room r\n"
@@ -121,7 +145,7 @@ public class DAORoom extends DBConnect {
         return null;
     }
 
-    public void addRoom(String name, int floor, double price, int size, int typeRoom) {
+    public void addRoom(String name, int floor, int price, int size, int typeRoom) {
         String sql = "INSERT INTO `managerhotel`.`room`\n"
                 + "(`name`,\n"
                 + "`floor_Room_Id`,\n"
@@ -134,7 +158,7 @@ public class DAORoom extends DBConnect {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, name);
             pre.setInt(2, floor);
-            pre.setDouble(3, price);
+            pre.setInt(3, price);
             pre.setInt(4, size);
             pre.setInt(5, typeRoom);
             pre.executeUpdate();
@@ -1092,10 +1116,38 @@ public class DAORoom extends DBConnect {
      
     
 
+
+    public void updateStatusRoom(int rid, String status) {
+        String sql = "UPDATE room\n"
+                + " set status = ?"
+                + " WHERE room_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, status);
+            pre.setInt(2, rid);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateRoomStatusByBookingId(int bid, String status) {
+        String sql = "UPDATE room r JOIN bookingdetail bd ON r.room_Id = bd.room_Id "
+                + " SET r.status = ? WHERE bd.booking_Id = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, status);
+            pre.setInt(2, bid);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        Room room = dao.getMinPrice( 1);
-        System.out.println(room);
+        dao.updateRoomStatusByBookingId(7, "Available");
     }
 
 }

@@ -95,6 +95,20 @@ public class DAOAccount extends DBConnect {
         }
     }
 
+    public void updateProfile(String file, int accoutID) {
+        String sql = "update account\n"
+                + "set avatar = ?\n"
+                + "where account_Id = ?;";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, file);
+            pre.setInt(2, accoutID);
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
+    }
+
     public void deleteAccountByID(int id) {
         String sql = "delete from Account where account_Id=?";
         try {
@@ -159,8 +173,16 @@ public class DAOAccount extends DBConnect {
     }
 
     public static void main(String[] args) {
-        DAOAccount dao=new DAOAccount();
-       Account a= dao.getLastAccount();
+        DAOAccount dao = new DAOAccount();
+        List<Account> list = dao.getAllAccount();
+        for (Account account : list) {
+            System.out.println(account);
+        }
+
+    }
+}
+/*
+   Account a= dao.getLastAccount();
         String userName = "testuser";
         String firstName = "Test";
         String lastName = "User";
@@ -192,5 +214,4 @@ public class DAOAccount extends DBConnect {
         int jobId = a.getJobId().getJob_Id()+1;
 
         dao.insertAccount(jobId, userName, firstName, lastName, password, email, phone, roleId, create_at, update_at, accountId);
-    }
-}
+ */
