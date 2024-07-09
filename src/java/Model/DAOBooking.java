@@ -56,10 +56,11 @@ public class DAOBooking extends DBConnect {
     }
 
     public void addCustomerAndBooking(String firstName, String lastName, String phoneNumber, String email, String idCard,
-            String checkIn, String checkOut, int expenses) {
+            String checkIn, String checkOut, int expenses, List<Integer> roomIds) {
         String insertCustomerSql = "INSERT INTO customer (firstName, lastName, phone, email, idCard) VALUES (?, ?, ?, ?, ?)";
         String insertBookingSql = "INSERT INTO booking (customer_Id, checkIn, checkOut, expenses, created_at) VALUES (?, ?, ?, ?, NOW())";
         String updateCustomerSql = "UPDATE customer SET reservationCode = ? WHERE customer_Id = ?";
+        String insertBookingDetailSql = "INSERT INTO bookingdetail (room_Id, booking_Id) VALUES (?, ?)";
 
         try {
             // Bắt đầu một transaction
@@ -82,18 +83,33 @@ public class DAOBooking extends DBConnect {
             }
 
             // Thực hiện insert booking với customerId
-            PreparedStatement insertBookingStmt = conn.prepareStatement(insertBookingSql);
+            PreparedStatement insertBookingStmt = conn.prepareStatement(insertBookingSql, Statement.RETURN_GENERATED_KEYS);
             insertBookingStmt.setInt(1, customerId);
             insertBookingStmt.setString(2, checkIn);
             insertBookingStmt.setString(3, checkOut);
             insertBookingStmt.setInt(4, expenses);
             insertBookingStmt.executeUpdate();
 
-            // Cập nhật reservationCode cho customer
+            // Lấy giá trị booking_Id tự tăng vừa chèn
+            ResultSet bookingKeys = insertBookingStmt.getGeneratedKeys();
+            int bookingId = -1;
+            if (bookingKeys.next()) {
+                bookingId = bookingKeys.getInt(1);
+            }
+
+            // Thực hiện cập nhật reservationCode cho customer
             PreparedStatement updateCustomerStmt = conn.prepareStatement(updateCustomerSql);
-            updateCustomerStmt.setInt(1, customerId);
+            updateCustomerStmt.setInt(1, bookingId); // Đặt reservationCode bằng bookingId
             updateCustomerStmt.setInt(2, customerId);
             updateCustomerStmt.executeUpdate();
+
+            // Thêm vào bookingdetail
+            PreparedStatement insertBookingDetailStmt = conn.prepareStatement(insertBookingDetailSql);
+            for (int roomId : roomIds) {
+                insertBookingDetailStmt.setInt(1, roomId);
+                insertBookingDetailStmt.setInt(2, bookingId);
+                insertBookingDetailStmt.executeUpdate();
+            }
 
             // Commit transaction
             conn.commit();

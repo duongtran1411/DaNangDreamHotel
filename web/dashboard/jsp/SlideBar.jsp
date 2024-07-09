@@ -20,13 +20,10 @@
 <aside class="left-sidebar" style="background-color: #213e66;height: 100%" >
     <!-- Sidebar scroll-->
     <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-            <img src="img/logo2.jpg" alt="" width="100%" height="80px"/>
-        </div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
 
-            <button class="btn hide-menu" id=""><label class="white" >HOME</label></button>
+            <button class="btn hide-menu" id=""><a href="homeController" style="color: white">HOME</a></button>
             <ul class="nav-small-cap">
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./index.html" aria-expanded="false">
@@ -45,7 +42,7 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
 
                 </li>
-               <%--<c:if test="${sessionScope.acc.role_Id == 2}">--%>
+                <%--<c:if test="${sessionScope.acc.role_Id == 2}">--%>
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="customerController" aria-expanded="false">
                         <span>
@@ -107,7 +104,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ManageEvent.jsp" aria-expanded="false">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/ManageEventControllerURL" aria-expanded="false">
                         <span>
                             <i class="far fa-star white"></i>
                         </span>
