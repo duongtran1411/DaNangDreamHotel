@@ -104,7 +104,7 @@
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Calc</th>
+                                                        <th>Check Out</th>
                                                         <th class="sortable">Type</th>
                                                         <th class="sortable">Name</th>
                                                         <th class="sortable">Status</th>
@@ -118,7 +118,7 @@
                                                 <c:forEach items="${list}" var="o">
                                                     <tr>
                                                         <td>
-                                                            <a href="useSuppliesURL?action=calc&id=${o.room_Id}"><i class="far fa-eye successful"></i></a>
+                                                            <a href="useSuppliesURL?action=edit&id=${o.room_Id}"><i class="far fa-eye successful"></i></a>
                                                         </td>
                                                         <td data-label="Type">${o.type_Room_Id}</td>
                                                         <td data-label="Name">${o.name}</td>

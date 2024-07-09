@@ -231,8 +231,50 @@ public class DAOBooking extends DBConnect {
         return list;
     }
 
+    public int getLiveBookingDetailId(int roomId) {
+        int bookingDetailId = 0;
+        String sql = "SELECT bd.bookingDetail_Id\n"
+                + "FROM bookingdetail bd\n"
+                + "JOIN booking b ON bd.booking_Id = b.booking_Id\n"
+                + "WHERE bd.room_Id = ?\n"
+                + "AND CURDATE() BETWEEN b.checkIn AND b.checkOut";
+
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, roomId);
+            ResultSet rs = pre.executeQuery();
+
+            if (rs.next()) {
+                bookingDetailId = rs.getInt("bookingDetail_Id");
+            }
+
+            rs.close();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return bookingDetailId;
+    }
+
+    public void insert(int ex, int id) {
+        String sql = "INSERT INTO servicepayment (extramoney, bookingDetail_Id) VALUES (?, ?)";
+
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, ex);          // Set giá trị cho cột extramoney
+            pre.setInt(2, id);          // Set giá trị cho cột bookingDetail_Id
+
+            pre.executeUpdate();        // Thực thi câu lệnh INSERT
+
+            pre.close();
+        } catch (SQLException e) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-        System.out.println(dao.getRoomsByBookingId(2));
+       dao.insert(1, 4);
     }
 }

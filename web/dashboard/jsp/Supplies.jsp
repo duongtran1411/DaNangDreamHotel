@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Entity.FormatUtils" %>
 <%@ page import="Model.DAORoom" %>
 <%@ page import="Entity.Room" %>
@@ -16,9 +16,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style>
-
-
             .btn-adjust {
                 border: none;
                 background-color: #C59B24;
@@ -98,13 +97,12 @@
             .sortable.desc:after {
                 content: '\f0dd';
             }
-
-
         </style>
     </head>
 
     <body>
-        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+             data-sidebar-position="fixed" data-header-position="fixed">
             <jsp:include page="SlideBar.jsp"></jsp:include>
                 <div class="body-wrapper">
                 <jsp:include page="Profile.jsp"></jsp:include>
@@ -112,135 +110,174 @@
                         <div class="card-body">
                             <div class="container-fluid" style="height: 800px;width: 1300px">
                                 <input type="text" id="searchInput" class="search-input" placeholder="Search for item...">
-
-
-                            <div class="card shadow mb-4">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr> 
-                                                    <th class="sortable">Item Name</th>
-                                                    <th class="sortable">Quantity</th>
-                                                    <th class="sortable">Price</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="content">
+                                <div class="card shadow mb-4">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="sortable">Item Name</th>
+                                                        <th class="sortable">Quantity</th>
+                                                        <th class="sortable">Price</th>
+                                                      
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="content">
                                                 <c:set var="currentRoomName" value="" />
                                                 <c:forEach items="${list}" var="o">
-                                                    <tr>
-
+                                                    <tr data-price="${o.getPrice()}">
                                                         <td data-label="Item">${o.name}</td>
                                                         <td data-label="Quantity" class="quantity-container">
-                                                            <button class="btn-adjust btn-decrease" data-id="${o.item_Id}"><i class="fas fa-minus"></i></button>
+                                                            <button class="btn-adjust btn-decrease"
+                                                                    data-id="${o.item_Id}"><i
+                                                                    class="fas fa-minus"></i></button>
                                                             <span class="quantity" id="quantity-${o.item_Id}">0</span>
-                                                            <button class="btn-adjust btn-increase" data-id="${o.item_Id}"><i class="fas fa-plus"></i></button>
+                                                            <button class="btn-adjust btn-increase"
+                                                                    data-id="${o.item_Id}"><i
+                                                                    class="fas fa-plus"></i></button>
                                                         </td>
-                                                        <td data-label="Price">${FormatUtils.formatPRice(o.getPrice())}đ</td>
-                                                        
-                                              
-                                                </tr>
-                                            </c:forEach>
+                                                        <td data-label="Price" class="price" id="price-${o.item_Id}"
+                                                            data-price="${o.price}">0đ</td>
+
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
+                                                <div id="totalPrice"></div>
+                            <button class="btn-save" onclick="saveTotalPrice()">Save Total Price</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>
-                                                                document.addEventListener('DOMContentLoaded', function () {
-                                                                    document.querySelectorAll('.btn-decrease').forEach(button => {
-                                                                        button.addEventListener('click', function () {
-                                                                            let id = this.getAttribute('data-id');
-                                                                            let quantityElement = document.getElementById('quantity-' + id);
-                                                                            let quantity = parseInt(quantityElement.textContent);
-                                                                            if (quantity > 0) {
-                                                                                quantity--;
-                                                                                quantityElement.textContent = quantity;
-                                                                                // Update quantity in the database if needed
-                                                                            }
-                                                                        });
-                                                                    });
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    document.querySelectorAll('.btn-decrease').forEach(button => {
+                                        button.addEventListener('click', function () {
+                                            adjustQuantity(this.getAttribute('data-id'), -1);
+                                        });
+                                    });
 
-                                                                    document.querySelectorAll('.btn-increase').forEach(button => {
-                                                                        button.addEventListener('click', function () {
-                                                                            let id = this.getAttribute('data-id');
-                                                                            let quantityElement = document.getElementById('quantity-' + id);
-                                                                            let quantity = parseInt(quantityElement.textContent);
-                                                                            quantity++;
-                                                                            quantityElement.textContent = quantity;
-                                                                            // Update quantity in the database if needed
-                                                                        });
-                                                                    });
-                                                                });
+                                    document.querySelectorAll('.btn-increase').forEach(button => {
+                                        button.addEventListener('click', function () {
+                                            adjustQuantity(this.getAttribute('data-id'), 1);
+                                        });
+                                    });
 
-                                                                function saveQuantity(button) {
-                                                                    var itemInRoomId = button.getAttribute('data-id');
-                                                                    var row = button.closest('tr');
-                                                                    var quantityElement = row.querySelector('.quantity');
-                                                                    var quantity = quantityElement.textContent;
+                                    function adjustQuantity(itemId, change) {
+                                        let quantityElement = document.getElementById('quantity-' + itemId);
+                                        let quantity = parseInt(quantityElement.textContent) + change;
+                                        if (quantity >= 0) {
+                                            quantityElement.textContent = quantity;
+                                            updatePrice(itemId, quantity);
+                                        }
+                                    }
 
-                                                                    console.log("itemInRoomId:", itemInRoomId);
-                                                                    console.log("quantity:", quantity);
+                                    function updateTotalPrice() {
+                                        let totalPrice = 0;
+                                        document.querySelectorAll('#content tr').forEach(row => {
+                                            let quantity = parseInt(row.querySelector('.quantity').textContent);
+                                            let pricePerItem = parseFloat(row.getAttribute('data-price'));
+                                            totalPrice += quantity * pricePerItem;
+                                        });
+                                        document.getElementById('totalPrice').textContent = totalPrice;
+                                    }
 
-                                                                    $.ajax({
-                                                                        url: '/DaNangDreamHotel/itemManageURL?action=update',
-                                                                        type: 'GET',
-                                                                        data: {
-                                                                            itemInRoomId: itemInRoomId,
-                                                                            quantity: quantity
-                                                                        },
-                                                                        success: function (data) {
-                                                                            console.log("Success:", data);
-                                                                        },
-                                                                        error: function (xhr) {
-                                                                            console.log("Error:", xhr);
-                                                                        }
-                                                                    });
-                                                                }
-        </script>
-        <script>
-            $(document).ready(function () {
-                $("#searchInput").on("keyup", function () {
-                    var value = $(this).val().toLowerCase();
-                    $("#content tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
+                                    function updatePrice(itemId, quantity) {
+                                        let priceElement = document.getElementById('price-' + itemId);
+                                        let originalPrice = parseFloat(priceElement.getAttribute('data-price'));
+                                        if (!isNaN(originalPrice)) {
+                                            let newPrice = originalPrice * quantity;
+                                            priceElement.textContent = newPrice.toLocaleString('vi-VN') + 'đ';
+                                            updateTotalPrice(); // Cập nhật tổng giá tiền sau khi thay đổi giá
+                                        } else {
+                                            console.error('Original price is not a valid number:', originalPrice);
+                                        }
+                                    }
+                                });
 
-                $('#dataTable th').on('click', function () {
-                    var index = $(this).index();
-                    var table = $(this).parents('table');
-                    var rows = table.find('tbody > tr').toArray().sort(comparer(index));
-                    this.asc = !this.asc;
-                    if (!this.asc) {
-                        rows = rows.reverse();
-                    }
-                    table.find('thead th').removeClass('asc desc');
-                    $(this).addClass(this.asc ? 'asc' : 'desc');
-                    for (var i = 0; i < rows.length; i++) {
-                        table.append(rows[i]);
-                    }
-                });
+                                function saveTotalPrice() {
+                                    let totalPrice = document.getElementById('totalPrice').textContent;
+                                    let bookingDetailId = ${bookingDetailId};
 
-                function comparer(index) {
-                    return function (a, b) {
-                        var valA = getCellValue(a, index),
-                                valB = getCellValue(b, index);
-                        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
-                    };
-                }
+                                    // Gọi Ajax để gửi giá trị totalPrice về controller
+//                fetch('/DaNangDreamHotel/useSuppliesURL?action=update', {
+//                    method: 'POST',
+//                    headers: {
+//                        'Content-Type': 'application/json'
+//                    },
+//                    body: JSON.stringify({
+//                        totalPrice: totalPrice,
+//                        bookingDetailId: bookingDetailId
+//                    })
+//                })
+//                        .then(response => response.text())
+//                        .then(data => {
+//                            console.log('Total price saved successfully:', totalPrice   );
+//                        
+//                        })
+//                        .catch(error => {
+//                            console.error('Error saving total price:', error);
+//                  
+//                        });
+                                    $.ajax({
+                                        url: '/DaNangDreamHotel/useSuppliesURL?action=update',
+                                        type: 'GET',
+                                        data: {
+                                            total: totalPrice,
+                                            id: bookingDetailId
+                                        },
+                                        success: function (data) {
+                                            console.log("Success:", data);
+                                        },
+                                        error: function (xhr) {
+                                            console.log("Error:", xhr, totalPrice, bookingDetailId);
+                                        }
+                                    });
+                                }
 
-                function getCellValue(row, index) {
-                    return $(row).children('td').eq(index).text();
-                }
-            });
+
+
+
+                                $(document).ready(function () {
+                                    $("#searchInput").on("keyup", function () {
+                                        var value = $(this).val().toLowerCase();
+                                        $("#content tr").filter(function () {
+                                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                        });
+                                    });
+
+                                    $('#dataTable th').on('click', function () {
+                                        var index = $(this).index();
+                                        var table = $(this).parents('table');
+                                        var rows = table.find('tbody > tr').toArray().sort(comparer(index));
+                                        this.asc = !this.asc;
+                                        if (!this.asc) {
+                                            rows = rows.reverse();
+                                        }
+                                        table.find('thead th').removeClass('asc desc');
+                                        $(this).addClass(this.asc ? 'asc' : 'desc');
+                                        for (var i = 0; i < rows.length; i++) {
+                                            table.append(rows[i]);
+                                        }
+                                    });
+
+                                    function comparer(index) {
+                                        return function (a, b) {
+                                            var valA = getCellValue(a, index),
+                                                    valB = getCellValue(b, index);
+                                            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
+                                        };
+                                    }
+
+                                    function getCellValue(row, index) {
+                                        return $(row).children('td').eq(index).text();
+                                    }
+                                });
         </script>
     </body>
 
