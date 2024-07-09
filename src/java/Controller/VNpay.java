@@ -1,7 +1,5 @@
 package Controller;
 
-import Entity.BookingCart;
-import Entity.CartItem;
 import Entity.Config;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -21,10 +19,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-
 /**
  *
  * @author CTT VNPAY

@@ -238,11 +238,13 @@
                 <script>
                                             $(document).ready(function () {
                                                 var table = $('#dataTable').DataTable({
-                                                    "paging": false,
                                                     "ordering": true,
                                                     "info": false,
                                                     "searching": true,
-                                                    "language": {
+                                                    "lengthChange": false,
+                                                    "pagingType": "simple_numbers", // Sử dụng loại phân trang đơn giản, chỉ có next và previous
+                                                    "lengthMenu": [5, 10, 25, 50],
+                                                    "pageLength": 10, "language": {
                                                         "emptyTable": "No result search for '<i></i>'",
                                                         "zeroRecords": "No result search for '<i></i>'"
                                                     },

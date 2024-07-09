@@ -163,7 +163,7 @@
                         <div class="col-lg-12"><i class="fa-regular fa-calendar-days" style="padding-right: 5px;padding-top: 10px"></i>${checkInDay} to ${checkOutDay}</div>
                     </div>
                     <div class="row list-room" >
-                        <c:forEach items="${list}" var="o">
+                        <c:forEach items="${ListCart}" var="o">
                             <div class="col-lg-12 cart" >
                                 <div class="row booking-infor infor" >
                                     <div class="col-lg-12 conten">
@@ -181,103 +181,101 @@
                                 <span>Total room price: ${FormatUtils.formatPRice(total)}đ</span>
                                 <p>Including all taxes and service fees</p>
                             </div>
-
-
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet" />
-        <script src="https://pay.vnpay.vn/lib/vnpay/vnpay.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                function validateField(field, regex, errorElement, errorMessage) {
-                    var value = field.val();
-                    if (!regex.test(value)) {
-                        errorElement.text(errorMessage);
-                    } else {
-                        errorElement.text("");
-                    }
-                }
-
-                $("#firstName").on("input", function () {
-                    validateField(
-                            $(this),
-                            /^[A-Z]/,
-                            $("#firstName-error"),
-                            "The first letter with uppercase."
-                            );
-                });
-
-                $("#lastName").on("input", function () {
-                    validateField(
-                            $(this),
-                            /^[A-Z]/,
-                            $("#lastName-error"),
-                            "The first letter with uppercase."
-                            );
-                });
-
-                $("#card").on("input", function () {
-                    validateField(
-                            $(this),
-                            /^\d{12}$/,
-                            $("#card-error"),
-                            "Card number must be exactly 12 digits."
-                            );
-                });
-
-                $("#phone").on("input", function () {
-                    validateField(
-                            $(this),
-                            /^0\d{9}$/,
-                            $("#phone-error"),
-                            "Phone number must be exactly 10 digits."
-                            );
-                });
-
-                $("#frmCreateOrder").submit(function (event) {
-                    event.preventDefault();
-
-                    var card = $("#card").val();
-                    var phone = $("#phone").val();
-                    var hasError = false;
-
-                    if (!/^\d{12}$/.test(card)) {
-                        $("#card-error").text("Invalid card number. Card number must be exactly 12 digits.");
-                        hasError = true;
+            <link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet" />
+            <script src="https://pay.vnpay.vn/lib/vnpay/vnpay.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    function validateField(field, regex, errorElement, errorMessage) {
+                        var value = field.val();
+                        if (!regex.test(value)) {
+                            errorElement.text(errorMessage);
+                        } else {
+                            errorElement.text("");
+                        }
                     }
 
-                    if (!/^\d{10}$/.test(phone)) {
-                        $("#phone-error").text("Invalid phone number. Phone number must be exactly 10 digits.");
-                        hasError = true;
-                    }
+                    $("#firstName").on("input", function () {
+                        validateField(
+                                $(this),
+                                /^[A-Z]/,
+                                $("#firstName-error"),
+                                "The first letter with uppercase."
+                                );
+                    });
 
-                    if (!hasError) {
-                        var postData = $("#frmCreateOrder").serialize();
-                        var submitUrl = $("#frmCreateOrder").attr("action");
-                        $.ajax({
-                            type: "POST",
-                            url: submitUrl,
-                            data: postData,
-                            dataType: 'JSON',
-                            success: function (x) {
-                                if (x.code === '00') {
-                                    if (window.vnpay) {
-                                        vnpay.open({width: 768, height: 600, url: x.data});
+                    $("#lastName").on("input", function () {
+                        validateField(
+                                $(this),
+                                /^[A-Z]/,
+                                $("#lastName-error"),
+                                "The first letter with uppercase."
+                                );
+                    });
+
+                    $("#card").on("input", function () {
+                        validateField(
+                                $(this),
+                                /^\d{12}$/,
+                                $("#card-error"),
+                                "Card number must be exactly 12 digits."
+                                );
+                    });
+
+                    $("#phone").on("input", function () {
+                        validateField(
+                                $(this),
+                                /^0\d{9}$/,
+                                $("#phone-error"),
+                                "Phone number must be exactly 10 digits."
+                                );
+                    });
+
+                    $("#frmCreateOrder").submit(function (event) {
+                        event.preventDefault();
+
+                        var card = $("#card").val();
+                        var phone = $("#phone").val();
+                        var hasError = false;
+
+                        if (!/^\d{12}$/.test(card)) {
+                            $("#card-error").text("Invalid card number. Card number must be exactly 12 digits.");
+                            hasError = true;
+                        }
+
+                        if (!/^\d{10}$/.test(phone)) {
+                            $("#phone-error").text("Invalid phone number. Phone number must be exactly 10 digits.");
+                            hasError = true;
+                        }
+
+                        if (!hasError) {
+                            var postData = $("#frmCreateOrder").serialize();
+                            var submitUrl = $("#frmCreateOrder").attr("action");
+                            $.ajax({
+                                type: "POST",
+                                url: submitUrl,
+                                data: postData,
+                                dataType: 'JSON',
+                                success: function (x) {
+                                    if (x.code === '00') {
+                                        if (window.vnpay) {
+                                            vnpay.open({width: 768, height: 600, url: x.data});
+                                        } else {
+                                            location.href = x.data;
+                                        }
                                     } else {
-                                        location.href = x.data;
+                                        alert(x.message);
                                     }
-                                } else {
-                                    alert(x.message);
                                 }
-                            }
-                        });
-                    }
+                            });
+                        }
+                    });
                 });
-            });
-        </script>       
+            </script>       
     </body>
     <jsp:include page="Footer.jsp"></jsp:include>       
 </html>

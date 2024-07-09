@@ -275,6 +275,6 @@ public class DAOBooking extends DBConnect {
 
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-       dao.insert(1, 4);
+        dao.updateBookingStatus(3, "processing");
     }
 }
