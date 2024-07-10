@@ -203,27 +203,6 @@
                                 function saveTotalPrice() {
                                     let totalPrice = document.getElementById('totalPrice').textContent;
                                     let bookingDetailId = ${bookingDetailId};
-
-                                    // Gọi Ajax để gửi giá trị totalPrice về controller
-//                fetch('/DaNangDreamHotel/useSuppliesURL?action=update', {
-//                    method: 'POST',
-//                    headers: {
-//                        'Content-Type': 'application/json'
-//                    },
-//                    body: JSON.stringify({
-//                        totalPrice: totalPrice,
-//                        bookingDetailId: bookingDetailId
-//                    })
-//                })
-//                        .then(response => response.text())
-//                        .then(data => {
-//                            console.log('Total price saved successfully:', totalPrice   );
-//                        
-//                        })
-//                        .catch(error => {
-//                            console.error('Error saving total price:', error);
-//                  
-//                        });
                                     $.ajax({
                                         url: '/DaNangDreamHotel/useSuppliesURL?action=update',
                                         type: 'GET',

@@ -1078,7 +1078,7 @@ public class DAORoom extends DBConnect {
 
     public List<Room> getProcessingRooms() {
         List<Room> list = new ArrayList<>();
-        String sql = "SELECT r.room_Id, r.name, r.price, r.status, r.size\n"
+        String sql = "SELECT r.room_Id, r.name, r.price, r.status, r.size,b.checkIn, b.checkOut\n"
                 + "FROM room r\n"
                 + "JOIN bookingdetail bd ON r.room_Id = bd.room_Id\n"
                 + "JOIN booking b ON bd.booking_Id = b.booking_Id\n"
@@ -1091,7 +1091,11 @@ public class DAORoom extends DBConnect {
                         rs.getString(2),
                         rs.getInt(3),
                         rs.getString(4),
-                        rs.getInt(5)));
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7)
+                        
+                ));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
@@ -1167,7 +1171,10 @@ public class DAORoom extends DBConnect {
 
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
-        dao.updateRoomStatusByBookingId(10, "Available");
+        List<Room> list = dao.getProcessingRooms();
+        for (Room room : list) {
+            System.out.println(room);
+        }
     }
 
 }
