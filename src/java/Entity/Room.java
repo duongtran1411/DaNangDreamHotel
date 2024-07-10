@@ -31,6 +31,14 @@ public class Room {
         this.name = name;
     }
 
+    public Room(int room_Id, String name, int price, String status, int size) {
+        this.room_Id = room_Id;
+        this.name = name;
+        this.price = price;
+        this.status = status;
+        this.size = size;
+    }
+
     public Room(int room_Id, int type_Room_Id, int floor_Room_Id, String name, int price, int size, int bed, int bath, int people) {
         this.room_Id = room_Id;
         this.type_Room_Id = type_Room_Id;

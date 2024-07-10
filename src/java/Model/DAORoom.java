@@ -1075,25 +1075,25 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    public List<Room> getRoomByStatus(String status){
+
+    public List<Room> getProcessingRooms() {
         List<Room> list = new ArrayList<>();
-        String sql = "select * from room where status = ?";
-        try{
+        String sql = "SELECT r.room_Id, r.name, r.price, r.status, r.size\n"
+                + "FROM room r\n"
+                + "JOIN bookingdetail bd ON r.room_Id = bd.room_Id\n"
+                + "JOIN booking b ON bd.booking_Id = b.booking_Id\n"
+                + "WHERE b.status = 'processing';";
+        try {
             PreparedStatement pre = conn.prepareCall(sql);
-            pre.setString(1, status);
             ResultSet rs = pre.executeQuery();
-            while(rs.next()){
-               list.add(new Room(rs.getInt(1),
-                        rs.getInt(2),
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getString(2),
                         rs.getInt(3),
                         rs.getString(4),
-                        rs.getInt(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getInt(9)));
-                }
-        }catch (SQLException ex) {
+                        rs.getInt(5)));
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
@@ -1156,7 +1156,7 @@ public class DAORoom extends DBConnect {
                         rs.getInt(7),
                         rs.getString(8),
                         rs.getDouble(9),
-                         rs.getInt(10)
+                        rs.getInt(10)
                 );
             }
         } catch (SQLException ex) {

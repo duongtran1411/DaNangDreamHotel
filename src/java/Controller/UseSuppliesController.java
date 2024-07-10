@@ -63,8 +63,7 @@ public class UseSuppliesController extends HttpServlet {
         request.getRequestDispatcher("dashboard/jsp/Supplies.jsp").forward(request, response);
     }
     private void listRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String status = "live";
-        List<Room> list = daoRoom.getRoomByStatus(status);
+        List<Room> list = daoRoom.getProcessingRooms();
         request.setAttribute("list", list);
         request.getRequestDispatcher("dashboard/jsp/LiveRoom.jsp").forward(request, response);
     }
@@ -74,6 +73,7 @@ public class UseSuppliesController extends HttpServlet {
         
            int total = Integer.parseInt(expenses);
            int detailId = Integer.parseInt(id);
+          System.out.println(id);
             daoBooking.insert(total, detailId);
         
         

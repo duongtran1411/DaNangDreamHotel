@@ -105,11 +105,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Check Out</th>
-                                                        <th class="sortable">Type</th>
+                                                        <th class="sortable">ID</th>
                                                         <th class="sortable">Name</th>
+                                                        <th class="sortable">Price</th>
                                                         <th class="sortable">Status</th>
-                                                        <th class="sortable">Create At</th>
-                                                        <th class="sortable">Update At</th>
                                                         <th class="sortable">Size</th>
 
                                                     </tr>
@@ -120,13 +119,11 @@
                                                         <td>
                                                             <a href="useSuppliesURL?action=edit&id=${o.room_Id}"><i class="far fa-eye successful"></i></a>
                                                         </td>
-                                                        <td data-label="Type">${o.type_Room_Id}</td>
+                                                        <td data-label="Type">${o.room_Id}</td>
                                                         <td data-label="Name">${o.name}</td>
+                                                        <td data-label="Price">${o.price}</td>
                                                         <td data-label="Status">${o.status}</td>
-                                                        <td data-label="Create At">${o.created_at}</td>
-                                                        <td data-label="Update At">${o.updated_at}</td>
                                                         <td data-label="Size">${o.size}</td>
-
                                                     </tr>
                                                 </c:forEach>
 
