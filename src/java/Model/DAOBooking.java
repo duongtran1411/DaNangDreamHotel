@@ -2,6 +2,7 @@ package Model;
 
 import Entity.Booking;
 import Entity.Customer;
+import Entity.Room;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -170,7 +171,7 @@ public class DAOBooking extends DBConnect {
                     + "SET checkIn=STR_TO_DATE(?, '%Y-%m-%d'), checkOut=STR_TO_DATE(?, '%Y-%m-%d'), expenses=? "
                     + "WHERE booking_Id=?;";
 
-            try (PreparedStatement pre = conn.prepareStatement(sql)) {
+            try ( PreparedStatement pre = conn.prepareStatement(sql)) {
                 pre.setString(1, checkIn);
                 pre.setString(2, checkOut);
                 pre.setDouble(3, newExpenses);
@@ -219,8 +220,77 @@ public class DAOBooking extends DBConnect {
         }
     }
 
+    public List<Room> getRoomsByBookingId(int id) {
+        List<Room> list = new ArrayList();
+        String sql = "SELECT r.room_Id, r.type_Room_Id, r.floor_Room_Id, r.name, r.price, r.status, r.created_at, r.updated_at, r.size\n"
+                + "FROM managerhotel.room r\n"
+                + "JOIN managerhotel.bookingdetail bd ON r.room_Id = bd.room_Id\n"
+                + "WHERE bd.booking_Id = ?;";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int getLiveBookingDetailId(int roomId) {
+        int bookingDetailId = 0;
+        String sql = "SELECT bd.bookingDetail_Id\n"
+                + "FROM bookingdetail bd\n"
+                + "JOIN booking b ON bd.booking_Id = b.booking_Id\n"
+                + "WHERE bd.room_Id = ?\n"
+                + "AND CURDATE() BETWEEN b.checkIn AND b.checkOut";
+
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, roomId);
+            ResultSet rs = pre.executeQuery();
+
+            if (rs.next()) {
+                bookingDetailId = rs.getInt("bookingDetail_Id");
+            }
+
+            rs.close();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return bookingDetailId;
+    }
+
+    public void insert(int ex, int id) {
+        String sql = "INSERT INTO servicepayment (extramoney, bookingDetail_Id) VALUES (?, ?)";
+
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, ex);          // Set giá trị cho cột extramoney
+            pre.setInt(2, id);          // Set giá trị cho cột bookingDetail_Id
+
+            pre.executeUpdate();        // Thực thi câu lệnh INSERT
+
+            pre.close();
+        } catch (SQLException e) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-        dao.updateBookingStatus(3, "processing");
+        //Room r = dao.getLiveBookingDetailId()
     }
 }

@@ -125,6 +125,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>View</th>
+                                                        <th>Detail</th>
                                                         <th>Card ID</th>
                                                         <th>Check In</th>
                                                         <th>Check Out</th>
@@ -141,6 +142,9 @@
                                                             <tr>
                                                                 <td>
                                                                     <a href="bookingURL?action=view&rCode=${o.customer_Id}"><i class="far fa-eye successful"></i></a>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="bookingURL?action=detail&id=${o.booking_Id}"><i class="far fa-eye successful"></i></a>
                                                                 </td>
                                                                 <td data-label="ID">${o.idCard}</td>
                                                                 <td data-label="CheckIn">
