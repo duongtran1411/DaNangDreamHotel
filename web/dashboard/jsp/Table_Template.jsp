@@ -18,9 +18,6 @@
 
         <title>SB Admin 2 - Tables</title>
 
-        <!-- Custom fonts for this template -->
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
@@ -162,31 +159,25 @@
                 font-size:20px; 
             }
 
-           
-
-
         </style>
+        <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
+        <link rel="stylesheet" href="../assets/css/styles.min.css" />
+        <link rel="stylesheet" href="../assets/css/styles.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     </head>
 
     <body id="page-top">
-
+        
         <!-- Page Wrapper -->
-        <div id="wrapper" >
-
-            <!-- Sidebar -->
-
-            <!-- End of Sidebar -->
-
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
-
-                <!-- Main Content -->
-                <div id="content">
+        <jsp:include page="SlideBar.jsp"></jsp:include>
 
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
-                    <div class="container-fluid">
+                    <div class="container-fluid" style="height: 800px;width: 1300px">
 
                         <!-- Page Heading -->
                         <h1 class="h3 mb-2 text-gray-800">Tables</h1>
@@ -673,11 +664,7 @@
                     </div>
                     <!-- /.container-fluid -->
 
-                </div>
-            </div>
-            <!-- End of Content Wrapper -->
-
-        </div>
+            
         <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
         <script>

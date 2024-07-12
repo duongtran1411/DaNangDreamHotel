@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="Entity.FormatUtils" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -61,6 +62,7 @@
                                                 <option  value="${o.typeRoom_Id}">${o.name}</option> 
                                             </c:forEach>
                                         </select>
+                                        <button id="backButton" style="border: none; background-color:#C59B24;color: white">Back</button>
                                     </div>
                                     <div class="row" id="content">
 
@@ -70,26 +72,30 @@
                                                 <div class="card mb-3">
                                                     <div class="card-body" >
                                                         <div class="d-flex ">
-
-                                                            <div class="col-lg-4">
-
+                                                            <div class="col-lg-3">
                                                                 <img
                                                                     src="${o.room.image}"
-                                                                    class="img-fluid rounded-3" width="150px" height="100%">
+                                                                    class="img-fluid rounded-3" width="100%" height="100%">
                                                             </div>
-                                                            <div class="col-lg-4">
+                                                            <div class="col-lg-3">
+                                                                <strong>Da Nang Dream Hotel</strong>
+                                                                <p style="margin-top: 15px"><%= session.getAttribute("checkInDay") %> to <%= session.getAttribute("checkOutDay") %></p>
+                                                                <p>(${numberDay} nights)</p>
+                                                            </div>
+                                                            <div class="align-items-center col-lg-3">
                                                                 <strong>Information Room</strong>
                                                                 <h5>${o.room.name}</h5>
-                                                                <p class="small mb-0">${o.room.people} Person</p>
-                                                                <p class="small mb-0">${o.room.bed} Bed</p>
+                                                                <div style="display: flex">
+                                                                    <p class="small mb-0" style="margin-right: 5px">${o.room.people} Person</p>
+                                                                    <p class="small mb-0">${o.room.bed} Bed</p>
+                                                                </div>
                                                             </div>
+                                                            <div class="align-items-center col-lg-3">
 
-                                                            <div class="align-items-center col-lg-4">
+                                                                <h5 class="fw-normal mb-0"><a href="cartController?action=delete&Id=${o.room.room_Id}" style="color:red ">Cancel</a></h5>
 
-                                                                <h5 class="fw-normal mb-0"><a href="cartController?action=delete&Id=${o.room.room_Id}">Cancel</a></h5>
-
-
-                                                                <h5 class="mb-0">${FormatUtils.formatPRice(o.room.price * o.room.discount)}đ</h5>
+                                                                <h5><del>${FormatUtils.formatPRice(o.room.price)}đ/Pernight</del></h5>
+                                                                <h5 class="mb-0" style="color:#C59B24">${FormatUtils.formatPRice(o.room.price * o.room.discount)}đ/Pernight</h5>
 
                                                                 <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                                             </div>
@@ -111,18 +117,22 @@
                                     </div>
                                 </div>
                             </c:if>
+
                         </div>
                     </div>
-
+                    <c:if test="${cart.size() == 0}">
+                        <a href="homeController" style="color: black">No Room Your Booking</a>
+                    </c:if>
                 </div>
             </div>
+
         </section>
         <jsp:include page="Footer.jsp"></jsp:include>
     </body>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
     <script>
                                                     function redirectToAdd() {
-                                                        window.location.href = "vnpay_pay.jsp";
+                                                        window.location.href = "bookingInformationController";
                                                     }
                                                     function handleChange() {
                                                         var selectElement = document.getElementById("roomSelect");
@@ -163,6 +173,9 @@
                                                             }
                                                         });
                                                     }
+                                                    document.getElementById("backButton").addEventListener("click", function () {
+                                                        window.history.back();
+                                                    });
 //        var sessionTimeout = setTimeout(function() {
 //            alert("timeout");
 //        }, 1000);

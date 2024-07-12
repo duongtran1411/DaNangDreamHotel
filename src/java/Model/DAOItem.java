@@ -298,14 +298,7 @@ public class DAOItem extends DBConnect {
         return list;
     }
 
-    public static void main(String[] args) {
-        DAOItem dao = new DAOItem();
-        int i = dao.getTotalItem();
-        List<ItemInRoom> list = dao.getItemInRoom(1);
-        for (ItemInRoom itemInRoom : list) {
-            System.out.println(itemInRoom);
-        }
-    }
+   
 
     public void InsertItemInRoom(int itemId, int roomId) {
         String sql = "insert into item_in_room(item_Id,room_id, quantity) "
@@ -319,5 +312,32 @@ public class DAOItem extends DBConnect {
         }catch (SQLException ex) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
     }
+    }
+
+    public List<Item> getFoodItem() {
+         List<Item> list = new ArrayList();
+        String sql = "select * from items where typeItem_Id between 1 and 2";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Item(
+                        rs.getInt("item_Id"),
+                        rs.getString("name"),
+                        rs.getInt("typeItem_Id"),
+                        rs.getDouble("price")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+     public static void main(String[] args) {
+        DAOItem dao = new DAOItem();
+       List<Item> list = dao.getFoodItem();
+         for (Item item : list) {
+             System.out.println(item);
+         }
+ 
     }
 }

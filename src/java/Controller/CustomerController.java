@@ -64,13 +64,14 @@ public class CustomerController extends HttpServlet {
     }
 
     private void addCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String rCode = request.getParameter("rCode");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String phoneNumber = request.getParameter("phoneNumber");
         String email = request.getParameter("email");
         String idCard = request.getParameter("idCard");
-        daoCustomer.insertCustomer(firstName, lastName, phoneNumber, email, idCard);
-        response.sendRedirect("customerController?action=listCustomer");
+        daoCustomer.insertCustomer(firstName, lastName, phoneNumber, email, idCard, rCode);
+        response.sendRedirect("bookingURL?action=view&rCode=" + rCode + "");
     }
 
     private void editCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

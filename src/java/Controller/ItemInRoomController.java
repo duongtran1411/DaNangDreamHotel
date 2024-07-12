@@ -1,5 +1,6 @@
 package Controller;
 
+import Entity.Room;
 import Entity.RoomWithItem;
 import Entity.TypeRoom;
 import Model.DAOImageRoom;
@@ -58,8 +59,10 @@ public class ItemInRoomController extends HttpServlet {
             case "view":
                 allItemInRoom(request, response);
                 break;
+            case "detail":
+                detailRoom(request, response);
+                break;
             case "update":
-            
                 updateQuantity(request, response);
                 break;
             default:
@@ -82,22 +85,22 @@ public class ItemInRoomController extends HttpServlet {
     private void listTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
         request.setAttribute("AllTypeRoom", allTypeRoom);
-        request.getRequestDispatcher("dashboard/jsp/ManageTypeRoom.jsp").forward(request, response);
+        request.getRequestDispatcher("dashboard/jsp/ItemInRoomPage1.jsp").forward(request, response);
     }
 
     private void allItemInRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomId = Integer.parseInt(request.getParameter("rid"));
-        int troomId = Integer.parseInt(request.getParameter("trid"));
-//        int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
-//        int itemsPerPage = 5;
-//        int totalItem = daoItem.getTotalItemInRoom(roomId);
-//        int totalPages = (int) Math.ceil((double) totalItem / itemsPerPage);
         List<RoomWithItem> allItem = daoItem.getRoomWithItem(roomId);
         request.setAttribute("allItem", allItem);
-        request.setAttribute("trid", troomId);
-//        request.setAttribute("currentPage", currentPage);
-//        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("rid", roomId);
         request.getRequestDispatcher("dashboard/jsp/ManageItemInRoom.jsp").forward(request, response);
+    }
+
+    private void detailRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int typeRoomId = Integer.parseInt(request.getParameter("trid"));
+        List<Room> listRoom = daoRoom.getRoomByTypeRoomId(typeRoomId);
+        request.setAttribute("ListRoomBID", listRoom);
+        request.getRequestDispatcher("dashboard/jsp/ItemInRoomPage2.jsp").forward(request, response);
     }
 
     private void updateQuantity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

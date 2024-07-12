@@ -26,6 +26,7 @@
             href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap"
             rel="stylesheet"
             />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
         <title>Da Nang Dream Hotel</title>
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
@@ -40,8 +41,33 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" />
         <link href="css/paging.css" rel="stylesheet" type="text/css"/>
         <link href="css/home.css" rel="stylesheet" type="text/css"/>
+        <style>
+
+            .check-date input[type="date"]:focus {
+                border-color: #7900ff;
+                outline: none;
+            }
+            .check-date input[type="date"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                transition: border-color 0.3s ease;
+            }
+
+            #checkin::-webkit-clear-button,
+            #checkin::-webkit-inner-spin-button {
+                display: none;
+            }
+
+            input[type="date"]::-webkit-clear-button,
+            input[type="date"]::-webkit-inner-spin-button {
+                display: none;
+            }
 
 
+
+        </style>
     </head>
     <body>
         <div id="preloder">
@@ -66,25 +92,26 @@
                         <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                             <div class="booking-form">
                                 <h3>Booking Your Hotel</h3>
-                                <form action="bookingController" method="get">
-                                    <div class="check-date">
+                                <form action="bookByEventController" method="get">
+                                    <div class="check-date date-picker">
                                         <label for="checkin">Check-in</label>
-                                        <input type="date" class="form-control w-100" id="checkin" value="2024-06-18">
-<!--                                        <i class="icon_calendar"></i>-->
+                                        <input type="date" class="form-control w-100 dateCheck" id="checkin" name="checkIn">
                                     </div>
-                                    <div class="check-date">
+                                    <div class="check-date date-picker">
                                         <label for="checkout">Check-out</label>
-                                        <input type="date" class="form-control w-100" id="checkout" value="2024-06-20">
-                                        <!--<i class="icon_calendar"></i>-->
+                                        <input type="date" class="form-control w-100 dateCheck" id="checkout" name="checkOut">
                                     </div>
                                     <div class="select-option">
                                         <label for="guest">Guests:</label>
-                                        <select id="guest">
-                                            <option value="">2 Adults</option>
-                                            <option value="">3 Adults</option>
+                                        <select id="guest" name="numberPerson">
+                                            <option value="1">1 Adults</option>
+                                            <option value="2">2 Adults</option>
+                                            <option value="3">3 Adults</option>
+                                            <option value="3">4 Adults</option>
+                                            <option value="3">5 Adults</option>
                                         </select>
                                     </div>
-                                    <button type="submit">Booking Now</button>
+                                    <button type="submit">Check Availability</button>
                                 </form>
                             </div>
                         </div>
@@ -384,7 +411,47 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
         <script>
-            $( ".date-input" ).datepicker({ dateFormat: 'yy-dd-mm' });
+                                        var date = new Date();
+                                        var tdate = date.getDate();
+                                        var tmonth = date.getMonth() + 1;
+                                        if (tdate < 10) {
+                                            tdate = '0' + tdate;
+                                        }
+                                        if (tmonth < 10) {
+                                            tmonth = '0' + tmonth;
+                                        }
+                                        var year = date.getUTCFullYear();
+                                        var minDate = year + '-' + tmonth + '-' + tdate;
+                                        var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
+                                        var showDateIn = document.getElementById('checkin').setAttribute('value', minDate);
+                                        var tdateMin = date.getDate() + 1;
+                                        var tmonthMin = date.getMonth() + 1;
+                                        if (tdateMin < 10) {
+                                            tdateMin = '0' + tdateMin;
+                                        }
+                                        if (tmonthMin < 10) {
+                                            tmonthMin = '0' + tmonthMin;
+                                        }
+                                        var yearMin = date.getUTCFullYear();
+                                        var min = yearMin + '-' + tmonthMin + '-' + tdateMin;
+                                        var checkOut = document.getElementById('checkout').setAttribute('min', min);
+                                        var showDateOut = document.getElementById('checkout').setAttribute('value', min);
+                                        document.getElementById('checkin').addEventListener('input', function (e) {
+                                            if (e.target.value === '') {
+                                                e.preventDefault();
+                                                e.target.value = e.target.defaultValue;
+                                            }
+                                        });
+
+                                        document.getElementById('checkout').addEventListener('input', function (e) {
+                                            if (e.target.value === '') {
+                                                e.preventDefault();
+                                                e.target.value = e.target.defaultValue;
+                                            }
+                                        });
+
+                                        
+
         </script>
     </body>
 </html>

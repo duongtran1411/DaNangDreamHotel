@@ -19,7 +19,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 /**
  *
  * @author CTT VNPAY
@@ -30,8 +29,9 @@ public class VNpay extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
-        String orderType = "150000";
-        long amount = Integer.parseInt(req.getParameter("amount")) * 100;
+        String orderType = "170000";
+
+        long amount = Long.parseLong(req.getParameter("amount")) * 100;
 
         String vnp_TxnRef = Config.getRandomNumber(8);
         String vnp_IpAddr = Config.getIpAddress(req);
@@ -95,7 +95,7 @@ public class VNpay extends HttpServlet {
         job.addProperty("data", paymentUrl);
         Gson gson = new Gson();
         resp.getWriter().write(gson.toJson(job));
-        
+
         // Save customer details in session
         req.getSession().setAttribute("firstName", req.getParameter("firstName"));
         req.getSession().setAttribute("lastName", req.getParameter("lastName"));
@@ -104,4 +104,5 @@ public class VNpay extends HttpServlet {
         req.getSession().setAttribute("card", req.getParameter("card"));
         req.getSession().setAttribute("vnp_TxnRef", vnp_TxnRef);
     }
+
 }

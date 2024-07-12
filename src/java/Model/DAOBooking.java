@@ -2,16 +2,15 @@ package Model;
 
 import Entity.Booking;
 import Entity.Customer;
+import Entity.Room;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -57,10 +56,11 @@ public class DAOBooking extends DBConnect {
     }
 
     public void addCustomerAndBooking(String firstName, String lastName, String phoneNumber, String email, String idCard,
-            String checkIn, String checkOut, int expenses) {
+            String checkIn, String checkOut, int expenses, List<Integer> roomIds) {
         String insertCustomerSql = "INSERT INTO customer (firstName, lastName, phone, email, idCard) VALUES (?, ?, ?, ?, ?)";
         String insertBookingSql = "INSERT INTO booking (customer_Id, checkIn, checkOut, expenses, created_at) VALUES (?, ?, ?, ?, NOW())";
         String updateCustomerSql = "UPDATE customer SET reservationCode = ? WHERE customer_Id = ?";
+        String insertBookingDetailSql = "INSERT INTO bookingdetail (room_Id, booking_Id) VALUES (?, ?)";
 
         try {
             // Bắt đầu một transaction
@@ -83,18 +83,33 @@ public class DAOBooking extends DBConnect {
             }
 
             // Thực hiện insert booking với customerId
-            PreparedStatement insertBookingStmt = conn.prepareStatement(insertBookingSql);
+            PreparedStatement insertBookingStmt = conn.prepareStatement(insertBookingSql, Statement.RETURN_GENERATED_KEYS);
             insertBookingStmt.setInt(1, customerId);
             insertBookingStmt.setString(2, checkIn);
             insertBookingStmt.setString(3, checkOut);
             insertBookingStmt.setInt(4, expenses);
             insertBookingStmt.executeUpdate();
 
-            // Cập nhật reservationCode cho customer
+            // Lấy giá trị booking_Id tự tăng vừa chèn
+            ResultSet bookingKeys = insertBookingStmt.getGeneratedKeys();
+            int bookingId = -1;
+            if (bookingKeys.next()) {
+                bookingId = bookingKeys.getInt(1);
+            }
+
+            // Thực hiện cập nhật reservationCode cho customer
             PreparedStatement updateCustomerStmt = conn.prepareStatement(updateCustomerSql);
-            updateCustomerStmt.setInt(1, customerId);
+            updateCustomerStmt.setInt(1, bookingId); // Đặt reservationCode bằng bookingId
             updateCustomerStmt.setInt(2, customerId);
             updateCustomerStmt.executeUpdate();
+
+            // Thêm vào bookingdetail
+            PreparedStatement insertBookingDetailStmt = conn.prepareStatement(insertBookingDetailSql);
+            for (int roomId : roomIds) {
+                insertBookingDetailStmt.setInt(1, roomId);
+                insertBookingDetailStmt.setInt(2, bookingId);
+                insertBookingDetailStmt.executeUpdate();
+            }
 
             // Commit transaction
             conn.commit();
@@ -156,7 +171,7 @@ public class DAOBooking extends DBConnect {
                     + "SET checkIn=STR_TO_DATE(?, '%Y-%m-%d'), checkOut=STR_TO_DATE(?, '%Y-%m-%d'), expenses=? "
                     + "WHERE booking_Id=?;";
 
-            try (PreparedStatement pre = conn.prepareStatement(sql)) {
+            try ( PreparedStatement pre = conn.prepareStatement(sql)) {
                 pre.setString(1, checkIn);
                 pre.setString(2, checkOut);
                 pre.setDouble(3, newExpenses);
@@ -241,30 +256,78 @@ public class DAOBooking extends DBConnect {
             Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }           
+    public List<Room> getRoomsByBookingId(int id) {
+        List<Room> list = new ArrayList();
+        String sql = "SELECT r.room_Id, r.type_Room_Id, r.floor_Room_Id, r.name, r.price, r.status, r.created_at, r.updated_at, r.size\n"
+                + "FROM managerhotel.room r\n"
+                + "JOIN managerhotel.bookingdetail bd ON r.room_Id = bd.room_Id\n"
+                + "WHERE bd.booking_Id = ?;";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int getLiveBookingDetailId(int roomId) {
+        int bookingDetailId = 0;
+        String sql = "SELECT bd.bookingDetail_Id\n"
+                + "FROM bookingdetail bd\n"
+                + "JOIN booking b ON bd.booking_Id = b.booking_Id\n"
+                + "WHERE bd.room_Id = ?\n"
+                + "AND CURDATE() BETWEEN b.checkIn AND b.checkOut";
+
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, roomId);
+            ResultSet rs = pre.executeQuery();
+
+            if (rs.next()) {
+                bookingDetailId = rs.getInt("bookingDetail_Id");
+            }
+
+            rs.close();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return bookingDetailId;
+    }
+
+    public void insert(int ex, int id) {
+        String sql = "INSERT INTO servicepayment (extramoney, bookingDetail_Id) VALUES (?, ?)";
+
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, ex);          // Set giá trị cho cột extramoney
+            pre.setInt(2, id);          // Set giá trị cho cột bookingDetail_Id
+
+            pre.executeUpdate();        // Thực thi câu lệnh INSERT
+
+            pre.close();
+        } catch (SQLException e) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-
-        // Tạo ngày check-in và check-out cho test case
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2024, Calendar.JULY, 18); // Ngày check-in: 1st July 2024
-        Date checkin = calendar.getTime();
-        calendar.set(2024, Calendar.JULY, 19); // Ngày check-out: 7th July 2024
-        Date checkout = calendar.getTime();
-
-        // Gọi phương thức getAllBookingByDate và in ra kết quả
-        List<Booking> list = dao.getAllBookingByDate(checkin, checkout);
-        for (Booking booking : list) {
-            System.out.println("Booking ID: " + booking.getBooking_Id());
-            System.out.println("Check-in: " + booking.getCheckIn());
-            System.out.println("Check-out: " + booking.getCheckOut());
-            System.out.println("Expenses: " + booking.getExpenses());
-            System.out.println("Created at: " + booking.getCreated_at());
-            System.out.println("Customer ID: " + booking.getCustomer_Id());
-            System.out.println("Status: " + booking.getStatus());
-            System.out.println("------------------------");
-        }
+        //Room r = dao.getLiveBookingDetailId()
     }
-
 }

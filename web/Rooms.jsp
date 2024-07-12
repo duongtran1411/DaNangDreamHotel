@@ -74,7 +74,7 @@
 
                             <c:forEach items="${listTypeRoom}" var="o">
                                 <button class="btnType" name="typeRoom" onclick="loadType(this)" value="${o.typeRoom_Id}"><li>${o.name}</li></button>
-                                    </c:forEach>   
+                            </c:forEach>   
                         </ul>
                     </div>
 
@@ -126,9 +126,10 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
+                                    <a href="roomDetailsController?Id=${o.room_Id}&typeRoom=${o.type_Room_Id}" class="primary-btn">More Details</a>
                                 </div>
                             </div>
+                                   
                         </div>      
                     </c:forEach>
 
@@ -234,104 +235,104 @@
         <script src="js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
-                                         function searchByName(txtSearch) {
-                                             var text = txtSearch.value;
-                                             console.log(text);
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/searchController',
-                                                 type: 'GET',
-                                                 data: {
-                                                     txt: text
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr, txtSearch.value);
-                                                 }
-                                             });
-                                         }
+                                        function searchByName(txtSearch) {
+                                            var text = txtSearch.value;
+                                            console.log(text);
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/searchController',
+                                                type: 'GET',
+                                                data: {
+                                                    txt: text
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr, txtSearch.value);
+                                                }
+                                            });
+                                        }
 
-                                         function sortPriceUp() {
-                                             var amount = 0;
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/sortRoomController?action=asc',
-                                                 type: 'GET',
-                                                 data: {
-                                                     size: amount
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr);
-                                                 }
-                                             });
-                                         }
+                                        function sortPriceUp() {
+                                            var amount = 0;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/sortRoomController?action=asc',
+                                                type: 'GET',
+                                                data: {
+                                                    size: amount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
 
 
-                                         function sortPriceDown() {
-                                             var amount = 0;
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/sortRoomController?action=desc',
-                                                 type: 'GET',
-                                                 data: {
-                                                     size: amount
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr);
-                                                 }
-                                             });
-                                         }
+                                        function sortPriceDown() {
+                                            var amount = 0;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/sortRoomController?action=desc',
+                                                type: 'GET',
+                                                data: {
+                                                    size: amount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
 
-                                         function loadType(param) {
+                                        function loadType(param) {
 
-                                             var typeRoom = param.value;
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/roomOfTypeController',
-                                                 type: 'GET',
-                                                 data: {
-                                                     type: typeRoom
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log(typeRoom);
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr);
-                                                 }
-                                             });
-                                         }
+                                            var typeRoom = param.value;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/roomOfTypeController',
+                                                type: 'GET',
+                                                data: {
+                                                    type: typeRoom
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log(typeRoom);
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
 
-                                         function handlePage(param) {
-                                             var numberPage = param.value;
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/pagingController',
-                                                 type: 'GET',
-                                                 data: {
-                                                     page: numberPage
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr);
-                                                 }
-                                             });
-                                         }
+                                        function handlePage(param) {
+                                            var numberPage = param.value;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/pagingController',
+                                                type: 'GET',
+                                                data: {
+                                                    page: numberPage
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
 
         </script>
     </body>

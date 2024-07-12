@@ -96,8 +96,22 @@ public class DAOAccount extends DBConnect {
         }
     }
 
-    public void deletedAccountById(int id) {
-        String sql = "UPDATE Account SET is_deleted = ? WHERE account_Id = ?";
+    public void updateProfile(String file, int accoutID) {
+        String sql = "update account\n"
+                + "set avatar = ?\n"
+                + "where account_Id = ?;";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, file);
+            pre.setInt(2, accoutID);
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
+    }
+
+    public void deleteAccountByID(int id) {
+        String sql = "delete from Account where account_Id=?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setBoolean(1, true);
