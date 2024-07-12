@@ -26,7 +26,7 @@
             <button class="btn hide-menu" id=""><label class="white" >HOME</label></button>
             <ul class="nav-small-cap">
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/AdminControllerURL" aria-expanded="false">
                         <span>
                             <i class="ti ti-layout-dashboard white"></i>
                         </span>
@@ -111,6 +111,14 @@
                             <i class="fa-solid fa-user white"></i>
                         </span>
                         <span class="hide-menu white">Manage Jobs</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/ManageUtilitiesController" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-address-card white" aria-hidden="true"></i>
+                        </span>
+                        <span class="hide-menu white">Manage Utilities</span>
                     </a>
                 </li>
                 <%--</c:if>--%>
