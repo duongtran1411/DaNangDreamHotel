@@ -68,29 +68,7 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
-    public List<Room> listAllRoom() {
-        List<Room> list = new ArrayList<>();
-        String sql = "select * from room";
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                list.add(new Room(rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getInt(9)));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        return list;
-    }
     
     public List<Room> getRoomByTypeRoomId(int typeRoomId) {
         List<Room> list = new ArrayList();
