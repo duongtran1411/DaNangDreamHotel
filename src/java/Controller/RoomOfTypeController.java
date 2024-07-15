@@ -70,7 +70,7 @@ public class RoomOfTypeController extends HttpServlet {
         FormatUtils format = new FormatUtils();
         List<Room> list = dao.getRoomByType(size, numberType);
         for (Room o : list) {
-            out.println("<div class=\"room col-lg-4 col-md-6\">\n"
+            out.println("<div class=\"room col-lg-4 col-md-6 element\">\n"
                     + "                            <div class=\"room-item \" id=\"item\">\n"
                     + "                                <img src=\"" + o.getImage() + "\" alt=\"\" style=\"height: 240px\">\n"
                     + "                                <div class=\"ri-text\" style=\"height:450px\">\n"

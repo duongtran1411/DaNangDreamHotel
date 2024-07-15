@@ -42,7 +42,7 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
 
                 </li>
-                <%--<c:if test="${sessionScope.acc.role_Id == 2}">--%>
+               <c:if test="${sessionScope.acc.role_Id == 2}">
                 <li  class="sidebar-item">
                     <a  class="sidebar-link" href="customerController" aria-expanded="false">
                         <span>
@@ -84,8 +84,16 @@
                         <span class="hide-menu white">Room Diagram</span>
                     </a>
                 </li>
-                <%--</c:if>--%>
-                <%--<c:if test="${acc.role_Id == 3}">--%>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="${pageContext.request.contextPath}/bookingURL" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-address-card white" aria-hidden="true"></i>
+                        </span>
+                        <span class="hide-menu white">Manage Booking</span>
+                    </a>
+                </li>
+                </c:if>
+                <c:if test="${acc.role_Id == 3}">
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/typeRoomURL" aria-expanded="false">
                         <span>
@@ -103,8 +111,8 @@
                         <span class="hide-menu white">Manage Event</span>
                     </a>
                 </li>
-                <%--</c:if>--%>
-                <%--<c:if test="${sessionScope.acc.role_Id == 1}">--%>
+                </c:if>
+                <c:if test="${sessionScope.acc.role_Id == 1}">
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/ManageAccountControllerURL" aria-expanded="false">
                         <span>
@@ -121,15 +129,8 @@
                         <span class="hide-menu white">Manage Jobs</span>
                     </a>
                 </li>
-                <%--</c:if>--%>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="${pageContext.request.contextPath}/bookingURL" aria-expanded="false">
-                        <span>
-                            <i class="fa fa-address-card white" aria-hidden="true"></i>
-                        </span>
-                        <span class="hide-menu white">Manage Booking</span>
-                    </a>
-                </li>
+                </c:if>
+                
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

@@ -19,7 +19,7 @@
                 <div class="col-lg-6">
                     <div class="tn-right">
                         <div class="top-social">
-                           
+
                         </div>
                         <a href="authentication-login" class="bk-btn">Login</a>
                     </div>
@@ -41,18 +41,17 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="active"><a href="homeController" style="text-decoration: none">Home</a></li>
+                                <li class="btn-hover active"><a href="homeController" style="text-decoration: none">Home</a></li>
                                 <li>
                                     <a href="AboutUs.jsp" style="text-decoration: none">About Us</a>
                                     <ul class="dropdown">
-                                        <li><a href="Jobs.jsp">Jobs</a></li>
+                                        <li class="btn-hover"><a href="Jobs.jsp">Jobs</a></li>
                                     </ul>
-                                <li>
+                                <li class="btn-hover">
                                     <a href="viewRoomController" style="text-decoration: none">Resort</a>
                                 </li>
-                                <li><a href="eventController" style="text-decoration: none">Events</a></li>
-                                <li><a href="Contact.jsp" style="text-decoration: none">Contact</a></li>
-                                <li><a href="viewCartController" style="text-decoration: none">Booked</a></li>
+                                <li class="btn-hover"><a href="eventController" style="text-decoration: none">Events</a></li>
+                                <li class="btn-hover"><a href="Contact.jsp" style="text-decoration: none">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -61,3 +60,4 @@
         </div>
     </div>
 </header>
+
