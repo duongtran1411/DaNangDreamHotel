@@ -110,8 +110,8 @@ public class DAOAccount extends DBConnect {
         }
     }
 
-    public void deleteAccountByID(int id) {
-        String sql = "delete from Account where account_Id=?";
+    public void deletedAccountById(int id) {
+        String sql = "UPDATE Account SET is_deleted = ? WHERE account_Id = ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setBoolean(1, true);
