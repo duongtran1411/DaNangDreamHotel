@@ -42,8 +42,8 @@
                                                 <th>Full Name</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
-                                                <th>Create-at</th>
-                                                <th>Update-at</th>
+                                                <!--<th>Create-at</th>-->
+                                                <!--<th>Update-at</th>-->
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -57,8 +57,8 @@
                                                 <td>${o.lastName} ${o.firstName}</td>
                                                 <td>${o.email}</td>
                                                 <td>${o.phone}</td>
-                                                <td>${o.create_at}</td>
-                                                <td>${o.update_at}</td>
+                                                <!--<td>${o.create_at}</td>-->
+                                                <!--<td>${o.update_at}</td>-->
                                                 <td>
                                                     <a href="EditAccountControllerURL?id=${o.account_Id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                                     <a href="DeleteAccountControllerURL?id=${o.account_Id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -131,14 +131,14 @@
                             <label>Email</label>
                             <input name="email" type="email" class="form-control" placeholder="Enter email" required>
                         </div>
-                        <div class="form-group">
+<!--                        <div class="form-group">
                             <label>Create At</label>
                             <input name="create_at" type="date" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Update At</label>
                             <input name="update_at" type="date" class="form-control" required>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">

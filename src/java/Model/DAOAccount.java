@@ -121,11 +121,13 @@ public class DAOAccount extends DBConnect {
     }
 
     public void insertAccount(int job_Id, String userName, String firstName, String lastName,
-            String password, String email, String phone, int role_Id,
-            java.sql.Date create_at, java.sql.Date update_at, int account_Id) {
+            String password, String email, String phone, int role_Id, int account_Id) {
+//            java.sql.Date create_at, java.sql.Date update_at, int account_Id) {
         String sql = "INSERT INTO account (job_Id, userName, firstName, lastName, "
-                + "password, email, phone, role_Id, create_at, update_at, account_Id) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "password, email, phone, role_Id, account_Id) "
+//                + "password, email, phone, role_Id, create_at, update_at, account_Id) "
+//                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, job_Id);
@@ -136,9 +138,7 @@ public class DAOAccount extends DBConnect {
             st.setString(6, email);
             st.setString(7, phone);
             st.setInt(8, role_Id);
-            st.setDate(9, create_at);
-            st.setDate(10, update_at);
-            st.setInt(11, account_Id);
+            st.setInt(9, account_Id);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -174,10 +174,7 @@ public class DAOAccount extends DBConnect {
 
     public static void main(String[] args) {
         DAOAccount dao = new DAOAccount();
-        List<Account> list = dao.getAllAccount();
-        for (Account account : list) {
-            System.out.println(account);
-        }
+        dao.insertAccount(4, "123", "123", "123", "123", "123@", "123", 1, 4);
 
     }
 }
