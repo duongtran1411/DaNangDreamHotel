@@ -67,17 +67,7 @@
 <div class="container-fluid">
     <div class="modal" id="myModal">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <c:url value="/img/typeroom/${sessionScope.acc.getAvatar()}" var="ava"/>
-                <div class="d-flex justify-content-center">
-                    <c:choose>
-                        <c:when test="${fn:startsWith(sessionScope.acc.getAvatar(), 'http')}">
-                            <img src="${sessionScope.acc.getAvatar()}">
-                        </c:when>
-                        <c:otherwise>
-                            <img src="${ava}" style="width: 59%">
-                        </c:otherwise>
-                    </c:choose>                            
+            <div class="modal-content">                         
                 </div>
                 <div class="card-body" style="text-align: center">
                     <h2 class="card-header">PROFILE</h2>
