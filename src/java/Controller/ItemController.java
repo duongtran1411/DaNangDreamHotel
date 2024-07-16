@@ -1,14 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package Controller;
 
 import Entity.Item;
+import Entity.ItemInRoom;
 import Entity.Room;
+import Entity.TypeRoom;
 import Model.DAOItem;
 import Model.DAORoom;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,6 +39,9 @@ public class ItemController extends HttpServlet {
             case "add":
                 addItem(request, response);
                 break;
+                case "search":
+                searchItem(request, response);
+                break;
             case "delete":
                 deleteItem(request, response);
                 break;
@@ -59,7 +62,7 @@ public class ItemController extends HttpServlet {
 
     private void listAllItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
-        int itemsPerPage = 6;
+        int itemsPerPage = 7;
         int totalTypes = daoItem.getTotalItem();
         int totalPages = (int) Math.ceil((double) totalTypes / itemsPerPage);
         List<Item> allItem = daoItem.getItemsWithPagin(currentPage, itemsPerPage);
@@ -67,6 +70,12 @@ public class ItemController extends HttpServlet {
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("dashboard/jsp/ItemManage.jsp").forward(request, response);
+    }
+    private void searchItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String query = request.getParameter("query");
+        List<Item> filteredItems = daoItem.searchItems(query); // Implement this method in your DAO
+            request.setAttribute("allItem", filteredItems);
+        //request.getRequestDispatcher("/partials/itemTable.jsp").forward(request, response);
     }
 
     private void deleteItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

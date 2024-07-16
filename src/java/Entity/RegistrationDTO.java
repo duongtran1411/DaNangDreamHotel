@@ -1,6 +1,7 @@
 package Entity;
 
 public class RegistrationDTO {
+
     private String account_Id;
     private int job_Id;
     private String userName;
@@ -117,6 +118,10 @@ public class RegistrationDTO {
     public void setUpdate_at(String update_at) {
         this.update_at = update_at;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "RegistrationDTO{" + "account_Id=" + account_Id + ", job_Id=" + job_Id + ", userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", email=" + email + ", phone=" + phone + ", role_Id=" + role_Id + ", create_at=" + create_at + ", update_at=" + update_at + '}';
+    }
+
 }

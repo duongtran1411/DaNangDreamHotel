@@ -47,13 +47,14 @@ public class RegistrationDAO extends DBConnect {
         }
         return role;
     }
+
     public boolean CheckDataEmail(String email) {
-        String sql="SELECT * FROM ACCOUNT WHERE email = ?";
+        String sql = "SELECT * FROM ACCOUNT WHERE email = ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 return true;
             }
 
@@ -62,6 +63,7 @@ public class RegistrationDAO extends DBConnect {
         }
         return false;
     }
+
     public RegistrationDTO getDataAccount(String username, String password) {
         String sql = "SELECT * FROM ACCOUNT WHERE username = ? AND password = ?";
         PreparedStatement pre = null;
@@ -75,7 +77,7 @@ public class RegistrationDAO extends DBConnect {
 
             if (rs.next()) {
                 return new RegistrationDTO(
-                        rs.getString("acoount_Id"),
+                        rs.getString("account_Id"),
                         rs.getInt("job_Id"),
                         rs.getString("userName"),
                         rs.getString("firstName"),
@@ -106,7 +108,7 @@ public class RegistrationDAO extends DBConnect {
         return null;
     }
 
-    public boolean CheckPassExist(String email,String pass){
+    public boolean CheckPassExist(String email, String pass) {
         String sql = "SELECT * FROM ACCOUNT WHERE email=? and password = ?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
@@ -117,11 +119,12 @@ public class RegistrationDAO extends DBConnect {
             if (rs.next()) {
                 return true;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
     }
+
     public void UpdatePassReset(String email, String password) {
         String sql = "UPDATE ACCOUNT SET password = ? WHERE email = ?";
         try {
@@ -134,8 +137,9 @@ public class RegistrationDAO extends DBConnect {
             Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void AddJob(JobDTO jobDTO) {
-        String sql="insert into jobs values(?,?,?,?,?,?,?)";
+        String sql = "insert into jobs values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, jobDTO.getJob_Id());
@@ -151,10 +155,11 @@ public class RegistrationDAO extends DBConnect {
             if (rowAffected > 0) {
                 System.out.println("Một bản ghi công việc mới đã được thêm thành công!");
             }
-        }catch (SQLException e){
-            Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null , e);
+        } catch (SQLException e) {
+            Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
     public void AddAcc(RegistrationDTO registrationDTO) {
         String sql = "INSERT INTO account VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
         try (
@@ -179,9 +184,10 @@ public class RegistrationDAO extends DBConnect {
             }
 
         } catch (SQLException e) {
-            Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null , e);
+            Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
     public void deleteJob(int jobId) {
         String sql = "DELETE FROM jobs WHERE job_Id = ?";
         try {
@@ -240,10 +246,9 @@ public class RegistrationDAO extends DBConnect {
         return false;
     }
 
-
     public static void main(String[] args) {
         RegistrationDAO dao = new RegistrationDAO();
-       RegistrationDTO acc = dao.getDataAccount("Admin", "123");
+        RegistrationDTO acc = dao.getDataAccount("Staff", "123");
         System.out.println(acc);
     }
 }

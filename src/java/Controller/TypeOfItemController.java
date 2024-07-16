@@ -58,7 +58,7 @@ public class TypeOfItemController extends HttpServlet {
     private void listAllTypeOfItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //paging
         int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
-        int itemsPerPage = 6;
+        int itemsPerPage = 5;
         int totalTypes = daoTypeItem.getTotalType();
         int totalPages = (int) Math.ceil((double) totalTypes / itemsPerPage);
         List<TypeItem> allType = daoTypeItem.getTypesWithPagin(currentPage, itemsPerPage);

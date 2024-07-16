@@ -17,7 +17,8 @@ import java.util.logging.Logger;
  *
  * @author CaoTung
  */
-public class DAOCustomer extends DBConnect{
+public class DAOCustomer extends DBConnect {
+
     public List<Customer> getAllCustomer() {
         List<Customer> list = new ArrayList();
         String sql = "select * from customer";
@@ -39,46 +40,7 @@ public class DAOCustomer extends DBConnect{
         }
         return list;
     }
-    public int getTotalCustomer() {
-        String sql = "select count(customer_Id) "
-                + "from customer";
-        int totalCus = 0;
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
-            ResultSet rs = pre.executeQuery();
-            if (rs.next()) {
-                totalCus = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return totalCus;
-    }
-    public List<Customer> getCusWithPagin(int currentPage, int cusPerPage) {
-        List<Customer> list = new ArrayList();
-        int startIndex = (currentPage - 1) * cusPerPage;
-        String sql = "SELECT * from customer limit ? offset ?";
-        try {
-            PreparedStatement pre = conn.prepareStatement(sql);
 
-            pre.setInt(1, cusPerPage);
-            pre.setInt(2, startIndex);
-            ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                Customer x = new Customer();
-                x.customerId = rs.getInt("customer_Id");
-                x.firstName = rs.getString("firstName");
-                x.lastName = rs.getString("lastName");
-                x.phoneNumber = rs.getString("phone");
-                x.email = rs.getString("email");
-                x.idCard = rs.getString("idCard");
-                list.add(x);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
     public Customer getCustomerById(int id) {
         Customer cus = new Customer();
         String sql = "select * from customer "
@@ -87,7 +49,7 @@ public class DAOCustomer extends DBConnect{
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 cus.setCustomerId(rs.getInt(1));
                 cus.setFirstName(rs.getString(2));
                 cus.setLastName(rs.getString(3));
@@ -99,11 +61,11 @@ public class DAOCustomer extends DBConnect{
             Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cus;
-}
-    
-    public void insertCustomer(String firstName, String lastName, String phoneNumber, String email, String idCard) {
-        String sql = "insert into customer(firstName, lastName, phone, email, idCard)"
-                + " values(?,?,?,?,?)";
+    }
+
+    public void insertCustomer(String firstName, String lastName, String phoneNumber, String email, String idCard, String rCode) {
+        String sql = "insert into customer(firstName, lastName, phone, email, idCard, reservationCode)"
+                + " values(?,?,?,?,?,?)";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, firstName);
@@ -111,17 +73,18 @@ public class DAOCustomer extends DBConnect{
             pre.setString(3, phoneNumber);
             pre.setString(4, email);
             pre.setString(5, idCard);
+            pre.setString(6, rCode);
             pre.execute();
         } catch (SQLException e) {
-            System.out.println("Error at inserption e) {\n" +
-"            System.out.ptCustomer " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
-    public void updateCustomer(int id,String firstName, String lastName, String phoneNumber, String email, String idCard){
+
+    public void updateCustomer(int id, String firstName, String lastName, String phoneNumber, String email, String idCard) {
         String sql = "update customer "
                 + "set firstName=?, lastName=?, phone=?, email=?, idCard=? "
                 + "where customer_Id=?";
-        try{
+        try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(6, id);
             pre.setString(1, firstName);
@@ -130,25 +93,24 @@ public class DAOCustomer extends DBConnect{
             pre.setString(4, email);
             pre.setString(5, idCard);
             pre.execute();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Error at updateCustomer " + e.getMessage());
         }
     }
 
-    public void deleteCustomer(int id){
+    public void deleteCustomer(int id) {
         String sql = "delete from customer "
                 + "where customer_Id= ? ";
-        try{
-            PreparedStatement pre= conn.prepareStatement(sql);
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
             pre.executeUpdate();
-        }catch (SQLException ex) {
-           Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
+
     public static void main(String[] args) {
         DAOCustomer dao = new DAOCustomer();
-        dao.insertCustomer("1", "1", "1", "1", "1");
     }
 }

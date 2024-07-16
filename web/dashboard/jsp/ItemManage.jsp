@@ -18,6 +18,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
         <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
         <style>
             .pagination-container {
                 display: flex;
@@ -88,7 +89,7 @@
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>    
-                                                        <th class="sortable">Item Name</th>
+                                                        <th class="sortable">Name of item</th>
                                                         <th class="sortable">Type</th>
                                                         <th class="sortable">Price</th>
                                                         <th>Action</th>
@@ -98,7 +99,7 @@
                                                 <c:forEach items="${allItem}" var="o">
                                                     <tr>
                                                         <td data-label="Name">${o.name}</td>
-                                                        <td data-label="Type">${o.typeName}</td>
+                                                        <td data-label="Type">${o.typeItem_Id}</td>
                                                         <td data-label="Price">${FormatUtils.formatPRice(o.price)}đ</td>
                                                         <td data-label="Actions">
                                                             <a href="UpdateItem.jsp?id=${o.item_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>

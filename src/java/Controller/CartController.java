@@ -61,9 +61,9 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BookingCart bookingCart = new BookingCart();
         HttpSession session = request.getSession();
-        bookingCart = (BookingCart) session.getAttribute("cart");
+        session.setMaxInactiveInterval(300);
+        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         if (bookingCart == null) {
             bookingCart = new BookingCart();
         }
@@ -111,8 +111,13 @@ public class CartController extends HttpServlet {
                     Room room = dao.getRoomToCart(roomId);
                     CartItem cartItem = new CartItem(room);
                     bookingCart.addRoom(cartItem);
+                    String checkIn = (String)session.getAttribute("checkInDay");
+                    String checkOut = (String)session.getAttribute("checkOutDay");
+                    System.out.println(checkIn + "  " +checkOut);
+                    session.setAttribute("checkInDay", checkIn);
+                    session.setAttribute("checkOutDay", checkOut);
                     session.setAttribute("cart", bookingCart);
-                    response.sendRedirect("viewRoomController");
+                    request.getRequestDispatcher("viewCartController").forward(request, response);
                 }
                 break;
         }
@@ -127,6 +132,7 @@ public class CartController extends HttpServlet {
         int roomId = Integer.parseInt(id);
         bookingCart.remove(roomId);
         session.setAttribute("cart", bookingCart);
+        session.setAttribute("total", bookingCart.getTotalMoney());
         resp.sendRedirect("viewCartController");
     }
 

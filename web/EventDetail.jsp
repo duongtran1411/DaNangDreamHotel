@@ -80,7 +80,7 @@
                                 </p>
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
-                                        <button type="submit" class="site-btn" style="margin-bottom: 20px; background-color: #DFA974; border: none; width: 148px;height: 47px"><a href="bookByEventController?eventId=${event.event_Id}" style="color: white; background: ">Booking Now</a></button>
+                                        <button type="submit" class="site-btn" style="margin-bottom: 20px; background-color: #DFA974; border: none; width: 148px;height: 47px"><a href="bookByEventController" style="color: white; background: ">Booking Now</a></button>
                                     </div>
                                 </div>
                             </div>

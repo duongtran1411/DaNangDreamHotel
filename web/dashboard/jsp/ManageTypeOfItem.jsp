@@ -20,7 +20,6 @@
                 justify-content: center;
                 margin-top: 20px;
             }
-
             .pagination a {
                 margin: 0 5px;
                 padding: 10px 15px;
@@ -30,7 +29,6 @@
                 border-radius: 5px;
                 transition: background-color 0.3s;
             }
-
             .pagination a:hover {
                 background-color: #f8f9fa;
             }
@@ -67,33 +65,37 @@
 
     <body>
         <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
-            <jsp:include page="SlideBar.jsp"></jsp:include>
+            <div class="sidebar">
+                <jsp:include page="SlideBar.jsp"></jsp:include>
+                </div>
 
                 <div class="body-wrapper">
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTypeModal">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTypeItemModal">
                                 <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Type</p>                  
                             </button>
                             <div class="container-fluid" style="height: 800px;width: 1300px">
 
                                 <input type="text" id="searchInput" class="search-input" placeholder="Search for items...">
 
-                                <h1 class="h3 mb-2 text-gray-800">Tables Type Of Item</h1>
+                                <h1 class="h3 mb-2 text-gray-800">Table Type Of Item</h1>
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
-                                                    <tr>
-                                                        <th class="sortable">Name</th>
+                                                    <tr>    
+                                                        <th class="sortable">Type ID</th>
+                                                        <th class="sortable">Type Name</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="content">
                                                 <c:forEach items="${allType}" var="type">
                                                     <tr>
+                                                        <td data-label="Type ID">${type.typeItem_Id}</td>
                                                         <td data-label="Type Name">${type.name}</td>
                                                         <td data-label="Actions">
                                                             <a href="UpdateTypeOfItem.jsp?id=${type.typeItem_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
@@ -126,19 +128,15 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="modal fade" id="addTypeModal">
+            <div class="modal fade" id="addTypeItemModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form id="addItemForm" action="ItemTypeController?action=add" method="post">
-                            <div class="modal-header">			
-                                <h4 class="modal-title">Add Type</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
                             <div class="modal-body">					
                                 <div class="form-group" style="margin-bottom: 12px">
                                     <label>Name</label>
                                     <input name="name" type="text" class="form-control" required>
-                                </div>
+                                </div>			
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
@@ -150,48 +148,50 @@
             </div>
 
         </div>
-        <script>
-            $(document).ready(function () {
-                $("#searchInput").on("keyup", function () {
-                    var value = $(this).val().toLowerCase();
-                    $("#content tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
-
-                $('#dataTable th').on('click', function () {
-                    var index = $(this).index();
-                    var table = $(this).parents('table');
-                    var rows = table.find('tbody > tr').toArray().sort(comparer(index));
-                    this.asc = !this.asc;
-                    if (!this.asc) {
-                        rows = rows.reverse();
-                    }
-                    table.find('thead th').removeClass('asc desc');
-                    $(this).addClass(this.asc ? 'asc' : 'desc');
-                    for (var i = 0; i < rows.length; i++) {
-                        table.append(rows[i]);
-                    }
-                });
-
-                function comparer(index) {
-                    return function (a, b) {
-                        var valA = getCellValue(a, index),
-                                valB = getCellValue(b, index);
-                        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
-                    };
-                }
-
-                function getCellValue(row, index) {
-                    return $(row).children('td').eq(index).text();
-                }
-            });
-        </script>
-        <script>
-            function confirmDelete() {
-                return confirm("Are you sure you want to remove this item?");
-            }
-        </script>
     </body>
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script>
+                                                                   $(document).ready(function () {
+                                                                       $("#searchInput").on("keyup", function () {
+                                                                           var value = $(this).val().toLowerCase();
+                                                                           $("#content tr").filter(function () {
+                                                                               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                           });
+                                                                       });
 
+                                                                       $('#dataTable th').on('click', function () {
+                                                                           var index = $(this).index();
+                                                                           var table = $(this).parents('table');
+                                                                           var rows = table.find('tbody > tr').toArray().sort(comparer(index));
+                                                                           this.asc = !this.asc;
+                                                                           if (!this.asc) {
+                                                                               rows = rows.reverse();
+                                                                           }
+                                                                           table.find('thead th').removeClass('asc desc');
+                                                                           $(this).addClass(this.asc ? 'asc' : 'desc');
+                                                                           for (var i = 0; i < rows.length; i++) {
+                                                                               table.append(rows[i]);
+                                                                           }
+                                                                       });
+
+                                                                       function comparer(index) {
+                                                                           return function (a, b) {
+                                                                               var valA = getCellValue(a, index),
+                                                                                       valB = getCellValue(b, index);
+                                                                               return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
+                                                                           };
+                                                                       }
+
+                                                                       function getCellValue(row, index) {
+                                                                           return $(row).children('td').eq(index).text();
+                                                                       }
+                                                                   });
+
+    </script>
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to remove this type?");
+        }
+    </script>
 </html>

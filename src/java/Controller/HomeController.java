@@ -6,8 +6,10 @@ package Controller;
 
 import Entity.Event;
 import Entity.Room;
+import Entity.Utilities;
 import Model.DAOEvent;
 import Model.DAORoom;
+import Model.DAOUtilities;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -62,11 +65,22 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String checkIn = (String) session.getAttribute("checkInDay");
+        String checkOut = (String) session.getAttribute("checkOutDay");
+        if(checkIn == null && checkOut == null){
+            checkIn = new String();
+            checkOut = new String();
+        }
         DAORoom dao = new DAORoom();
         List<Room> list = dao.getNewRoom();
         DAOEvent daoE = new DAOEvent();
         List<Event> listE = daoE.getTop3Event();
+         DAOUtilities daoU=new DAOUtilities();
+        List<Utilities>listU=daoU.getTop3Utilities();
         
+
+       request.setAttribute("listU", listU);
         request.setAttribute("listR", list);
         request.setAttribute("listE", listE);
        

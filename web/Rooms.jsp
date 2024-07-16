@@ -34,6 +34,47 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
         <link rel="stylesheet" href="css/paging.css"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+        <style>
+            .pagination {
+                display: flex;
+                justify-content: center;
+                padding-left: 0;
+                list-style: none;
+                margin: 0;
+            }
+
+            .page-item {
+                display: inline;
+                margin: 0 5px;
+            }
+
+            .page-link {
+                color: #333;
+                text-decoration: none;
+                padding-left: 12px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                border: none;
+                border-radius: 50px;
+            }
+
+            .page-link:hover {
+                background-color: #ddd;
+                color: white;
+                border-radius: 50px;
+            }
+
+            .page-item.active .page-link   {
+                background-color: #DFA974;
+                color: white;
+                border-color: #DFA974;
+                border-radius: 50px;
+            }
+        </style>
     </head>
     <body>
         <!-- Page Preloder -->
@@ -92,11 +133,11 @@
         <!-- Breadcrumb Section End -->
 
         <!-- Rooms Section Begin -->
-        <section class="rooms-section spad">
+        <div class="rooms-section spad">
             <div class="container">
                 <div class="row" id="content">                 
                     <c:forEach items="${listRoom}" var="o">
-                        <div class="room col-lg-4 col-md-6">
+                        <div class="room col-lg-4 col-md-6 element">
                             <div class="room-item " id="item">
                                 <img src="${o.image}" alt="" style="height: 240px">
                                 <div class="ri-text" style="height:450px">
@@ -126,23 +167,20 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
+                                    <a href="roomDetailsController?Id=${o.room_Id}&typeRoom=${o.type_Room_Id}" class="primary-btn">More Details</a>
                                 </div>
                             </div>
+
                         </div>      
                     </c:forEach>
-
-
+                </div>
+                <div id="pagination-info">
 
                 </div>
-                <ul class="page">
-                    <c:forEach begin="1" end="${end}" var="o">
-                        <button class="${tag == o?"highlight":""}" onclick="handlePage(this)" value="${o}"><li>${o}</li></button>
-                            </c:forEach>
-
-                </ul>
+                <div id="pagination-container">
+                </div>
             </div>
-        </section>
+        </div>
         <!-- Rooms Section End -->
 
         <!-- Footer Section Begin -->
@@ -234,104 +272,287 @@
         <script src="js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
-                                         function searchByName(txtSearch) {
-                                             var text = txtSearch.value;
-                                             console.log(text);
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/searchController',
-                                                 type: 'GET',
-                                                 data: {
-                                                     txt: text
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr, txtSearch.value);
-                                                 }
-                                             });
-                                         }
+                                        function searchByName(txtSearch) {
+                                            var text = txtSearch.value;
+                                            console.log(text);
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/searchController',
+                                                type: 'GET',
+                                                data: {
+                                                    txt: text
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        const itemsPerPage = 6;  // Số lượng phòng mỗi trang
+                                                        const paginationContainer = document.getElementById('pagination-container');
+                                                        const pageInfo = document.getElementById('pagination-info');
 
-                                         function sortPriceUp() {
-                                             var amount = 0;
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/sortRoomController?action=asc',
-                                                 type: 'GET',
-                                                 data: {
-                                                     size: amount
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr);
-                                                 }
-                                             });
-                                         }
+                                                        function showPage(page) {
+                                                            const items = document.querySelectorAll('#content .element');
+                                                            const start = (page - 1) * itemsPerPage;
+                                                            const end = start + itemsPerPage;
+
+                                                            items.forEach((item, index) => {
+                                                                if (index >= start && index < end) {
+                                                                    item.style.display = 'block';
+                                                                } else {
+                                                                    item.style.display = 'none';
+                                                                }
+                                                            });
+
+                                                            const pageItems = paginationContainer.querySelectorAll('li');
+                                                            pageItems.forEach((item, index) => {
+                                                                if (index === (page - 1)) {
+                                                                    item.classList.add('active');
+                                                                } else {
+                                                                    item.classList.remove('active');
+                                                                }
+                                                            });
+
+                                                            const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                            pageInfo.innerText = `Page ${page} of ${totalPages}`;
+                                                        }
+
+                                                        function setupPagination() {
+                                                            const items = document.querySelectorAll('#content .element');
+                                                            const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                            paginationContainer.innerHTML = '';
+                                                            const ul = document.createElement('ul');
+                                                            ul.className = 'pagination justify-content-center';
+
+                                                            for (let i = 1; i <= totalPages; i++) {
+                                                                const li = document.createElement('li');
+                                                                li.className = 'page-item';
+
+                                                                const link = document.createElement('a');
+                                                                link.className = 'page-link';
+                                                                link.href = '#';
+                                                                link.innerText = i;
+                                                                (function (page) {
+                                                                    link.addEventListener('click', function (event) {
+                                                                        event.preventDefault();
+                                                                        showPage(page);
+                                                                    });
+                                                                })(i);
+
+                                                                li.appendChild(link);
+                                                                ul.appendChild(li);
+                                                                if (i === 1) {
+                                                                    li.classList.add('active');
+                                                                }
+                                                            }
+
+                                                            paginationContainer.appendChild(ul);
+                                                            pageInfo.innerText = `Page 1 of ${totalPages}`;
+                                                        }
+
+                                                        setupPagination();
+                                                        showPage(1);
+                                                    });
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr, txtSearch.value);
+                                                }
+                                            });
+                                        }
+
+                                        function sortPriceUp() {
+                                            var amount = 0;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/sortRoomController?action=asc',
+                                                type: 'GET',
+                                                data: {
+                                                    size: amount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
 
 
-                                         function sortPriceDown() {
-                                             var amount = 0;
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/sortRoomController?action=desc',
-                                                 type: 'GET',
-                                                 data: {
-                                                     size: amount
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr);
-                                                 }
-                                             });
-                                         }
+                                        function sortPriceDown() {
+                                            var amount = 0;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/sortRoomController?action=desc',
+                                                type: 'GET',
+                                                data: {
+                                                    size: amount
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
 
-                                         function loadType(param) {
+                                        function loadType(param) {
 
-                                             var typeRoom = param.value;
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/roomOfTypeController',
-                                                 type: 'GET',
-                                                 data: {
-                                                     type: typeRoom
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log(typeRoom);
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr);
-                                                 }
-                                             });
-                                         }
+                                            var typeRoom = param.value;
+                                            $.ajax({
+                                                url: '/DaNangDreamHotel/roomOfTypeController',
+                                                type: 'GET',
+                                                data: {
+                                                    type: typeRoom
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content");
+                                                    row.innerHTML = data;
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        const itemsPerPage = 6;  // Số lượng phòng mỗi trang
+                                                        const paginationContainer = document.getElementById('pagination-container');
+                                                        const pageInfo = document.getElementById('pagination-info');
 
-                                         function handlePage(param) {
-                                             var numberPage = param.value;
-                                             $.ajax({
-                                                 url: '/DaNangDreamHotel/pagingController',
-                                                 type: 'GET',
-                                                 data: {
-                                                     page: numberPage
-                                                 },
-                                                 success: function (data) {
-                                                     var row = document.getElementById("content");
-                                                     row.innerHTML = data;
-                                                     console.log("success");
-                                                 },
-                                                 error: function (xhr) {
-                                                     console.log(xhr);
-                                                 }
-                                             });
-                                         }
+                                                        function showPage(page) {
+                                                            const items = document.querySelectorAll('#content .element');
+                                                            const start = (page - 1) * itemsPerPage;
+                                                            const end = start + itemsPerPage;
+
+                                                            items.forEach((item, index) => {
+                                                                if (index >= start && index < end) {
+                                                                    item.style.display = 'block';
+                                                                } else {
+                                                                    item.style.display = 'none';
+                                                                }
+                                                            });
+
+                                                            const pageItems = paginationContainer.querySelectorAll('li');
+                                                            pageItems.forEach((item, index) => {
+                                                                if (index === (page - 1)) {
+                                                                    item.classList.add('active');
+                                                                } else {
+                                                                    item.classList.remove('active');
+                                                                }
+                                                            });
+
+                                                            const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                            pageInfo.innerText = `Page ${page} of ${totalPages}`;
+                                                        }
+
+                                                        function setupPagination() {
+                                                            const items = document.querySelectorAll('#content .element');
+                                                            const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                            paginationContainer.innerHTML = '';
+                                                            const ul = document.createElement('ul');
+                                                            ul.className = 'pagination justify-content-center';
+
+                                                            for (let i = 1; i <= totalPages; i++) {
+                                                                const li = document.createElement('li');
+                                                                li.className = 'page-item';
+
+                                                                const link = document.createElement('a');
+                                                                link.className = 'page-link';
+                                                                link.href = '#';
+                                                                link.innerText = i;
+                                                                (function (page) {
+                                                                    link.addEventListener('click', function (event) {
+                                                                        event.preventDefault();
+                                                                        showPage(page);
+                                                                    });
+                                                                })(i);
+
+                                                                li.appendChild(link);
+                                                                ul.appendChild(li);
+                                                                if (i === 1) {
+                                                                    li.classList.add('active');
+                                                                }
+                                                            }
+
+                                                            paginationContainer.appendChild(ul);
+                                                            pageInfo.innerText = `Page 1 of ${totalPages}`;
+                                                        }
+
+                                                        setupPagination();
+                                                        showPage(1);
+                                                    });
+                                                    console.log(typeRoom);
+                                                    console.log("success");
+                                                },
+                                                error: function (xhr) {
+                                                    console.log(xhr);
+                                                }
+                                            });
+                                        }
+
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            const itemsPerPage = 6;  // Số lượng phòng mỗi trang
+                                            const paginationContainer = document.getElementById('pagination-container');
+                                            const pageInfo = document.getElementById('pagination-info');
+
+                                            function showPage(page) {
+                                                const items = document.querySelectorAll('#content .element');
+                                                const start = (page - 1) * itemsPerPage;
+                                                const end = start + itemsPerPage;
+
+                                                items.forEach((item, index) => {
+                                                    if (index >= start && index < end) {
+                                                        item.style.display = 'block';
+                                                    } else {
+                                                        item.style.display = 'none';
+                                                    }
+                                                });
+
+                                                const pageItems = paginationContainer.querySelectorAll('li');
+                                                pageItems.forEach((item, index) => {
+                                                    if (index === (page - 1)) {
+                                                        item.classList.add('active');
+                                                    } else {
+                                                        item.classList.remove('active');
+                                                    }
+                                                });
+
+                                                const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                pageInfo.innerText = `Page ${page} of ${totalPages}`;
+                                            }
+
+                                            function setupPagination() {
+                                                const items = document.querySelectorAll('#content .element');
+                                                const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                paginationContainer.innerHTML = '';
+                                                const ul = document.createElement('ul');
+                                                ul.className = 'pagination justify-content-center';
+
+                                                for (let i = 1; i <= totalPages; i++) {
+                                                    const li = document.createElement('li');
+                                                    li.className = 'page-item';
+
+                                                    const link = document.createElement('a');
+                                                    link.className = 'page-link';
+                                                    link.href = '#';
+                                                    link.innerText = i;
+                                                    (function (page) {
+                                                        link.addEventListener('click', function (event) {
+                                                            event.preventDefault();
+                                                            showPage(page);
+                                                        });
+                                                    })(i);
+
+                                                    li.appendChild(link);
+                                                    ul.appendChild(li);
+                                                    if (i === 1) {
+                                                        li.classList.add('active');
+                                                    }
+                                                }
+
+                                                paginationContainer.appendChild(ul);
+                                                pageInfo.innerText = `Page 1 of ${totalPages}`;
+                                            }
+
+                                            setupPagination();
+                                            showPage(1);
+                                        });
 
         </script>
     </body>

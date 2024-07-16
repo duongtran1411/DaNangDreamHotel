@@ -60,7 +60,7 @@
                                             <td>${a.startDay}</td>
                                             <td>${a.endDay}</td>
                                             <td>${a.description}</td>
-                                            <td>${a.discount}</td>
+                                            <td>${a.discount * 100}%</td>
                                             <td>${a.voucher}</td>
                                             <td>
                                                 <a href="EditEventControllerURL?id=${a.event_Id}" title="Edit" class="edit" data-toggle="tooltip"><i class="ti ti-pencil fs-7"></i></a>
