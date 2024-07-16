@@ -97,7 +97,7 @@ public class DAOUtilities extends DBConnect {
         }
     }
     
-    public void insertAccount(String name, String image, String description, String time, String location, int utilities_Id) {
+    public void insertUtilities(String name, String image, String description, String time, String location, int utilities_Id) {
         String sql = "INSERT INTO utilities (utilities_Id,name,image,description,time,location) "
                 + "VALUES (?, ?, ?, ?,?,?)";
         try {
@@ -156,9 +156,6 @@ public class DAOUtilities extends DBConnect {
     
     public static void main(String[] args) {
         DAOUtilities dao = new DAOUtilities();
-        List<Utilities>list=dao.getTop3Utilities();
-        for (Utilities utilities : list) {
-            System.out.println(utilities);
-        }
+        dao.insertUtilities("duong","C:\\Users\\GIGABYTE\\OneDrive\\Pictures\\Saved Pictures\\z5637010614799_bd15e7547bbb50b5763abe16b0038a68.jpg","dddd","dddd","sdsdf",5);
     }
 }

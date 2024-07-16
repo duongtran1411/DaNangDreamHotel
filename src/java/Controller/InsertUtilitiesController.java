@@ -113,7 +113,7 @@ public class InsertUtilitiesController extends HttpServlet {
         String description=request.getParameter("description");
         String date=request.getParameter("time");
         String location=request.getParameter("location");
-        dao.insertAccount(name, fileName, description, date, location, id+1);
+        dao.insertUtilities(name, fileName, description, date, location, id+1);
         response.sendRedirect("ManageUtilitiesController");
     }
 

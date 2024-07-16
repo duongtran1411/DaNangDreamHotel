@@ -43,7 +43,7 @@
             <!-- Header End -->
 
             <!-- Blog Details Hero Section Begin -->
-            <section class="blog-details-hero set-bg" data-setbg="img/banner4_1634483115.jpg">
+            <section class="blog-details-hero set-bg" data-setbg="img/z5637010616325_eee280111ccccd13cfe6f87589e01359.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-10 offset-lg-1">
