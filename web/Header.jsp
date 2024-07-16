@@ -23,6 +23,7 @@
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-tripadvisor"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
+
                         </div>
                         <a href="dashboard/jsp/authentication-login.jsp" class="bk-btn">Login</a>
                     </div>
@@ -59,6 +60,17 @@
                                 </li>
                                 <li><a href="Blog.jsp">Events</a></li>
                                 <li><a href="Contact.jsp">Contact</a></li>
+                                <li class="btn-hover active"><a href="homeController" style="text-decoration: none">Home</a></li>
+                                <li>
+                                    <a href="AboutUs.jsp" style="text-decoration: none">About Us</a>
+                                    <ul class="dropdown">
+                                        <li class="btn-hover"><a href="Jobs.jsp">Jobs</a></li>
+                                    </ul>
+                                <li class="btn-hover">
+                                    <a href="viewRoomController" style="text-decoration: none">Resort</a>
+                                </li>
+                                <li class="btn-hover"><a href="eventController" style="text-decoration: none">Events</a></li>
+                                <li class="btn-hover"><a href="Contact.jsp" style="text-decoration: none">Contact</a></li>
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">
@@ -70,3 +82,4 @@
         </div>
     </div>
 </header>
+

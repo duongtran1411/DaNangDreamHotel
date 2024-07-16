@@ -102,6 +102,8 @@ public class authentication_login extends HttpServlet {
             try {
                 RegistrationDAO dao = new RegistrationDAO();
                 boolean result = dao.checkLogin(username, password);
+                String role = dao.GetRoleId(username, password);
+                RegistrationDTO user = dao.getDataAccount(username, password);
 
                 RegistrationDTO user = dao.getDataAccount(username, password);
                 if (!isEmailValid) {

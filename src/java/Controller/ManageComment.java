@@ -6,6 +6,10 @@
 package Controller;
 
 import Model.DAOComment;
+import Entity.Event;
+import Entity.Room;
+import Model.DAOEvent;
+import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -59,6 +63,27 @@ public class ManageComment extends HttpServlet {
     } 
 
     /** 
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String checkIn = (String) session.getAttribute("checkInDay");
+        String checkOut = (String) session.getAttribute("checkOutDay");
+        if(checkIn == null && checkOut == null){
+            checkIn = new String();
+            checkOut = new String();
+        }
+        DAORoom dao = new DAORoom();
+        List<Room> list = dao.getNewRoom();
+        DAOEvent daoE = new DAOEvent();
+        List<Event> listE = daoE.getTop3Event();
+        
+        request.setAttribute("listR", list);
+        request.setAttribute("listE", listE);
+       
+        request.getRequestDispatcher("Home.jsp").forward(request, response);
+        
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
