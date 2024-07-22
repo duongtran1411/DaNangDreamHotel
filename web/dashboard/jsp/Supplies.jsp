@@ -147,7 +147,7 @@
                                 </div>
                             </div>
                                                 <div id="totalPrice"></div>
-                            <button class="btn-save" onclick="saveTotalPrice()">Save Total Price</button>
+                            <button class="btn-save" onclick="saveTotalPrice()">Check out</button>
                         </div>
                     </div>
                 </div>

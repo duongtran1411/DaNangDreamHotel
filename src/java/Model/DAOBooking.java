@@ -278,10 +278,10 @@ public class DAOBooking extends DBConnect {
 
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, ex);          // Set giá trị cho cột extramoney
-            pre.setInt(2, id);          // Set giá trị cho cột bookingDetail_Id
+            pre.setInt(1, ex);   
+            pre.setInt(2, id);         
 
-            pre.executeUpdate();        // Thực thi câu lệnh INSERT
+            pre.executeUpdate();     
 
             pre.close();
         } catch (SQLException e) {

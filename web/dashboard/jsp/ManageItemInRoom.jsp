@@ -119,7 +119,7 @@
      Room r = dao.getNameByRoomId(roomId);
 
      if (r != null) {
-         out.println("<h1 class='h3 mb-2 text-gray-800'>Table Item In " + r.getName() + "</h1>");
+         out.println("<h1 class='h3 mb-2 text-gray-800'>Table Items In " + r.getName() + "</h1>");
      } else {
          out.println("<h1 class='h3 mb-2 text-gray-800'>Room not found</h1>");
      }
@@ -165,6 +165,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                                 <a href="itemManageURL">Back</a>
                                 </div>
                             </div>
                         </div>

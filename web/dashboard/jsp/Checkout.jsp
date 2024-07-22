@@ -89,8 +89,8 @@
                         <div class="card-body">
                             <div class="container-fluid" style="height: 800px;width: 1300px">
                                 <!-- Page Heading -->
-                                <h1 class="h3 mb-2 text-gray-800">BOOKING DETAIL</h1>
-                                <input readonly type="date" id="now-date"/>
+                         
+                             
                                 <div class="d-flex justify-content-center">
                                     <div class="search">
                                         <input class="search_input" id="searchInput" type="text" name="txt" placeholder="Search...">
