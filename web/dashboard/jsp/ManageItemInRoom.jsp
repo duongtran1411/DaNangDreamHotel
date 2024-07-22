@@ -110,26 +110,26 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <div class="container-fluid" style="height: 800px;width: 1300px">
+                            <div class="container-fluid" style="height: 800px;width: 1300px;margin-left: 400px">
                                 <input type="text" id="searchInput" class="search-input" placeholder="Search for item...">
                             <%
- try {
-     int roomId = Integer.parseInt(request.getParameter("rid"));
-     DAORoom dao = new DAORoom();
-     Room r = dao.getNameByRoomId(roomId);
+                                try {
+                                    int roomId = Integer.parseInt(request.getParameter("rid"));
+                                    DAORoom dao = new DAORoom();
+                                    Room r = dao.getNameByRoomId(roomId);
 
-     if (r != null) {
-         out.println("<h1 class='h3 mb-2 text-gray-800'>Table Item In " + r.getName() + "</h1>");
-     } else {
-         out.println("<h1 class='h3 mb-2 text-gray-800'>Room not found</h1>");
-     }
- } catch (NumberFormatException e) {
-     out.println("<h1 class='h3 mb-2 text-gray-800'>Invalid room ID</h1>");
-     e.printStackTrace();
- } catch (Exception e) {
-     out.println("<h1 class='h3 mb-2 text-gray-800'>Error retrieving room</h1>");
-     e.printStackTrace();
- }
+                                    if (r != null) {
+                                        out.println("<h1 class='h3 mb-2 text-gray-800'>Item In  " +" :"+r.getName() + "</h1>");
+                                    } else {
+                                        out.println("<h1 class='h3 mb-2 text-gray-800'>Room not found</h1>");
+                                    }
+                                } catch (NumberFormatException e) {
+                                    out.println("<h1 class='h3 mb-2 text-gray-800'>Invalid room ID</h1>");
+                                    e.printStackTrace();
+                                } catch (Exception e) {
+                                    out.println("<h1 class='h3 mb-2 text-gray-800'>Error retrieving room</h1>");
+                                    e.printStackTrace();
+                                }
                             %>
 
                             <div class="card shadow mb-4">

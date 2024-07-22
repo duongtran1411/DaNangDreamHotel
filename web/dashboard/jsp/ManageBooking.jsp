@@ -109,7 +109,7 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body"> 
-                            <div class="container-fluid" style="height: 800px;width: 1300px">
+                            <div class="container" style="margin-right: 105px; height: 800px;width: 1300px">
                                 <!-- Page Heading -->
                                 <h1 class="h3 mb-2 text-gray-800">BOOKING</h1>
                                 <div class="d-flex justify-content-center">
@@ -118,7 +118,7 @@
                                         <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
-                                <div class="card shadow mb-4">
+                                <div class="card shadow">
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -18,6 +18,7 @@
         <meta name="keywords" content="Sona, unica, creative, html" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link
             href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap"
             rel="stylesheet"
@@ -167,51 +168,62 @@
 
             <!-- Home Room Section Begin -->  <!--BEST SELLER-->
             <!-- Home Room Section Begin -->  <!--BEST SELLER-->
-            <section class="hp-room-section">
-                <div class="container-fluid">
-                    <div class="hp-room-items">
-                        <div class="row">
-                        <c:forEach items="${listR}" var="o">
-                            <div class="col-lg-3 col-md-6">
-                                <div
-                                    class="hp-room-item set-bg"
-                                    data-setbg="${o.image}"
-                                    >
-                                    <div class="hr-text">
-                                        <h3>${o.name}</h3>
-                                        <h2>
-                                            <fmt:formatNumber value="${o.price}" type="number" maxFractionDigits="0"/>đ
-                                            <span>/Pernight</span>
-                                        </h2>
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="r-o">Size:</td>
-                                                    <td>${o.size}m<sup>2</sup></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="r-o">Capacity:</td>
-                                                    <td>${o.people} person</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="r-o">Bed:</td>
-                                                    <td>${o.bed} bed</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="r-o">Services:</td>
-                                                    <td>Wifi, Television, Bathroom,...</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
-                                    </div>
-                                </div>
-                            </div>       
-                        </c:forEach>
+            <!--            <div >
+                            <div class="section-title">
+                                <h2>Resort</h2>
+                            </div>
+                            <div class="container-fluid">
+                                <div>
+                                    <div class="row">
+                                        <ul class="d-flex" style="flex-wrap: wrap">
+        <c:forEach items="${listR}" var="o">
+            <li class="col-lg-4 " style="list-style: none">
+                <h3></h3>
+                <div>
+                    <img src="${o.image}" alt="alt" height="500px" weight="300px"/>
+                </div>
+                <div>
+                    <strong>${o.name}</strong>
+                    <p></p>
+                    <span></span>
+                </div>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
+</div>
+</div
+</div>-->
+            <div class="offers_area padding_top" style="box-shadow: 5px 5px 10px #ddd">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="section_title mb-100">
+                            <h2>Room and Suits</h2>
+                            <p>Pick a room that new suits your taste and budget</p>
+                        </div>
                     </div>
                 </div>
+                <div class="row">
+                <c:forEach items="${listR}" var="o">
+                    <div class="col-xl-3 col-md-3" style="padding: 0 10px">
+                            <div class="single_offers" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 15px; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
+                                <div class="about_thumb">
+                                    <img src="${o.image}" width="400px" height="250px" alt="alt"/>
+                                </div>
+                                    <h4 style="font-family: Edu Australia VIC WA NT Hand, sans-serif;margin: 10px 0;font-size: 22px ">${o.name}</h4>
+                                
+                                    <p>Price: ${FormatUtils.formatPRice(o.price)}đ/Pernight</p>
+                                    <p>Type: ${o.getTypeName()}</p>
+                                    <p>Size: ${o.size}m<sup>2</sup></p>
+                                    <button style="background-color:#DFA974; border: 1px solid #DFA974; padding: 5px; border-radius:5px "><a href="roomDetailsController?Id=${o.id}" style="color:white">More Details</a></button>
+<!--                                    <span style="padding-left: 70px; font-family: Edu Australia VIC WA NT Hand, sans-serif">${FormatUtils.formatPRice(o.price)}đ</span>-->
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
-        </section>
+        </div>
         <!-- Home Room Section End -->
 
         <!-- Home Room Section End -->
@@ -255,7 +267,7 @@
             </div>
         </section>
         <!-- Testimonial Section End -->
-<section class="blog-section spad">
+        <section class="blog-section spad">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -272,7 +284,7 @@
                                 <div class="bi-text">
                                     <span class="b-tag">Utilities</span>
                                     <h4 ><a class="name-Utilities"  href="UtilitiesController?id=${u.utilities_Id}&action=listdetail">${u.name}</a></h4>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -450,7 +462,7 @@
                                             }
                                         });
 
-                                        
+
 
         </script>
     </body>

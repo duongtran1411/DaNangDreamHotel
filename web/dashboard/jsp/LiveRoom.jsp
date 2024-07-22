@@ -87,7 +87,7 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <div class="container-fluid" style="height: 800px;width: 1300px">
+                            <div class="container-fluid" style="height: 800px;width: 1300px;margin-left: 400px">
                                 <!-- Page Heading -->
                                 <h1 class="h3 mb-2 text-gray-800">BOOKING DETAIL</h1>
                                 <input readonly type="date" id="now-date"/>

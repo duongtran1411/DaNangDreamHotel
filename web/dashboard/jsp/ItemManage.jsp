@@ -78,7 +78,7 @@
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addItemModal">
                                 <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Item</p>                  
                             </button>
-                            <div class="container-fluid" style="height: 800px;width: 1300px">
+                            <div class="container-fluid" style="height: 800px;width: 1300px;margin-left:400px">
 
                                 <input type="text" id="searchInput" class="search-input" placeholder="Search for items...">
 

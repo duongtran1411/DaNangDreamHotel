@@ -108,7 +108,7 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <div class="container-fluid" style="height: 800px;width: 1300px">
+                            <div class="container-fluid" style="height: 800px;width: 1300px; margin-left: 400px">
                                 <input type="text" id="searchInput" class="search-input" placeholder="Search for item...">
                                 <div class="card shadow mb-4">
                                     <div class="card-body">

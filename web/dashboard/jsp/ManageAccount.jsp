@@ -28,7 +28,7 @@
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addAccountModal">
                                 <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Account</p>                  
                             </button>
-                            <div class="container-fluid">
+                            <div class="container-fluid" style="height: 800px;width: 1300px; margin-left: 400px">
                                 <div class="table-wrapper">
                                     <div class="table-title" style="background-color: #000">                 
                                     </div>

@@ -328,6 +328,6 @@ public class DAOBooking extends DBConnect {
 
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-        //Room r = dao.getLiveBookingDetailId()
+        System.out.println(dao.getCustomerSameBooking(10));
     }
 }
