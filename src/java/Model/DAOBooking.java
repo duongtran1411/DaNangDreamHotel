@@ -220,6 +220,43 @@ public class DAOBooking extends DBConnect {
         }
     }
 
+    public List<Booking> getAllBookingByDate(Date checkin, Date checkout) {
+        List<Booking> list = new ArrayList<>();
+        String sql = "SELECT \n"
+                + "             b.booking_Id, \n"
+                + "               b.checkIn, \n"
+                + "               b.checkOut, \n"
+                + "               b.expenses,\n"
+                + "               b.created_at, \n"
+                + "             c.idCard, \n"
+                + "               c.customer_Id,\n"
+                + "            b.status \n"
+                + "            FROM booking b \n"
+                + "            JOIN customer c ON c.customer_Id = b.customer_Id \n"
+                + "            WHERE (b.checkIn >= ? and b.checkOut <=?) or(b.checkIn<=? and b.checkOut>=?)";
+
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setDate(1, new java.sql.Date(checkin.getTime())); // Chuyển đổi java.util.Date thành java.sql.Date
+            pre.setDate(2, new java.sql.Date(checkout.getTime())); // Chuyển đổi java.util.Date thành java.sql.Date
+            pre.setDate(3, new java.sql.Date(checkin.getTime())); // Chuyển đổi java.util.Date thành java.sql.Date
+            pre.setDate(4, new java.sql.Date(checkout.getTime())); // Chuyển đổi java.util.Date thành java.sql.Date
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Booking(rs.getInt("booking_Id"),
+                        rs.getDate("checkIn"),
+                        rs.getDate("checkOut"),
+                        rs.getInt("expenses"),
+                        rs.getString("created_at"),
+                        rs.getString("idCard"),
+                        rs.getInt("customer_Id"),
+                        rs.getString("status")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }           
     public List<Room> getRoomsByBookingId(int id) {
         List<Room> list = new ArrayList();
         String sql = "SELECT r.room_Id, r.type_Room_Id, r.floor_Room_Id, r.name, r.price, r.status, r.created_at, r.updated_at, r.size\n"

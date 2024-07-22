@@ -96,7 +96,56 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Floor</th>
+                                                <th>Name
+                                                    <button onclick="sortNameUp()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-down"></i></button>
+                                                    <button onclick="sortNameDown()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-up"></i></button>
+                                                </th>
+                                                <th>Price
+                                                    <button onclick="sortPriceUp()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-down"></i></button>
+                                                    <button onclick="sortPriceDown()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-up"></i></button>
+                                                </th>
+                                                <th>Size</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="content">
+                                        <c:forEach items="${AllRoom}" var="o">
+                                            <tr>
+                                                <td>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}"><i class="far fa-eye successful"></i></a>
+                                                </td>
+                                                <td>${o.floor_Room_Id}</td>
+                                                <td>${o.name}</td>
+                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber>  đ</td>
+                                                <td>${o.size} m²</td>
+                                                <td>
+                                                    <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                    <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        <c:forEach items="${ListRoomBID}" var="o">
+                                            <tr>
+                                                <td>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}"><i class="far fa-eye"></i></a>
+                                                </td>
+                                                <td>${o.floor_Room_Id}</td>
+                                                <td>${o.name}</td>
+                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber> đ</td>
+                                                <td>${o.size} m²</td>
+                                                <td>
+                                                    <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                    <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -81,28 +81,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     String phone = request.getParameter("phone");
     int roleId = Integer.parseInt(request.getParameter("roleid"));
     
-    String createAtString = request.getParameter("create_at");
-    String updateAtString = request.getParameter("update_at");
 
-    // Define the date format
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    // Parse the date strings
-    java.sql.Date create_at = null;
-    java.sql.Date update_at = null;
-    try {
-        java.util.Date createDate = sdf.parse(createAtString);
-        create_at = new java.sql.Date(createDate.getTime());
-
-        java.util.Date updateDate = sdf.parse(updateAtString);
-        update_at = new java.sql.Date(updateDate.getTime());
-    } catch (ParseException e) {
-        e.printStackTrace();
-        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid date format");
-        return;
-    }
-
-    dao.insertAccount(jobId, userName, firstName, lastName, password, email, phone, roleId, create_at, update_at, id);
+    dao.insertAccount( userName, firstName, lastName, password, email, phone, roleId);
     response.sendRedirect("ManageAccountControllerURL");
 }
 

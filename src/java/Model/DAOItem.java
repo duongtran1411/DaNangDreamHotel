@@ -41,6 +41,7 @@ public class DAOItem extends DBConnect {
         }
         return items;
     }
+
     public int getTotalItem() {
         String sql = "select count(item_Id) "
                 + "from items";
@@ -89,10 +90,10 @@ public class DAOItem extends DBConnect {
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 ItemInRoom x = new ItemInRoom();
-               int id = rs.getInt("item_In_Room_Id");
-               int item_Id= rs.getInt("item_Id");
-               int room_Id = rs.getInt("room_Id");
-               int quantity = rs.getInt("quantity");
+                int id = rs.getInt("item_In_Room_Id");
+                int item_Id = rs.getInt("item_Id");
+                int room_Id = rs.getInt("room_Id");
+                int quantity = rs.getInt("quantity");
                 list.add(x);
             }
         } catch (SQLException ex) {
@@ -298,24 +299,22 @@ public class DAOItem extends DBConnect {
         return list;
     }
 
-   
-
     public void InsertItemInRoom(int itemId, int roomId) {
         String sql = "insert into item_in_room(item_Id,room_id, quantity) "
                 + "values(?,?,?)";
-        try{
+        try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, itemId);
             pre.setInt(2, roomId);
             pre.setInt(3, 0);
             pre.executeUpdate();
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        }
     }
 
     public List<Item> getFoodItem() {
-         List<Item> list = new ArrayList();
+        List<Item> list = new ArrayList();
         String sql = "select * from items where typeItem_Id between 1 and 2";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
@@ -332,12 +331,60 @@ public class DAOItem extends DBConnect {
         }
         return list;
     }
-     public static void main(String[] args) {
+
+    public List<RoomWithItem> getAllItemsInRoom() {
+        List<RoomWithItem> list = new ArrayList();
+        String sql = "select i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name as roomName,it.name as itemName, it.price from item_in_room i\n"
+                + "                join room r on i.room_id = r.room_Id\n"
+                + "                join items it on i.item_Id = it.item_Id;";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
+                        rs.getInt("item_Id"),
+                        rs.getInt("room_Id"),
+                        rs.getString("roomName"),
+                        rs.getString("itemName"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public List<RoomWithItem> getAllItemsInRoomByName(String roomName) {
+        List<RoomWithItem> list = new ArrayList();
+        String sql = "select i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name as roomName,it.name as itemName, it.price from item_in_room i\n"
+                + "join room r on i.room_id = r.room_Id\n"
+                + "join items it on i.item_Id = it.item_Id\n"
+                + "where r.name =?\n";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, roomName);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
+                        rs.getInt("item_Id"),
+                        rs.getInt("room_Id"),
+                        rs.getString("roomName"),
+                        rs.getString("itemName"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
         DAOItem dao = new DAOItem();
-       List<Item> list = dao.getFoodItem();
-         for (Item item : list) {
-             System.out.println(item);
-         }
- 
+        List<RoomWithItem> list = dao.getAllItemsInRoomByName("Family Suite");
+        for (RoomWithItem roomWithItem : list) {
+            System.out.println(list);
+        }
     }
 }

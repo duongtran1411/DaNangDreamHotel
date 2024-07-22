@@ -68,6 +68,8 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
+
+    
     public List<Room> getRoomByTypeRoomId(int typeRoomId) {
         List<Room> list = new ArrayList();
         String sql = "select distinct r.* from room r\n"
@@ -151,7 +153,7 @@ public class DAORoom extends DBConnect {
                 + "`floor_Room_Id`,\n"
                 + "`price`,\n"
                 + "`size`,\n"
-                + "`typeRoom_Id`)\n"
+                + "`type_Room_Id`)\n"
                 + "VALUES\n"
                 + "(?,?,?,?,?);";
         try {
@@ -1075,6 +1077,47 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
+    
+     public Room getMinPrice( int event_Id) {
+       
+        String sql = "WITH roomDetail AS (\n" +
+"                               SELECT r.room_Id, r.name, r.price, r.size, t.bed, t.bath, t.person, i.image, e.discount, e.event_Id, t.typeRoom_Id,\n" +
+"                                         ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id DESC) AS rn\n" +
+"                                   FROM room r\n" +
+"                                    JOIN typeroom t ON t.typeRoom_Id = r.type_Room_Id\n" +
+"                                    JOIN imageroom i ON i.room_Id = r.room_Id\n" +
+"                                   JOIN event e ON e.event_Id = t.event_Id\n" +
+"                                )\n" +
+"                               SELECT room_Id, name, price, size, bed, bath, person, image, discount, typeRoom_Id\n" +
+"							FROM roomDetail\n" +
+"                                WHERE rn = 2\n" +
+"                                   AND event_Id = ?\n" +
+"                                order by price asc\n" +
+"                                 limit 1;";
+        try {
+            PreparedStatement pre = conn.prepareCall(sql);
+            pre.setInt(1, event_Id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                return new Room(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getDouble(9),
+                        rs.getInt(10));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     
+    
+
 
     public List<Room> getProcessingRooms() {
         List<Room> list = new ArrayList<>();
@@ -1128,46 +1171,10 @@ public class DAORoom extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    public Room getMinPrice(int event_Id) {
-
-        String sql = "WITH roomDetail AS (\n"
-                + "                               SELECT r.room_Id, r.name, r.price, r.size, t.bed, t.bath, t.person, i.image, e.discount, e.event_Id, t.typeRoom_Id,\n"
-                + "                                         ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id DESC) AS rn\n"
-                + "                                   FROM room r\n"
-                + "                                    JOIN typeroom t ON t.typeRoom_Id = r.type_Room_Id\n"
-                + "                                    JOIN imageroom i ON i.room_Id = r.room_Id\n"
-                + "                                   JOIN event e ON e.event_Id = t.event_Id\n"
-                + "                                )\n"
-                + "                               SELECT room_Id, name, price, size, bed, bath, person, image, discount, typeRoom_Id\n"
-                + "							FROM roomDetail\n"
-                + "                                WHERE rn = 2\n"
-                + "                                   AND event_Id = ?\n"
-                + "                                order by price asc\n"
-                + "                                 limit 1;";
-        try {
-            PreparedStatement pre = conn.prepareCall(sql);
-            pre.setInt(1, event_Id);
-            ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                return new Room(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getInt(7),
-                        rs.getString(8),
-                        rs.getDouble(9),
-                        rs.getInt(10)
-                );
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+  
 
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
