@@ -60,12 +60,12 @@ public class UseSuppliesController extends HttpServlet {
         List<Item> list = daoItem.getFoodItem();
         request.setAttribute("list", list);
         request.setAttribute("bookingDetailId", bookingDetailId);
-        request.getRequestDispatcher("dashboard/jsp/Supplies.jsp").forward(request, response);
+        request.getRequestDispatcher("dashboard/jsp/Checkout.jsp").forward(request, response);
     }
     private void listRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Room> list = daoRoom.getProcessingRooms();
         request.setAttribute("list", list);
-        request.getRequestDispatcher("dashboard/jsp/Checkout.jsp").forward(request, response);
+        request.getRequestDispatcher("dashboard/jsp/ListProcessRoom.jsp").forward(request, response);
     }
     private void updatePayment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String expenses = request.getParameter("total");
