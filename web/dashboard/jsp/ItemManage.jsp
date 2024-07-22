@@ -79,10 +79,10 @@
                                 <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Item</p>                  
                             </button>
                             <div class="container-fluid" style="height: 800px;width: 1300px">
-
+                                <h1 class="h3 mb-2 text-gray-800">LIST ALL ITEMS</h1>
                                 <input type="text" id="searchInput" class="search-input" placeholder="Search for items...">
 
-                                <h1 class="h3 mb-2 text-gray-800">Tables Item</h1>
+
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -175,15 +175,15 @@
         <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
         <script>
-            document.getElementById("addItemForm").addEventListener("submit", function (event) {
-                var priceInput = document.getElementById("price");
-                var price = parseFloat(priceInput.value);
+                                                                   document.getElementById("addItemForm").addEventListener("submit", function (event) {
+                                                                       var priceInput = document.getElementById("price");
+                                                                       var price = parseFloat(priceInput.value);
 
-                if (isNaN(price) || price < 0) {
-                alert("Please enter a valid number for the price.");
-                event.preventDefault();
-                }
-                });
+                                                                       if (isNaN(price) || price < 0) {
+                                                                           alert("Please enter a valid number for the price.");
+                                                                           event.preventDefault();
+                                                                       }
+                                                                   });
         </script>
         <script>
             $(document).ready(function () {
