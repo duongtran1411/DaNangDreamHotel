@@ -28,7 +28,7 @@
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addAccountModal">
                                 <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add New Utilities</p>                  
                             </button>
-                            <div class="container-fluid">
+                            <div class="container-fluid" >
                                 <div class="table-wrapper">
                                     <div class="table-title" style="background-color: #000">                 
                                     </div>
@@ -64,7 +64,29 @@
                                                 <td>${u.location}</td>
                                                 <td>
                                                     <a href="EditUtilitiesControllerURL?id=${u.utilities_Id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                                    <a href="DeleteUtilitiesControllerURL?id=${u.utilities_Id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                    <a href="#" class="delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="DeleteUtilitiesControllerURL?id=${u.utilities_Id}">
+                                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                                    </a>
+
+                                                    <!-- Confirmation Modal -->
+                                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to delete this utility?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </td>
 
                                             </tr>      
@@ -101,7 +123,7 @@
             <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form action="InsertUtilitiesControllerURL" method="post" enctype="multipart/form-data">
+                        <form id="addUtilitiesForm" action="InsertUtilitiesControllerURL" method="post" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="addAccountModalLabel">Add New Utilities</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -109,35 +131,86 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input name="name" type="text" class="form-control" placeholder="Enter name" required>
+                                    <input id="name" name="name" type="text" class="form-control" placeholder="Enter name" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <input name="description" type="text" class="form-control" placeholder="Enter description" required>
+                                    <input id="description" name="description" type="text" class="form-control" placeholder="Enter description" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Time</label>
-                                    <input name="time" type="text" class="form-control" placeholder="Enter time" required>
+                                    <input id="time" name="time" type="text" class="form-control" placeholder="Enter time" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Location</label>
-                                    <input name="location" type="text" class="form-control" placeholder="Enter location" required>
+                                    <input id="location" name="location" type="text" class="form-control" placeholder="Enter location" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Images</label>
-                                    <input name="image" class="input-file" type="file"  placeholder="Enter Images" required="">
+                                    <input id="image" name="image" class="input-file" type="file" placeholder="Enter Images" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                                <button type="submit" class="btn btn-success">Add</button>
+                                <button type="submit" class="btn btn-success" onclick="return validateForm()">Add</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
+        <script >
+            function validateForm() {
+                const name = document.getElementById('name').value.trim();
+                const description = document.getElementById('description').value.trim();
+                const time = document.getElementById('time').value.trim();
+                const location = document.getElementById('location').value.trim();
+                const image = document.getElementById('image').value;
 
+                if (name === "") {
+                    alert("Please enter a name.");
+                    return false;
+                }
+
+                if (description === "") {
+                    alert("Please enter a description.");
+                    return false;
+                }
+
+                if (time === "") {
+                    alert("Please enter a time.");
+                    return false;
+                }
+
+                if (location === "") {
+                    alert("Please enter a location.");
+                    return false;
+                }
+
+                if (image === "") {
+                    alert("Please upload an image.");
+                    return false;
+                }
+
+                return true; // If all fields are valid, submit the form
+            }
+
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var deleteModal = document.getElementById('deleteModal');
+                deleteModal.addEventListener('show.bs.modal', function (event) {
+                    var button = event.relatedTarget; // Button that triggered the modal
+                    var url = button.getAttribute('data-url'); // Extract info from data-* attributes
+
+                    // Update the modal's content.
+                    var confirmDeleteBtn = deleteModal.querySelector('#confirmDeleteBtn');
+                    confirmDeleteBtn.setAttribute('href', url);
+                });
+            });
+
+        </script>
         <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="dashboard/assets/js/sidebarmenu.js"></script>
