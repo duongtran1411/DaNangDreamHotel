@@ -77,10 +77,10 @@
                                 <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Type</p>                  
                             </button>
                             <div class="container-fluid" style="height: 800px;width: 1300px">
-
+                                <h1 class="h3 mb-2 text-gray-800">Table Type Of Item</h1>
                                 <input type="text" id="searchInput" class="search-input" placeholder="Search for items...">
 
-                                <h1 class="h3 mb-2 text-gray-800">Table Type Of Item</h1>
+
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -135,7 +135,7 @@
                             <div class="modal-body">					
                                 <div class="form-group" style="margin-bottom: 12px">
                                     <label>Name</label>
-                                    <input name="name" type="text" class="form-control" required>
+                                    <input id="typeName" name="name" type="text" class="form-control" required>
                                 </div>			
                             </div>
                             <div class="modal-footer">
@@ -152,6 +152,38 @@
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <script>
+                                                                   document.getElementById("addItemForm").addEventListener("submit", function (event) {
+                                                                       var hasError = false;
+                                                                       var errorMessage = "";
+
+                                                                       // Validate price
+
+
+                                                                       // Validate name
+                                                                       var nameInput = document.getElementById("typeName");
+                                                                       var name = nameInput.value.trim();
+                                                                       var nameRegex = /\d/; // Regular expression to check for digits
+
+                                                                       if (name === '') {
+                                                                           errorMessage += "Name cannot be empty or just whitespace.\n";
+                                                                           hasError = true;
+                                                                       } else if (name.length < 3 || name.length > 100) {
+                                                                           errorMessage += "Name must be between 3 and 100 characters long.\n";
+                                                                           hasError = true;
+                                                                       } else if (nameRegex.test(name)) {
+                                                                           errorMessage += "Name cannot contain numbers.\n";
+                                                                           hasError = true;
+                                                                       }
+
+                                                                       if (hasError) {
+                                                                           alert(errorMessage.trim());
+                                                                           event.preventDefault();
+                                                                           if (name === '' || name.length < 3 || name.length > 100 || nameRegex.test(name)) {
+                                                                               nameInput.focus();
+                                                                           }
+                                                                           return;
+                                                                       }
+                                                                   });
                                                                    $(document).ready(function () {
                                                                        $("#searchInput").on("keyup", function () {
                                                                            var value = $(this).val().toLowerCase();
