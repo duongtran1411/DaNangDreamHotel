@@ -104,107 +104,52 @@
                             <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                      <form id="addJobForm" action="InsertJobsControllerURL" method="post" enctype="multipart/form-data" onsubmit="return validateJobForm()">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="addAccountModalLabel">Add Information Jobs</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="firstname">First Name</label>
-                                                <input id="firstname" name="firstname" type="text" class="form-control" placeholder="Enter first name" required>
+                                        <form action="InsertJobsControllerURL" method="post" enctype="multipart/form-data">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="addAccountModalLabel">Add Information Jobs</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="lastname">Last Name</label>
-                                                <input id="lastname" name="lastname" type="text" class="form-control" placeholder="Enter last name" required>
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    <input name="firstname" type="text" class="form-control" placeholder="Enter first name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input name="lastname" type="text" class="form-control" placeholder="Enter last name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Date of birth</label>
+                                                    <input name="dob" type="date" class="form-control" placeholder="Enter date of birth" required>
+                                                </div>
+          
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input name="phone" type="text" class="form-control" placeholder="Enter phone" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input name="email" type="email" class="form-control" placeholder="Enter email" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>CV</label>
+                                                    <input name="cv" class="input-file" type="file"  placeholder="Enter CV" required="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Status</label>
+                                                    <input id="status" name="status" class="form-control" value="wait" readonly="">
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="dob">Date of Birth</label>
-                                                <input id="dob" name="dob" type="date" class="form-control" placeholder="Enter date of birth" required>
+                                            <div class="modal-footer">
+                                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                                <button type="submit" class="btn btn-success">Add</button>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="phone" class="form-label">Phone</label>
-                                                <input id="phone" name="phone" type="text" class="form-control" placeholder="Enter phone" required pattern="\d{10}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input id="email" name="email" type="email" class="form-control" placeholder="Enter email" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cv">CV</label>
-                                                <input id="cv" name="cv" class="input-file" type="file" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="status">Status</label>
-                                                <input id="status" name="status" class="form-control" value="wait" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                                            <button type="submit" class="btn btn-success">Add</button>
-                                        </div>
-                                    </form>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                             <script>
-                        function validateJobForm() {
-                            const firstname = document.getElementById('firstname').value.trim();
-                            const lastname = document.getElementById('lastname').value.trim();
-                            const dob = document.getElementById('dob').value;
-                            const phone = document.getElementById('phone').value.trim();
-                            const email = document.getElementById('email').value.trim();
-                            const cv = document.getElementById('cv').value;
-
-                            if (firstname === "") {
-                                alert("Please enter the first name.");
-                                return false;
-                            }
-
-                            if (lastname === "") {
-                                alert("Please enter the last name.");
-                                return false;
-                            }
-
-                            if (dob === "") {
-                                alert("Please enter the date of birth.");
-                                return false;
-                            }
-
-                            if (phone === "") {
-                                alert("Please enter a phone number.");
-                                return false;
-                            } else if (!phone.match(/^\d{10}$/)) {
-                                alert("Please enter a valid 10-digit phone number.");
-                                return false;
-                            }
-
-                            const phonePattern = /^[0-9]+$/;
-                            if (!phonePattern.test(phone)) {
-                                alert("Please enter a valid phone number.");
-                                return false;
-                            }
-
-                            if (email === "") {
-                                alert("Please enter the email.");
-                                return false;
-                            }
-
-                            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                            if (!emailPattern.test(email)) {
-                                alert("Please enter a valid email address.");
-                                return false;
-                            }
-
-                            if (cv === "") {
-                                alert("Please upload a CV.");
-                                return false;
-                            }
-
-                            return true; // If all fields are valid, submit the form
-                        }
-                    </script>
                         <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
                         <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
                         </body>

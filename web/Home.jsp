@@ -117,9 +117,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero-slider owl-carousel" >
-                    <div class="hs-item set-bg" data-setbg="img/img_HomePage01_1.jpg"></div>
-                    <div class="hs-item set-bg" data-setbg="img/img_HomePage02_1.jpg"></div>
+                <div class="hero-slider owl-carousel">
+                    <div class="hs-item set-bg" data-setbg="img/img_HomePage01.jpg"></div>
+                    <div class="hs-item set-bg" data-setbg="img/img_HomePage02.jpg"></div>
                     <div class="hs-item set-bg" data-setbg="img/img_HomePage05.jpg"></div>
                 </div>
             </section>
@@ -255,31 +255,7 @@
             </div>
         </section>
         <!-- Testimonial Section End -->
-<section class="blog-section spad">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title">
-                            <span>Hotel</span>
-                            <h2>Utilities</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <c:forEach items="${listU}" var="u">
-                        <div class="col-lg-4">
-                            <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath}/uploads/image/${u.image}">
-                                <div class="bi-text">
-                                    <span class="b-tag">Utilities</span>
-                                    <h4 ><a class="name-Utilities"  href="UtilitiesController?id=${u.utilities_Id}&action=listdetail">${u.name}</a></h4>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
-            </div>
-        </section>
+
         <!-- Blog Section Begin -->
         <section class="blog-section spad">
             <div class="container">

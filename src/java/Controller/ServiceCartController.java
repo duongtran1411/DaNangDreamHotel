@@ -162,7 +162,44 @@ public class ServiceCartController extends HttpServlet {
                     }
                 }
                 break;
-            
+            case "search":
+                String text = request.getParameter("text");
+                list = booking.getListByName(text);
+                for (CartItem o : list) {
+                    out.print("<div class=\"col-lg-12\">\n"
+                            + "\n"
+                            + "                                                <div class=\"card mb-3\">\n"
+                            + "                                                    <div class=\"card-body\" >\n"
+                            + "                                                        <div class=\"d-flex \">\n"
+                            + "\n"
+                            + "                                                            <div class=\"col-lg-4\">\n"
+                            + "\n"
+                            + "                                                                <img\n"
+                            + "                                                                    src=\"" + o.getRoom().getImage() + "\"\n"
+                            + "                                                                    class=\"img-fluid rounded-3\" width=\"150px\" height=\"100%\">\n"
+                            + "                                                            </div>\n"
+                            + "                                                            <div class=\"col-lg-4\">\n"
+                            + "                                                                <strong>Information Room</strong>\n"
+                            + "                                                                <h5>" + o.getRoom().getName() + "</h5>\n"
+                            + "                                                                <p class=\"small mb-0\">" + o.getRoom().getPeople() + " Person</p>\n"
+                            + "                                                                <p class=\"small mb-0\">" + o.getRoom().getBed() + " Bed</p>\n"
+                            + "                                                            </div>\n"
+                            + "\n"
+                            + "                                                            <div class=\"align-items-center col-lg-4\">\n"
+                            + "\n"
+                            + "                                                                <h5 class=\"fw-normal mb-0\"><a href=\"cartController?action=delete&Id=" + o.getRoom().getRoom_Id() + "\">Cancel</a></h5>\n"
+                            + "\n"
+                            + "\n"
+                            + "                                                                <h5 class=\"mb-0\">" + FormatUtils.formatPRice(o.getRoom().getPrice() * o.getRoom().getDiscount()) + "đ</h5>\n"
+                            + "\n"
+                            + "                                                                <a href=\"#!\" style=\"color: #cecece;\"><i class=\"fas fa-trash-alt\"></i></a>\n"
+                            + "                                                            </div>\n"
+                            + "                                                        </div>\n"
+                            + "                                                    </div>\n"
+                            + "                                                </div>\n"
+                            + "                                            </div>");
+                }
+                break;
         }
 
     }

@@ -43,8 +43,10 @@
                             <ul>
                                 <li class="active"><a href="homeController" style="text-decoration: none">Home</a></li>
                                 <li>
-                                    <a href="AboutUs.jsp">About Us</a>
-                                  
+                                    <a href="AboutUs.jsp" style="text-decoration: none">About Us</a>
+                                    <ul class="dropdown">
+                                        <li><a href="Jobs.jsp">Jobs</a></li>
+                                    </ul>
                                 <li>
                                     <a href="viewRoomController" style="text-decoration: none">Resort</a>
                                 </li>

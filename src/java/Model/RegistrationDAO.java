@@ -87,7 +87,8 @@ public class RegistrationDAO extends DBConnect {
                         rs.getString("phone"),
                         rs.getString("role_Id"),
                         rs.getString("create_at"),
-                        rs.getString("update_at")
+                        rs.getString("update_at"),
+                        rs.getString("avatar")
                 );
             }
         } catch (SQLException ex) {
