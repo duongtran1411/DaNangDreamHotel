@@ -147,7 +147,7 @@
                             <div class="modal-body">					
                                 <div class="form-group" style="margin-bottom: 12px">
                                     <label>Name</label>
-                                    <input name="name" type="text" class="form-control" required>
+                                    <input id="itemName"name="name" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group" style="margin-bottom: 12px">
                                     <label>Price</label>
@@ -175,15 +175,44 @@
         <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
         <script>
-                                                                   document.getElementById("addItemForm").addEventListener("submit", function (event) {
-                                                                       var priceInput = document.getElementById("price");
-                                                                       var price = parseFloat(priceInput.value);
+document.getElementById("addItemForm").addEventListener("submit", function (event) {
+    var hasError = false;
+    var errorMessage = "";
 
-                                                                       if (isNaN(price) || price < 0) {
-                                                                           alert("Please enter a valid number for the price.");
-                                                                           event.preventDefault();
-                                                                       }
-                                                                   });
+    // Validate price
+    var priceInput = document.getElementById("price");
+    var price = parseFloat(priceInput.value);
+
+    if (isNaN(price) || price < 0) {
+        errorMessage += "Please enter a valid number for the price.\n";
+        hasError = true;
+    }
+
+    // Validate name
+    var nameInput = document.getElementById("itemName");
+    var name = nameInput.value.trim();
+    var nameRegex = /\d/; // Regular expression to check for digits
+
+    if (name === '') {
+        errorMessage += "Name cannot be empty or just whitespace.\n";
+        hasError = true;
+    } else if (name.length < 3 || name.length > 100) {
+        errorMessage += "Name must be between 3 and 100 characters long.\n";
+        hasError = true;
+    } else if (nameRegex.test(name)) {
+        errorMessage += "Name cannot contain numbers.\n";
+        hasError = true;
+    }
+
+    if (hasError) {
+        alert(errorMessage.trim());
+        event.preventDefault();
+        if (name === '' || name.length < 3 || name.length > 100 || nameRegex.test(name)) {
+            nameInput.focus();
+        }
+        return;
+    }
+});
         </script>
         <script>
             $(document).ready(function () {
