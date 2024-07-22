@@ -1,4 +1,3 @@
-
 package Controller;
 
 import Entity.Item;
@@ -23,9 +22,10 @@ public class ItemController extends HttpServlet {
 
     DAOItem daoItem = new DAOItem();
     DAORoom daoRoom = new DAORoom();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
+
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ItemController extends HttpServlet {
             case "add":
                 addItem(request, response);
                 break;
-                case "search":
+            case "search":
                 searchItem(request, response);
                 break;
             case "delete":
@@ -71,10 +71,11 @@ public class ItemController extends HttpServlet {
         request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("dashboard/jsp/ItemManage.jsp").forward(request, response);
     }
+
     private void searchItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String query = request.getParameter("query");
         List<Item> filteredItems = daoItem.searchItems(query); // Implement this method in your DAO
-            request.setAttribute("allItem", filteredItems);
+        request.setAttribute("allItem", filteredItems);
         //request.getRequestDispatcher("/partials/itemTable.jsp").forward(request, response);
     }
 
@@ -84,14 +85,29 @@ public class ItemController extends HttpServlet {
         daoItem.deleteItem(id);
         response.sendRedirect("ItemController");
     }
+
     private void updateItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        int typeId = Integer.parseInt(request.getParameter("type"));
-        Double price = Double.parseDouble(request.getParameter("price"));
-        daoItem.updateItem(id, name, typeId, price);
-        response.sendRedirect("ItemController");
+        try {
+            String itemIdParam = request.getParameter("itemId");
+            if (itemIdParam == null || itemIdParam.isEmpty()) {
+                throw new IllegalArgumentException("Item ID is required!");
+            }
+            int id = Integer.parseInt(itemIdParam);
+            String name = request.getParameter("name");
+            int typeId = Integer.parseInt(request.getParameter("type"));
+            Double price = Double.parseDouble(request.getParameter("price"));
+            daoItem.updateItem(id, name, typeId, price);
+            response.sendRedirect("ItemController");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid number format");
+        }catch (IllegalArgumentException e) {
+        e.printStackTrace();
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
     }
+
+    }
+
     private void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         int type = Integer.parseInt(request.getParameter("type"));
@@ -99,7 +115,7 @@ public class ItemController extends HttpServlet {
         daoItem.insertItem(name, type, price);
         List<Room> listRoomId = daoRoom.getAllRoomId();
         Item it = daoItem.getItemByName(name);
-        for(Room x : listRoomId){
+        for (Room x : listRoomId) {
             daoItem.InsertItemInRoom(it.getItem_Id(), x.getRoom_Id());
         }
         response.sendRedirect("ItemController");

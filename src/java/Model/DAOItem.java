@@ -209,6 +209,17 @@ public class DAOItem extends DBConnect {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void deleteItemByType(int id) {
+        String sql = "delete from items "
+                + "where typeItem_Id= ? ";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void insertItem(String name, int type, double price) {
         String sql = "insert into items(name, typeItem_Id, price)"
@@ -332,9 +343,28 @@ public class DAOItem extends DBConnect {
         }
         return list;
     }
+    public List<Item> getItemByType(int typeId){
+         List<Item> list = new ArrayList();
+        String sql = "select * from items where typeItem_Id =?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, typeId);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Item(
+                        rs.getInt("item_Id"),
+                        rs.getString("name"),
+                        rs.getInt("typeItem_Id"),
+                        rs.getDouble("price")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
      public static void main(String[] args) {
         DAOItem dao = new DAOItem();
-       List<Item> list = dao.getFoodItem();
+      List<Item> list =  dao.getItemByType(7);
          for (Item item : list) {
              System.out.println(item);
          }

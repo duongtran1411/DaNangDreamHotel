@@ -98,7 +98,11 @@
                                                         <td data-label="Type ID">${type.typeItem_Id}</td>
                                                         <td data-label="Type Name">${type.name}</td>
                                                         <td data-label="Actions">
-                                                            <a href="UpdateTypeOfItem.jsp?id=${type.typeItem_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                            <a href="#" class="update-link" 
+                                                               data-id="${type.typeItem_Id}" 
+                                                               data-name="${type.name}" 
+                                                               title="Update" 
+                                                               data-toggle="tooltip"><i class='far fa-edit'></i></a>    
                                                             <a href="ItemTypeController?action=delete&id=${type.typeItem_Id}" class="delete" title="Delete" data-toggle="tooltip" 
                                                                onclick="return confirmDelete();"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
                                                         </td>
@@ -131,7 +135,7 @@
             <div class="modal fade" id="addTypeItemModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form id="addItemForm" action="ItemTypeController?action=add" method="post">
+                        <form id="addTypeForm" action="ItemTypeController?action=add" method="post">
                             <div class="modal-body">					
                                 <div class="form-group" style="margin-bottom: 12px">
                                     <label>Name</label>
@@ -146,21 +150,66 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Modal Update Type -->
+            <div class="modal fade" id="updateTypeItemModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="updateTypeForm" action="ItemTypeController?action=update" method="post">
+                            <div class="modal-header">			
+                                <h4 class="modal-title">Update Type Of Item</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">					
+                                <div class="form-group" style="margin-bottom: 12px">
+                                    <label>Name</label>
+                                    <input id="updateTypeName" name="name" type="text" class="form-control" required>
+                                </div>			
+                                <input type="hidden" id="updateTypeId" name="typeId">
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                <input type="submit" class="btn btn-success" value="Update">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <script>
-                                                                   document.getElementById("addItemForm").addEventListener("submit", function (event) {
+                                                                   document.getElementById("addTypeForm").addEventListener("submit", function (event) {
                                                                        var hasError = false;
                                                                        var errorMessage = "";
-
-                                                                       // Validate price
-
-
-                                                                       // Validate name
                                                                        var nameInput = document.getElementById("typeName");
+                                                                       var name = nameInput.value.trim();
+                                                                       var nameRegex = /\d/; // Regular expression to check for digits
+
+                                                                       if (name === '') {
+                                                                           errorMessage += "Name cannot be empty or just whitespace.\n";
+                                                                           hasError = true;
+                                                                       } else if (name.length < 3 || name.length > 100) {
+                                                                           errorMessage += "Name must be between 3 and 100 characters long.\n";
+                                                                           hasError = true;
+                                                                       } else if (nameRegex.test(name)) {
+                                                                           errorMessage += "Name cannot contain numbers.\n";
+                                                                           hasError = true;
+                                                                       }
+
+                                                                       if (hasError) {
+                                                                           alert(errorMessage.trim());
+                                                                           event.preventDefault();
+                                                                           if (name === '' || name.length < 3 || name.length > 100 || nameRegex.test(name)) {
+                                                                               nameInput.focus();
+                                                                           }
+                                                                           return;
+                                                                       }
+                                                                   });
+                                                                   document.getElementById("updateTypeForm").addEventListener("submit", function (event) {
+                                                                       var hasError = false;
+                                                                       var errorMessage = "";
+                                                                       var nameInput = document.getElementById("updateTypeName");
                                                                        var name = nameInput.value.trim();
                                                                        var nameRegex = /\d/; // Regular expression to check for digits
 
@@ -219,6 +268,20 @@
                                                                            return $(row).children('td').eq(index).text();
                                                                        }
                                                                    });
+                                                                    $(document).ready(function () {
+                // Click event for update links
+                $(document).on('click', '.update-link', function () {
+                    var typeId = $(this).data('id');
+                    var typeName = $(this).data('name');
+
+                    // Set the data in the modal
+                    $('#updateTypeId').val(typeId);
+                    $('#updateTypeName').val(typeName);
+
+                    // Show the modal
+                    $('#updateTypeItemModal').modal('show');
+                });
+            });
 
     </script>
     <script>
