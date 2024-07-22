@@ -1168,7 +1168,7 @@ public class DAORoom extends DBConnect {
         }
         
     }
-    
+
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
         List<Room> list = dao.getNewRoom();

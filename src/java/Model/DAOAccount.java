@@ -122,25 +122,20 @@ public class DAOAccount extends DBConnect {
         }
     }
 
-    public void insertAccount(int job_Id, String userName, String firstName, String lastName,
-            String password, String email, String phone, int role_Id, int account_Id) {
-//            java.sql.Date create_at, java.sql.Date update_at, int account_Id) {
-        String sql = "INSERT INTO account (job_Id, userName, firstName, lastName, "
-                + "password, email, phone, role_Id, account_Id) "
-//                + "password, email, phone, role_Id, create_at, update_at, account_Id) "
-//                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public void insertAccount(String userName, String firstName, String lastName,
+            String password, String email, String phone, int role_Id) {
+        String sql = "INSERT INTO account ( userName, firstName, lastName, "
+                + "password, email, phone, role_Id) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, job_Id);
-            st.setString(2, userName);
-            st.setString(3, firstName);
-            st.setString(4, lastName);
-            st.setString(5, password);
-            st.setString(6, email);
-            st.setString(7, phone);
-            st.setInt(8, role_Id);
-            st.setInt(9, account_Id);
+            st.setString(1, userName);
+            st.setString(2, firstName);
+            st.setString(3, lastName);
+            st.setString(4, password);
+            st.setString(5, email);
+            st.setString(6, phone);
+            st.setInt(7, role_Id);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -176,8 +171,19 @@ public class DAOAccount extends DBConnect {
 
     public static void main(String[] args) {
         DAOAccount dao = new DAOAccount();
-        dao.insertAccount(4, "123", "123", "123", "123", "123@", "123", 1, 4);
+        Account a = dao.getLastAccount();
+        String userName = "testuser";
+        String firstName = "Test";
+        String lastName = "User";
+        String password = "password123";
+        String email = "testuser@example.com";
+        String phone = "1234567890";
+        int roleId = 2;
 
+        int accountId = 5;
+        int jobId = a.getJobId().getJob_Id() + 1;
+
+        dao.insertAccount(userName, firstName, lastName, password, email, phone, roleId);
     }
 }
 /*

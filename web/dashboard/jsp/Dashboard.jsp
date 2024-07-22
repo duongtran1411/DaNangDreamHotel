@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
 
         <!-- Title Page-->
         <title>Dashboard</title>
- <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
+        <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -46,194 +47,258 @@
     <body >
 
 
-                        <!-- END HEADER MOBILE-->
+        <!-- END HEADER MOBILE-->
 
-                        <!-- MENU SIDEBAR-->
-                       <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        <!-- MENU SIDEBAR-->
+        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
              data-sidebar-position="fixed" data-header-position="fixed">
             <jsp:include page="SlideBar.jsp"></jsp:include>
                 <div class="body-wrapper">
-                      <div class="main-content">
-                                <div class="section__content section__content--p30">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="overview-wrap">
-                                                    <h2 class="title-1">overview</h2>
-                                                </div>
-                                            </div>
+                    <div class="main-content">
+                        <div class="section__content section__content--p30">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="overview-wrap">
+                                            <h2 class="title-1">overview</h2>
                                         </div>
-                                        <div class="row m-t-25">
-                                            <div class="col-sm-6 col-lg-6">
-                                                <div class="overview-item overview-item--c1">
-                                                    <div class="overview__inner">
-                                                        <div class="overview-box clearfix">
-                                                            <div class="icon">
-                                                                <i class="zmdi zmdi-account-o"></i>
-                                                            </div>
-
-                                                            <div class="text">
-                                                                <h2>${totalPrice}</h2>
-                                                                <span>
-                                                                    Room Earnings</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="overview-chart">
-                                                            <canvas id="widgetChart1"></canvas>
-                                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-t-25">
+                                    <div class="col-sm-4 col-lg-4">
+                                        <div class="overview-item overview-item--c1">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-account-o"></i>
                                                     </div>
+
+                                                    <div class="text">
+                                                        <h2>${totalPrice}</h2>
+                                                    <span>
+                                                        Room Earnings</span>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-lg-6">
-                                                <div class="overview-item overview-item--c4">
-                                                    <div class="overview__inner">
-                                                        <div class="overview-box clearfix">
-                                                            <div class="icon">
-                                                                <i class="zmdi zmdi-money"></i>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h2>${totalPrice}</h2>
-                                                                <span>total earnings</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="overview-chart">
-                                                            <canvas id="widgetChart4"></canvas>
-                                                        </div>
+                                            <div class="overview-chart">
+                                                <canvas id="widgetChart1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                    <div class="col-sm-4 col-lg-4">
+                                        <div class="overview-item overview-item--c1">
+                                            <div class="overview__inner">
+                                                <div class="overview-box clearfix">
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-account-o"></i>
                                                     </div>
+
+                                                    <div class="text">
+                                                        <h2>${totalPriceItem}</h2>
+                                                    <span>
+                                                        Room Earnings By Item</span>
                                                 </div>
+                                            </div>
+                                            <div class="overview-chart">
+                                                <canvas id="widgetChart1"></canvas>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <h2 class="title-1 m-b-25">Expenses by booking</h2>
-                                                <form action="FilterBookingURL" method="post">
-                                                    <label for="checkinDate">Start Date:</label>
-                                                    <input type="date" id="checkinDate" name="checkinDate" style="margin-right: 10px">
-                                                    <label for="checkoutDate">End Date:</label>
-                                                    <input type="date" id="checkoutDate" name="checkoutDate" style="margin-right: 10px">
-                                                    <button type="submit" class="btn btn-primary">Filter</button>
-                                                </form>
-                                                <div class="table-responsive table--no-card m-b-40">
-                                                    <table class="table table-borderless table-striped table-earning">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>CheckIn</th>
-                                                                <th>CheckOut</th>
-                                                                <th>Expenses</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <c:forEach items="${listB}" var="b">
-                                                                <tr>
-                                                                    <td>${b.checkIn}</td>
-                                                                    <td>${b.checkOut}</td>
-                                                                    <td>${b.expenses}</td>
-
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-lg-4">
+                                    <div class="overview-item overview-item--c4">
+                                        <div class="overview__inner">
+                                            <div class="overview-box clearfix">
+                                                <div class="icon">
+                                                    <i class="zmdi zmdi-money"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <h2>${totalPrice+totalPriceItem}</h2>
+                                                    <span>total earnings</span>
                                                 </div>
                                             </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-9">
-                                                <h2 class="title-1 m-b-25">Room</h2>
-
-                                                <div class="table-responsive table--no-card m-b-40">
-                                                    <table class="table table-borderless table-striped table-earning">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Id</th>
-                                                                <th>Name</th>
-                                                                <th>Price</th>
-                                                                <th>Status</th>
-                                                                <th>Size</th>
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <c:forEach items="${listR}" var="r">
-                                                                <tr>
-                                                                    <td>${r.room_Id}</td>
-                                                                    <td>${r.name}</td>
-                                                                    <td>${r.price}</td>
-                                                                    <td>${r.status}</td>
-                                                                    <td>${r.size}</td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <h2 class="title-1 m-b-25">Top room</h2>
-                                                <div class="au-card au-card--bg-blue au-card-top-countries m-b-40">
-                                                    <div class="au-card-inner">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-top-countries">
-                                                                <tbody>
-                                                                    <c:forEach items="${listT}" var="t">
-                                                                        <tr>
-                                                                            <td>${t.name}</td>
-                                                                            <td>${t.price}</td>
-                                                                        </tr>
-                                                                    </c:forEach>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="copyright">
-                                                
-                                                </div>
+                                            <div class="overview-chart">
+                                                <canvas id="widgetChart4"></canvas>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-        </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h2 class="title-1 m-b-25">Expenses by booking</h2>
+                                    <form action="AdminControllerURL" method="get" onsubmit="return validateDates()">
+                                        <label for="checkinDate">Start Date:</label>
+                                        <input type="date" id="checkinDate" name="checkinDate" style="margin-right: 10px"
+                                               value="${param.checkinDate != null ? param.checkinDate : ''}">
+                                        <label for="checkoutDate">End Date:</label>
+                                        <input type="date" id="checkoutDate" name="checkoutDate" style="margin-right: 10px"
+                                               value="${param.checkoutDate != null ? param.checkoutDate : ''}">
+                                        <button type="submit" class="btn btn-primary">Filter</button>
+                                    </form>
+                                    <div class="table-responsive table--no-card m-b-40">
+                                        <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                    <th>CheckIn</th>
+                                                    <th>CheckOut</th>
+                                                    <th>Expenses</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${listB}" var="b">
+                                                    <tr>
+                                                        <td>${b.checkIn}</td>
+                                                        <td>${b.checkOut}</td>
+                                                        <td>${b.expenses}</td>
+
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <h2 class="title-1 m-b-25">Room</h2>
+
+                                    <div class="table-responsive table--no-card m-b-40">
+                                        <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Name</th>
+                                                    <th>Price</th>
+                                                    <th>Status</th>
+                                                    <th>Size</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${listR}" var="r">
+                                                    <tr>
+                                                        <td>${r.room_Id}</td>
+                                                        <td>${r.name}</td>
+                                                        <td>${r.price}</td>
+                                                        <td>${r.status}</td>
+                                                        <td>${r.size}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <h2 class="title-1 m-b-25">Top room</h2>
+                                    <div class="au-card au-card--bg-blue au-card-top-countries m-b-40">
+                                        <div class="au-card-inner">
+                                            <div class="table-responsive">
+                                                <table class="table table-top-countries">
+                                                    <tbody>
+                                                        <c:forEach items="${listT}" var="t">
+                                                            <tr>
+                                                                <td>${t.name}</td>
+                                                                <td>${t.price}</td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form method="get" action="AdminControllerURL">
+                                        <div class="form-group">
+                                            <label for="searchName">Search by Room Name:</label>
+                                            <input type="text" class="form-control" id="searchName" name="searchName">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </form> 
+                                    <div class="copyright">
+                                        <div class="table-responsive table--no-card m-b-40">
+                                            <table class="table table-borderless table-striped table-earning">
+                                                <thead>
+                                                    <tr>
+                                                        <th>RoomName</th>
+                                                        <th>ItemName</th>
+                                                        <th>Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Total</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${listI}" var="i">
+                                                        <tr>
+                                                            <td>${i.getRoomName()}</td>
+                                                            <td>${i.getItemName()}</td>
+                                                            <td><fmt:formatNumber value="${i.getItempPrice()}" type="number" /></td>
+                                                            <td>${i.getQuantity() }</td>
+                                                            <td><fmt:formatNumber value="${i.getQuantity() * i.getItempPrice()}" type="number" /></td>
+
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                function validateDates() {
+                    var checkinDate = document.getElementById('checkinDate').value;
+                    var checkoutDate = document.getElementById('checkoutDate').value;
+
+                    if (checkinDate && checkoutDate && checkinDate > checkoutDate) {
+                        alert('Start Date must be before End Date. Please select the dates again.');
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
+            <!-- Jquery JS-->
+            <script src="vendor/jquery-3.2.1.min.js"></script>
+            <!-- Bootstrap JS-->
+            <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+            <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+            <!-- Vendor JS       -->
+            <script src="vendor/slick/slick.min.js">
+            </script>
+            <script src="vendor/wow/wow.min.js"></script>
+            <script src="vendor/animsition/animsition.min.js"></script>
+            <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+            </script>
+            <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+            <script src="vendor/counter-up/jquery.counterup.min.js">
+            </script>
+            <script src="vendor/circle-progress/circle-progress.min.js"></script>
+            <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+            <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+            <script src="vendor/select2/select2.min.js">
+            </script>
+            <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
+            <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="dashboard/assets/js/sidebarmenu.js"></script>
+            <script src="dashboard/assets/js/app.min.js"></script>
+            <script src="dashboard/assets/libs/simplebar/dist/simplebar.js"></script>
+            <!-- Main JS-->
+            <script src="Admin/js/main.js"></script>
+
+    </body>
+
+</html>
+<!-- end document-->
 
 
-                        <!-- Jquery JS-->
-                        <script src="vendor/jquery-3.2.1.min.js"></script>
-                        <!-- Bootstrap JS-->
-                        <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-                        <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-                        <!-- Vendor JS       -->
-                        <script src="vendor/slick/slick.min.js">
-                        </script>
-                        <script src="vendor/wow/wow.min.js"></script>
-                        <script src="vendor/animsition/animsition.min.js"></script>
-                        <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-                        </script>
-                        <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-                        <script src="vendor/counter-up/jquery.counterup.min.js">
-                        </script>
-                        <script src="vendor/circle-progress/circle-progress.min.js"></script>
-                        <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-                        <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-                        <script src="vendor/select2/select2.min.js">
-                        </script>
- <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
-        <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="dashboard/assets/js/sidebarmenu.js"></script>
-        <script src="dashboard/assets/js/app.min.js"></script>
-        <script src="dashboard/assets/libs/simplebar/dist/simplebar.js"></script>
-                        <!-- Main JS-->
-                        <script src="Admin/js/main.js"></script>
 
-                        </body>
-
-                        </html>
-                        <!-- end document-->
-
-                        
-                        
-                       

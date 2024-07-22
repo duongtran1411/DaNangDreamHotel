@@ -6,8 +6,11 @@
 package Controller;
 
 import Entity.Booking;
+import Entity.Item;
 import Entity.Room;
+import Entity.RoomWithItem;
 import Model.DAOBooking;
+import Model.DAOItem;
 import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +19,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,9 +66,17 @@ public class AdminControllerURL extends HttpServlet {
     throws ServletException, IOException {
         DAOBooking dao=new DAOBooking();
         DAORoom daoroom=new DAORoom();
+        DAOItem daoitem=new DAOItem();
         List<Booking>list=dao.getAllBooking();
         List<Room>listR=daoroom.listAllRoom();
+        int count=1;
+        for (Room room : listR) {
+            if(room.getRoom_Id()!=room.getRoom_Id()+1){
+                count++;
+            }
+        }
         List<Room>listT=daoroom.sortRoomsByPriceDesc();
+        List<RoomWithItem>listI=daoitem.getAllItemsInRoom();
         long totalPrice=0;
         for (Booking booking : list) {
             totalPrice+=booking.getExpenses();
@@ -72,8 +84,25 @@ public class AdminControllerURL extends HttpServlet {
         request.setAttribute("listB", list);
         request.setAttribute("listT", listT);
         request.setAttribute("totalPrice", totalPrice);
-        
         request.setAttribute("listR", listR);
+        String searchName = request.getParameter("searchName");
+        
+        DAOItem daoItem = new DAOItem();
+        List<RoomWithItem> items = new ArrayList<>();
+        
+        if (searchName != null && !searchName.trim().isEmpty()) {
+            items = daoItem.getAllItemsInRoomByName(searchName);
+        } else {
+            items = daoItem.getAllItemsInRoom(); // Method to get all items if no search is performed
+        }
+        long totalPriceItem=0;
+       
+        
+        for (RoomWithItem item : items) {
+            totalPriceItem+= (long)(item.getQuantity()*item.getItempPice());
+        }
+        request.setAttribute("totalPriceItem", totalPriceItem);
+        request.setAttribute("listI", items); 
         request.getRequestDispatcher("dashboard/jsp/Dashboard.jsp").forward(request, response);
     } 
 
