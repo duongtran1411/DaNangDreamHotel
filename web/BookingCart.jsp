@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
         <link href="css/paging.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link href="css/home.css" rel="stylesheet" type="text/css"/>
         <link
             href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap"

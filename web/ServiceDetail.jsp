@@ -14,9 +14,10 @@
         <meta name="keywords" content="Sona, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Sona | Template</title>
+        <title>Da Nang Dream Hotel</title>
 
         <!-- Google Font -->
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
 
@@ -59,28 +60,19 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8">
-                          
+                            <h3 class="event-main">${utilities.name}</h3>
                         <div class="blog-details-text">
-
                             <div class="bd-title">
-                                <img src="${pageContext.request.contextPath}/uploads/image/${utilities.image}" alt="alt"/>        
-
+                                <img src="${pageContext.request.contextPath}/uploads/image/${utilities.image}" alt="alt"/>
+                                <p>${utilities.description}</p>
+                                <p>${utilities.time}</p>
+                                <p>Location: ${utilities.location}</p>
                             </div>
-                          <h3 class="event-main">Other Service</h3>
-                        <c:forEach items="${listU}" var="o">
-                            <div class="row">
-                                <div class="col-lg-3 list-img">
-                                    <img src="${pageContext.request.contextPath}/uploads/image/${o.image}" width="160px" height="86px" alt="">
-                                </div>
-                                <div class="col-lg-8">
-                                    <a class="serviceName" href="UtilitiesController?action=listdetail&id=${o.utilities_Id}">${o.name}</a>
-                                </div>
-                            </div>
-                        </c:forEach>
                             <div class="leave-comment">
                                 <h4>Da Nang Dream Hotel</h4>
-                                <p>Hotline: 0822 86 44 99</p>
-                                <p>  Email:danangdreamhotel@gmail.com
+                                <p> Hotline: 0822 86 44 99 
+                                    <br>
+                                    Email:danangdreamhotel@gmail.com
                                     <br>
                                     Website:danangdreamhotel.vn
                                     <br>
@@ -90,25 +82,23 @@
                                     <br>
                                     Tiktok: tiktok.com/@danangdreamhotelsresorts
                                 </p>
-<!--                                <div class="row">
-                                    <div class="col-lg-12 text-center">
-                                        <button type="submit" class="site-btn" style="margin-bottom: 20px; background-color: #DFA974; border: none; width: 148px;height: 47px"><a href="bookByEventController" style="color: white; background: ">Booking Now</a></button>
-                                    </div>
-                                </div>-->
                             </div>
                         </div>
                     </div>
                     <br/>        
-
-                    <div class="col-lg-4" style="display: block">
-                        <h3 class="utilities-main" style="margin-bottom: 15px">${utilities.name}</h3>
-                        <p>${utilities.description}</p>
-                        <p>${utilities.time}</p>
-                        <p>Location: ${utilities.location}</p>
-                        <div class="blog-details-text">
-
-                           
-                        </div>
+                    <div class="col-lg-4">
+                        <h3 class="event-main">Other Service</h3>
+                        <c:forEach items="${listU}" var="o">
+                            <div class="row">
+                                <div class="col-lg-6 list-img">
+                                    <img src="${pageContext.request.contextPath}/uploads/image/${o.image}" width="160px" height="86px" alt="">
+                                </div>
+                                <div class="col-lg-6">
+                                    <a class="eventName" href="UtilitiesController?action=listdetail&id=${o.utilities_Id}" >${o.name}</a>
+                                    <p class="utilities-main" style="margin-top: 30px">${o.time}</p>
+                                </div>
+                            </div>
+                        </c:forEach>
 
                     </div>
                 </div>

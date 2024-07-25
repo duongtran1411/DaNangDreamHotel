@@ -66,8 +66,103 @@
                 display: none;
             }
 
+            #slide{
+                width: max-content;
+                margin-top: 20px;
+                margin-left: 150px;
+                margin-bottom: 50px
+            }
 
+            .roomItem{
+                width: 350px;
+                height: 250px;
+                background-position: 50% 50%;
+                display: inline-block;
+                transition: 1s;
+                background-size: 200%;
+                position: absolute;
+                z-index: 10000;
 
+            }
+            .roomItem:nth-child(1){
+                transform: translate(-150%);
+                opacity: 0;
+                background-position: 0% 50%;
+                z-index: -1;
+            }
+            .roomItem:nth-child(2){
+                transform: translate(-40%);
+                background-position: 20% 50%;
+            }
+            .roomItem:nth-child(3){
+                transform: translate(70%);
+                background-position: 50% 50%;
+            }
+            .roomItem:nth-child(4){
+                transform: translate(180%);
+                background-position: 80% 50%;
+            }
+            .roomItem:nth-child(n+5){
+                transform: translate(290%);
+                opacity: 0;
+                background-position: 100% 50%;
+                z-index: -1;
+            }
+
+            .roomItem .content{
+                position: absolute;
+                top: 100%;
+                background-color: #b9b9b9;
+                width: 80%;
+                padding: 0 10%;
+                text-align: center;
+                transition: 0.5s;
+                max-height: 0;
+                box-shadow: 0 30px 50px #b9b9b9;
+            }
+
+            .roomItem .content:hover {
+                background-color:#DFA974;
+                color: white;
+            }
+
+            .buttons{
+                position: absolute;
+                bottom: -120px;
+                left: 0px;
+                width: 100%;
+            }
+
+            .buttons button{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: 1px solid #DFA974;
+                transition: 0.5s;
+                background-color: #DFA974
+            }
+
+            .buttons button:hover{
+                background-color: #bac383;
+
+            }
+
+            .white{
+                color: #FFF;
+            }
+            #next{
+                transform: translateX(1100px);
+
+            }
+            .right{
+                left: 100px;
+            }
+
+            #prev{
+                transform: translateX(-35px);
+            }
+            
+            
         </style>
     </head>
     <body>
@@ -162,59 +257,29 @@
                     </div>
                 </div>
             </section>
-            <!-- About Us Section End -->
-
-            <!-- Home Room Section Begin -->  <!--BEST SELLER-->
-            <!-- Home Room Section Begin -->  <!--BEST SELLER-->
-            <!--            <div >
-                            <div class="section-title">
-                                <h2>Resort</h2>
-                            </div>
-                            <div class="container-fluid">
-                                <div>
-                                    <div class="row">
-                                        <ul class="d-flex" style="flex-wrap: wrap">
-        <c:forEach items="${listR}" var="o">
-            <li class="col-lg-4 " style="list-style: none">
-                <h3></h3>
-                <div>
-                    <img src="${o.image}" alt="alt" height="500px" weight="300px"/>
-                </div>
-                <div>
-                    <strong>${o.name}</strong>
-                    <p></p>
-                    <span></span>
-                </div>
-            </li>
-        </c:forEach>
-    </ul>
-</div>
-</div>
-</div
-</div>-->
             <div class="offers_area padding_top" style="box-shadow: 5px 5px 10px #ddd">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="section_title mb-100">
-                            <h2>Room and Suits</h2>
-                            <p>Pick a room that new suits your taste and budget</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="section_title mb-100">
+                                <h2>Room and Suits</h2>
+                                <p>Pick a room that new suits your taste and budget</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                <c:forEach items="${listR}" var="o">
-                    <div class="col-xl-3 col-md-3" style="padding: 0 10px">
+                    <div class="row">
+                    <c:forEach items="${listR}" var="o">
+                        <div class="col-xl-3 col-md-3" style="padding: 0 10px">
                             <div class="single_offers" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 15px; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
                                 <div class="about_thumb">
                                     <img src="${o.image}" width="400px" height="250px" alt="alt"/>
                                 </div>
-                                    <h4 style="font-family: Edu Australia VIC WA NT Hand, sans-serif;margin: 10px 0;font-size: 22px ">${o.name}</h4>
-                                
-                                    <p>Price: ${FormatUtils.formatPRice(o.price)}đ/Pernight</p>
-                                    <p>Type: ${o.typeName}</p>
-                                    <p>Size: ${o.size}m<sup>2</sup></p>
-                                    <button style="background-color:#DFA974; border: 1px solid #DFA974; padding: 5px; border-radius:5px "><a href="roomDetailsController?Id=${o.room_Id}&typeRoom=${o.type_Room_Id}" style="color:white">More Details</a></button>
+                                <h4 style="font-family: Edu Australia VIC WA NT Hand, sans-serif;margin: 10px 0;font-size: 22px ">${o.name}</h4>
+
+                                <p>Price: ${FormatUtils.formatPRice(o.price)}đ/Pernight</p>
+                                <p>Type: ${o.typeName}</p>
+                                <p>Size: ${o.size}m<sup>2</sup></p>
+                                <button style="background-color:#DFA974; border: 1px solid #DFA974; padding: 5px; border-radius:5px "><a href="roomDetailsController?Id=${o.room_Id}&typeRoom=${o.type_Room_Id}" style="color:white">More Details</a></button>
 <!--                                    <span style="padding-left: 70px; font-family: Edu Australia VIC WA NT Hand, sans-serif">${FormatUtils.formatPRice(o.price)}đ</span>-->
                             </div>
                         </div>
@@ -258,33 +323,36 @@
             </div>
         </section>
         <!-- Testimonial Section End -->
-        <section class="blog-section spad">
+        <section >
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title">
-                            <span>Hotel</span>
                             <h2>Service</h2>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <c:forEach items="${listU}" var="u">
-                        <div class="col-lg-4">
-                            <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath}/uploads/image/${u.image}">
-                                <div class="bi-text">
-                                    <span class="b-tag">Utilities</span>
-                                    <h4 ><a class="name-Utilities"  href="UtilitiesController?id=${u.utilities_Id}&action=listdetail">${u.name}</a></h4>
-
+                <div class="row" style="width: 100%;  align-items: center">
+                    <div class="col-lg-12">
+                        <div id="slide" >
+                            <c:forEach items="${listU}" var="o">
+                                <div class="roomItem" style="background-image: url(${pageContext.request.contextPath}/uploads/image/${o.image})">
+                                    <div class="content">
+                                        <a class="name-util" href="UtilitiesController?id=${o.utilities_Id}&action=listdetail" style="color: black; padding-left: 55px">${o.name}</a>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:forEach>
                         </div>
-                    </c:forEach>
+                        <div class="buttons">
+                            <button id="prev"> <i class="fa-solid fa-chevron-left white"></i></button>
+                            <button id="next"><i class="fa-solid fa-chevron-right white"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         <!-- Blog Section Begin -->
-        <section class="blog-section spad">
+        <section class="blog-section spad" style="margin-top: 200px">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -453,6 +521,21 @@
                                             }
                                         });
 
+                                        document.getElementById('next').onclick = function () {
+                                            let list = document.querySelectorAll('.roomItem');
+                                            document.getElementById('slide').appendChild(list[0]);
+                                        };
+                                        document.getElementById('prev').onclick = function () {
+                                            let list = document.querySelectorAll('.roomItem');
+                                            document.getElementById('slide').prepend(list[list.length - 1]);
+                                        };
+
+                                        setInterval(() => {
+                                            let list = document.querySelectorAll('.roomItem');
+                                            document.getElementById('slide').appendChild(list[0]);
+                                        }, 4000);
+
+                                      
 
 
         </script>

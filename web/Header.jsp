@@ -49,7 +49,7 @@
                                     <a href="viewRoomController" style="text-decoration: none">Resort</a>
                                 </li>
                                 <li><a href="eventController" style="text-decoration: none">Events</a></li>
-                                <!--<li><a href="Contact.jsp" style="text-decoration: none">Contact</a></li>-->
+                                <li><a href="Contact.jsp" style="text-decoration: none">Contact</a></li>
 <!--                                <li><a href="viewCartController" style="text-decoration: none">Booked</a></li>-->
                             </ul>
                         </nav>
