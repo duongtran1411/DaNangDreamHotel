@@ -87,11 +87,9 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-<<<<<<< HEAD
                             <div class="container-fluid" >
-=======
                             <div class="container" style="margin-right: 105px; height: 800px;">
->>>>>>> f6445d82bc5472ac1da5922d4456604306dd8c1d
+
                                 <!-- Page Heading -->
                                 <h1 class="h3 mb-2 text-gray-800"  style="margin-top: 100px">CUSTOMERS</h1>
                                 <div class="d-flex justify-content-center">

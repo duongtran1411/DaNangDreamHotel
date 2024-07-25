@@ -20,7 +20,7 @@ public class Room {
     private String checkIn;
     private String checkOut;
     private String maintenance_status;
-    private String typeName;
+    
 
     public Room() {
     }
@@ -178,18 +178,7 @@ public class Room {
         this.discount = discount;
     }
 
-    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int typeRoom_Id, String typeName) {
-        this.room_Id = room_Id;
-        this.name = name;
-        this.price = price;
-        this.size = size;
-        this.bed = bed;
-        this.bath = bath;
-        this.people = people;
-        this.image = image;
-        this.type_Room_Id = typeRoom_Id;
-        this.typeName = typeName;
-    }
+    
 
     public Room(int aInt, int aInt0, int aInt1) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

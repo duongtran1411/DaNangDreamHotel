@@ -285,24 +285,6 @@
                         </div>
                     </c:forEach>
                 </div>
-                <div class="row">
-                <c:forEach items="${listR}" var="o">
-                    <div class="col-xl-3 col-md-3" style="padding: 0 10px">
-                            <div class="single_offers" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 15px; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
-                                <div class="about_thumb">
-                                    <img src="${o.image}" width="400px" height="250px" alt="alt"/>
-                                </div>
-                                    <h4 style="font-family: Edu Australia VIC WA NT Hand, sans-serif;margin: 10px 0;font-size: 22px ">${o.name}</h4>
-                                
-                                    <p>Price: ${FormatUtils.formatPRice(o.price)}đ/Pernight</p>
-                                    <p>Type: ${o.typeName}</p>
-                                    <p>Size: ${o.size}m<sup>2</sup></p>
-                                    <button style="background-color:#DFA974; border: 1px solid #DFA974; padding: 5px; border-radius:5px "><a href="roomDetailsController?Id=${o.room_Id}&typeRoom=${o.type_Room_Id}" style="color:white">More Details</a></button>
-<!--                                    <span style="padding-left: 70px; font-family: Edu Australia VIC WA NT Hand, sans-serif">${FormatUtils.formatPRice(o.price)}đ</span>-->
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
             </div>
         </div>
         <!-- Home Room Section End -->
