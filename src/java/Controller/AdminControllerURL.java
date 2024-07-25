@@ -117,7 +117,7 @@ public class AdminControllerURL extends HttpServlet {
         if (request.getParameter("topPage") != null) {
             topPage = Integer.parseInt(request.getParameter("topPage"));
         }
-        List<Room> listT = daoroom.sortRoomsByPriceDesc((topPage - 1) * topRecordsPerPage, topRecordsPerPage);
+        List<Room> listT = daoroom.sortRoomsByPricesDesc((topPage - 1) * topRecordsPerPage, topRecordsPerPage);
         int noOfTopRecords = daoroom.getNoOfRecords(); // Use a similar method to get the total number of top rooms
         int noOfTopPages = (int) Math.ceil(noOfTopRecords * 1.0 / topRecordsPerPage);
 
@@ -179,67 +179,7 @@ request.setAttribute("totalPriceItem", totalPriceItem);
     @Override
      protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String checkinDateStr = request.getParameter("checkinDate");
-        String checkoutDateStr = request.getParameter("checkoutDate");
-
-        // Kiểm tra nếu các ngày không null và không trống
-        if (checkinDateStr != null && !checkinDateStr.isEmpty() && checkoutDateStr != null && !checkoutDateStr.isEmpty()) {
-            try {
-                // Chuyển đổi từ String sang đối tượng Date
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                java.util.Date checkinDate = dateFormat.parse(checkinDateStr);
-                java.util.Date checkoutDate = dateFormat.parse(checkoutDateStr);
-
-                // Gọi DAO để lấy danh sách booking dựa trên ngày
-                DAOBooking dao = new DAOBooking();
-                DAORoom daoroom = new DAORoom();
-                List<Booking> listB = dao.getAllBookingByDate(new Date(checkinDate.getTime()), new Date(checkoutDate.getTime()));
-                int topPage = 1;
-                int topRecordsPerPage = 3; // Example for top rooms per page
-                if (request.getParameter("topPage") != null) {
-                    topPage = Integer.parseInt(request.getParameter("topPage"));
-                }
-                List<Room> listT = daoroom.sortRoomsByPriceDesc((topPage - 1) * topRecordsPerPage, topRecordsPerPage);
-                int noOfTopRecords = daoroom.getNoOfRecords(); // Use a similar method to get the total number of top rooms
-                int noOfTopPages = (int) Math.ceil(noOfTopRecords * 1.0 / topRecordsPerPage);
-
-                request.setAttribute("listT", listT);
-                request.setAttribute("noOfTopPages", noOfTopPages);
-                request.setAttribute("currentTopPage", topPage);
-                int page = 1;
-                int recordsPerPage = 5;
-                if (request.getParameter("page") != null) {
-                    page = Integer.parseInt(request.getParameter("page"));
-                }
-                List<Room> listR = daoroom.listAllRooms((page - 1) * recordsPerPage, recordsPerPage);
-                int noOfRecords = daoroom.getNoOfRecords();
-                int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-
-                request.setAttribute("listR", listR);
-                request.setAttribute("noOfPages", noOfPages);
-                request.setAttribute("currentPage", page);
-                // Đặt danh sách booking vào request để hiển thị trong JSP
-                request.setAttribute("listB", listB);
-
-                long totalPrice = 0;
-
-                for (Booking booking : listB) {
-                    totalPrice += booking.getExpenses();
-                }
-                request.setAttribute("totalPrice", totalPrice);
-                
-                
-                
-                // Chuyển hướng đến trang hiển thị danh sách booking
-                request.getRequestDispatcher("dashboard/jsp/Dashboard.jsp").forward(request, response);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response.sendRedirect("AdminControllerURL"); // Xử lý lỗi nếu có
-            }
-        } else {
-            response.sendRedirect("AdminControllerURL"); // Quay lại trang filter nếu không có ngày được chọn
-        }
+       
     }
 
     /**
