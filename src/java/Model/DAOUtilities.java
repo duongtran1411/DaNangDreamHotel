@@ -132,7 +132,7 @@ public class DAOUtilities extends DBConnect {
     
     public List<Utilities> getTop3Utilities() {
         List<Utilities> list = new ArrayList<>();
-        String sql = "select * from Utilities limit 3";
+        String sql = "select * from Utilities";
 
         try {
             PreparedStatement pre = conn.prepareCall(sql);
@@ -156,6 +156,9 @@ public class DAOUtilities extends DBConnect {
     
     public static void main(String[] args) {
         DAOUtilities dao = new DAOUtilities();
-        dao.insertUtilities("duong","C:\\Users\\GIGABYTE\\OneDrive\\Pictures\\Saved Pictures\\z5637010614799_bd15e7547bbb50b5763abe16b0038a68.jpg","dddd","dddd","sdsdf",5);
+        List<Utilities> list = dao.getTop3Utilities();
+        for (Utilities o : list) {
+            System.out.println(o);
+        }
     }
 }
