@@ -19,6 +19,7 @@ public class Room {
     private String checkIn;
     private String checkOut;
     private String maintenance_status;
+    private String typeName;
 
     public Room() {
     }
@@ -98,6 +99,18 @@ public class Room {
         this.people = people;
         this.image = image;
         this.type_Room_Id = type_Room_Id;
+    }
+    public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int type_Room_Id, String typeName) {
+        this.room_Id = room_Id;
+        this.name = name;
+        this.price = price;
+        this.size = size;
+        this.bed = bed;
+        this.bath = bath;
+        this.people = people;
+        this.image = image;
+        this.type_Room_Id = type_Room_Id;
+        this.typeName = typeName;
     }
 
     public Room(int room_Id, String name, int price, int size, int bed, int bath, int people, String image, int type_Room_Id, int floor_Room_Id) {
@@ -303,6 +316,14 @@ public class Room {
 
     public void setMaintenance_status(String maintenance_status) {
         this.maintenance_status = maintenance_status;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
     @Override
