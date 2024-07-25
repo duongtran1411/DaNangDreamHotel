@@ -201,7 +201,6 @@ public class ServiceStatusController extends HttpServlet {
         if (action.equals("arrive")) {
             String date = request.getParameter("date");
             list = dao.getRoomCheckIn(date);
-            session.setAttribute("listArrive", list.size());
             for (Room o : list) {
                 out.print("<div class=\"col-lg-3 col-md-6  justify-content-center element\">\n"
                         + "    <input value=\"" + o.getRoom_Id() + "\" type=\"hidden\" id=\"room-id\" class=\"RID\"/>\n");

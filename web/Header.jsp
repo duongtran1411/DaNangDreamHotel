@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <ul class="tn-left">
-                        <li><i class="fa fa-phone"></i> (12) 345 67890</li>
+                        <li><i class="fa fa-phone"></i> (+84) 335 500390</li>
                         <li><i class="fa fa-envelope"></i> danangdreamhotel@gmail.com</li>
                     </ul>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="col-lg-2">
                     <div >
                         <a href="homeController">
-                            <img src="img/logo2.jpg" alt="" height="90px" width="165px"/>
+                            <img src="img/header_homepage.jpg" alt="" height="70px" />
                         </a>
                     </div>
                 </div>
@@ -43,14 +43,14 @@
                             <ul>
                                 <li class="active"><a href="homeController" style="text-decoration: none">Home</a></li>
                                 <li>
-                                    <a href="AboutUs.jsp">About Us</a>
+                                    <a href="UtilitiesController">Service</a>
                                   
                                 <li>
                                     <a href="viewRoomController" style="text-decoration: none">Resort</a>
                                 </li>
                                 <li><a href="eventController" style="text-decoration: none">Events</a></li>
-                                <li><a href="Contact.jsp" style="text-decoration: none">Contact</a></li>
-                                <li><a href="viewCartController" style="text-decoration: none">Booked</a></li>
+                                <!--<li><a href="Contact.jsp" style="text-decoration: none">Contact</a></li>-->
+<!--                                <li><a href="viewCartController" style="text-decoration: none">Booked</a></li>-->
                             </ul>
                         </nav>
                     </div>

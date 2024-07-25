@@ -107,21 +107,26 @@ public class authentication_login extends HttpServlet {
 
                 if (!isEmailValid) {
                     request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
-                    request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
+                    request.getRequestDispatcher("/dashboard/jsp/authentication-login.jsp").forward(request, response);
                 } else if (result) {
                     HttpSession session = request.getSession();
                     session.setAttribute("acc", user);
-                    if ("1".equals(role)) {
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                    } else if ("2".equals(role)) {
-                        //request.getRequestDispatcher("ManageComment.jsp").forward(request, response);
-                        response.sendRedirect("/demo_war_exploded/dashboard/jsp/ManageComment");
-                    } else if ("3".equals(role)) {
-                        response.sendRedirect("/demo_war_exploded/Roomload.jsp");
+                    switch (user.getRole_Id()) {
+                        case 1:
+                            response.sendRedirect("AdminControllerURL");
+                            break;
+                        case 2:
+                            response.sendRedirect("typeRoomURL");
+                            break;
+                        case 3:
+                            response.sendRedirect("AdminControllerURL");
+                            break;
+                        default:
+                            break;
                     }
                 } else {
                     request.setAttribute("mess1", "Username or password is incorrect!<br>Enter your username again");
-                    request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
+                    request.getRequestDispatcher("/dashboard/jsp/authentication-login.jsp").forward(request, response);
                 }
 
             } catch (Exception e) {

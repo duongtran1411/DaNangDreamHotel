@@ -4,28 +4,19 @@
  */
 package Controller;
 
-import Entity.Event;
-import Entity.Room;
-import Entity.Utilities;
-import Model.DAOEvent;
-import Model.DAORoom;
-import Model.DAOUtilities;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  *
  * @author GIGABYTE
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/homeController"})
-public class HomeController extends HttpServlet {
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +35,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeController</title>");            
+            out.println("<title>Servlet Logout</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Logout at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,27 +56,9 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String checkIn = (String) session.getAttribute("checkInDay");
-        String checkOut = (String) session.getAttribute("checkOutDay");
-        if(checkIn == null && checkOut == null){
-            checkIn = new String();
-            checkOut = new String();
-        }
-        DAORoom dao = new DAORoom();
-        List<Room> list = dao.getNewRoom();
-        DAOEvent daoE = new DAOEvent();
-        List<Event> listE = daoE.getTop3Event();
-         DAOUtilities daoU=new DAOUtilities();
-        List<Utilities>listU=daoU.getTop3Utilities();
-        
-        
-       request.setAttribute("listU", listU);
-        request.setAttribute("listR", list);
-        request.setAttribute("listE", listE);
-       
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
-        
+       HttpSession session = request.getSession();
+       session.removeAttribute("acc");
+       response.sendRedirect("homeController");
     }
 
     /**

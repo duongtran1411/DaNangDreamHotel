@@ -312,7 +312,7 @@
                                                             });
 
                                                             const totalPages = Math.ceil(items.length / itemsPerPage);
-                                                            pageInfo.innerText = `Page ${page} of ${totalPages}`;
+//                                                            pageInfo.innerText = `Page ${page} of ${totalPages}`;
                                                         }
 
                                                         function setupPagination() {
@@ -345,7 +345,7 @@
                                                             }
 
                                                             paginationContainer.appendChild(ul);
-                                                            pageInfo.innerText = `Page 1 of ${totalPages}`;
+//                                                            pageInfo.innerText = `Page 1 of ${totalPages}`;
                                                         }
 
                                                         setupPagination();
@@ -471,7 +471,7 @@
                                                             }
 
                                                             paginationContainer.appendChild(ul);
-                                                            pageInfo.innerText = `Page 1 of ${totalPages}`;
+//                                                            pageInfo.innerText = `Page 1 of ${totalPages}`;
                                                         }
 
                                                         setupPagination();
@@ -514,7 +514,7 @@
                                                 });
 
                                                 const totalPages = Math.ceil(items.length / itemsPerPage);
-                                                pageInfo.innerText = `Page ${page} of ${totalPages}`;
+//                                                pageInfo.innerText = `Page ${page} of ${totalPages}`;
                                             }
 
                                             function setupPagination() {
@@ -547,7 +547,7 @@
                                                 }
 
                                                 paginationContainer.appendChild(ul);
-                                                pageInfo.innerText = `Page 1 of ${totalPages}`;
+//                                                pageInfo.innerText = `Page 1 of ${totalPages}`;
                                             }
 
                                             setupPagination();

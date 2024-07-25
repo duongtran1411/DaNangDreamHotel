@@ -92,9 +92,21 @@
         <servlet-name>UseSuppliesController</servlet-name>
         <servlet-class>Controller.UseSuppliesController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>Controller.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAccountController</servlet-name>
+        <servlet-class>Controller.ManageAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAccountController</servlet-name>
+        <url-pattern>/ManageAccountControllerURL</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TypeRoomController</servlet-name>
@@ -187,6 +199,10 @@
     <servlet-mapping>
         <servlet-name>UseSuppliesController</servlet-name>
         <url-pattern>/useSuppliesURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logoutURL</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

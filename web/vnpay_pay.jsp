@@ -153,7 +153,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-lg-4">
-                            <img src="img/img_HomePage01.jpg" alt="alt" width="120px" height="60px"/>
+                            <img src="img/img_HomePage01_1.jpg" alt="alt" width="120px" height="60px"/>
                         </div>
                         <div class="col-lg-8">
                             <p class="name">Da Nang Dream Hotel</p>

@@ -18,6 +18,7 @@
         <meta name="keywords" content="Sona, unica, creative, html" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link
             href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap"
             rel="stylesheet"
@@ -91,7 +92,7 @@
                         </div>
                         <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                             <div class="booking-form">
-                                <h3>Booking Your Hotel</h3>
+                                <h3>Booking Hotel</h3>
                                 <form action="bookByEventController" method="get">
                                     <div class="check-date date-picker">
                                         <label for="checkin">Check-in</label>
@@ -107,8 +108,8 @@
                                             <option value="1">1 Adults</option>
                                             <option value="2">2 Adults</option>
                                             <option value="3">3 Adults</option>
-                                            <option value="3">4 Adults</option>
-                                            <option value="3">5 Adults</option>
+                                            <option value="4">4 Adults</option>
+                                            <option value="5">5 Adults</option>
                                         </select>
                                     </div>
                                     <button type="submit">Check Availability</button>
@@ -133,19 +134,17 @@
                             <div class="about-text">
                                 <div class="section-title">
                                     <span>About Us</span>
-                                    <h2>Intercontinental LA <br />Westlake Hotel</h2>
+                                    <h2>Da Nang, Viet Nam<br />Da Nang Dream Hotel</h2>
                                 </div>
                                 <p class="f-para">
-                                    Sona.com is a leading online accommodation site. We’re
-                                    passionate about travel. Every day, we inspire and reach
-                                    millions of travelers across 90 local websites in 41 languages.
+                                    DaNangDreamHotel.com is a leading online accommodation site. We’re
+                                    passionate about travel.
                                 </p>
                                 <p class="s-para">
                                     So when it comes to booking the perfect hotel, vacation rental,
                                     resort, apartment, guest house, or tree house, we’ve got you
                                     covered.
                                 </p>
-                                <a href="#" class="primary-btn about-btn">Read More</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -167,51 +166,62 @@
 
             <!-- Home Room Section Begin -->  <!--BEST SELLER-->
             <!-- Home Room Section Begin -->  <!--BEST SELLER-->
-            <section class="hp-room-section">
-                <div class="container-fluid">
-                    <div class="hp-room-items">
-                        <div class="row">
-                        <c:forEach items="${listR}" var="o">
-                            <div class="col-lg-3 col-md-6">
-                                <div
-                                    class="hp-room-item set-bg"
-                                    data-setbg="${o.image}"
-                                    >
-                                    <div class="hr-text">
-                                        <h3>${o.name}</h3>
-                                        <h2>
-                                            <fmt:formatNumber value="${o.price}" type="number" maxFractionDigits="0"/>đ
-                                            <span>/Pernight</span>
-                                        </h2>
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="r-o">Size:</td>
-                                                    <td>${o.size}m<sup>2</sup></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="r-o">Capacity:</td>
-                                                    <td>${o.people} person</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="r-o">Bed:</td>
-                                                    <td>${o.bed} bed</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="r-o">Services:</td>
-                                                    <td>Wifi, Television, Bathroom,...</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
-                                    </div>
-                                </div>
-                            </div>       
-                        </c:forEach>
+            <!--            <div >
+                            <div class="section-title">
+                                <h2>Resort</h2>
+                            </div>
+                            <div class="container-fluid">
+                                <div>
+                                    <div class="row">
+                                        <ul class="d-flex" style="flex-wrap: wrap">
+        <c:forEach items="${listR}" var="o">
+            <li class="col-lg-4 " style="list-style: none">
+                <h3></h3>
+                <div>
+                    <img src="${o.image}" alt="alt" height="500px" weight="300px"/>
+                </div>
+                <div>
+                    <strong>${o.name}</strong>
+                    <p></p>
+                    <span></span>
+                </div>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
+</div>
+</div
+</div>-->
+            <div class="offers_area padding_top" style="box-shadow: 5px 5px 10px #ddd">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="section_title mb-100">
+                            <h2>Room and Suits</h2>
+                            <p>Pick a room that new suits your taste and budget</p>
+                        </div>
                     </div>
                 </div>
+                <div class="row">
+                <c:forEach items="${listR}" var="o">
+                    <div class="col-xl-3 col-md-3" style="padding: 0 10px">
+                            <div class="single_offers" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 15px; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
+                                <div class="about_thumb">
+                                    <img src="${o.image}" width="400px" height="250px" alt="alt"/>
+                                </div>
+                                    <h4 style="font-family: Edu Australia VIC WA NT Hand, sans-serif;margin: 10px 0;font-size: 22px ">${o.name}</h4>
+                                
+                                    <p>Price: ${FormatUtils.formatPRice(o.price)}đ/Pernight</p>
+                                    <p>Type: ${o.typeName}</p>
+                                    <p>Size: ${o.size}m<sup>2</sup></p>
+                                    <button style="background-color:#DFA974; border: 1px solid #DFA974; padding: 5px; border-radius:5px "><a href="roomDetailsController?Id=${o.room_Id}&typeRoom=${o.type_Room_Id}" style="color:white">More Details</a></button>
+<!--                                    <span style="padding-left: 70px; font-family: Edu Australia VIC WA NT Hand, sans-serif">${FormatUtils.formatPRice(o.price)}đ</span>-->
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
-        </section>
+        </div>
         <!-- Home Room Section End -->
 
         <!-- Home Room Section End -->
@@ -236,16 +246,9 @@
                                     husband, my daughter and I needed a place to stay for a few
                                     nights. As a Chicago resident, we know a lot about our city,
                                     neighborhood and the types of housing options available and
-                                    absolutely love our vacation at Sona Hotel.
+                                    absolutely love our vacation at Da Nang Dream Hotel Hotel.
                                 </p>
                                 <div class="ti-author">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
                                     <h5>- Alexander Vasquez</h5>
                                 </div>
                             </div>
@@ -255,13 +258,13 @@
             </div>
         </section>
         <!-- Testimonial Section End -->
-<section class="blog-section spad">
+        <section class="blog-section spad">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title">
                             <span>Hotel</span>
-                            <h2>Utilities</h2>
+                            <h2>Service</h2>
                         </div>
                     </div>
                 </div>
@@ -272,7 +275,7 @@
                                 <div class="bi-text">
                                     <span class="b-tag">Utilities</span>
                                     <h4 ><a class="name-Utilities"  href="UtilitiesController?id=${u.utilities_Id}&action=listdetail">${u.name}</a></h4>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -450,7 +453,7 @@
                                             }
                                         });
 
-                                        
+
 
         </script>
     </body>

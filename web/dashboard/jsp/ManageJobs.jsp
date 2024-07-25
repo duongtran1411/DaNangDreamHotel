@@ -24,10 +24,10 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addAccountModal">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addAccountModal" >
                                 <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Jobs</p>                  
                             </button>
-                            <div class="container-fluid">
+                            <div class="container-fluid" style="height: 800px;width: 1300px;">
                                 <div class="table-wrapper">
                                     <div class="table-title" style="background-color: #000">                 
                                     </div>
