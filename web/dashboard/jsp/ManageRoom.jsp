@@ -96,8 +96,105 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Floor</th>
+                                                <th>Name
+                                                    <button onclick="sortNameUp()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-down"></i></button>
+                                                    <button onclick="sortNameDown()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-up"></i></button>
+                                                </th>
+                                                <th>Price
+                                                    <button onclick="sortPriceUp()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-down"></i></button>
+                                                    <button onclick="sortPriceDown()" class="btn" style="border: none; background-color: transparent; padding: 2px"><i class="fa fa-angle-up"></i></button>
+                                                </th>
+                                                <th>Size</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="content">
+                                        <c:forEach items="${AllRoom}" var="o">
+                                            <tr>
+                                                <td>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}"><i class="far fa-eye successful"></i></a>
+                                                </td>
+                                                <td>${o.floor_Room_Id}</td>
+                                                <td>${o.name}</td>
+                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber>  đ</td>
+                                                <td>${o.size} m²</td>
+                                                <td>
+                                                    <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                    <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        <c:forEach items="${ListRoomBID}" var="o">
+                                            <tr>
+                                                <td>
+                                                    <a href="imageRoomURL?action=view&rid=${o.room_Id}"><i class="far fa-eye"></i></a>
+                                                </td>
+                                                <td>${o.floor_Room_Id}</td>
+                                                <td>${o.name}</td>
+                                                <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber> đ</td>
+                                                <td>${o.size} m²</td>
+                                                <td>
+                                                    <a href="roomURL?action=loadEdit&rid=${o.room_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
+                                                    <a href="roomURL?action=delete&rid=${o.room_Id}" class="delete" title="Delete" data-toggle="tooltip"><i class='far fa-trash-alt' style="color: #c80000"></i></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="updateRoom" tabindex="-1" role="dialog" aria-labelledby="updateRoomLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateRoomLabel">Update Room Details</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="roomURL?action=update" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="room_Id" name="rid" hidden="">
+                            </div>
+                            <div class="form-group">
+                                <label for="floor_Room_Id">Floor:</label>
+                                <input type="text" class="form-control" id="floor_Room_Id" name="floor" >
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Room Name:</label>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price:</label>
+                                <input type="number" class="form-control" id="price" name="price">
+                            </div>
+                            <div class="form-group">
+                                <label for="size">Size (m²):</label>
+                                <input type="number" class="form-control" id="size" name="size">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 12px">
+                                <label>Type Room</label>
+                                <select name="trid" class="form-select" aria-label="Default select example">
+                                    <c:forEach items="${AllTypeRoom}" var="o">
+                                        <option value="${o.typeRoom_Id}">${o.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" value="Close">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

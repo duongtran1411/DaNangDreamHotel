@@ -112,6 +112,5 @@ public class DAOCustomer extends DBConnect {
 
     public static void main(String[] args) {
         DAOCustomer dao = new DAOCustomer();
-        System.out.println(dao.getAllCustomer());
     }
 }

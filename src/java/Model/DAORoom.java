@@ -68,6 +68,48 @@ public class DAORoom extends DBConnect {
         return list;
     }
     
+    
+    public List<Room> listAllRooms(int offset, int limit) {
+        List<Room> list = new ArrayList<>();
+        String sql = "SELECT * FROM room LIMIT ? OFFSET ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, limit);
+            pre.setInt(2, offset);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
+    public int getNoOfRecords() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM room";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
     public List<Room> getRoomByTypeRoomId(int typeRoomId) {
         List<Room> list = new ArrayList();
         String sql = "select distinct r.* from room r\n"
@@ -758,10 +800,35 @@ public class DAORoom extends DBConnect {
     
     public List<Room> sortRoomsByPriceDesc() {
         List<Room> list = new ArrayList<>();
-        String sql = "SELECT * FROM managerhotel\n"
-                + "    .room order by price desc ; ";
+        String sql = "SELECT * FROM room ORDER BY price DESC";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;
+    }
+    
+    public List<Room> sortRoomsByPricesDesc(int limit,int offset) {
+        List<Room> list = new ArrayList<>();
+        String sql = "SELECT * FROM room ORDER BY price DESC LIMIT ? OFFSET ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, limit);
+            pre.setInt(2, offset);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),

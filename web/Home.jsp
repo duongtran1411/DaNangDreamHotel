@@ -18,7 +18,6 @@
         <meta name="keywords" content="Sona, unica, creative, html" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link
             href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap"
             rel="stylesheet"
@@ -187,7 +186,7 @@
                         </div>
                         <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                             <div class="booking-form">
-                                <h3>Booking Hotel</h3>
+                                <h3>Booking Your Hotel</h3>
                                 <form action="bookByEventController" method="get">
                                     <div class="check-date date-picker">
                                         <label for="checkin">Check-in</label>
@@ -203,8 +202,8 @@
                                             <option value="1">1 Adults</option>
                                             <option value="2">2 Adults</option>
                                             <option value="3">3 Adults</option>
-                                            <option value="4">4 Adults</option>
-                                            <option value="5">5 Adults</option>
+                                            <option value="3">4 Adults</option>
+                                            <option value="3">5 Adults</option>
                                         </select>
                                     </div>
                                     <button type="submit">Check Availability</button>
@@ -229,17 +228,19 @@
                             <div class="about-text">
                                 <div class="section-title">
                                     <span>About Us</span>
-                                    <h2>Da Nang, Viet Nam<br />Da Nang Dream Hotel</h2>
+                                    <h2>Intercontinental LA <br />Westlake Hotel</h2>
                                 </div>
                                 <p class="f-para">
-                                    DaNangDreamHotel.com is a leading online accommodation site. We’re
-                                    passionate about travel.
+                                    Sona.com is a leading online accommodation site. We’re
+                                    passionate about travel. Every day, we inspire and reach
+                                    millions of travelers across 90 local websites in 41 languages.
                                 </p>
                                 <p class="s-para">
                                     So when it comes to booking the perfect hotel, vacation rental,
                                     resort, apartment, guest house, or tree house, we’ve got you
                                     covered.
                                 </p>
+                                <a href="#" class="primary-btn about-btn">Read More</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -286,7 +287,7 @@
                     </c:forEach>
                 </div>
             </div>
-        </div>
+        </section>
         <!-- Home Room Section End -->
 
         <!-- Home Room Section End -->
@@ -311,9 +312,16 @@
                                     husband, my daughter and I needed a place to stay for a few
                                     nights. As a Chicago resident, we know a lot about our city,
                                     neighborhood and the types of housing options available and
-                                    absolutely love our vacation at Da Nang Dream Hotel Hotel.
+                                    absolutely love our vacation at Sona Hotel.
                                 </p>
                                 <div class="ti-author">
+                                    <div class="rating">
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star-half_alt"></i>
+                                    </div>
                                     <h5>- Alexander Vasquez</h5>
                                 </div>
                             </div>

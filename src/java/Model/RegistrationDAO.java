@@ -85,7 +85,7 @@ public class RegistrationDAO extends DBConnect {
                         rs.getString("password"),
                         rs.getString("email"),
                         rs.getString("phone"),
-                        rs.getInt("role_Id"),
+                        rs.getString("role_Id"),
                         rs.getString("create_at"),
                         rs.getString("update_at")
                 );
@@ -173,7 +173,7 @@ public class RegistrationDAO extends DBConnect {
             st.setString(6, registrationDTO.getPassword());
             st.setString(7, registrationDTO.getEmail());
             st.setString(8, registrationDTO.getPhone());
-            st.setInt(9, registrationDTO.getRole_Id());
+            st.setString(9, registrationDTO.getRole_Id());
             st.setString(10, registrationDTO.getCreate_at());
             st.setString(11, registrationDTO.getUpdate_at());
 

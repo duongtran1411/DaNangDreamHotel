@@ -90,7 +90,7 @@
                 </div>
                 <div class="form-group col-md-1">
                     <label for="checkout">Person</label>
-                    <input type="text" class="form-control w-100" value="<c:if test="${sessionScope.numberPerson == null}">2</c:if>${sessionScope.numberPerson}" style="padding-left: 25px" readonly="" >
+                    <input type="text" class="form-control w-100" value="${sessionScope.numberPerson}" style="padding-left: 25px" readonly="" >
                 </div>
                 <div class="form-group col-md-2" style="padding-right: 5px;align-items: center">
                     <button  class="btn btn w-100" style="background-color: #C59B24; color: white" id="updateButton" >Update</button>
@@ -99,7 +99,7 @@
             </div>
         </div>
         <!-- End of Header Section -->
-        <%--<c:if test="${checkOutDay > checkInDay}">--%>
+        <c:if test="${checkOutDay > checkInDay}">
             <div class="row">
                 <div class="col-md-3">
                     <div class="filter-box">
@@ -162,9 +162,11 @@
                             </div>
                         </div>
                     </c:forEach>
+
+
                 </div>
             </div>
-        <%--</c:if>--%>
+        </c:if>
         <c:if test="${checkOutDay < checkInDay}">
             <h2 style="color: red">Check-in date is less than check-out date</h2>
             <a href="homeController" style="color: black">Back to home</a>
@@ -235,13 +237,7 @@
                                                     var year = date.getUTCFullYear();
                                                     var minDate = year + '-' + tmonth + '-' + tdate;
                                                     var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
-                                                    var showCheckIn = document.getElementById('checkin').value;
-//                                                    if(showCheckIn === ""){
-//                                                        showCheckIn.setAttribute('value', minDate);
-//                                                        console.log("now day");
-//                                                    }
-                                                    
-                                                    var tdateMin = date.getDate() + 2;
+                                                    var tdateMin = date.getDate() + 1;
                                                     var tmonthMin = date.getMonth() + 1;
                                                     if (tdateMin < 10) {
                                                         tdateMin = '0' + tdateMin;
@@ -252,11 +248,6 @@
                                                     var yearMin = date.getUTCFullYear();
                                                     var min = yearMin + '-' + tmonthMin + '-' + tdateMin;
                                                     var checkOut = document.getElementById('checkout').setAttribute('min', min);
-                                                    var showCheckOut = document.getElementById('checkout').value;
-//                                                    if(showCheckOut === ""){
-//                                                        showCheckOut.setAttribute('value', min);
-//                                                    }
-                                                    
                                                     document.getElementById('checkin').addEventListener('input', function (e) {
                                                         if (e.target.value === '') {
                                                             e.preventDefault();

@@ -87,9 +87,9 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <div class="container" style="margin-right: 105px; height: 800px;">
+                            <div class="container-fluid" >
                                 <!-- Page Heading -->
-                                <h1 class="h3 mb-2 text-gray-800"  style="margin-top: 100px">CUSTOMERS</h1>
+                                <h1 class="h3 mb-2 text-gray-800">CUSTOMERS</h1>
                                 <div class="d-flex justify-content-center">
                                     <div class="search">
                                         <input class="search_input" id="searchInput" type="text" name="txt" placeholder="Search...">
@@ -260,7 +260,7 @@
                     "lengthMenu": [5, 10, 25, 50],
                     "pageLength": 10,
                     "language": {
-                        //"info": "Hiển thị START đến END của TOTAL bản ghi",
+                        //"info": "Hiển thị _START_ đến _END_ của _TOTAL_ bản ghi",
                         "paginate": {
                             //                        "next": "next",
                             //                        "previous": "rev"

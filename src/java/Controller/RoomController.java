@@ -151,7 +151,7 @@ public class RoomController extends HttpServlet {
         response.sendRedirect("roomURL?action=detail&trid=" + request.getSession().getAttribute("typeroomid") + "");
     }
     
-   private void editRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void editRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         int roomId = Integer.parseInt(request.getParameter("rid"));
         String name = request.getParameter("name");

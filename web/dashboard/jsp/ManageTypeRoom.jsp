@@ -27,26 +27,26 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                 </div>
                 <section class="rooms-section spad">
-                <c:if test="${not empty sessionScope.notificationMessage}">
-                    <div style="margin-left: 300px; margin-right: 90px" class="alert alert-${sessionScope.notificationStatus == 'success' ? 'success' : 'danger'} alert-dismissible fade show" role="alert" id="status-alert">
-                        ${sessionScope.notificationMessage}
-                    </div>
-                    <script>
-                        setTimeout(function () {
-                            var alert = document.getElementById('status-alert');
-                            if (alert) {
-                                alert.classList.remove('show');
-                                alert.classList.add('fade');
-                                setTimeout(function () {
-                                    alert.parentNode.removeChild(alert);
-                                }, 11000);
-                            }
-                        }, 9000);
-                    </script>
-                    <c:remove var="notificationMessage" scope="session"/>
-                    <c:remove var="notificationStatus" scope="session"/>
-                </c:if>
-                <div class="container">
+                    <div class="container">
+                    <c:if test="${not empty sessionScope.notificationMessage}">
+                        <div class="alert alert-${sessionScope.notificationStatus == 'success' ? 'success' : 'danger'} alert-dismissible fade show" role="alert" id="status-alert">
+                            ${sessionScope.notificationMessage}
+                        </div>
+                        <script>
+                            setTimeout(function () {
+                                var alert = document.getElementById('status-alert');
+                                if (alert) {
+                                    alert.classList.remove('show');
+                                    alert.classList.add('fade');
+                                    setTimeout(function () {
+                                        alert.parentNode.removeChild(alert);
+                                    }, 500);
+                                }
+                            }, 3000);
+                        </script>
+                        <c:remove var="notificationMessage" scope="session"/>
+                        <c:remove var="notificationStatus" scope="session"/>
+                    </c:if>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTypeRoomModal">
                         <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>New Type</p>                  
                     </button>
@@ -96,9 +96,7 @@
                                         </div>
                                     </div>
                                     <div style="display: flex; justify-content: space-between; width: 100%; padding: 5px;">
-                                        <!--<a href="typeRoomURL?action=loadEdit&id=${o.typeRoom_Id}" class="text-decoration-none" style="color: #08c;">Edit</a>-->
-                                        <a data-bs-toggle="modal" data-bs-target="#updateTypeRoom"
-                                           onclick="updateTypeRoom('${o.getTypeRoom_Id()}', '${o.name}', '${o.event_Id}', '${o.bed}', '${o.bath}', '${o.people}')" class="text-decoration-none" style="color: #08c;">Edit</a>
+                                        <a href="typeRoomURL?action=loadEdit&id=${o.typeRoom_Id}" class="text-decoration-none" style="color: #08c;">Edit</a>
                                         <a href="roomURL?action=detail&trid=${o.typeRoom_Id}" class="text-decoration-underline" style="color: seagreen;">Detail</a>
                                         <a href="typeRoomURL?action=delete&id=${o.typeRoom_Id}" class="text-decoration-none" style="color: red; ">Delete</a>
                                     </div>
@@ -162,53 +160,6 @@
             </div>
         </div>
 
-        <div class="modal fade" id="updateTypeRoom" tabindex="-1" role="dialog" aria-labelledby="updateTypeRoomLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="updateTypeRoomLabel">Update Type Room</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="typeRoomURL?action=edit" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="type_room_Id" name="type_Room_Id" hidden="">
-                            </div>
-                            <div class="form-group">
-                                <label for="floor_Room_Id">Name: </label>
-                                <input type="text" class="form-control" id="trname" name="name" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Event ID:</label>
-                                <input type="number" class="form-control" id="event_Id" name="event_Id">
-                            </div>
-                            <div class="form-group">
-                                <label for="price">Bed: </label>
-                                <input type="number" class="form-control" id="bedId" name="bed">
-                            </div>
-                            <div class="form-group">
-                                <label for="size">Bath:</label>
-                                <input type="number" class="form-control" id="bathId" name="bath">
-                            </div>
-                            <div class="form-group">
-                                <label for="size">People: </label>
-                                <input type="number" class="form-control" id="peopleId" name="people">
-                            </div>
-                            <div class="form-group">
-                                <label>Image</label>
-                                <input type="file" class="form-control" id="imageId" name="fileImageTypeRoom"required>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" value="Close">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <script>
             function updateValue(elementId, increment) {
                 var element = document.getElementById(elementId);
@@ -217,16 +168,6 @@
                 if (newValue >= 0) {
                     element.value = newValue;
                 }
-            }
-            function updateTypeRoom(type_room_Id, trname, event_Id, bed, bath, people, img) {
-                $('#type_room_Id').val(type_room_Id);
-                $('#trname').val(trname);
-                $('#event_Id').val(event_Id);
-                $('#bedId').val(bed);
-                $('#bathId').val(bath);
-                $('#peopleId').val(people);
-                $('#imageId').val(img);
-                $('#updateTypeRoom').modal('show');
             }
         </script>
     </div>

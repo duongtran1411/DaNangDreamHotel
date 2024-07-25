@@ -73,12 +73,11 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTypeItemModal">
+                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Type</p>                  
+                            </button>
                             <div class="container-fluid" style="height: 800px;width: 1300px">
-                                <div class="row">
-                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTypeItemModal" style="padding-right: 1150px">
-                                        <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Type</p>                  
-                                    </button>
-                                </div>
+
                                 <input type="text" id="searchInput" class="search-input" placeholder="Search for items...">
 
                                 <h1 class="h3 mb-2 text-gray-800">Table Type Of Item</h1>

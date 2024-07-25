@@ -25,10 +25,10 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addAccountModal" >
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addAccountModal">
                                 <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Account</p>                  
                             </button>
-                            <div class="container-fluid" style="height: 800px;width: 1300px">
+                            <div class="container-fluid">
                                 <div class="table-wrapper">
                                     <div class="table-title" style="background-color: #000">                 
                                     </div>
@@ -126,12 +126,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label>First Name</label>
-                                    <input name="firstName" type="text" class="form-control" placeholder="Enter first name" required>
+                                    <input name="firstName" type="text" class="form-control" placeholder="Enter first name" required
+                                           pattern="[A-Za-z]{2,}" title="First name should only contain letters and be at least 2 characters long.">
                                 </div>
                                 <div class="form-group">
                                     <label>Last Name</label>
-                                    <input name="lastName" type="text" class="form-control" placeholder="Enter last name" required>
+                                    <input name="lastName" type="text" class="form-control" placeholder="Enter last name" required
+                                           pattern="[A-Za-z]{2,}" title="Last name should only contain letters and be at least 2 characters long.">
                                 </div>
+
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input name="password" type="password" class="form-control" placeholder="Enter password" required>
@@ -181,6 +184,7 @@
                 const phone = document.getElementById('phone').value.trim();
                 const email = document.getElementById('email').value.trim();
 
+                // Check for empty fields
                 if (username === "") {
                     alert("Please enter a username.");
                     return false;
@@ -189,10 +193,16 @@
                 if (firstName === "") {
                     alert("Please enter a first name.");
                     return false;
+                } else if (!/^[A-Za-z]+$/.test(firstName) || /^[0-9]/.test(firstName) || firstName.length < 2) {
+                    alert("First name should only contain letters, should not start with a number, and must be at least 2 characters long.");
+                    return false;
                 }
 
                 if (lastName === "") {
                     alert("Please enter a last name.");
+                    return false;
+                } else if (!/^[A-Za-z]+$/.test(lastName) || /^[0-9]/.test(lastName) || lastName.length < 2) {
+                    alert("Last name should only contain letters, should not start with a number, and must be at least 2 characters long.");
                     return false;
                 }
 
@@ -204,21 +214,15 @@
                 if (phone === "") {
                     alert("Please enter a phone number.");
                     return false;
-                } else if (!phone.match(/^\d{10}$/)) {
+                } else if (!/^\d{10}$/.test(phone)) {
                     alert("Please enter a valid 10-digit phone number.");
-                    return false;
-                }
-
-                const phonePattern = /^[0-9]+$/;
-                if (!phonePattern.test(phone)) {
-                    alert("Please enter a valid phone number.");
                     return false;
                 }
 
                 if (email === "") {
                     alert("Please enter an email.");
                     return false;
-                } else if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                     alert("Please enter a valid email address.");
                     return false;
                 }
@@ -226,6 +230,7 @@
                 return true; // If all fields are valid, submit the form
             }
         </script>
+
         <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="dashboard/assets/js/sidebarmenu.js"></script>

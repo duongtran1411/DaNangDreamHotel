@@ -28,8 +28,7 @@ public class DAOBooking extends DBConnect {
                 + "   b.created_at, "
                 + "   c.idCard, "
                 + "   c.customer_Id,"
-                + "   b.status,"
-                + "c.reservationCode "
+                + "   b.status "
                 + "FROM booking b "
                 + "JOIN customer c ON c.customer_Id = b.customer_Id";
 
@@ -48,8 +47,7 @@ public class DAOBooking extends DBConnect {
                         rs.getString("created_at"),
                         rs.getString("idCard"),
                         rs.getInt("customer_Id"),
-                        rs.getString("status"),
-                rs.getInt("reservationCode")));
+                        rs.getString("status")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex);
@@ -330,7 +328,6 @@ public class DAOBooking extends DBConnect {
 
     public static void main(String[] args) {
         DAOBooking dao = new DAOBooking();
-        System.out.println(dao.getAllBooking());
-//        System.out.println(dao.getCustomerSameBooking(12));
+        //Room r = dao.getLiveBookingDetailId()
     }
 }

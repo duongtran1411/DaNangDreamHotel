@@ -79,7 +79,7 @@ public class HomeController extends HttpServlet {
          DAOUtilities daoU=new DAOUtilities();
         List<Utilities>listU=daoU.getTop3Utilities();
         
-        
+
        request.setAttribute("listU", listU);
         request.setAttribute("listR", list);
         request.setAttribute("listE", listE);

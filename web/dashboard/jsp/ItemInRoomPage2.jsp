@@ -34,7 +34,7 @@
                     <div class="card">
                         <div class="card-body">
              
-                        <div class="container-fluid" style="height: 800px;width: 1300px; margin-left: 400px">
+                        <div class="container-fluid" style="height: 800px;width: 1300px">
 
                             <!-- Page Heading -->
                             <h1 class="h3 mb-2 text-gray-800">Tables Room</h1>

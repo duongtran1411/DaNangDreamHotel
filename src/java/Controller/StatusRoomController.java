@@ -70,7 +70,7 @@ public class StatusRoomController extends HttpServlet {
         List<Room> list = dao.getAllRoom();
         List<TypeRoom> listT = daoT.getAllTypeRoom();
         List<Floor> listF = daoL.getAllFloor();
-//        request.setAttribute("list", session.getAttribute("listArrive"));
+        request.setAttribute("list", session.getAttribute("listArrive"));
         request.setAttribute("list", list);
         request.setAttribute("listType", listT);
         request.setAttribute("listFloor", listF);
