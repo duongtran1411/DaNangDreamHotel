@@ -108,10 +108,10 @@
             <jsp:include page="SlideBar.jsp"></jsp:include>
                 <div class="body-wrapper">
                 <jsp:include page="Profile.jsp"></jsp:include>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="container-fluid" style="height: 800px;width: 1300px;margin-left: 400px">
-                                <input type="text" id="searchInput" class="search-input" placeholder="Search for item...">
+                <div class="card" >
+                        <div class="card-body" >
+                            <div class="container-fluid" style="height: 800px;width: 1300px;margin-left: 400px;">
+                                <input type="text" id="searchInput" class="search-input" placeholder="Search for item..." >
                             <%
                                 try {
                                     int roomId = Integer.parseInt(request.getParameter("rid"));

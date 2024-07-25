@@ -30,67 +30,74 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addRoomModal">
-                                <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>New Event</p>                  
-                            </button>
-                            <div class="container-fluid">
-                                <div class="table-wrapper">
-                                    <div class="table-title" style="background-color: #000">                 
-                                    </div>
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Image</th>
-                                                <th>StartDay</th>
-                                                <th>EndDay</th>
-                                                <th>Description</th>
-                                                <th>Discount</th>
-                                                <th>Voucher</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${listE}" var="a">
-                                            <tr>
-                                                <th scope="row">${a.event_Id}</th>
-                                                <td>${a.name}</td>
-                                                <td><img src="${a.image}" alt="alt" style="width:304px;height: 204px"/></td>
-                                                <td>${a.startDay}</td>
-                                                <td>${a.endDay}</td>
-                                                <td>${a.description}</td>
-                                                <td>${a.discount}</td>
-                                                <td>${a.voucher}</td>
-                                                <td>
-                                                    <a href="EditEventControllerURL?id=${a.event_Id}" title="Edit" class="edit" data-toggle="tooltip"><i class="ti ti-pencil fs-7"></i></a>
-                                                    <a href="#" class="delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="DeleteEventControllerURL?id=${a.event_Id}">
-                                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                                    </a>
 
-                                                    <!-- Confirmation Modal -->
-                                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    Are you sure you want to delete event?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                    <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addRoomModal" style="padding-right: 1400px">
+                                        <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>New Event</p>                  
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <div class="table-wrapper" style="width: 1600px">
+                                        <div>
+                                            <div class="table-title" style="background-color: #000">                 
+                                            </div>
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Name</th>
+                                                        <th>Image</th>
+                                                        <th>StartDay</th>
+                                                        <th>EndDay</th>
+                                                        <th>Description</th>
+                                                        <th>Discount</th>
+                                                        <th>Voucher</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <c:forEach items="${listE}" var="a">
+                                                    <tr>
+                                                        <th scope="row">${a.event_Id}</th>
+                                                        <td>${a.name}</td>
+                                                        <td><img src="${a.image}" alt="alt" style="width:304px;height: 204px"/></td>
+                                                        <td>${a.startDay}</td>
+                                                        <td>${a.endDay}</td>
+                                                        <td>${a.description}</td>
+                                                        <td>${a.discount}</td>
+                                                        <td>${a.voucher}</td>
+                                                        <td>
+                                                            <a href="EditEventControllerURL?id=${a.event_Id}" title="Edit" class="edit" data-toggle="tooltip"><i class="ti ti-pencil fs-7"></i></a>
+                                                            <a href="#" class="delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="DeleteEventControllerURL?id=${a.event_Id}">
+                                                                <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                                            </a>
+
+                                                            <!-- Confirmation Modal -->
+                                                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            Are you sure you want to delete event?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                            <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>      
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
+                                                        </td>
+                                                    </tr>      
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -148,58 +155,58 @@
             </div>
         </div>
         <script>
-    function validateEventForm() {
-        const name = document.getElementById('name').value.trim();
-        const image = document.getElementById('image').value.trim();
-        const start = document.getElementById('start').value;
-        const end = document.getElementById('end').value;
-        const description = document.getElementById('description').value.trim();
-        const discount = document.getElementById('discount').value.trim();
-        const voucher = document.getElementById('voucher').value.trim();
+            function validateEventForm() {
+                const name = document.getElementById('name').value.trim();
+                const image = document.getElementById('image').value.trim();
+                const start = document.getElementById('start').value;
+                const end = document.getElementById('end').value;
+                const description = document.getElementById('description').value.trim();
+                const discount = document.getElementById('discount').value.trim();
+                const voucher = document.getElementById('voucher').value.trim();
 
-        if (name === "") {
-            alert("Please enter a name.");
-            return false;
-        }
+                if (name === "") {
+                    alert("Please enter a name.");
+                    return false;
+                }
 
-        if (image === "") {
-            alert("Please enter an image URL.");
-            return false;
-        }
+                if (image === "") {
+                    alert("Please enter an image URL.");
+                    return false;
+                }
 
-        if (start === "") {
-            alert("Please select a start day.");
-            return false;
-        }
+                if (start === "") {
+                    alert("Please select a start day.");
+                    return false;
+                }
 
-        if (end === "") {
-            alert("Please select an end day.");
-            return false;
-        }
+                if (end === "") {
+                    alert("Please select an end day.");
+                    return false;
+                }
 
-        if (new Date(start) > new Date(end)) {
-            alert("Start day cannot be after end day.");
-            return false;
-        }
+                if (new Date(start) > new Date(end)) {
+                    alert("Start day cannot be after end day.");
+                    return false;
+                }
 
-        if (description === "") {
-            alert("Please enter a description.");
-            return false;
-        }
+                if (description === "") {
+                    alert("Please enter a description.");
+                    return false;
+                }
 
-        if (discount === "") {
-            alert("Please enter a discount.");
-            return false;
-        }
+                if (discount === "") {
+                    alert("Please enter a discount.");
+                    return false;
+                }
 
-        if (voucher === "") {
-            alert("Please enter a voucher.");
-            return false;
-        }
+                if (voucher === "") {
+                    alert("Please enter a voucher.");
+                    return false;
+                }
 
-        return true; // If all fields are valid, submit the form
-    }
-</script>
+                return true; // If all fields are valid, submit the form
+            }
+        </script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var deleteModal = document.getElementById('deleteModal');

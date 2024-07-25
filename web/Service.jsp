@@ -94,10 +94,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Event</h2>
+                        <h2>Service</h2>
                         <div class="bt-option">
                             <a href="homeController">Home</a>
-                            <span>Event</span>
+                            <span>Service</span>
                         </div>
                     </div>
                 </div>

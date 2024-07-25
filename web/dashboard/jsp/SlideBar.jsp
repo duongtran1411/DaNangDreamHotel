@@ -47,8 +47,6 @@
     <div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-
-            <button class="btn hide-menu" id=""><a href="homeController" style="color: white">HOME</a></button>
             <ul class="nav-small-cap">
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/AdminControllerURL" aria-expanded="false">
@@ -146,7 +144,7 @@
                 </li>
                 </c:if>
                 <c:if test="${sessionScope.acc.role_Id == 1}">
-                <li class="sidebar-item">
+               <li class="sidebar-item">
                     <a class="sidebar-link" href="${pageContext.request.contextPath}/ManageAccountControllerURL" aria-expanded="false">
                         <span>
                             <i class="fa-solid fa-user white"></i>
@@ -167,7 +165,7 @@
                         <span>
                             <i class="fa fa-address-card white" aria-hidden="true"></i>
                         </span>
-                        <span class="hide-menu white">Manage Utilities</span>
+                        <span class="hide-menu white">Manage Service</span>
                     </a>
                 </li>
                 </c:if>

@@ -92,7 +92,7 @@
                         </div>
                         <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                             <div class="booking-form">
-                                <h3>Booking Your Hotel</h3>
+                                <h3>Booking Hotel</h3>
                                 <form action="bookByEventController" method="get">
                                     <div class="check-date date-picker">
                                         <label for="checkin">Check-in</label>
@@ -108,8 +108,8 @@
                                             <option value="1">1 Adults</option>
                                             <option value="2">2 Adults</option>
                                             <option value="3">3 Adults</option>
-                                            <option value="3">4 Adults</option>
-                                            <option value="3">5 Adults</option>
+                                            <option value="4">4 Adults</option>
+                                            <option value="5">5 Adults</option>
                                         </select>
                                     </div>
                                     <button type="submit">Check Availability</button>
@@ -134,19 +134,17 @@
                             <div class="about-text">
                                 <div class="section-title">
                                     <span>About Us</span>
-                                    <h2>Intercontinental LA <br />Westlake Hotel</h2>
+                                    <h2>Da Nang, Viet Nam<br />Da Nang Dream Hotel</h2>
                                 </div>
                                 <p class="f-para">
-                                    Sona.com is a leading online accommodation site. We’re
-                                    passionate about travel. Every day, we inspire and reach
-                                    millions of travelers across 90 local websites in 41 languages.
+                                    DaNangDreamHotel.com is a leading online accommodation site. We’re
+                                    passionate about travel.
                                 </p>
                                 <p class="s-para">
                                     So when it comes to booking the perfect hotel, vacation rental,
                                     resort, apartment, guest house, or tree house, we’ve got you
                                     covered.
                                 </p>
-                                <a href="#" class="primary-btn about-btn">Read More</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -214,9 +212,9 @@
                                     <h4 style="font-family: Edu Australia VIC WA NT Hand, sans-serif;margin: 10px 0;font-size: 22px ">${o.name}</h4>
                                 
                                     <p>Price: ${FormatUtils.formatPRice(o.price)}đ/Pernight</p>
-                                    <p>Type: ${o.getTypeName()}</p>
+                                    <p>Type: ${o.typeName}</p>
                                     <p>Size: ${o.size}m<sup>2</sup></p>
-                                    <button style="background-color:#DFA974; border: 1px solid #DFA974; padding: 5px; border-radius:5px "><a href="roomDetailsController?Id=${o.id}" style="color:white">More Details</a></button>
+                                    <button style="background-color:#DFA974; border: 1px solid #DFA974; padding: 5px; border-radius:5px "><a href="roomDetailsController?Id=${o.room_Id}&typeRoom=${o.type_Room_Id}" style="color:white">More Details</a></button>
 <!--                                    <span style="padding-left: 70px; font-family: Edu Australia VIC WA NT Hand, sans-serif">${FormatUtils.formatPRice(o.price)}đ</span>-->
                             </div>
                         </div>
@@ -248,16 +246,9 @@
                                     husband, my daughter and I needed a place to stay for a few
                                     nights. As a Chicago resident, we know a lot about our city,
                                     neighborhood and the types of housing options available and
-                                    absolutely love our vacation at Sona Hotel.
+                                    absolutely love our vacation at Da Nang Dream Hotel Hotel.
                                 </p>
                                 <div class="ti-author">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
                                     <h5>- Alexander Vasquez</h5>
                                 </div>
                             </div>
@@ -273,7 +264,7 @@
                     <div class="col-lg-12">
                         <div class="section-title">
                             <span>Hotel</span>
-                            <h2>Utilities</h2>
+                            <h2>Service</h2>
                         </div>
                     </div>
                 </div>

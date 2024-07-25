@@ -27,26 +27,26 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                 </div>
                 <section class="rooms-section spad">
-                    <div class="container">
-                    <c:if test="${not empty sessionScope.notificationMessage}">
-                        <div class="alert alert-${sessionScope.notificationStatus == 'success' ? 'success' : 'danger'} alert-dismissible fade show" role="alert" id="status-alert">
-                            ${sessionScope.notificationMessage}
-                        </div>
-                        <script>
-                            setTimeout(function () {
-                                var alert = document.getElementById('status-alert');
-                                if (alert) {
-                                    alert.classList.remove('show');
-                                    alert.classList.add('fade');
-                                    setTimeout(function () {
-                                        alert.parentNode.removeChild(alert);
-                                    }, 1100);
-                                }
-                            }, 3000);
-                        </script>
-                        <c:remove var="notificationMessage" scope="session"/>
-                        <c:remove var="notificationStatus" scope="session"/>
-                    </c:if>
+                <c:if test="${not empty sessionScope.notificationMessage}">
+                    <div style="margin-left: 300px; margin-right: 90px" class="alert alert-${sessionScope.notificationStatus == 'success' ? 'success' : 'danger'} alert-dismissible fade show" role="alert" id="status-alert">
+                        ${sessionScope.notificationMessage}
+                    </div>
+                    <script>
+                        setTimeout(function () {
+                            var alert = document.getElementById('status-alert');
+                            if (alert) {
+                                alert.classList.remove('show');
+                                alert.classList.add('fade');
+                                setTimeout(function () {
+                                    alert.parentNode.removeChild(alert);
+                                }, 11000);
+                            }
+                        }, 9000);
+                    </script>
+                    <c:remove var="notificationMessage" scope="session"/>
+                    <c:remove var="notificationStatus" scope="session"/>
+                </c:if>
+                <div class="container">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addTypeRoomModal">
                         <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>New Type</p>                  
                     </button>
@@ -109,9 +109,6 @@
                 </div>
             </section>
         </div> 
-
-
-
         <div class="container-fluid">
             <div class="modal fade" id="addTypeRoomModal">
                 <div class="modal-dialog">
@@ -200,7 +197,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
-                                <input type="file" class="form-control" id="image" name="fileImageTypeRoom"required>
+                                <input type="file" class="form-control" id="imageId" name="fileImageTypeRoom"required>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" value="Close">Close</button>
@@ -221,13 +218,14 @@
                     element.value = newValue;
                 }
             }
-            function updateTypeRoom(type_room_Id, trname, event_Id, bed, bath, people) {
+            function updateTypeRoom(type_room_Id, trname, event_Id, bed, bath, people, img) {
                 $('#type_room_Id').val(type_room_Id);
                 $('#trname').val(trname);
                 $('#event_Id').val(event_Id);
                 $('#bedId').val(bed);
                 $('#bathId').val(bath);
                 $('#peopleId').val(people);
+                $('#imageId').val(img);
                 $('#updateTypeRoom').modal('show');
             }
         </script>

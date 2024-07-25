@@ -141,7 +141,7 @@
                                                         <c:forEach items="${listB}" var="o">
                                                             <tr>
                                                                 <td>
-                                                                    <a href="bookingURL?action=view&rCode=${o.customer_Id}"><i class="far fa-eye successful"></i></a>
+                                                                    <a href="bookingURL?action=view&rCode=${o.getReservationCode()}"><i class="far fa-eye successful"></i></a>
                                                                 </td>
                                                                 <td>
                                                                     <a href="bookingURL?action=detail&id=${o.booking_Id}"><i class="far fa-eye successful"></i></a>

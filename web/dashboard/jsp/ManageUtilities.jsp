@@ -25,7 +25,7 @@
                 <jsp:include page="Profile.jsp"></jsp:include>
                     <div class="card">
                         <div class="card-body" >
-                            <div class="container-fluid" style="height: 800px;width: 1300px;margin-left: 400px">
+                            <div class="container-fluid" style="height: 800px;width: 1300px">
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addAccountModal">
                                     <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add New Utilities</p>                  
                                 </button>
