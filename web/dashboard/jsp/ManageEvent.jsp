@@ -110,8 +110,9 @@
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input id="name" name="name" type="text" class="form-control" required>
+                                    <label> Name</label>
+                                    <input name="name" type="text" class="form-control" placeholder="Enter name" required
+                                           pattern="[A-Za-z]{2,}" title="First name should only contain letters and be at least 2 characters long.">
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label>
@@ -158,9 +159,12 @@
         const voucher = document.getElementById('voucher').value.trim();
 
         if (name === "") {
-            alert("Please enter a name.");
-            return false;
-        }
+                    alert("Please enter a  name.");
+                    return false;
+                } else if (!/^[A-Za-z]+$/.test(name) || /^[0-9]/.test(name) || name.length < 2) {
+                    alert(" name should only contain letters, should not start with a number, and must be at least 2 characters long.");
+                    return false;
+                }
 
         if (image === "") {
             alert("Please enter an image URL.");
