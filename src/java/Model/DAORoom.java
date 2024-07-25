@@ -44,7 +44,7 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
-    public List<Room> listAllRoom() {
+     public List<Room> listAllRoom() {
         List<Room> list = new ArrayList<>();
         String sql = "select * from room";
         try {
@@ -67,9 +67,49 @@ public class DAORoom extends DBConnect {
 
         return list;
     }
-
-
     
+    
+    public List<Room> listAllRooms(int offset, int limit) {
+        List<Room> list = new ArrayList<>();
+        String sql = "SELECT * FROM room LIMIT ? OFFSET ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, limit);
+            pre.setInt(2, offset);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
+    public int getNoOfRecords() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM room";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAORoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
     public List<Room> getRoomByTypeRoomId(int typeRoomId) {
         List<Room> list = new ArrayList();
         String sql = "select distinct r.* from room r\n"
@@ -757,12 +797,13 @@ public class DAORoom extends DBConnect {
         return list;
     }
 
-    public List<Room> sortRoomsByPriceDesc() {
+    public List<Room> sortRoomsByPriceDesc(int offset, int limit) {
         List<Room> list = new ArrayList<>();
-        String sql = "SELECT * FROM managerhotel\n"
-                + "    .room order by price desc ; ";
+        String sql = "SELECT * FROM room ORDER BY price DESC LIMIT ? OFFSET ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, limit);
+            pre.setInt(2, offset);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),
@@ -1077,23 +1118,23 @@ public class DAORoom extends DBConnect {
         }
         return list;
     }
-    
-     public Room getMinPrice( int event_Id) {
-       
-        String sql = "WITH roomDetail AS (\n" +
-"                               SELECT r.room_Id, r.name, r.price, r.size, t.bed, t.bath, t.person, i.image, e.discount, e.event_Id, t.typeRoom_Id,\n" +
-"                                         ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id DESC) AS rn\n" +
-"                                   FROM room r\n" +
-"                                    JOIN typeroom t ON t.typeRoom_Id = r.type_Room_Id\n" +
-"                                    JOIN imageroom i ON i.room_Id = r.room_Id\n" +
-"                                   JOIN event e ON e.event_Id = t.event_Id\n" +
-"                                )\n" +
-"                               SELECT room_Id, name, price, size, bed, bath, person, image, discount, typeRoom_Id\n" +
-"							FROM roomDetail\n" +
-"                                WHERE rn = 2\n" +
-"                                   AND event_Id = ?\n" +
-"                                order by price asc\n" +
-"                                 limit 1;";
+
+    public Room getMinPrice(int event_Id) {
+
+        String sql = "WITH roomDetail AS (\n"
+                + "                               SELECT r.room_Id, r.name, r.price, r.size, t.bed, t.bath, t.person, i.image, e.discount, e.event_Id, t.typeRoom_Id,\n"
+                + "                                         ROW_NUMBER() OVER (PARTITION BY r.room_Id ORDER BY r.room_Id DESC) AS rn\n"
+                + "                                   FROM room r\n"
+                + "                                    JOIN typeroom t ON t.typeRoom_Id = r.type_Room_Id\n"
+                + "                                    JOIN imageroom i ON i.room_Id = r.room_Id\n"
+                + "                                   JOIN event e ON e.event_Id = t.event_Id\n"
+                + "                                )\n"
+                + "                               SELECT room_Id, name, price, size, bed, bath, person, image, discount, typeRoom_Id\n"
+                + "							FROM roomDetail\n"
+                + "                                WHERE rn = 2\n"
+                + "                                   AND event_Id = ?\n"
+                + "                                order by price asc\n"
+                + "                                 limit 1;";
         try {
             PreparedStatement pre = conn.prepareCall(sql);
             pre.setInt(1, event_Id);
@@ -1115,9 +1156,6 @@ public class DAORoom extends DBConnect {
         }
         return null;
     }
-     
-    
-
 
     public List<Room> getProcessingRooms() {
         List<Room> list = new ArrayList<>();
@@ -1137,7 +1175,6 @@ public class DAORoom extends DBConnect {
                         rs.getInt(5),
                         rs.getString(6),
                         rs.getString(7)
-                        
                 ));
             }
         } catch (SQLException ex) {
@@ -1173,8 +1210,6 @@ public class DAORoom extends DBConnect {
         }
 
     }
-
-  
 
     public static void main(String[] args) {
         DAORoom dao = new DAORoom();
