@@ -100,6 +100,10 @@
         <servlet-name>ManageAccountController</servlet-name>
         <servlet-class>Controller.ManageAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FeedBackController</servlet-name>
+        <servlet-class>Controller.FeedBackController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>authentication_register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -203,6 +207,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logoutURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedBackController</servlet-name>
+        <url-pattern>/feedBackController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

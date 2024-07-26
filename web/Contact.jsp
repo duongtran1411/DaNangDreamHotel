@@ -76,46 +76,41 @@
                             </table>
                         </div>
                     </div>
-                    <!--                    <div class="col-lg-7 offset-lg-1">
-                                            <form action="#" class="contact-form">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <input placeholder="Your Phone Number . . .">
-                                                        <textarea placeholder="Your Feedback . . ."></textarea>
-                                                        <button type="submit">Submit Now</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>-->
-                 
+
                     <div class="col-lg-7 offset-lg-1">
                         <h2>Feedback Form</h2>
                         <p>We would love to hear your thoughts, concerns or problem with anything so we can improve!</p>
                         <hr>
-                        <form>
+                        <form id="feedbackForm">
                             <h4>Feedback type</h4>
                             <div class="row">
 
                                 <div class="col-md-6">
                                     <label>Comments</label>
-                                    <input type="radio" name="feed" class="pointer"/>
+                                    <input type="radio" name="feed" class="pointer" value="Comments"/>
                                 </div>
                                 <div class="col-md-6">
                                     <label>Questions</label>
-                                    <input type="radio" name="feed" class="pointer"/>
+                                    <input type="radio" name="feed" class="pointer" value="Questions"/>
                                 </div>
                             </div>
-                            <div class="form-group mt-3 mb-3">
-                                <label class="form-label">Full Name<sup class="colo-main">*</sup></label>
-                                <input type="text" class="form-control" required=""/>
-                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">First Name<sup class="colo-main">*</sup></label>
+                                    <input type="text" name="firstname" class="form-control" required=""/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Last Name<sup class="colo-main">*</sup></label>
+                                    <input type="text" name="lastname" class="form-control" required=""/>
+                                </div>
+                            </div> 
                             <div class="form-group mb-2-2">
                                 <label class="form-label">Email<sup class="colo-main">*</sup></label>
-                                <input type="email" class="form-control" required=""/>
+                                <input type="email" name="email" class="form-control" required=""/>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="form-label">Describe Feedback<sup class="colo-main">*</sup></label>
-                                <textarea rows="4" class="form-control" required=""></textarea>
+                                <textarea rows="4" name="description" class="form-control" required=""></textarea>
                             </div>
                             <button type="submit" class="btn btn-success">Submit feedback</button>
                         </form>
@@ -209,6 +204,8 @@
         <!-- Search model end -->
 
         <!-- Js Plugins -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.magnific-popup.min.js"></script>
@@ -217,5 +214,47 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <script>
+                                        $('#feedbackForm').on('submit', function (e) {
+                                            e.preventDefault();
+                                            $.ajax({
+                                                url: 'feedBackController',
+                                                type: 'POST',
+                                                data: $(this).serialize(),
+                                                dataType: 'json',
+                                                success: function (data) {
+                                                    if (data.status === 'success') {
+                                                        Swal.fire({
+                                                            title: 'Success!',
+                                                            text: 'Feedback submitted successfully!',
+                                                            icon: 'success',
+                                                            confirmButtonText: 'OK',
+                                                            timer: 2000
+                                                        });
+                                                        
+                                                    } else {
+                                                        Swal.fire({
+                                                            title: 'Error!',
+                                                            text: 'Email no have booking',
+                                                            icon: 'error',
+                                                            confirmButtonText: 'OK',
+                                                            timer: 2000
+                                                        });
+                                                    }
+                                                    setTimeout(() => {
+                                                            location.reload();
+                                                    }, 1000);
+                                                },
+                                                error: function () {
+                                                    Swal.fire({
+                                                        title: 'Error!',
+                                                        text: 'An error occurred. Please try again later.',
+                                                        icon: 'error',
+                                                        confirmButtonText: 'OK'
+                                                    });
+                                                }
+                                            });
+                                        });
+        </script>
     </body>
 </html>
