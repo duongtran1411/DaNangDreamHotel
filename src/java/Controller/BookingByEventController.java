@@ -68,42 +68,31 @@ public class BookingByEventController extends HttpServlet {
         String checkIn = request.getParameter("checkIn");
         String checkOut = request.getParameter("checkOut");
         String person = request.getParameter("numberPerson");
+        String dateIn = request.getParameter("dateIn");
+        String dateOut = request.getParameter("dateOut");
         DAOEvent daoE = new DAOEvent();
         DAORoom dao = new DAORoom();
-//        if (checkIn == null && checkOut == null) {
-//            List<Integer> prices = new ArrayList<>();
-//            List<Double> discounts = new ArrayList<>();
-//            List<Event> listE = daoE.getImageEvent();
-//            for (Event event : listE) {
-//                Room room = dao.getMinPrice(event.getEvent_Id());
-//                prices.add(room.getPrice());
-//                discounts.add(room.getPrice() * room.getDiscount());
-//            }
-//            request.setAttribute("listE", listE);
-//            request.setAttribute("priceRoom", prices);
-//            request.setAttribute("priceDiscount", discounts);
-//            session.setAttribute("checkInDay", checkIn);
-//            session.setAttribute("checkOutDay", checkOut);
-//            session.setAttribute("numberPerson", person);
-//            request.getRequestDispatcher("Booking.jsp").forward(request, response);
-//        }
-//        if (checkIn != null && checkOut != null) {
-            List<Integer> prices = new ArrayList<>();
-            List<Double> discounts = new ArrayList<>();
-            List<Event> listE = daoE.getImageEvent();
-            for (Event event : listE) {
-                Room room = dao.getMinPrice(event.getEvent_Id());
-                prices.add(room.getPrice());
-                discounts.add(room.getPrice() * room.getDiscount());
-            }
-            request.setAttribute("listE", listE);
-            request.setAttribute("priceRoom", prices);
-            request.setAttribute("priceDiscount", discounts);
+        List<Integer> prices = new ArrayList<>();
+        List<Double> discounts = new ArrayList<>();
+        List<Event> listE = daoE.getImageEvent();
+        for (Event event : listE) {
+            Room room = dao.getMinPrice(event.getEvent_Id());
+            prices.add(room.getPrice());
+            discounts.add(room.getPrice() * room.getDiscount());
+        }
+        request.setAttribute("listE", listE);
+        request.setAttribute("priceRoom", prices);
+        request.setAttribute("priceDiscount", discounts);
+        if (dateIn != null && dateOut != null) {
+            session.setAttribute("checkInDay", dateIn);
+            session.setAttribute("checkOutDay", dateOut);
+        } else {
             session.setAttribute("checkInDay", checkIn);
             session.setAttribute("checkOutDay", checkOut);
-            session.setAttribute("numberPerson", person);
-            request.getRequestDispatcher("Booking.jsp").forward(request, response);
-//        }
+        }
+
+        session.setAttribute("numberPerson", person);
+        request.getRequestDispatcher("Booking.jsp").forward(request, response);
 
     }
 
