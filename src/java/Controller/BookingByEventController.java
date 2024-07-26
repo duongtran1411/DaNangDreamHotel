@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Entity.BookingCart;
 import Entity.Event;
 import Entity.FormatUtils;
 import Entity.Room;
@@ -65,6 +66,7 @@ public class BookingByEventController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(300);
+        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         String checkIn = request.getParameter("checkIn");
         String checkOut = request.getParameter("checkOut");
         String person = request.getParameter("numberPerson");
@@ -90,6 +92,8 @@ public class BookingByEventController extends HttpServlet {
             session.setAttribute("checkInDay", checkIn);
             session.setAttribute("checkOutDay", checkOut);
         }
+        
+        
 
         session.setAttribute("numberPerson", person);
         request.getRequestDispatcher("Booking.jsp").forward(request, response);

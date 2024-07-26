@@ -36,6 +36,7 @@
             href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap"
             rel="stylesheet"
             />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
         <style>
             @media (min-width: 1025px) {
                 .h-custom {
@@ -56,7 +57,6 @@
                             <c:if test="${cart.size() != 0}" >
                                 <div class="card-body p-4">
                                     <div style="padding-bottom: 10px">
-                                        <input type="text" placeholder="Search..." oninput="searchByName(this)"  >
                                         <select id="roomSelect" onchange="handleChange()" style="padding-right: 50px;padding-top: 3px;padding-bottom: 3px">
                                             <option value="0">All</option>
                                             <c:forEach items="${listT}" var="o"> 
@@ -93,12 +93,10 @@
                                                             </div>
                                                             <div class="align-items-center col-lg-3">
 
-                                                                <h5 class="fw-normal mb-0"><a href="cartController?action=delete&Id=${o.room.room_Id}" style="color:red ">Cancel</a></h5>
+                                                                <h5 class="fw-normal mb-0" style="color: red"><a href="cartController?action=delete&Id=${o.room.room_Id}" style="color:red">Cancel</a></h5>
 
                                                                 <h5><del>${FormatUtils.formatPRice(o.room.price)}đ/Pernight</del></h5>
                                                                 <h5 class="mb-0" style="color:#C59B24">${FormatUtils.formatPRice(o.room.price * o.room.discount)}đ/Pernight</h5>
-
-                                                                <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -122,7 +120,7 @@
                         </div>
                     </div>
                     <c:if test="${cart.size() == 0}">
-                        <a href="homeController" style="color: black">No Room Your Booking</a>
+                        
                     </c:if>
                 </div>
             </div>
@@ -135,6 +133,7 @@
                                                     function redirectToAdd() {
                                                         window.location.href = "bookingInformationController";
                                                     }
+
                                                     function handleChange() {
                                                         var selectElement = document.getElementById("roomSelect");
                                                         var selectedValue = selectElement.value;
