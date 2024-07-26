@@ -6,10 +6,8 @@ package Controller;
 
 import Entity.Event;
 import Entity.Room;
-import Entity.Utilities;
 import Model.DAOEvent;
 import Model.DAORoom;
-import Model.DAOUtilities;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -76,11 +74,9 @@ public class HomeController extends HttpServlet {
         List<Room> list = dao.getNewRoom();
         DAOEvent daoE = new DAOEvent();
         List<Event> listE = daoE.getTop3Event();
-         DAOUtilities daoU=new DAOUtilities();
-        List<Utilities>listU=daoU.getTop3Utilities();
         
         
-       request.setAttribute("listU", listU);
+       //request.setAttribute("listU", listU);
         request.setAttribute("listR", list);
         request.setAttribute("listE", listE);
        

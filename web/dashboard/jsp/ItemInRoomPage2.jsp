@@ -37,7 +37,7 @@
                         <div class="container-fluid" style="height: 800px;width: 1300px; margin-left: 400px">
 
                             <!-- Page Heading -->
-                            <h1 class="h3 mb-2 text-gray-800">Tables Room</h1>
+                            <h1 class="h3 mb-2 text-gray-800">Table Rooms</h1>
                             <div class="card shadow mb-4">
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -47,13 +47,10 @@
                                                     <th>Action</th>
                                                     <th>Floor</th>
                                                     <th>Name
-                                                  
                                                     </th>
                                                     <th>Price
-                                                   
                                                     </th>
                                                     <th>Size</th>
-                                           
                                                 </tr>
                                             </thead>
                                             <tbody id="content">
@@ -66,12 +63,12 @@
                                                         <td>${o.name}</td>
                                                         <td><fmt:formatNumber type="number">${o.price}</fmt:formatNumber> </td>
                                                         <td>${o.size} m²</td>
-                                                    
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
+                                    <a href="itemManageURL">Back</a>
                                 </div>
                             </div>
 

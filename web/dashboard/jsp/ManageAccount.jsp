@@ -55,30 +55,11 @@
                                                 <td>${o.lastName} ${o.firstName}</td>
                                                 <td>${o.email}</td>
                                                 <td>${o.phone}</td>
+                                                <td>${o.create_at}</td>
+                                                <td>${o.update_at}</td>
                                                 <td>
                                                     <a href="EditAccountControllerURL?id=${o.account_Id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                                    <a href="#" class="delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="DeleteAccountControllerURL?id=${o.account_Id}">
-                                                        <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                                    </a>
-
-                                                    <!-- Confirmation Modal -->
-                                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    Are you sure you want to delete this account?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                    <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <a href="DeleteAccountControllerURL?id=${o.account_Id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -158,15 +139,53 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input name="username" type="text" class="form-control" placeholder="Enter username" required>
+                        </div>
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input name="firstName" type="text" class="form-control" placeholder="Enter first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input name="lastName" type="text" class="form-control" placeholder="Enter last name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input name="password" type="password" class="form-control" placeholder="Enter password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Role Id</label>
+                            <input name="roleid" type="text" class="form-control" value="2" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input name="phone" type="text" class="form-control" placeholder="Enter phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input name="email" type="email" class="form-control" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Create At</label>
+                            <input name="create_at" type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Update At</label>
+                            <input name="update_at" type="date" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var deleteModal = document.getElementById('deleteModal');
-                deleteModal.addEventListener('show.bs.modal', function (event) {
-                    var button = event.relatedTarget; // Button that triggered the modal
-                    var url = button.getAttribute('data-url'); // Extract info from data-* attributes
+    </div>
+</div>
 
                     // Update the modal's content.
                     var confirmDeleteBtn = deleteModal.querySelector('#confirmDeleteBtn');

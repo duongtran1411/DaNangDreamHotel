@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ page import="Entity.FormatUtils" %>
 <!doctype html>
 <html lang="en">
 
@@ -89,8 +89,8 @@
                         <div class="card-body">
                             <div class="container-fluid" style="height: 800px;width: 1300px">
                                 <!-- Page Heading -->
-                                <h1 class="h3 mb-2 text-gray-800">BOOKING DETAIL</h1>
-                               
+                         <h1 class="h3 mb-2 text-gray-800">ALL ROOMS IN PROCESSING</h1>
+                             
                                 <div class="d-flex justify-content-center">
                                     <div class="search">
                                         <input class="search_input" id="searchInput" type="text" name="txt" placeholder="Search...">
@@ -104,25 +104,28 @@
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>
-                                                        <th class="sortable">Type</th>
+                                                        <th>Check Out</th>
                                                         <th class="sortable">Name</th>
+                                                        <th class="sortable">Price</th>
                                                         <th class="sortable">Status</th>
-                                                        <th class="sortable">Create At</th>
-                                                        <th class="sortable">Update At</th>
                                                         <th class="sortable">Size</th>
+                                                         <th class="sortable">CheckIn Day</th>
+                                                        <th class="sortable">CheckOut Day</th>
 
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach items="${rooms}" var="o">
+                                                <c:forEach items="${list}" var="o">
                                                     <tr>
-                                                        <td data-label="Type">${o.type_Room_Id}</td>
+                                                        <td>
+                                                            <a href="useSuppliesURL?action=edit&id=${o.room_Id}"><i class="far fa-eye successful"></i></a>
+                                                        </td>
                                                         <td data-label="Name">${o.name}</td>
+                                                        <td data-label="Price">${FormatUtils.formatPRice(o.price)}đ</td>
                                                         <td data-label="Status">${o.status}</td>
-                                                        <td data-label="Create At">${o.created_at}</td>
-                                                        <td data-label="Update At">${o.updated_at}</td>
                                                         <td data-label="Size">${o.size}</td>
-
+                                                        <td data-label="CheckIn">${o.created_at}</td>
+                                                        <td data-label="CheckOut">${o.updated_at}</td>
                                                     </tr>
                                                 </c:forEach>
 

@@ -47,7 +47,7 @@ public class ManageEventController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
          DAOEvent dao=new DAOEvent();
-    List<Event>list=dao.getAllEvents();
+    List<Event>list=dao.getAllEvent();
     request.setAttribute("listE", list);
     request.getRequestDispatcher("dashboard/jsp/ManageEvent.jsp").forward(request, response);
     } 

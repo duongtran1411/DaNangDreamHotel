@@ -49,7 +49,7 @@
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
             <ul class="nav-small-cap">
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="${pageContext.request.contextPath}/AdminControllerURL" aria-expanded="false">
+                    <a class="sidebar-link" href="./index.html" aria-expanded="false">
                         <span>
                             <i class="ti ti-layout-dashboard white"></i>
                         </span>

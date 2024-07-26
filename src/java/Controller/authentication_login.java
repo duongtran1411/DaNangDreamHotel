@@ -81,7 +81,7 @@ public class authentication_login extends HttpServlet {
             String password = request.getParameter("txtPassword");
             String remember = request.getParameter("remember");
 
-            String emailPattern="^[a-zA-Z0-9._-]{5,}";
+            String emailPattern = "^[a-zA-Z0-9._-]{5,}";
             boolean isEmailValid = Pattern.matches(emailPattern, username);
 
             Cookie cookieU = new Cookie("cUser", username);
@@ -110,6 +110,7 @@ public class authentication_login extends HttpServlet {
                     request.getRequestDispatcher("/dashboard/jsp/authentication-login.jsp").forward(request, response);
                 } else if (result) {
                     HttpSession session = request.getSession();
+                    session.setMaxInactiveInterval(30000);
                     session.setAttribute("acc", user);
                     switch (user.getRole_Id()) {
                         case 1:
@@ -132,7 +133,7 @@ public class authentication_login extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute("mess1", "An unexpected error occurred: " + e.getMessage());
-                request.getRequestDispatcher("authentication-login.jsp").forward(request, response);
+                request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
             }
         }
     }
