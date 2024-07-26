@@ -18,6 +18,7 @@
         <meta name="keywords" content="Sona, unica, creative, html" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link
             href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap"
             rel="stylesheet"
@@ -65,8 +66,103 @@
                 display: none;
             }
 
+            #slide{
+                width: max-content;
+                margin-top: 20px;
+                margin-left: 150px;
+                margin-bottom: 50px
+            }
 
+            .roomItem{
+                width: 350px;
+                height: 250px;
+                background-position: 50% 50%;
+                display: inline-block;
+                transition: 1s;
+                background-size: 200%;
+                position: absolute;
+                z-index: 10000;
 
+            }
+            .roomItem:nth-child(1){
+                transform: translate(-150%);
+                opacity: 0;
+                background-position: 0% 50%;
+                z-index: -1;
+            }
+            .roomItem:nth-child(2){
+                transform: translate(-40%);
+                background-position: 20% 50%;
+            }
+            .roomItem:nth-child(3){
+                transform: translate(70%);
+                background-position: 50% 50%;
+            }
+            .roomItem:nth-child(4){
+                transform: translate(180%);
+                background-position: 80% 50%;
+            }
+            .roomItem:nth-child(n+5){
+                transform: translate(290%);
+                opacity: 0;
+                background-position: 100% 50%;
+                z-index: -1;
+            }
+
+            .roomItem .content{
+                position: absolute;
+                top: 100%;
+                background-color: #b9b9b9;
+                width: 80%;
+                padding: 0 10%;
+                text-align: center;
+                transition: 0.5s;
+                max-height: 0;
+                box-shadow: 0 30px 50px #b9b9b9;
+            }
+
+            .roomItem .content:hover {
+                background-color:#DFA974;
+                color: white;
+            }
+
+            .buttons{
+                position: absolute;
+                bottom: -120px;
+                left: 0px;
+                width: 100%;
+            }
+
+            .buttons button{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: 1px solid #DFA974;
+                transition: 0.5s;
+                background-color: #DFA974
+            }
+
+            .buttons button:hover{
+                background-color: #bac383;
+
+            }
+
+            .white{
+                color: #FFF;
+            }
+            #next{
+                transform: translateX(1100px);
+
+            }
+            .right{
+                left: 100px;
+            }
+
+            #prev{
+                transform: translateX(-35px);
+            }
+            
+            
         </style>
     </head>
     <body>
@@ -91,7 +187,7 @@
                         </div>
                         <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                             <div class="booking-form">
-                                <h3>Booking Your Hotel</h3>
+                                <h3>Booking Hotel</h3>
                                 <form action="bookByEventController" method="get">
                                     <div class="check-date date-picker">
                                         <label for="checkin">Check-in</label>
@@ -107,8 +203,8 @@
                                             <option value="1">1 Adults</option>
                                             <option value="2">2 Adults</option>
                                             <option value="3">3 Adults</option>
-                                            <option value="3">4 Adults</option>
-                                            <option value="3">5 Adults</option>
+                                            <option value="4">4 Adults</option>
+                                            <option value="5">5 Adults</option>
                                         </select>
                                     </div>
                                     <button type="submit">Check Availability</button>
@@ -133,19 +229,17 @@
                             <div class="about-text">
                                 <div class="section-title">
                                     <span>About Us</span>
-                                    <h2>Intercontinental LA <br />Westlake Hotel</h2>
+                                    <h2>Da Nang, Viet Nam<br />Da Nang Dream Hotel</h2>
                                 </div>
                                 <p class="f-para">
-                                    Sona.com is a leading online accommodation site. We’re
-                                    passionate about travel. Every day, we inspire and reach
-                                    millions of travelers across 90 local websites in 41 languages.
+                                    DaNangDreamHotel.com is a leading online accommodation site. We’re
+                                    passionate about travel.
                                 </p>
                                 <p class="s-para">
                                     So when it comes to booking the perfect hotel, vacation rental,
                                     resort, apartment, guest house, or tree house, we’ve got you
                                     covered.
                                 </p>
-                                <a href="#" class="primary-btn about-btn">Read More</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -163,55 +257,36 @@
                     </div>
                 </div>
             </section>
-            <!-- About Us Section End -->
-
-            <!-- Home Room Section Begin -->  <!--BEST SELLER-->
-            <!-- Home Room Section Begin -->  <!--BEST SELLER-->
-            <section class="hp-room-section">
-                <div class="container-fluid">
-                    <div class="hp-room-items">
-                        <div class="row">
-                        <c:forEach items="${listR}" var="o">
-                            <div class="col-lg-3 col-md-6">
-                                <div
-                                    class="hp-room-item set-bg"
-                                    data-setbg="${o.image}"
-                                    >
-                                    <div class="hr-text">
-                                        <h3>${o.name}</h3>
-                                        <h2>
-                                            <fmt:formatNumber value="${o.price}" type="number" maxFractionDigits="0"/>đ
-                                            <span>/Pernight</span>
-                                        </h2>
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="r-o">Size:</td>
-                                                    <td>${o.size}m<sup>2</sup></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="r-o">Capacity:</td>
-                                                    <td>${o.people} person</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="r-o">Bed:</td>
-                                                    <td>${o.bed} bed</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="r-o">Services:</td>
-                                                    <td>Wifi, Television, Bathroom,...</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <a href="roomDetailsController?Id=${o.room_Id}" class="primary-btn">More Details</a>
-                                    </div>
-                                </div>
-                            </div>       
-                        </c:forEach>
+            <div class="offers_area padding_top" style="box-shadow: 5px 5px 10px #ddd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="section_title mb-100">
+                                <h2>Room and Suits</h2>
+                                <p>Pick a room that new suits your taste and budget</p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row">
+                    <c:forEach items="${listR}" var="o">
+                        <div class="col-xl-3 col-md-3" style="padding: 0 10px">
+                            <div class="single_offers" style="border: 1.5px solid gainsboro; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 15px; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); position: relative;">
+                                <div class="about_thumb">
+                                    <img src="${o.image}" width="400px" height="250px" alt="alt"/>
+                                </div>
+                                <h4 style="font-family: Edu Australia VIC WA NT Hand, sans-serif;margin: 10px 0;font-size: 22px ">${o.name}</h4>
+
+                                <p>Price: ${FormatUtils.formatPRice(o.price)}đ/Pernight</p>
+                                <p>Type: ${o.typeName}</p>
+                                <p>Size: ${o.size}m<sup>2</sup></p>
+                                <button style="background-color:#DFA974; border: 1px solid #DFA974; padding: 5px; border-radius:5px "><a href="roomDetailsController?Id=${o.room_Id}&typeRoom=${o.type_Room_Id}" style="color:white">More Details</a></button>
+<!--                                    <span style="padding-left: 70px; font-family: Edu Australia VIC WA NT Hand, sans-serif">${FormatUtils.formatPRice(o.price)}đ</span>-->
+                            </div>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
-        </section>
+        </div>
         <!-- Home Room Section End -->
 
         <!-- Home Room Section End -->
@@ -236,16 +311,9 @@
                                     husband, my daughter and I needed a place to stay for a few
                                     nights. As a Chicago resident, we know a lot about our city,
                                     neighborhood and the types of housing options available and
-                                    absolutely love our vacation at Sona Hotel.
+                                    absolutely love our vacation at Da Nang Dream Hotel Hotel.
                                 </p>
                                 <div class="ti-author">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
                                     <h5>- Alexander Vasquez</h5>
                                 </div>
                             </div>
@@ -255,9 +323,36 @@
             </div>
         </section>
         <!-- Testimonial Section End -->
-
+        <section >
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2>Service</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="width: 100%;  align-items: center">
+                    <div class="col-lg-12">
+                        <div id="slide" >
+                            <c:forEach items="${listU}" var="o">
+                                <div class="roomItem" style="background-image: url(${pageContext.request.contextPath}/uploads/image/${o.image})">
+                                    <div class="content">
+                                        <a class="name-util" href="UtilitiesController?id=${o.utilities_Id}&action=listdetail" style="color: black; padding-left: 55px">${o.name}</a>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="buttons">
+                            <button id="prev"> <i class="fa-solid fa-chevron-left white"></i></button>
+                            <button id="next"><i class="fa-solid fa-chevron-right white"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Blog Section Begin -->
-        <section class="blog-section spad">
+        <section class="blog-section spad" style="margin-top: 200px">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -426,7 +521,22 @@
                                             }
                                         });
 
-                                        
+                                        document.getElementById('next').onclick = function () {
+                                            let list = document.querySelectorAll('.roomItem');
+                                            document.getElementById('slide').appendChild(list[0]);
+                                        };
+                                        document.getElementById('prev').onclick = function () {
+                                            let list = document.querySelectorAll('.roomItem');
+                                            document.getElementById('slide').prepend(list[list.length - 1]);
+                                        };
+
+                                        setInterval(() => {
+                                            let list = document.querySelectorAll('.roomItem');
+                                            document.getElementById('slide').appendChild(list[0]);
+                                        }, 4000);
+
+                                      
+
 
         </script>
     </body>

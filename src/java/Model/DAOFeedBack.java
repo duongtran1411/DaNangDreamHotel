@@ -17,14 +17,13 @@ import java.util.logging.Logger;
  */
 public class DAOFeedBack extends DBConnect {
 
-    public void addFeedBack(String text) {
-        String sql = "INSERT INTO `managerhotel`.`feedback`\n"
-                + "(`content`)\n"
-                + "VALUES\n"
-                + "(?)";
+    public void addFeedBack(int id,String text,String type) {
+        String sql = "INSERT INTO feedback (customer_Id, content, type) VALUES (?, ?, ?)";
         try {
             PreparedStatement pre = conn.prepareCall(sql);
-            pre.setString(1, text);
+            pre.setInt(1, id);
+            pre.setString(2, text);
+            pre.setString(3, type);
             pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAOFeedBack.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,9 +47,6 @@ public class DAOFeedBack extends DBConnect {
     
     public static void main(String[] args) {
         DAOFeedBack dao = new DAOFeedBack();
-        List<FeedBack> list = dao.getAllFeedBack();
-        for (FeedBack feedBack : list) {
-            System.out.println(feedBack);
-        }
+        dao.addFeedBack(2, "ok", "Comments");
     }
 }

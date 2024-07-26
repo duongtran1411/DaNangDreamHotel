@@ -10,7 +10,7 @@ public class RegistrationDTO {
     private String password;
     private String email;
     private String phone;
-    private String role_Id;
+    private int role_Id;
     private String create_at;
     private String update_at;
     private String avatar;
@@ -18,7 +18,7 @@ public class RegistrationDTO {
     public RegistrationDTO() {
     }
 
-    public RegistrationDTO(String account_Id, int job_Id, String userName, String firstName, String lastName, String password, String email, String phone, String role_Id, String create_at, String update_at, String avatar) {
+    public RegistrationDTO(String account_Id, int job_Id, String userName, String firstName, String lastName, String password, String email, String phone, int role_Id, String create_at, String update_at) {
         this.account_Id = account_Id;
         this.job_Id = job_Id;
         this.userName = userName;
@@ -109,11 +109,11 @@ public class RegistrationDTO {
         this.phone = phone;
     }
 
-    public String getRole_Id() {
+    public int getRole_Id() {
         return role_Id;
     }
 
-    public void setRole_Id(String role_Id) {
+    public void setRole_Id(int role_Id) {
         this.role_Id = role_Id;
     }
 

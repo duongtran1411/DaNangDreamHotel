@@ -12,6 +12,7 @@ public class Booking {
     private String created_at;
     private String idCard;
     private String status;
+    private int reservationCode;
 
     public Booking(int booking_Id, int customer_Id, Date checkIn, Date checkOut, int expenses, String created_at) {
         this.booking_Id = booking_Id;
@@ -22,6 +23,17 @@ public class Booking {
         this.created_at = created_at;
     }
 
+    public Booking(int booking_Id, Date checkIn, Date checkOut, int expenses, String created_at, String idCard, int customer_Id, String status, int reservationCode) {
+        this.booking_Id = booking_Id;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.expenses = expenses;
+        this.created_at = created_at;
+        this.idCard = idCard;
+        this.customer_Id = customer_Id;
+        this.status = status;
+        this.reservationCode = reservationCode;
+    }
     public Booking(int booking_Id, Date checkIn, Date checkOut, int expenses, String created_at, String idCard, int customer_Id, String status) {
         this.booking_Id = booking_Id;
         this.checkIn = checkIn;
@@ -109,9 +121,21 @@ public class Booking {
         this.created_at = created_at;
     }
 
+    public int getReservationCode() {
+        return reservationCode;
+    }
+
+    public void setReservationCode(int reservationCode) {
+        this.reservationCode = reservationCode;
+    }
+
     @Override
     public String toString() {
-        return "Booking{" + "booking_Id=" + booking_Id + ", customer_Id=" + customer_Id + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", expenses=" + expenses + ", created_at=" + created_at + ", idCard=" + idCard + ", status=" + status + '}';
+        return "Booking{" + "booking_Id=" + booking_Id + ", customer_Id=" + customer_Id + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", expenses=" + expenses + ", created_at=" + created_at + ", idCard=" + idCard + ", status=" + status + ", reservationCode=" + reservationCode + '}';
     }
+    
+    
+
+   
 
 }

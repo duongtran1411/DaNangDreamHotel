@@ -54,7 +54,7 @@
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
                                     <p class="mb-0 fs-3"><i class="ti ti-list-check fs-6"></i>My Task</p>
                                 </button>
-                                <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                                <a href="logoutURL" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -96,4 +96,3 @@
             </div> 
         </div>
     </div>
-</div>

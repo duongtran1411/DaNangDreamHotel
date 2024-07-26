@@ -19,7 +19,7 @@
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
-
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -78,11 +78,11 @@
                                     <br>
                                     Tiktok: tiktok.com/@danangdreamhotelsresorts
                                 </p>
-                                <div class="row">
+<!--                                <div class="row">
                                     <div class="col-lg-12 text-center">
                                         <button type="submit" class="site-btn" style="margin-bottom: 20px; background-color: #DFA974; border: none; width: 148px;height: 47px"><a href="bookByEventController" style="color: white; background: ">Booking Now</a></button>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>

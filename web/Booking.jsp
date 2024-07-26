@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
 <link
     href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap"
     rel="stylesheet"
@@ -74,30 +75,30 @@
         <div class="container mt-5">
             <!-- Header Section -->
             <div class="header-box mb-4">
-                <div class="form-inline row align-items-end "  >
+                <form class="form-inline row align-items-end " action="bookByEventController" method="get">
                     <div class="form-group col-md-3">
                         <label for="destination">Destination</label>
-                        <input type="text" class="form-control w-100" id="destination" placeholder="Destination" value="Da Nang Dream Hotel" readonly="" name="dateIn">
+                        <input type="text" class="form-control w-100" id="destination" placeholder="Destination" value="Da Nang Dream Hotel" readonly="">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="checkin">Check-in</label>
-                        <input type="date" class="form-control w-100" id="checkin" value="${sessionScope.checkInDay}" name="dateIn" readonly="" >
+                        <input type="date" class="form-control w-100" id="checkin" value="${sessionScope.checkInDay}" name="dateIn"  >
                 </div>
                 <div class="form-group col-md-3">
                     <label for="checkout">Check-out</label>
-                    <input type="date" class="form-control w-100" id="checkout" value="${sessionScope.checkOutDay}" name="dateOut" readonly="" >
+                    <input type="date" class="form-control w-100" id="checkout" value="${sessionScope.checkOutDay}" name="dateOut" >
                 </div>
                 <div class="form-group col-md-1">
                     <label for="checkout">Person</label>
-                    <input type="text" class="form-control w-100" value="${sessionScope.numberPerson}" style="padding-left: 25px" readonly="" >
-                </div>
-                <div class="form-group col-md-2" style="padding-right: 5px;align-items: center">
-                    <button  class="btn btn w-100" style="background-color: #C59B24; color: white" id="updateButton" >Update</button>
-                </div>
-                <input type="hidden" name="action" value="updateDate">
+                    <input type="text" class="form-control w-100" value="<c:if test="${sessionScope.numberPerson == null}">2</c:if>${sessionScope.numberPerson}" style="padding-left: 25px" readonly="" >
+                    </div>
+                    <div class="form-group col-md-2" style="padding-right: 5px;align-items: center">
+                        <button type="submit" class="btn btn w-100" style="background-color: #C59B24; color: white" id="updateButton">Update</button>
+                    </div>
+                    <input type="hidden" name="action" value="updateDate">
+                </form>
             </div>
-        </div>
-        <!-- End of Header Section -->
+            <!-- End of Header Section -->
         <c:if test="${checkOutDay > checkInDay}">
             <div class="row">
                 <div class="col-md-3">
@@ -110,19 +111,19 @@
                         <div class="form-group">
                             <label>Recreation</label>
                             <div class="form-check">
-                                <input class="filterInput" type="checkbox" value="Couple" id="doubleBed">
+                                <input class="filterInput" type="radio" value="Couple" id="doubleBed">
                                 <label class="form-check-label" for="doubleBed">Couple Room</label>
                             </div>
                             <div class="form-check">
-                                <input class="filterInput" type="checkbox" value="Luxury" id="twoSingleBeds">
+                                <input class="filterInput" type="radio" value="Luxury" id="twoSingleBeds">
                                 <label class="form-check-label" for="LUXURY">Luxury Room</label>
                             </div>
                             <div class="form-check">
-                                <input class="filterInput" type="checkbox" value="Ocean View" id="oceanView">
+                                <input class="filterInput" type="radio" value="Ocean View" id="oceanView">
                                 <label class="form-check-label" for="oceanView">Ocean View</label>
                             </div>
                             <div class="form-check">
-                                <input class="filterInput" type="checkbox" value="Golf View" id="cityView">
+                                <input class="filterInput" type="radio" value="Golf View" id="cityView">
                                 <label class="form-check-label" for="cityView">Golf View</label>
                             </div>
                         </div>
@@ -150,10 +151,10 @@
                                                 <p class="mb-0 room-price">${FormatUtils.formatPRice(priceDiscount[status.index])} VND/night (Including tax and service charge)</p>
                                             </div>
                                             <div style="padding-top: 7px">
-                                                <button class="btn btn btnRoom " id="show-room-details" style="background-color: #C59B24; color: white; margin-left: 10px;" onclick="handleEvent(${o.event_Id})" >Room details</button>
+                                                <button class="btn btn btnRoom show-room-details"  style="background-color: #C59B24; color: white; margin-left: 10px; "   data-event-id="${o.event_Id}" >Room details</button>
                                             </div>
                                         </div> 
-                                        <div id="room-details-${o.event_Id}" style="display: block;">
+                                        <div id="room-details-${o.event_Id}" style="display: none;">
 
                                         </div>
                                     </div>
@@ -161,14 +162,13 @@
                             </div>
                         </div>
                     </c:forEach>
-
-
                 </div>
             </div>
+
         </c:if>
         <c:if test="${checkOutDay < checkInDay}">
             <h2 style="color: red">Check-in date is less than check-out date</h2>
-            <a href="homeController" style="color: black">Back to home</a>
+            <a href="homeController" class="btn btn-danger">Back to home</a>
         </c:if>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -176,117 +176,143 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-                                                    $(document).ready(function () {
-                                                        $("#show-room-details").click(function (e) {
-                                                            $("#room-details").toggle();
-                                                        });
-                                                    });
 
-                                                    function handleChange() {
-                                                        var checkIn = document.getElementById('checkin').value;
-                                                        var checkOut = document.getElementById('checkout').value;
-                                                        $.ajax({
-                                                            url: '/DaNangDreamHotel/loadRoomEvent',
-                                                            type: 'POST',
-                                                            data: {
-                                                                checkIn: checkIn,
-                                                                checkOut: checkOut
-                                                            },
-                                                            success: function (data) {
-                                                                var row = document.getElementById('dateCheck');
-                                                                row.innerHTML = data;
-                                                            },
-                                                            error: function (xhr) {
-                                                                console.log(xhr);
-                                                            }
-                                                        });
-                                                    }
+                            function handleChange() {
+                                var checkIn = document.getElementById('checkin').value;
+                                var checkOut = document.getElementById('checkout').value;
+                                $.ajax({
+                                    url: '/DaNangDreamHotel/loadRoomEvent',
+                                    type: 'POST',
+                                    data: {
+                                        checkIn: checkIn,
+                                        checkOut: checkOut
+                                    },
+                                    success: function (data) {
+                                        var row = document.getElementById('dateCheck');
+                                        row.innerHTML = data;
+                                    },
+                                    error: function (xhr) {
+                                        console.log(xhr);
+                                    }
+                                });
+                            }
 
-                                                    function handleEvent(e) {
-                                                        var checkIn = document.getElementById('checkin').value;
-                                                        var checkOut = document.getElementById('checkout').value;
-                                                        console.log(e);
-                                                        $.ajax({
-                                                            url: '/DaNangDreamHotel/loadRoomEvent?action=list',
-                                                            type: 'GET',
-                                                            data: {
-                                                                checkIn: checkIn,
-                                                                checkOut: checkOut,
-                                                                eventId: e
-                                                            },
-                                                            success: function (data) {
-                                                                var row = document.getElementById('room-details-' + e);
-                                                                row.innerHTML = data;
-                                                            },
-                                                            error: function (xhr) {
-                                                                console.log(xhr, event);
-                                                            }
-                                                        });
-                                                    }
+                            $(document).ready(function () {
+                                $(".show-room-details").click(function () {
+                                    var checkIn = document.getElementById('checkin').value;
+                                    var checkOut = document.getElementById('checkout').value;
+                                    var eventId = $(this).data('event-id');
+                                    console.log(eventId);
+                                    $.ajax({
+                                        url: '/DaNangDreamHotel/loadRoomEvent?action=list',
+                                        type: 'GET',
+                                        data: {
+                                            checkIn: checkIn,
+                                            checkOut: checkOut,
+                                            eventId: eventId
+                                        },
+                                        success: function (data) {
+                                            var detailsElement = $('#room-details-' + eventId);
+                                            detailsElement.html(data);
+                                            detailsElement.toggle();
 
-                                                    var date = new Date();
-                                                    var tdate = date.getDate();
-                                                    var tmonth = date.getMonth() + 1;
-                                                    if (tdate < 10) {
-                                                        tdate = '0' + tdate;
-                                                    }
-                                                    if (tmonth < 10) {
-                                                        tmonth = '0' + tmonth;
-                                                    }
-                                                    var year = date.getUTCFullYear();
-                                                    var minDate = year + '-' + tmonth + '-' + tdate;
-                                                    var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
-                                                    var tdateMin = date.getDate() + 1;
-                                                    var tmonthMin = date.getMonth() + 1;
-                                                    if (tdateMin < 10) {
-                                                        tdateMin = '0' + tdateMin;
-                                                    }
-                                                    if (tmonthMin < 10) {
-                                                        tmonthMin = '0' + tmonthMin;
-                                                    }
-                                                    var yearMin = date.getUTCFullYear();
-                                                    var min = yearMin + '-' + tmonthMin + '-' + tdateMin;
-                                                    var checkOut = document.getElementById('checkout').setAttribute('min', min);
-                                                    document.getElementById('checkin').addEventListener('input', function (e) {
-                                                        if (e.target.value === '') {
-                                                            e.preventDefault();
-                                                            e.target.value = e.target.defaultValue;
-                                                        }
-                                                    });
+                                        },
+                                        error: function (xhr) {
+                                            console.log(xhr, eventId);
+                                        }
+                                    });
+
+                                });
+                            });
+
+//                                                function handleEvent(e) {
+//                                                    var checkIn = document.getElementById('checkin').value;
+//                                                    var checkOut = document.getElementById('checkout').value;
+//                                                    console.log(e);
+//                                                    $.ajax({
+//                                                        url: '/DaNangDreamHotel/loadRoomEvent?action=list',
+//                                                        type: 'GET',
+//                                                        data: {
+//                                                            checkIn: checkIn,
+//                                                            checkOut: checkOut,
+//                                                            eventId: e
+//                                                        },
+//                                                        success: function (data) {
+//                                                            var row = document.getElementById('room-details-' + e);
+//                                                            row.innerHTML = data;
+//                                                        },
+//                                                        error: function (xhr) {
+//                                                            console.log(xhr, event);
+//                                                        }
+//                                                    });
+//                                                }
+
+                            var date = new Date();
+                            var tdate = date.getDate();
+                            var tmonth = date.getMonth() + 1;
+                            if (tdate < 10) {
+                                tdate = '0' + tdate;
+                            }
+                            if (tmonth < 10) {
+                                tmonth = '0' + tmonth;
+                            }
+                            var year = date.getUTCFullYear();
+                            var minDate = year + '-' + tmonth + '-' + tdate;
+                            var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
+                            var showCheckIn = document.getElementById('checkin').value;
+
+                            var tdateMin = date.getDate() + 2;
+                            var tmonthMin = date.getMonth() + 1;
+                            if (tdateMin < 10) {
+                                tdateMin = '0' + tdateMin;
+                            }
+                            if (tmonthMin < 10) {
+                                tmonthMin = '0' + tmonthMin;
+                            }
+                            var yearMin = date.getUTCFullYear();
+                            var min = yearMin + '-' + tmonthMin + '-' + tdateMin;
+                            var checkOut = document.getElementById('checkout').setAttribute('min', min);
+                            var showCheckOut = document.getElementById('checkout').value;
+                            document.getElementById('checkin').addEventListener('input', function (e) {
+                                if (e.target.value === '') {
+                                    e.preventDefault();
+                                    e.target.value = e.target.defaultValue;
+                                }
+                            });
 
 
-                                                    function handleFilter(e) {
-                                                        var selectedValues = [];
+                            function handleFilter(e) {
+                                var selectedValues = [];
 
-                                                        document.querySelectorAll('.filterInput:checked').forEach(function (checkbox) {
-                                                            if (checkbox.checked) {
-                                                                selectedValues.push(checkbox.value);
-                                                                console.log(checkbox.value);
+                                document.querySelectorAll('.filterInput:checked').forEach(function (checkbox) {
+                                    if (checkbox.checked) {
+                                        selectedValues.push(checkbox.value);
+                                        console.log(checkbox.value);
 
-                                                            }
+                                    }
 
-                                                            if (selectedValues.length > 0) {
-                                                                $.ajax({
-                                                                    url: '/DaNangDreamHotel/loadRoomEvent?action=filter',
-                                                                    type: 'GET',
-                                                                    data: {
-                                                                        filterType: selectedValues,
-                                                                        eventId: e
-                                                                    },
-                                                                    success: function (data) {
-                                                                        var row = document.getElementById('room-details-' + e); // Ensure 'e' is defined
-                                                                        row.innerHTML = data;
-                                                                    },
-                                                                    error: function (xhr) {
-                                                                        console.log(xhr);
-                                                                    }
-                                                                });
-                                                            } else {
-                                                                console.log("No checkboxes selected");
-                                                            }
+                                    if (selectedValues.length > 0) {
+                                        $.ajax({
+                                            url: '/DaNangDreamHotel/loadRoomEvent?action=filter',
+                                            type: 'GET',
+                                            data: {
+                                                filterType: selectedValues,
+                                                eventId: e
+                                            },
+                                            success: function (data) {
+                                                var row = document.getElementById('room-details-' + e); // Ensure 'e' is defined
+                                                row.innerHTML = data;
+                                            },
+                                            error: function (xhr) {
+                                                console.log(xhr);
+                                            }
+                                        });
+                                    } else {
+                                        console.log("No checkboxes selected");
+                                    }
 
-                                                        });
-                                                    }
+                                });
+                            }
 
 
 

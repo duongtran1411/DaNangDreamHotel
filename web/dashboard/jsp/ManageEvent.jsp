@@ -89,33 +89,34 @@
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">
-                        <label>Name</label>
-                        <input name="name" type="text" class="form-control"  required>
-                    </div>
-                    <div class="form-group">
-                        <label>Image</label>
-                        <input name="image" type="text" class="form-control"  required>
-                    </div>
-                    <div class="form-group">
-                        <label>StartDay</label>
-                        <input name="start" type="date" class="form-control"  required>
-                    </div>
-                    <div class="form-group">
-                        <label>EndDay</label>
-                        <input name="end" type="date" class="form-control"  required>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input name="description" type="text" class="form-control"  required>
-                    </div>
-                    <div class="form-group">
-                        <label>Discount</label>
-                        <input name="discount" type="text" class="form-control"  required>
-                    </div>
-                    <div class="form-group">
-                        <label>Voucher</label>
-                        <input name="voucher" type="text" class="form-control" required>
-                    </div>		
+                                    <label> Name</label>
+                                    <input name="name" type="text" class="form-control" placeholder="Enter name" required
+                                           pattern="[A-Za-z]{2,}" title="Name should only contain letters and be at least 2 characters long.">
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Image</label>
+                                    <input id="image" name="image" type="text" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="start">Start Day</label>
+                                    <input id="start" name="start" type="date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="end">End Day</label>
+                                    <input id="end" name="end" type="date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <input id="description" name="description" type="text" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="discount">Discount</label>
+                                    <input id="discount" name="discount" type="text" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="voucher">Voucher</label>
+                                    <input id="voucher" name="voucher" type="text" class="form-control" required>
+                                </div>		
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
@@ -127,6 +128,66 @@
             </div>
         </div>
 
+        if (name === "") {
+                    alert("Please enter a  name.");
+                    return false;
+                } else if (!/^[A-Za-z]+$/.test(name) || /^[0-9]/.test(name) || name.length < 2) {
+                    alert("name should only contain letters, should not start with a number, and must be at least 2 characters long.");
+                    return false;
+                }
+
+        if (image === "") {
+            alert("Please enter an image URL.");
+            return false;
+        }
+
+        if (start === "") {
+            alert("Please select a start day.");
+            return false;
+        }
+
+        if (end === "") {
+            alert("Please select an end day.");
+            return false;
+        }
+
+        if (new Date(start) > new Date(end)) {
+            alert("Start day cannot be after end day.");
+            return false;
+        }
+
+        if (description === "") {
+            alert("Please enter a description.");
+            return false;
+        }
+
+        if (discount === "") {
+            alert("Please enter a discount.");
+            return false;
+        }
+
+        if (voucher === "") {
+            alert("Please enter a voucher.");
+            return false;
+        }
+
+        return true; // If all fields are valid, submit the form
+    }
+</script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var deleteModal = document.getElementById('deleteModal');
+                deleteModal.addEventListener('show.bs.modal', function (event) {
+                    var button = event.relatedTarget; // Button that triggered the modal
+                    var url = button.getAttribute('data-url'); // Extract info from data-* attributes
+
+                    // Update the modal's content.
+                    var confirmDeleteBtn = deleteModal.querySelector('#confirmDeleteBtn');
+                    confirmDeleteBtn.setAttribute('href', url);
+                });
+            });
+
+        </script>
         <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/sidebarmenu.js"></script>

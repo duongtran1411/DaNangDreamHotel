@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Da Nang Dream Hotel</title>
-
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
@@ -247,6 +247,73 @@
                                                 success: function (data) {
                                                     var row = document.getElementById("content");
                                                     row.innerHTML = data;
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        const itemsPerPage = 6;  // Số lượng phòng mỗi trang
+                                                        const paginationContainer = document.getElementById('pagination-container');
+                                                        const pageInfo = document.getElementById('pagination-info');
+
+                                                        function showPage(page) {
+                                                            const items = document.querySelectorAll('#content .element');
+                                                            const start = (page - 1) * itemsPerPage;
+                                                            const end = start + itemsPerPage;
+
+                                                            items.forEach((item, index) => {
+                                                                if (index >= start && index < end) {
+                                                                    item.style.display = 'block';
+                                                                } else {
+                                                                    item.style.display = 'none';
+                                                                }
+                                                            });
+
+                                                            const pageItems = paginationContainer.querySelectorAll('li');
+                                                            pageItems.forEach((item, index) => {
+                                                                if (index === (page - 1)) {
+                                                                    item.classList.add('active');
+                                                                } else {
+                                                                    item.classList.remove('active');
+                                                                }
+                                                            });
+
+                                                            const totalPages = Math.ceil(items.length / itemsPerPage);
+//                                                            pageInfo.innerText = `Page ${page} of ${totalPages}`;
+                                                        }
+
+                                                        function setupPagination() {
+                                                            const items = document.querySelectorAll('#content .element');
+                                                            const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                            paginationContainer.innerHTML = '';
+                                                            const ul = document.createElement('ul');
+                                                            ul.className = 'pagination justify-content-center';
+
+                                                            for (let i = 1; i <= totalPages; i++) {
+                                                                const li = document.createElement('li');
+                                                                li.className = 'page-item';
+
+                                                                const link = document.createElement('a');
+                                                                link.className = 'page-link';
+                                                                link.href = '#';
+                                                                link.innerText = i;
+                                                                (function (page) {
+                                                                    link.addEventListener('click', function (event) {
+                                                                        event.preventDefault();
+                                                                        showPage(page);
+                                                                    });
+                                                                })(i);
+
+                                                                li.appendChild(link);
+                                                                ul.appendChild(li);
+                                                                if (i === 1) {
+                                                                    li.classList.add('active');
+                                                                }
+                                                            }
+
+                                                            paginationContainer.appendChild(ul);
+//                                                            pageInfo.innerText = `Page 1 of ${totalPages}`;
+                                                        }
+
+                                                        setupPagination();
+                                                        showPage(1);
+                                                    });
                                                     console.log("success");
                                                 },
                                                 error: function (xhr) {
@@ -306,6 +373,73 @@
                                                 success: function (data) {
                                                     var row = document.getElementById("content");
                                                     row.innerHTML = data;
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        const itemsPerPage = 6;  // Số lượng phòng mỗi trang
+                                                        const paginationContainer = document.getElementById('pagination-container');
+                                                        const pageInfo = document.getElementById('pagination-info');
+
+                                                        function showPage(page) {
+                                                            const items = document.querySelectorAll('#content .element');
+                                                            const start = (page - 1) * itemsPerPage;
+                                                            const end = start + itemsPerPage;
+
+                                                            items.forEach((item, index) => {
+                                                                if (index >= start && index < end) {
+                                                                    item.style.display = 'block';
+                                                                } else {
+                                                                    item.style.display = 'none';
+                                                                }
+                                                            });
+
+                                                            const pageItems = paginationContainer.querySelectorAll('li');
+                                                            pageItems.forEach((item, index) => {
+                                                                if (index === (page - 1)) {
+                                                                    item.classList.add('active');
+                                                                } else {
+                                                                    item.classList.remove('active');
+                                                                }
+                                                            });
+
+                                                            const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                            pageInfo.innerText = `Page ${page} of ${totalPages}`;
+                                                        }
+
+                                                        function setupPagination() {
+                                                            const items = document.querySelectorAll('#content .element');
+                                                            const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                            paginationContainer.innerHTML = '';
+                                                            const ul = document.createElement('ul');
+                                                            ul.className = 'pagination justify-content-center';
+
+                                                            for (let i = 1; i <= totalPages; i++) {
+                                                                const li = document.createElement('li');
+                                                                li.className = 'page-item';
+
+                                                                const link = document.createElement('a');
+                                                                link.className = 'page-link';
+                                                                link.href = '#';
+                                                                link.innerText = i;
+                                                                (function (page) {
+                                                                    link.addEventListener('click', function (event) {
+                                                                        event.preventDefault();
+                                                                        showPage(page);
+                                                                    });
+                                                                })(i);
+
+                                                                li.appendChild(link);
+                                                                ul.appendChild(li);
+                                                                if (i === 1) {
+                                                                    li.classList.add('active');
+                                                                }
+                                                            }
+
+                                                            paginationContainer.appendChild(ul);
+//                                                            pageInfo.innerText = `Page 1 of ${totalPages}`;
+                                                        }
+
+                                                        setupPagination();
+                                                        showPage(1);
+                                                    });
                                                     console.log(typeRoom);
                                                     console.log("success");
                                                 },
@@ -315,24 +449,73 @@
                                             });
                                         }
 
-                                        function handlePage(param) {
-                                            var numberPage = param.value;
-                                            $.ajax({
-                                                url: '/DaNangDreamHotel/pagingController',
-                                                type: 'GET',
-                                                data: {
-                                                    page: numberPage
-                                                },
-                                                success: function (data) {
-                                                    var row = document.getElementById("content");
-                                                    row.innerHTML = data;
-                                                    console.log("success");
-                                                },
-                                                error: function (xhr) {
-                                                    console.log(xhr);
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            const itemsPerPage = 6;  // Số lượng phòng mỗi trang
+                                            const paginationContainer = document.getElementById('pagination-container');
+                                            const pageInfo = document.getElementById('pagination-info');
+
+                                            function showPage(page) {
+                                                const items = document.querySelectorAll('#content .element');
+                                                const start = (page - 1) * itemsPerPage;
+                                                const end = start + itemsPerPage;
+
+                                                items.forEach((item, index) => {
+                                                    if (index >= start && index < end) {
+                                                        item.style.display = 'block';
+                                                    } else {
+                                                        item.style.display = 'none';
+                                                    }
+                                                });
+
+                                                const pageItems = paginationContainer.querySelectorAll('li');
+                                                pageItems.forEach((item, index) => {
+                                                    if (index === (page - 1)) {
+                                                        item.classList.add('active');
+                                                    } else {
+                                                        item.classList.remove('active');
+                                                    }
+                                                });
+
+                                                const totalPages = Math.ceil(items.length / itemsPerPage);
+//                                                pageInfo.innerText = `Page ${page} of ${totalPages}`;
+                                            }
+
+                                            function setupPagination() {
+                                                const items = document.querySelectorAll('#content .element');
+                                                const totalPages = Math.ceil(items.length / itemsPerPage);
+                                                paginationContainer.innerHTML = '';
+                                                const ul = document.createElement('ul');
+                                                ul.className = 'pagination justify-content-center';
+
+                                                for (let i = 1; i <= totalPages; i++) {
+                                                    const li = document.createElement('li');
+                                                    li.className = 'page-item';
+
+                                                    const link = document.createElement('a');
+                                                    link.className = 'page-link';
+                                                    link.href = '#';
+                                                    link.innerText = i;
+                                                    (function (page) {
+                                                        link.addEventListener('click', function (event) {
+                                                            event.preventDefault();
+                                                            showPage(page);
+                                                        });
+                                                    })(i);
+
+                                                    li.appendChild(link);
+                                                    ul.appendChild(li);
+                                                    if (i === 1) {
+                                                        li.classList.add('active');
+                                                    }
                                                 }
-                                            });
-                                        }
+
+                                                paginationContainer.appendChild(ul);
+//                                                pageInfo.innerText = `Page 1 of ${totalPages}`;
+                                            }
+
+                                            setupPagination();
+                                            showPage(1);
+                                        });
 
         </script>
     </body>

@@ -103,7 +103,9 @@ public class CartController extends HttpServlet {
                 for (CartItem cartItem : list) {
                     if (cartItem.getRoom().getRoom_Id() == roomId) {
                         roomFound = true;
-                        response.sendRedirect("viewCartController");
+                        String url = String.format("bookByEventController?checkIn=%s&checkOut=%s&numberPerson=%s",
+                                 session.getAttribute("checkInDay"),session.getAttribute("checkOutDay"), session.getAttribute("numberPerson"));
+                        response.sendRedirect(url);
                         break;
                     }
                 }
@@ -111,13 +113,16 @@ public class CartController extends HttpServlet {
                     Room room = dao.getRoomToCart(roomId);
                     CartItem cartItem = new CartItem(room);
                     bookingCart.addRoom(cartItem);
-                    String checkIn = (String)session.getAttribute("checkInDay");
-                    String checkOut = (String)session.getAttribute("checkOutDay");
-                    System.out.println(checkIn + "  " +checkOut);
+                    String checkIn = (String) session.getAttribute("checkInDay");
+                    String checkOut = (String) session.getAttribute("checkOutDay");
+                    session.getAttribute("numberPerson");
+                    System.out.println(checkIn + "  " + checkOut);
                     session.setAttribute("checkInDay", checkIn);
                     session.setAttribute("checkOutDay", checkOut);
                     session.setAttribute("cart", bookingCart);
-                    request.getRequestDispatcher("viewCartController").forward(request, response);
+                    String url = String.format("bookByEventController?checkIn=%s&checkOut=%s&numberPerson=%s",
+                            checkIn, checkOut, session.getAttribute("numberPerson"));
+                    response.sendRedirect(url);
                 }
                 break;
         }

@@ -360,14 +360,133 @@ public class DAOItem extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+public List<RoomWithItem> getAllItemsInRoom(int offset, int limit) {
+    List<RoomWithItem> list = new ArrayList<>();
+    String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price " +
+                 "FROM item_in_room i " +
+                 "JOIN room r ON i.room_id = r.room_Id " +
+                 "JOIN items it ON i.item_Id = it.item_Id " +
+                 "LIMIT ? OFFSET ?";
+    try {
+        PreparedStatement pre = conn.prepareStatement(sql);
+        pre.setInt(1, limit);
+        pre.setInt(2, offset);
+        ResultSet rs = pre.executeQuery();
+        while (rs.next()) {
+            list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
+                    rs.getInt("item_Id"),
+                    rs.getInt("room_Id"),
+                    rs.getString("roomName"),
+                    rs.getString("itemName"),
+                    rs.getInt("quantity"),
+                    rs.getDouble("price")));
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
     }
-     public static void main(String[] args) {
+    return list;
+}
+
+
+public List<RoomWithItem> getAllItemsInRooms() {
+    List<RoomWithItem> list = new ArrayList<>();
+    String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price " +
+                 "FROM item_in_room i " +
+                 "JOIN room r ON i.room_id = r.room_Id " +
+                 "JOIN items it ON i.item_Id = it.item_Id; ";
+    try {
+        PreparedStatement pre = conn.prepareStatement(sql);
+        ResultSet rs = pre.executeQuery();
+        while (rs.next()) {
+            list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
+                    rs.getInt("item_Id"),
+                    rs.getInt("room_Id"),
+                    rs.getString("roomName"),
+                    rs.getString("itemName"),
+                    rs.getInt("quantity"),
+                    rs.getDouble("price")));
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return list;
+}
+
+public int getNoOfItemRecordsByName(String roomName) {
+    int noOfRecords = 0;
+    String sql = "SELECT COUNT(*) FROM item_in_room i "
+               + "JOIN room r ON i.room_id = r.room_Id "
+               + "JOIN items it ON i.item_Id = it.item_Id "
+               + "WHERE r.name = ?";
+    try {
+        PreparedStatement pre = conn.prepareStatement(sql);
+        pre.setString(1, roomName);
+        ResultSet rs = pre.executeQuery();
+        if (rs.next()) {
+            noOfRecords = rs.getInt(1);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return noOfRecords;
+}
+
+public int getNoOfItemRecords() {
+    int noOfRecords = 0;
+    String sql = "SELECT COUNT(*) FROM item_in_room";
+    try {
+        PreparedStatement pre = conn.prepareStatement(sql);
+        ResultSet rs = pre.executeQuery();
+        if (rs.next()) {
+            noOfRecords = rs.getInt(1);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return noOfRecords;
+}
+
+
+    
+    
+
+  public List<RoomWithItem> getAllItemsInRoomByName(String roomName, int offset, int limit) {
+    List<RoomWithItem> list = new ArrayList<>();
+    String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price " +
+                 "FROM item_in_room i " +
+                 "JOIN room r ON i.room_id = r.room_Id " +
+                 "JOIN items it ON i.item_Id = it.item_Id " +
+                 "WHERE r.name = ? " +
+                 "LIMIT ? OFFSET ?";
+    try {
+        PreparedStatement pre = conn.prepareStatement(sql);
+        pre.setString(1, roomName);
+        pre.setInt(2, limit);
+        pre.setInt(3, offset);
+        ResultSet rs = pre.executeQuery();
+        while (rs.next()) {
+            list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
+                    rs.getInt("item_Id"),
+                    rs.getInt("room_Id"),
+                    rs.getString("roomName"),
+                    rs.getString("itemName"),
+                    rs.getInt("quantity"),
+                    rs.getDouble("price")));
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return list;
+}
+
+
+
+
+    public static void main(String[] args) {
         DAOItem dao = new DAOItem();
-      List<Item> list =  dao.getItemByType(7);
-         for (Item item : list) {
-             System.out.println(item);
-         }
- 
+        List<RoomWithItem>list=dao.getAllItemsInRooms();
+        for (RoomWithItem roomWithItem : list) {
+            System.out.println(list);
+        }
     }
 }

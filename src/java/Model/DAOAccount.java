@@ -3,15 +3,10 @@ package Model;
 import Entity.Account;
 import Entity.Jobs;
 import Entity.Role;
-import Entity.Room;
-import jakarta.servlet.http.HttpServletResponse;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -174,13 +169,10 @@ public class DAOAccount extends DBConnect {
 
     public static void main(String[] args) {
         DAOAccount dao = new DAOAccount();
-        List<Account> list = dao.getAllAccount();
-        for (Account account : list) {
-            System.out.println(account);
-        }
-
+        System.out.println(dao.getAllAccount());
     }
 }
+
 /*
    Account a= dao.getLastAccount();
         String userName = "testuser";

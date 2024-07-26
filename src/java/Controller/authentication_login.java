@@ -107,15 +107,27 @@ public class authentication_login extends HttpServlet {
 
                 if (!isEmailValid) {
                     request.setAttribute("mess1", "Invalid email format! Example: example@example.com");
-                    request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
+                    request.getRequestDispatcher("/dashboard/jsp/authentication-login.jsp").forward(request, response);
                 } else if (result) {
                     HttpSession session = request.getSession();
                     session.setMaxInactiveInterval(30000);
                     session.setAttribute("acc", user);
-                    request.getRequestDispatcher("typeRoomURL").forward(request, response);
+                    switch (user.getRole_Id()) {
+                        case 1:
+                            response.sendRedirect("AdminControllerURL");
+                            break;
+                        case 2:
+                            response.sendRedirect("typeRoomURL");
+                            break;
+                        case 3:
+                            response.sendRedirect("AdminControllerURL");
+                            break;
+                        default:
+                            break;
+                    }
                 } else {
                     request.setAttribute("mess1", "Username or password is incorrect!<br>Enter your username again");
-                    request.getRequestDispatcher("dashboard/jsp/authentication-login.jsp").forward(request, response);
+                    request.getRequestDispatcher("/dashboard/jsp/authentication-login.jsp").forward(request, response);
                 }
 
             } catch (Exception e) {

@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Entity.BookingCart;
 import Entity.Event;
 import Entity.FormatUtils;
 import Entity.Room;
@@ -65,9 +66,12 @@ public class BookingByEventController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(300);
+        BookingCart bookingCart = (BookingCart) session.getAttribute("cart");
         String checkIn = request.getParameter("checkIn");
         String checkOut = request.getParameter("checkOut");
         String person = request.getParameter("numberPerson");
+        String dateIn = request.getParameter("dateIn");
+        String dateOut = request.getParameter("dateOut");
         DAOEvent daoE = new DAOEvent();
         DAORoom dao = new DAORoom();
         List<Integer> prices = new ArrayList<>();
@@ -81,8 +85,16 @@ public class BookingByEventController extends HttpServlet {
         request.setAttribute("listE", listE);
         request.setAttribute("priceRoom", prices);
         request.setAttribute("priceDiscount", discounts);
-        session.setAttribute("checkInDay", checkIn);
-        session.setAttribute("checkOutDay", checkOut);
+        if (dateIn != null && dateOut != null) {
+            session.setAttribute("checkInDay", dateIn);
+            session.setAttribute("checkOutDay", dateOut);
+        } else {
+            session.setAttribute("checkInDay", checkIn);
+            session.setAttribute("checkOutDay", checkOut);
+        }
+        
+        
+
         session.setAttribute("numberPerson", person);
         request.getRequestDispatcher("Booking.jsp").forward(request, response);
 

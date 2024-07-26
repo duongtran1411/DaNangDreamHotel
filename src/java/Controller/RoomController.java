@@ -149,9 +149,9 @@ public class RoomController extends HttpServlet {
         daoRoom.deleteRoom(roomId);
         response.sendRedirect("roomURL?action=");
     }
-
-    private void editRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    
+   private void editRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         int roomId = Integer.parseInt(request.getParameter("rid"));
         String name = request.getParameter("name");
         int floor = Integer.parseInt(request.getParameter("floor"));
