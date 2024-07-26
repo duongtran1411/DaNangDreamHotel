@@ -33,9 +33,11 @@ public class RegistrationDTO {
         this.avatar = avatar;
     }
 
-    public RegistrationDTO(String string, int aInt, String string0, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
+    public RegistrationDTO(String string, int aInt, String string0, String string1, String string2, String string3, String string4, String string5, int aInt0, String string6, String string7, String string8) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+  
 
     public String getAvatar() {
         return avatar;

@@ -88,7 +88,7 @@ public class AdminControllerURL extends HttpServlet {
                 java.util.Date checkoutDate = dateFormat.parse(checkoutDateStr);
 
                 // Gọi DAO để lấy danh sách booking dựa trên ngày
-                listB = dao.getAllBookingByDate(new Date(checkinDate.getTime()), new Date(checkoutDate.getTime()));
+               // listB = dao.getAllBookingByDate(new Date(checkinDate.getTime()), new Date(checkoutDate.getTime()));
                
         for (Booking booking : listB) {
             totalPrice+=booking.getExpenses();
