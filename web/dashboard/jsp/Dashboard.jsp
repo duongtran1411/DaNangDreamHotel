@@ -320,6 +320,30 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <!-- Pagination controls for items -->
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <c:if test="${currentItemPage > 1}">
+            <li class="page-item">
+                <a class="page-link" href="?searchName=${param.searchName}&itemPage=${currentItemPage - 1}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        </c:if>
+        <c:forEach var="i" begin="1" end="${noOfItemPages}">
+            <li class="page-item <c:if test="${i == currentItemPage}">active</c:if>">
+                <a class="page-link" href="?searchName=${param.searchName}&itemPage=${i}">${i}</a>
+            </li>
+        </c:forEach>
+        <c:if test="${currentItemPage < noOfItemPages}">
+            <li class="page-item">
+                <a class="page-link" href="?searchName=${param.searchName}&itemPage=${currentItemPage + 1}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </c:if>
+    </ul>
+</nav>
                                 </div>
                             </div>
                         </div>
@@ -327,6 +351,7 @@
                 </div>
             </div>
         </div>
+                                                    
     </div>                           
     <script>
         function validateDates() {
