@@ -76,7 +76,7 @@ public class HomeController extends HttpServlet {
         List<Event> listE = daoE.getTop3Event();
         
         
-       request.setAttribute("listU", listU);
+       //request.setAttribute("listU", listU);
         request.setAttribute("listR", list);
         request.setAttribute("listE", listE);
        

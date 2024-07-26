@@ -360,6 +360,8 @@ public class DAOItem extends DBConnect {
         } catch (SQLException ex) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return list;
+    }
 public List<RoomWithItem> getAllItemsInRoom(int offset, int limit) {
     List<RoomWithItem> list = new ArrayList<>();
     String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price " +
