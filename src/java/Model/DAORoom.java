@@ -191,7 +191,7 @@ public class DAORoom extends DBConnect {
                 + "`floor_Room_Id`,\n"
                 + "`price`,\n"
                 + "`size`,\n"
-                + "`type_Room_Id`)\n"
+                + "`typeRoom_Id`)\n"
                 + "VALUES\n"
                 + "(?,?,?,?,?);";
         try {

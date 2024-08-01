@@ -94,7 +94,7 @@
                                         </div>
                                     </div>
                                     <div  width: 100%; padding: 5px;">
-                                        <a href="itemManageURL?action=detail&trid=${o.typeRoom_Id}" class="text-decoration-underline" style="color: seagreen;">Detail</a>
+                                        <a href="itemManageURL?action=detail&trid=${o.typeRoom_Id}" class="text-decoration-underline" style="color: seagreen;">View</a>
                                     </div>
                                 </div>
                             </div>

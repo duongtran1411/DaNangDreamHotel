@@ -1,4 +1,3 @@
-
 package Controller;
 
 import Entity.Item;
@@ -23,9 +22,10 @@ public class ItemController extends HttpServlet {
 
     DAOItem daoItem = new DAOItem();
     DAORoom daoRoom = new DAORoom();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
+
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ItemController extends HttpServlet {
             case "add":
                 addItem(request, response);
                 break;
-                case "search":
+            case "search":
                 searchItem(request, response);
                 break;
             case "delete":
@@ -65,10 +65,11 @@ public class ItemController extends HttpServlet {
         request.setAttribute("allItem", allItem);
         request.getRequestDispatcher("dashboard/jsp/ItemManage.jsp").forward(request, response);
     }
+
     private void searchItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String query = request.getParameter("query");
         List<Item> filteredItems = daoItem.searchItems(query); // Implement this method in your DAO
-            request.setAttribute("allItem", filteredItems);
+        request.setAttribute("allItem", filteredItems);
         //request.getRequestDispatcher("/partials/itemTable.jsp").forward(request, response);
     }
 
@@ -78,6 +79,7 @@ public class ItemController extends HttpServlet {
         daoItem.deleteItem(id);
         
     }
+
     private void updateItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String itemIdParam = request.getParameter("itemId");
@@ -99,6 +101,9 @@ public class ItemController extends HttpServlet {
     }
 
     }
+
+    
+
     private void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         int type = Integer.parseInt(request.getParameter("type"));
@@ -106,7 +111,7 @@ public class ItemController extends HttpServlet {
         daoItem.insertItem(name, type, price);
         List<Room> listRoomId = daoRoom.getAllRoomId();
         Item it = daoItem.getItemByName(name);
-        for(Room x : listRoomId){
+        for (Room x : listRoomId) {
             daoItem.InsertItemInRoom(it.getItem_Id(), x.getRoom_Id());
         }
         response.sendRedirect("ItemController");

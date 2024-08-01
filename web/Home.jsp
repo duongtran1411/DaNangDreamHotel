@@ -251,9 +251,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero-slider owl-carousel" >
-                    <div class="hs-item set-bg" data-setbg="img/img_HomePage01_1.jpg"></div>
-                    <div class="hs-item set-bg" data-setbg="img/img_HomePage02_1.jpg"></div>
+                <div class="hero-slider owl-carousel">
+                    <div class="hs-item set-bg" data-setbg="img/img_HomePage01.jpg"></div>
+                    <div class="hs-item set-bg" data-setbg="img/img_HomePage02.jpg"></div>
                     <div class="hs-item set-bg" data-setbg="img/img_HomePage05.jpg"></div>
                 </div>
             </section>

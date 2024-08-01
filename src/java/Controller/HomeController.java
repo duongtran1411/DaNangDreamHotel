@@ -8,11 +8,9 @@ import Entity.BookingCart;
 import Entity.Event;
 import Entity.FeedBack;
 import Entity.Room;
-import Entity.Utilities;
 import Model.DAOEvent;
 import Model.DAOFeedBack;
 import Model.DAORoom;
-import Model.DAOUtilities;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -86,7 +84,7 @@ public class HomeController extends HttpServlet {
         List<FeedBack> listFb = daoF.getFeedBackShow();
         
         
-       request.setAttribute("listU", listU);
+       //request.setAttribute("listU", listU);
         request.setAttribute("listR", list);
         request.setAttribute("listE", listE);
         request.setAttribute("listFb", listFb);

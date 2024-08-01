@@ -34,47 +34,6 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
         <link rel="stylesheet" href="css/paging.css"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-        <style>
-            .pagination {
-                display: flex;
-                justify-content: center;
-                padding-left: 0;
-                list-style: none;
-                margin: 0;
-            }
-
-            .page-item {
-                display: inline;
-                margin: 0 5px;
-            }
-
-            .page-link {
-                color: #333;
-                text-decoration: none;
-                padding-left: 12px;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 30px;
-                height: 30px;
-                border: none;
-                border-radius: 50px;
-            }
-
-            .page-link:hover {
-                background-color: #ddd;
-                color: white;
-                border-radius: 50px;
-            }
-
-            .page-item.active .page-link   {
-                background-color: #DFA974;
-                color: white;
-                border-color: #DFA974;
-                border-radius: 50px;
-            }
-        </style>
     </head>
     <body>
         <!-- Page Preloder -->
@@ -115,7 +74,7 @@
 
                             <c:forEach items="${listTypeRoom}" var="o">
                                 <button class="btnType" name="typeRoom" onclick="loadType(this)" value="${o.typeRoom_Id}"><li>${o.name}</li></button>
-                                    </c:forEach>   
+                            </c:forEach>   
                         </ul>
                     </div>
 
@@ -133,11 +92,11 @@
         <!-- Breadcrumb Section End -->
 
         <!-- Rooms Section Begin -->
-        <div class="rooms-section spad">
+        <section class="rooms-section spad">
             <div class="container">
                 <div class="row" id="content">                 
                     <c:forEach items="${listRoom}" var="o">
-                        <div class="room col-lg-4 col-md-6 element">
+                        <div class="room col-lg-4 col-md-6">
                             <div class="room-item " id="item">
                                 <img src="${o.image}" alt="" style="height: 240px">
                                 <div class="ri-text" style="height:450px">
@@ -170,17 +129,21 @@
                                     <a href="roomDetailsController?Id=${o.room_Id}&typeRoom=${o.type_Room_Id}" class="primary-btn">More Details</a>
                                 </div>
                             </div>
-
+                                   
                         </div>      
                     </c:forEach>
-                </div>
-                <div id="pagination-info">
+
+
 
                 </div>
-                <div id="pagination-container">
-                </div>
+                <ul class="page">
+                    <c:forEach begin="1" end="${end}" var="o">
+                        <button class="${tag == o?"highlight":""}" onclick="handlePage(this)" value="${o}"><li>${o}</li></button>
+                            </c:forEach>
+
+                </ul>
             </div>
-        </div>
+        </section>
         <!-- Rooms Section End -->
 
         <!-- Footer Section Begin -->

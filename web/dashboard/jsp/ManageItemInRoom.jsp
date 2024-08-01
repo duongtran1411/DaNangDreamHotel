@@ -171,6 +171,7 @@
                                             </table>
                                         </div>
                                     </div>
+                                                 <a href="itemManageURL">Back</a>
                                 </div>
                             </div>
                         </div>

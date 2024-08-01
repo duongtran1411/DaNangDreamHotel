@@ -17,8 +17,7 @@ public class DAOAccount extends DBConnect {
     public List<Account> getAllAccount() {
         List<Account> list = new ArrayList<>();
         String sql = "select a.account_Id,a.userName,a.firstName,a.lastName,a.email,a.password,a.phone,a.create_at,a.update_at,r.role_Id,r.name from Account a\n"
-                + "         join role r on a.role_Id=r.role_Id\n"
-                + "         where is_deleted=false;";
+                + "            join role r on a.role_Id=r.role_Id ;";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
@@ -106,32 +105,36 @@ public class DAOAccount extends DBConnect {
         }
     }
 
-    public void deletedAccountById(int id) {
-        String sql = "UPDATE Account SET is_deleted = ? WHERE account_Id = ?";
+    public void deleteAccountByID(int id) {
+        String sql = "delete from Account where account_Id=?";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setBoolean(1, true);
-            st.setInt(2, id);
+            st.setInt(1, id);
             st.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.getStackTrace();
         }
     }
 
-    public void insertAccount(String userName, String firstName, String lastName,
-            String password, String email, String phone, int role_Id) {
-        String sql = "INSERT INTO account ( userName, firstName, lastName, "
-                + "password, email, phone, role_Id) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void insertAccount(int job_Id, String userName, String firstName, String lastName,
+            String password, String email, String phone, int role_Id,
+            java.sql.Date create_at, java.sql.Date update_at, int account_Id) {
+        String sql = "INSERT INTO account (job_Id, userName, firstName, lastName, "
+                + "password, email, phone, role_Id, create_at, update_at, account_Id) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setString(1, userName);
-            st.setString(2, firstName);
-            st.setString(3, lastName);
-            st.setString(4, password);
-            st.setString(5, email);
-            st.setString(6, phone);
-            st.setInt(7, role_Id);
+            st.setInt(1, job_Id);
+            st.setString(2, userName);
+            st.setString(3, firstName);
+            st.setString(4, lastName);
+            st.setString(5, password);
+            st.setString(6, email);
+            st.setString(7, phone);
+            st.setInt(8, role_Id);
+            st.setDate(9, create_at);
+            st.setDate(10, update_at);
+            st.setInt(11, account_Id);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

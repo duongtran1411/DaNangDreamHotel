@@ -73,7 +73,7 @@ public class UseSuppliesController extends HttpServlet {
     private void listRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Room> list = daoRoom.getProcessingRooms();
         request.setAttribute("list", list);
-        request.getRequestDispatcher("dashboard/jsp/LiveRoom.jsp").forward(request, response);
+        request.getRequestDispatcher("dashboard/jsp/ListProcessRoom.jsp").forward(request, response);
     }
 
     private void updatePayment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

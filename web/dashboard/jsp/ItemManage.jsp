@@ -104,10 +104,7 @@
                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addItemModal">
                                         <p class="mb-0 fs-3"><i class="ti ti-plus fs-6"></i>Add Item</p>
                                     </button>
-                                <%
-                                                       DAOTypeItem dao = new DAOTypeItem();
-                                                       List<TypeItem> allType = dao.getAllTypeOfItem();
-                                %>
+                                
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="table-responsive">

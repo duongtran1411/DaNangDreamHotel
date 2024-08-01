@@ -41,7 +41,6 @@ public class DAOItem extends DBConnect {
         }
         return items;
     }
-
     public int getTotalItem() {
         String sql = "select count(item_Id) "
                 + "from items";
@@ -90,10 +89,10 @@ public class DAOItem extends DBConnect {
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 ItemInRoom x = new ItemInRoom();
-                int id = rs.getInt("item_In_Room_Id");
-                int item_Id = rs.getInt("item_Id");
-                int room_Id = rs.getInt("room_Id");
-                int quantity = rs.getInt("quantity");
+               int id = rs.getInt("item_In_Room_Id");
+               int item_Id= rs.getInt("item_Id");
+               int room_Id = rs.getInt("room_Id");
+               int quantity = rs.getInt("quantity");
                 list.add(x);
             }
         } catch (SQLException ex) {
@@ -210,6 +209,17 @@ public class DAOItem extends DBConnect {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void deleteItemByType(int id) {
+        String sql = "delete from items "
+                + "where typeItem_Id= ? ";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void insertItem(String name, int type, double price) {
         String sql = "insert into items(name, typeItem_Id, price)"
@@ -299,22 +309,24 @@ public class DAOItem extends DBConnect {
         return list;
     }
 
+   
+
     public void InsertItemInRoom(int itemId, int roomId) {
         String sql = "insert into item_in_room(item_Id,room_id, quantity) "
                 + "values(?,?,?)";
-        try {
+        try{
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, itemId);
             pre.setInt(2, roomId);
             pre.setInt(3, 0);
             pre.executeUpdate();
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    }
     }
 
     public List<Item> getFoodItem() {
-        List<Item> list = new ArrayList();
+         List<Item> list = new ArrayList();
         String sql = "select * from items where typeItem_Id between 1 and 2";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
@@ -380,6 +392,34 @@ public class DAOItem extends DBConnect {
         }
         return list;
     }
+public List<RoomWithItem> getAllItemsInRoom(int offset, int limit) {
+    List<RoomWithItem> list = new ArrayList<>();
+    String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price " +
+                 "FROM item_in_room i " +
+                 "JOIN room r ON i.room_id = r.room_Id " +
+                 "JOIN items it ON i.item_Id = it.item_Id " +
+                 "LIMIT ? OFFSET ?";
+    try {
+        PreparedStatement pre = conn.prepareStatement(sql);
+        pre.setInt(1, limit);
+        pre.setInt(2, offset);
+        ResultSet rs = pre.executeQuery();
+        while (rs.next()) {
+            list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
+                    rs.getInt("item_Id"),
+                    rs.getInt("room_Id"),
+                    rs.getString("roomName"),
+                    rs.getString("itemName"),
+                    rs.getInt("quantity"),
+                    rs.getDouble("price")));
+
+        }
+    }catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;
+}
 
     public int getNoOfItemRecordsByName(String roomName) {
         int noOfRecords = 0;
