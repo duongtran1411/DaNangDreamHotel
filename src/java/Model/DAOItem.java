@@ -33,7 +33,7 @@ public class DAOItem extends DBConnect {
                 item.setItem_Id(rs.getInt("item_Id"));
                 item.setName(rs.getString("name"));
                 item.setTypeItem_Id(rs.getInt("typeItem_Id"));
-                item.setPrice(rs.getDouble("price"));
+                item.setPrice(rs.getInt("price"));
                 items.add(item);
             }
         } catch (SQLException e) {
@@ -73,7 +73,7 @@ public class DAOItem extends DBConnect {
                 x.item_Id = rs.getInt("item_Id");
                 x.name = rs.getString("name");
                 x.typeItem_Id = rs.getInt("typeItem_Id");
-                x.price = rs.getDouble("price");
+                x.price = rs.getInt("price");
                 list.add(x);
             }
         } catch (SQLException ex) {
@@ -113,7 +113,7 @@ public class DAOItem extends DBConnect {
                         rs.getInt("item_Id"),
                         rs.getString("name"),
                         rs.getInt("typeItem_Id"),
-                        rs.getDouble("price")));
+                        rs.getInt("price")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
@@ -236,7 +236,7 @@ public class DAOItem extends DBConnect {
                 it.setItem_Id(rs.getInt(1));
                 it.setName(rs.getString(2));
                 it.setTypeItem_Id(rs.getInt(3));
-                it.setPrice(rs.getDouble(4));
+                it.setPrice(rs.getInt(4));
             }
         } catch (SQLException e) {
             Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, e);
@@ -273,7 +273,7 @@ public class DAOItem extends DBConnect {
                 it.setItem_Id(rs.getInt(1));
                 it.setName(rs.getString(2));
                 it.setTypeItem_Id(rs.getInt(3));
-                it.setPrice(rs.getDouble(4));
+                it.setPrice(rs.getInt(4));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOTypeItem.class.getName()).log(Level.SEVERE, null, ex);
@@ -324,6 +324,31 @@ public class DAOItem extends DBConnect {
                         rs.getInt("item_Id"),
                         rs.getString("name"),
                         rs.getInt("typeItem_Id"),
+                        rs.getInt("price")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public List<RoomWithItem> getAllItemsInRoom() {
+        List<RoomWithItem> list = new ArrayList<>();
+        String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price "
+                + "FROM item_in_room i "
+                + "JOIN room r ON i.room_id = r.room_Id "
+                + "JOIN items it ON i.item_Id = it.item_Id "
+                + "where it.typeItem_Id = 1 or it.typeItem_Id = 2 ";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
+                        rs.getInt("item_Id"),
+                        rs.getInt("room_Id"),
+                        rs.getString("roomName"),
+                        rs.getString("itemName"),
+                        rs.getInt("quantity"),
                         rs.getDouble("price")));
             }
         } catch (SQLException ex) {
@@ -332,133 +357,95 @@ public class DAOItem extends DBConnect {
         return list;
     }
 
-public List<RoomWithItem> getAllItemsInRoom(int offset, int limit) {
-    List<RoomWithItem> list = new ArrayList<>();
-    String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price " +
-                 "FROM item_in_room i " +
-                 "JOIN room r ON i.room_id = r.room_Id " +
-                 "JOIN items it ON i.item_Id = it.item_Id " +
-                 "LIMIT ? OFFSET ?";
-    try {
-        PreparedStatement pre = conn.prepareStatement(sql);
-        pre.setInt(1, limit);
-        pre.setInt(2, offset);
-        ResultSet rs = pre.executeQuery();
-        while (rs.next()) {
-            list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
-                    rs.getInt("item_Id"),
-                    rs.getInt("room_Id"),
-                    rs.getString("roomName"),
-                    rs.getString("itemName"),
-                    rs.getInt("quantity"),
-                    rs.getDouble("price")));
+    public List<RoomWithItem> getAllItemsInRooms() {
+        List<RoomWithItem> list = new ArrayList<>();
+        String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price "
+                + "FROM item_in_room i "
+                + "JOIN room r ON i.room_id = r.room_Id "
+                + "JOIN items it ON i.item_Id = it.item_Id; ";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
+                        rs.getInt("item_Id"),
+                        rs.getInt("room_Id"),
+                        rs.getString("roomName"),
+                        rs.getString("itemName"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        return list;
     }
-    return list;
-}
 
-
-public List<RoomWithItem> getAllItemsInRooms() {
-    List<RoomWithItem> list = new ArrayList<>();
-    String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price " +
-                 "FROM item_in_room i " +
-                 "JOIN room r ON i.room_id = r.room_Id " +
-                 "JOIN items it ON i.item_Id = it.item_Id; ";
-    try {
-        PreparedStatement pre = conn.prepareStatement(sql);
-        ResultSet rs = pre.executeQuery();
-        while (rs.next()) {
-            list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
-                    rs.getInt("item_Id"),
-                    rs.getInt("room_Id"),
-                    rs.getString("roomName"),
-                    rs.getString("itemName"),
-                    rs.getInt("quantity"),
-                    rs.getDouble("price")));
+    public int getNoOfItemRecordsByName(String roomName) {
+        int noOfRecords = 0;
+        String sql = "SELECT COUNT(*) FROM item_in_room i "
+                + "JOIN room r ON i.room_id = r.room_Id "
+                + "JOIN items it ON i.item_Id = it.item_Id "
+                + "WHERE r.name = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, roomName);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                noOfRecords = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        return noOfRecords;
     }
-    return list;
-}
 
-public int getNoOfItemRecordsByName(String roomName) {
-    int noOfRecords = 0;
-    String sql = "SELECT COUNT(*) FROM item_in_room i "
-               + "JOIN room r ON i.room_id = r.room_Id "
-               + "JOIN items it ON i.item_Id = it.item_Id "
-               + "WHERE r.name = ?";
-    try {
-        PreparedStatement pre = conn.prepareStatement(sql);
-        pre.setString(1, roomName);
-        ResultSet rs = pre.executeQuery();
-        if (rs.next()) {
-            noOfRecords = rs.getInt(1);
+    public int getNoOfItemRecords() {
+        int noOfRecords = 0;
+        String sql = "SELECT COUNT(*) FROM item_in_room ir\n"
+                + "join items i on i.item_Id = ir.item_Id\n"
+                + "join typeofitem it on it.typeItem_Id = i.typeItem_Id\n"
+                + "where it.typeItem_Id = 1 or it.typeItem_Id = 2";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                noOfRecords = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        return noOfRecords;
     }
-    return noOfRecords;
-}
 
-public int getNoOfItemRecords() {
-    int noOfRecords = 0;
-    String sql = "SELECT COUNT(*) FROM item_in_room";
-    try {
-        PreparedStatement pre = conn.prepareStatement(sql);
-        ResultSet rs = pre.executeQuery();
-        if (rs.next()) {
-            noOfRecords = rs.getInt(1);
+    public List<RoomWithItem> getAllItemsInRoomByName(String roomName) {
+        List<RoomWithItem> list = new ArrayList<>();
+        String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price "
+                + "FROM item_in_room i "
+                + "JOIN room r ON i.room_id = r.room_Id "
+                + "JOIN items it ON i.item_Id = it.item_Id "
+                + "WHERE r.name = ? ";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, roomName);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
+                        rs.getInt("item_Id"),
+                        rs.getInt("room_Id"),
+                        rs.getString("roomName"),
+                        rs.getString("itemName"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
+        return list;
     }
-    return noOfRecords;
-}
-
-
-    
-    
-
-  public List<RoomWithItem> getAllItemsInRoomByName(String roomName, int offset, int limit) {
-    List<RoomWithItem> list = new ArrayList<>();
-    String sql = "SELECT i.item_in_Room_Id, i.item_Id, i.room_id, i.quantity, r.name AS roomName, it.name AS itemName, it.price " +
-                 "FROM item_in_room i " +
-                 "JOIN room r ON i.room_id = r.room_Id " +
-                 "JOIN items it ON i.item_Id = it.item_Id " +
-                 "WHERE r.name = ? " +
-                 "LIMIT ? OFFSET ?";
-    try {
-        PreparedStatement pre = conn.prepareStatement(sql);
-        pre.setString(1, roomName);
-        pre.setInt(2, limit);
-        pre.setInt(3, offset);
-        ResultSet rs = pre.executeQuery();
-        while (rs.next()) {
-            list.add(new RoomWithItem(rs.getInt("item_in_Room_Id"),
-                    rs.getInt("item_Id"),
-                    rs.getInt("room_Id"),
-                    rs.getString("roomName"),
-                    rs.getString("itemName"),
-                    rs.getInt("quantity"),
-                    rs.getDouble("price")));
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(DAOItem.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    return list;
-}
-
-
-
 
     public static void main(String[] args) {
         DAOItem dao = new DAOItem();
-        List<RoomWithItem>list=dao.getAllItemsInRooms();
-        for (RoomWithItem roomWithItem : list) {
-            System.out.println(list);
-        }
+        
     }
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class DAOAccount extends DBConnect {
 
@@ -28,7 +29,7 @@ public class DAOAccount extends DBConnect {
                 a.setFirstName(rs.getString("firstName"));
                 a.setLastName(rs.getString("lastName"));
                 a.setEmail(rs.getString("email"));
-                a.setPassword(rs.getString("password"));
+                a.setPassword(createHashPassword(rs.getString("password")));
                 a.setPhone(rs.getString("phone"));
                 a.setCreate_at(rs.getDate("create_at"));
                 a.setUpdate_at(rs.getDate("update_at"));
@@ -136,6 +137,25 @@ public class DAOAccount extends DBConnect {
             e.printStackTrace();
         }
     }
+    
+//    public void insertEmail(String firstName, String lastName,
+//             String email, String phone) {
+//        String sql = "INSERT INTO account ( firstName, lastName, "
+//                + "password, email, phone, role_Id) "
+//                + "VALUES (?, ?, ?, ?, ?, ?, 2)";
+//        try {
+//            PreparedStatement st = conn.prepareStatement(sql);
+//
+//            st.setString(1, firstName);
+//            st.setString(2, lastName);
+//            st.setString(3, email);
+//            st.setString(4, phone);
+//
+//            st.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public Account getLastAccount() {
         String sql = "SELECT a.account_Id,a.userName, a.lastName, a.firstName, a.email, a.password, a.phone, a.create_at, a.update_at, ar.role_Id, ar.name, j.job_Id,j.dateOfBirth,j.emailPersonal,j.status,j.cv\n"
@@ -159,9 +179,13 @@ public class DAOAccount extends DBConnect {
                         rs.getDate("create_at"), rs.getDate("update_at"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();  // Print stack trace for better error understanding
+            e.printStackTrace();
         }
-        return null;  // Return null if no account is found
+        return null;
+    }
+
+    public static String createHashPassword(String password) {
+        return BCrypt.withDefaults().hashToString(6, password.toCharArray());
     }
 
     public static void main(String[] args) {

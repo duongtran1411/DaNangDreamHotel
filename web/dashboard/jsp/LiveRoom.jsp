@@ -9,6 +9,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Da Nang Hotel</title>
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
@@ -90,7 +91,7 @@
                             <div class="container-fluid" style="height: 800px;width: 1300px">
                                 <!-- Page Heading -->
                                 <h1 class="h3 mb-2 text-gray-800">BOOKING DETAIL</h1>
-                                <input readonly type="date" id="now-date"/>
+                            
                                 <div class="d-flex justify-content-center">
                                     <div class="search">
                                         <input class="search_input" id="searchInput" type="text" name="txt" placeholder="Search...">

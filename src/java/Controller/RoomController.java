@@ -25,7 +25,7 @@ import java.util.List;
  */
 @WebServlet(name = "RoomController", urlPatterns = {"/roomURL"})
 public class RoomController extends HttpServlet {
-    
+
     private DAOTypeRoom daoTypeRoom = new DAOTypeRoom();
     private DAORoom daoRoom = new DAORoom();
     private DAOImageRoom daoImageRoom = new DAOImageRoom();
@@ -43,7 +43,7 @@ public class RoomController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +64,7 @@ public class RoomController extends HttpServlet {
         }
         switch (action) {
             case "detail":
-                detailRoom(request, response);
+                detailRoomByTRID(request, response);
                 break;
             case "add":
                 addRoom(request, response);
@@ -123,36 +123,36 @@ public class RoomController extends HttpServlet {
         request.setAttribute("AllTypeRoom", allTypeRoom);
         request.getRequestDispatcher("dashboard/jsp/ManageRoom.jsp").forward(request, response);
     }
-    
-    private void detailRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void detailRoomByTRID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int typeRoomId = Integer.parseInt(request.getParameter("trid"));
-        request.getSession().setAttribute("typeroomid", typeRoomId);
+        request.getSession().setAttribute("trid", typeRoomId);
         List<Room> listRoom = daoRoom.getRoomByTypeRoomId(typeRoomId);
         request.setAttribute("ListRoomBID", listRoom);
         List<TypeRoom> allTypeRoom = daoTypeRoom.getAllTypeRoom();
         request.setAttribute("AllTypeRoom", allTypeRoom);
         request.getRequestDispatcher("dashboard/jsp/ManageRoom.jsp").forward(request, response);
     }
-    
+
     private void addRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         int floor = Integer.parseInt(request.getParameter("floor"));
         int price = Integer.parseInt(request.getParameter("price"));
         int size = Integer.parseInt(request.getParameter("size"));
-        int trid = Integer.parseInt(request.getParameter("type_Room_Id"));
-        
+        Integer trid = (Integer) request.getSession().getAttribute("trid");
+
         daoRoom.addRoom(name, floor, price, size, trid);
-        response.sendRedirect("roomURL?action=detail&trid=" + request.getSession().getAttribute("typeroomid") + "");
+        response.sendRedirect("roomURL?action=detail&trid=" + request.getSession().getAttribute("trid") + "");
     }
-    
+
     private void deleteRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomId = Integer.parseInt(request.getParameter("rid"));
         daoRoom.deleteRoom(roomId);
-        response.sendRedirect("roomURL?action=detail&trid=" + request.getSession().getAttribute("typeroomid") + "");
+        response.sendRedirect("roomURL?action=detail&trid=" + request.getSession().getAttribute("trid") + "");
     }
-    
-   private void editRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
+    private void editRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         int roomId = Integer.parseInt(request.getParameter("rid"));
         String name = request.getParameter("name");
         int floor = Integer.parseInt(request.getParameter("floor"));
@@ -160,10 +160,10 @@ public class RoomController extends HttpServlet {
         int size = Integer.parseInt(request.getParameter("size"));
         int trid = Integer.parseInt(request.getParameter("trid"));
         daoRoom.editRoom(trid, floor, name, price, size, roomId);
-        
-        response.sendRedirect("roomURL?action=");
+
+        response.sendRedirect("roomURL?action=detail&trid=" + request.getSession().getAttribute("trid") + "");
     }
-    
+
     private void sortRoomByNameAsc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         List<Room> sortedRooms = daoRoom.sortRoomsByNameAsc();
@@ -187,7 +187,7 @@ public class RoomController extends HttpServlet {
                     + "                                            </tr>");
         }
     }
-    
+
     private void sortRoomByNameDesc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         List<Room> sortedRooms = daoRoom.sortRoomsByNameDesc();
@@ -212,7 +212,7 @@ public class RoomController extends HttpServlet {
                     + "                                            </tr>");
         }
     }
-    
+
     private void sortRoomByPriceDesc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         List<Room> sortedRooms = daoRoom.sortRoomsByPriceDesc();
@@ -237,7 +237,7 @@ public class RoomController extends HttpServlet {
                     + "                                            </tr>");
         }
     }
-    
+
     private void sortRoomByPriceAsc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         List<Room> sortedRooms = daoRoom.sortRoomsByPriceAsc();
@@ -262,5 +262,5 @@ public class RoomController extends HttpServlet {
                     + "                                            </tr>");
         }
     }
-    
+
 }

@@ -48,12 +48,6 @@
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
                                     <p class="mb-0 fs-3"><i class="ti ti-user fs-6"></i>My Profile</p>
                                 </button>
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
-                                    <p class="mb-0 fs-3"><i class="ti ti-mail fs-6"></i>My Account</p>
-                                </button>
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
-                                    <p class="mb-0 fs-3"><i class="ti ti-list-check fs-6"></i>My Task</p>
-                                </button>
                                 <a href="logoutURL" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                             </div>
                         </div>
@@ -73,16 +67,10 @@
                     <h2 class="card-header">PROFILE</h2>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item" style="font-size: 1.1rem"><strong>Name: </strong> Nguyen Thai Son</li>
-                    <li class="list-group-item" style="font-size: 1.1rem"><strong>Phone: </strong> 012939182</li>
-                    <li class="list-group-item" style="font-size: 1.1rem"><strong>Email: </strong> sonnthe123@gmail.com</li>
+                    <li class="list-group-item" style="font-size: 1.1rem"><strong>Name: </strong> ${sessionScope.acc.userName}</li>
+                    <li class="list-group-item" style="font-size: 1.1rem"><strong>Phone: </strong> ${sessionScope.acc.phone}</li>
+                    <li class="list-group-item" style="font-size: 1.1rem"><strong>Email: </strong> ${sessionScope.acc.email}</li>
                 </ul>
-                <form action="profileURL" method="post" enctype="multipart/form-data">
-                    <div class="d-flex justify-content-center mt-3">
-                        <input id="fileAva" name="fileAva" style="width: 60%; margin-bottom: 21px" type="file" class="form-control">
-                        <button type="submit" style="margin-left: 11px; width: 20%; height: 39px" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
             </div> 
         </div>
     </div>

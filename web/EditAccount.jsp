@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Account</title>
+    <title>Da Nang Dream Hotel</title>
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
     <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
     <link rel="stylesheet" href="dashboard/assets/css/styles.css" />

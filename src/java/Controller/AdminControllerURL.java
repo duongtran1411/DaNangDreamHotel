@@ -8,8 +8,10 @@ import Entity.Booking;
 import Entity.Item;
 import Entity.Room;
 import Entity.RoomWithItem;
+import Entity.ServicePayment;
 import Model.DAOBooking;
 import Model.DAOItem;
+import Model.DAOPayment;
 import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -76,7 +78,7 @@ public class AdminControllerURL extends HttpServlet {
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
         }
-        List<Room> listR = daoroom.listAllRooms((page - 1) * recordsPerPage, recordsPerPage);
+        List<Room> listR = daoroom.listAllRooms();
         List<Booking> listB=new ArrayList<>();
         String checkinDateStr = request.getParameter("checkinDate");
         String checkoutDateStr = request.getParameter("checkoutDate");
@@ -143,21 +145,22 @@ public class AdminControllerURL extends HttpServlet {
     int noOfItemRecords = 0;
 
     if (searchName != null && !searchName.trim().isEmpty()) {
-        items = daoitem.getAllItemsInRoomByName(searchName, (itemPage - 1) * itemsPerPage, itemsPerPage);
+        items = daoitem.getAllItemsInRoomByName(searchName);
         noOfItemRecords = daoitem.getNoOfItemRecordsByName(searchName);
     } else {
-        items = daoitem.getAllItemsInRoom((itemPage - 1) * itemsPerPage, itemsPerPage);
+        items = daoitem.getAllItemsInRoom();
         noOfItemRecords = daoitem.getNoOfItemRecords();
     }
 
     int noOfItemPages = (int) Math.ceil(noOfItemRecords * 1.0 / itemsPerPage);
     
 long totalPriceItem = 0;
-    List<RoomWithItem>listItem=daoitem.getAllItemsInRooms();
-        for (RoomWithItem roomWithItem : listItem) {
-            totalPriceItem+=(long)(roomWithItem.getItempPrice()*roomWithItem.getQuantity());
+    DAOPayment daoP = new DAOPayment();
+    List<ServicePayment> listItem =daoP.getAllPayment();
+        for (ServicePayment o : listItem) {
+            totalPriceItem+=(long)(o.getExtramoney());
         }
-request.setAttribute("totalPriceItem", totalPriceItem);
+    request.setAttribute("totalPriceItem", totalPriceItem);
     request.setAttribute("listI", items);
     request.setAttribute("noOfItemPages", noOfItemPages);
     request.setAttribute("currentItemPage", itemPage);

@@ -34,8 +34,6 @@
         <link rel="stylesheet" href="css/slide.css"/>
         <link rel="stylesheet" href="css/roomDetail.css"/>
         <style>
-
-
             #slide{
                 width: max-content;
                 margin-top: 20px;
@@ -85,7 +83,7 @@
                 padding: 0 10%;
                 text-align: center;
                 transition: 0.5s;
-/*                overflow: hidden;*/
+                /*                overflow: hidden;*/
                 max-height: 0;
                 box-shadow: 0 30px 50px #b9b9b9;
             }
@@ -175,10 +173,6 @@
 
                             <div class="rd-text">
                                 <div class="rd-title">
-<!--                                    <h3>${room.name}</h3>-->
-                                    <!--                                    <div class="rdt-right">
-                                                                            <a href="cartController?action=&id=${room.room_Id}">Booking Now</a>
-                                                                        </div>-->
                                     <h3 style="font-weight: 700">${room.name}</h3>
                                 </div>
                                 <div class="row">
@@ -224,27 +218,29 @@
                     </div>
 
                     <div class="col-lg-4">
-                        <div class="room-booking">
-                            <h3>Your Reservation</h3>
-                                                        <form action="#">
-                                                            <div class="check-date">
-                                                                <label for="date-in">Check In:</label>
-                                                                <input type="text" class="date-input" id="date-in">
-                                                                <i class="icon_calendar"></i>
-                                                            </div>
-                                                            <div class="check-date">
-                                                                <label for="date-out">Check Out:</label>
-                                                                <input type="text" class="date-input" id="date-out">
-                                                                <i class="icon_calendar"></i>
-                                                            </div>
-                                                            <div class="select-option">
-                                                                <label for="guest">Guests:</label>
-                                                                <select id="guest">
-                                                                    <option value="">3 Adults</option>
-                                                                </select>
-                                                            </div>
-                                                            <button type="submit">Check Availability</button>
-                                                        </form>
+                        <div class="booking-form" style="padding: 0px 0px;">
+                            <h3 style="text-align: center">Booking Hotel</h3>
+                            <form action="bookByEventController" method="get">
+                                <div class="check-date date-picker">
+                                    <label for="checkin">Check-in</label>
+                                    <input type="date" class="form-control w-100 dateCheck" id="checkin" name="checkIn">
+                                </div>
+                                <div class="check-date date-picker">
+                                    <label for="checkout">Check-out</label>
+                                    <input type="date" class="form-control w-100 dateCheck" id="checkout" name="checkOut">
+                                </div>
+                                <div class="select-option">
+                                    <label for="guest">Guests:</label>
+                                    <select id="guest" name="numberPerson">
+                                        <option value="1">1 Adults</option>
+                                        <option value="2">2 Adults</option>
+                                        <option value="3">3 Adults</option>
+                                        <option value="4">4 Adults</option>
+                                        <option value="5">5 Adults</option>
+                                    </select>
+                                </div>
+                                <button type="submit">Check Availability</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -254,7 +250,7 @@
                             <c:forEach items="${listR}" var="o">
                                 <div class="roomItem" style="background-image: url(${o.image})">
                                     <div class="content">
-                                        <div><h6><a href="roomDetailsController?Id=${o.room_Id}" style="color: black">${o.name}</a></h6></div>
+                                        <a href="roomDetailsController?Id=${o.room_Id}" style="color: black; padding-left: 20px"><p>${o.name}</p></a>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -292,6 +288,44 @@
                 let list = document.querySelectorAll('.roomItem');
                 document.getElementById('slide').prepend(list[list.length - 1]);
             };
+            var date = new Date();
+            var tdate = date.getDate();
+            var tmonth = date.getMonth() + 1;
+            if (tdate < 10) {
+                tdate = '0' + tdate;
+            }
+            if (tmonth < 10) {
+                tmonth = '0' + tmonth;
+            }
+            var year = date.getUTCFullYear();
+            var minDate = year + '-' + tmonth + '-' + tdate;
+            var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
+            var showDateIn = document.getElementById('checkin').setAttribute('value', minDate);
+            var tdateMin = date.getDate() + 1;
+            var tmonthMin = date.getMonth() + 1;
+            if (tdateMin < 10) {
+                tdateMin = '0' + tdateMin;
+            }
+            if (tmonthMin < 10) {
+                tmonthMin = '0' + tmonthMin;
+            }
+            var yearMin = date.getUTCFullYear();
+            var min = yearMin + '-' + tmonthMin + '-' + tdateMin;
+            var checkOut = document.getElementById('checkout').setAttribute('min', min);
+            var showDateOut = document.getElementById('checkout').setAttribute('value', min);
+            document.getElementById('checkin').addEventListener('input', function (e) {
+                if (e.target.value === '') {
+                    e.preventDefault();
+                    e.target.value = e.target.defaultValue;
+                }
+            });
+
+            document.getElementById('checkout').addEventListener('input', function (e) {
+                if (e.target.value === '') {
+                    e.preventDefault();
+                    e.target.value = e.target.defaultValue;
+                }
+            });
         </script>
     </body>
 </html>

@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Customer</title>
+    <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
     <style>
         body {
             font-family: Arial, sans-serif;

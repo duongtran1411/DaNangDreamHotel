@@ -30,6 +30,16 @@ public class RegistrationDTO {
         this.create_at = create_at;
         this.update_at = update_at;
     }
+    public RegistrationDTO(String userName, String firstName, String lastName, String password, String email, String phone, int role_Id) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.role_Id = role_Id;
+        
+    }
 
     public String getAccount_Id() {
         return account_Id;

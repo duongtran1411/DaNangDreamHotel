@@ -100,7 +100,7 @@ public class DAOCustomer extends DBConnect {
 
     public void deleteCustomer(int id) {
         String sql = "delete from customer "
-                + "where customer_Id= ? ";
+                + "where customer_Id = ? ";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
@@ -112,6 +112,6 @@ public class DAOCustomer extends DBConnect {
 
     public static void main(String[] args) {
         DAOCustomer dao = new DAOCustomer();
-        System.out.println(dao.getAllCustomer());
+       dao.deleteCustomer(10);
     }
 }

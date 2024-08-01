@@ -29,7 +29,7 @@
                             <div class="card mb-0">
                                 <div class="card-body">
                                     <div style="display: flex">
-                                        <a href="http://localhost:9999/DaNangDreamHotel/dashboard/jsp/authentication-login.jsp"> <button type="button" ><img style="width: 30px;border: 1px solid black; margin-left: -20px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmweiKifYhYWtioAUGKuLzMwDX2m-l_OdYLQ&s"></button></a>
+                                        <a href="authentication-login"> <button type="button" ><img style="width: 30px;border: 1px solid black; margin-left: -20px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmweiKifYhYWtioAUGKuLzMwDX2m-l_OdYLQ&s"></button></a>
 
                                         <a href="./Home.jsp" class="text-nowrap logo-img text-center d-block py-3 w-100">
                                             <img src="dashboard/assets/images/logos/dark-logo.svg" width="180" alt="">

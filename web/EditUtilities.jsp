@@ -10,6 +10,7 @@
         <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
+        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>

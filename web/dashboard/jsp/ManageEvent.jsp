@@ -6,6 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${empty sessionScope.acc}">
+    <jsp:include page="../../Pages.jsp"></jsp:include>
+</c:if>
+<c:if test="${not empty sessionScope.acc}">
 <!doctype html>
 <html lang="en">
 
@@ -13,6 +17,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Da Nang Hotel</title>
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
@@ -226,3 +231,4 @@
     </body>
 
 </html>
+</c:if>

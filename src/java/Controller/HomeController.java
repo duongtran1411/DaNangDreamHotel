@@ -4,10 +4,13 @@
  */
 package Controller;
 
+import Entity.BookingCart;
 import Entity.Event;
+import Entity.FeedBack;
 import Entity.Room;
 import Entity.Utilities;
 import Model.DAOEvent;
+import Model.DAOFeedBack;
 import Model.DAORoom;
 import Model.DAOUtilities;
 import java.io.IOException;
@@ -66,6 +69,7 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+       
         String checkIn = (String) session.getAttribute("checkInDay");
         String checkOut = (String) session.getAttribute("checkOutDay");
         if(checkIn == null && checkOut == null){
@@ -78,12 +82,15 @@ public class HomeController extends HttpServlet {
         List<Event> listE = daoE.getTop3Event();
          DAOUtilities daoU=new DAOUtilities();
         List<Utilities>listU=daoU.getTop3Utilities();
+        DAOFeedBack daoF = new DAOFeedBack();
+        List<FeedBack> listFb = daoF.getFeedBackShow();
         
         
        request.setAttribute("listU", listU);
         request.setAttribute("listR", list);
         request.setAttribute("listE", listE);
-       
+        request.setAttribute("listFb", listFb);
+     
         request.getRequestDispatcher("Home.jsp").forward(request, response);
         
     }

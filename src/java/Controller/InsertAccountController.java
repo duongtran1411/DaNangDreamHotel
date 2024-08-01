@@ -79,7 +79,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     String password = request.getParameter("password");
     String email = request.getParameter("email");
     String phone = request.getParameter("phone");
-    int roleId = Integer.parseInt(request.getParameter("roleid"));
+    int roleId = Integer.parseInt(request.getParameter("role"));
     
 
 

@@ -41,30 +41,52 @@ public class DAOJobs extends DBConnect {
     }
 
  
-    public void insertJobs(int job_Id, String firstname, String lastname, Date dob, String phone, String email,String cv, String status) {
-        String sql = "insert into Jobs(job_Id ,\n"
+    public void insertJobs( String firstname, String lastname, Date dob, String phone, String email,String cv) {
+        String sql = "insert into Jobs(\n"
                 + "firstName ,\n"
                 + "lastName , \n"
                 + "dateOfBirth ,\n"
                 + "phone ,\n"
                 + "emailPersonal ,\n"
-                + "cv ,\n"
-                + "status)\n"
-                + "values(?,?,?,?,?,?,?,?);";
+                + "cv )\n"
+                + "values(?,?,?,?,?,?)";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            st.setInt(1, job_Id);
-            st.setString(2, firstname);
-            st.setString(3, lastname);
-            st.setDate(4, (java.sql.Date) dob);
-            st.setString(5, phone);
-            st.setString(6, email);
-            st.setString(7, cv);
-            st.setString(8, status);
+            st.setString(1, firstname);
+            st.setString(2, lastname);
+            st.setDate(3, (java.sql.Date) dob);
+            st.setString(4, phone);
+            st.setString(5, email);
+            st.setString(6, cv);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public Jobs getEmailByID(int id ){
+        String email = null;
+        String sql ="select emailPersonal, firstName, lastName,dateOfBirth, phone, cv from jobs\n" +
+"where job_Id = ?";
+        PreparedStatement pre;
+        try {
+            pre = conn.prepareCall(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            if(rs.next()){
+                return new  Jobs(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(2),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOJobs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public Jobs getLastJobs() {
@@ -121,36 +143,25 @@ public class DAOJobs extends DBConnect {
         e.printStackTrace();
     }
 }
-
     public static void main(String[] args) {
-        DAOJobs dao=new DAOJobs();
-      Jobs job=dao.getLastJobs();
-      String createAtString ="2024-06-05";
+        String createAtString ="2024-06-05";
 
     // Define the date format
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
     // Parse the date strings
     java.sql.Date create_at = null;
     try {
-        java.util.Date createDate = sdf.parse(createAtString);
+       java.util.Date createDate = sdf.parse(createAtString);
         create_at = new java.sql.Date(createDate.getTime());
-    } catch (ParseException e) {
+   } catch (ParseException e) {
         e.printStackTrace();
         return;
     }
-        int id=job.getJob_Id()+1;
-        String first="minh";
-        String last="pham";
-        String phone="123456789";
-        String email="minh@gmail.com";
-        String cv="aaaaaa";
-        String status="wait";
-        dao.insertJobs(id, first, last, create_at, phone, email, cv, status);
-
-    // Define the date format
+        DAOJobs dao = new DAOJobs();
+     dao.insertJobs("duong","tran", create_at, "0330222390", "trandaiduong14112000@gmail.com", "assdasdasdasd");
     
-
     }
+
+    
 }
 

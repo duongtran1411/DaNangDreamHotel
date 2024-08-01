@@ -101,8 +101,8 @@
             <!-- End of Header Section -->
         <c:if test="${checkOutDay > checkInDay}">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="filter-box">
+                <!--<div class="col-md-3">-->
+<!--                    <div class="filter-box">
                         <h5>Filter</h5>
                         <div class="form-group">
                             <label for="priceRange">Price per night</label>
@@ -128,9 +128,9 @@
                             </div>
                         </div>
                         <button class="btn btn" id="filterButton" style="background-color: #C59B24; color: white" value="">Filter</button>
-                    </div>
-                </div>
-                <div class="col-md-9">
+                    </div>-->
+                <!--</div>-->
+                <div class="col-md-12">
 
                     <c:forEach items="${listE}" var="o" varStatus="status">
                         <div class="name-event" style="background: #f8f8f8; width:100% ;padding: 10px 20px"><h5 style="font-weight: 700;">${o.name}</h5></div>

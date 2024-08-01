@@ -49,9 +49,6 @@ public class TypeRoomController extends HttpServlet {
             action = "listTypeRoom";
         }
         switch (action) {
-            case "loadEdit":
-                loadEdit(request, response);
-                break;
             case "edit":
                 editTypeRoom(request, response);
                 break;
@@ -88,15 +85,8 @@ public class TypeRoomController extends HttpServlet {
         }
     }
 
-    private void loadEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int typeRoomId = Integer.parseInt(request.getParameter("id"));
-        TypeRoom typeRoom = daoTypeRoom.getTypeRoomByID(typeRoomId);
-        request.setAttribute("TypeRoomBID", typeRoom);
-        request.getRequestDispatcher("dashboard/jsp/EditTypeRoom.jsp").forward(request, response);
-    }
-
     private void editTypeRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("type_Room_Id"));
+        int id = Integer.parseInt(request.getParameter("type_Room_Id"));     
         String name = request.getParameter("name");
         int eventId = Integer.parseInt(request.getParameter("event_Id"));
         int bed = Integer.parseInt(request.getParameter("bed"));

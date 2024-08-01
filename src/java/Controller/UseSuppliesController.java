@@ -8,6 +8,7 @@ import Entity.Item;
 import Entity.Room;
 import Model.DAOBooking;
 import Model.DAOItem;
+import Model.DAOPayment;
 import Model.DAORoom;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,10 +23,11 @@ import java.util.List;
  * @author CaoTung
  */
 public class UseSuppliesController extends HttpServlet {
-
+    
     DAORoom daoRoom = new DAORoom();
     DAOItem daoItem = new DAOItem();
     DAOBooking daoBooking = new DAOBooking();
+    DAOPayment daoPayment = new DAOPayment();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,9 +40,9 @@ public class UseSuppliesController extends HttpServlet {
                 listRoom(request, response);
                 break;
             case "update":
-                    updatePayment(request, response);
+                updatePayment(request, response);
                 break;
-            case "edit":             
+            case "edit":                
                 listItemByType(request, response);
                 break;
             default:
@@ -48,38 +50,43 @@ public class UseSuppliesController extends HttpServlet {
                 break;
         }
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
-     private void listItemByType(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void listItemByType(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomId = Integer.parseInt(request.getParameter("id"));
         int bookingDetailId = daoBooking.getLiveBookingDetailId(roomId);
+        
         List<Item> list = daoItem.getFoodItem();
+        Room room = daoRoom.getNameById(roomId);
         request.setAttribute("list", list);
+        request.setAttribute("roomName", room.getName());
         request.setAttribute("bookingDetailId", bookingDetailId);
+        
         request.getRequestDispatcher("dashboard/jsp/Supplies.jsp").forward(request, response);
     }
+
     private void listRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Room> list = daoRoom.getProcessingRooms();
         request.setAttribute("list", list);
         request.getRequestDispatcher("dashboard/jsp/LiveRoom.jsp").forward(request, response);
     }
+
     private void updatePayment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String expenses = request.getParameter("total");
         String id = request.getParameter("id");
+        int total = Integer.parseInt(expenses);
+        int detailId = Integer.parseInt(id);
+        daoRoom.updateStatusRoom(total, "Available");
+        daoBooking.insert(total, detailId);
         
-           int total = Integer.parseInt(expenses);
-           int detailId = Integer.parseInt(id);
-          System.out.println(id);
-            daoBooking.insert(total, detailId);
         
-        
-       
     }
-
+    
     @Override
     public String getServletInfo() {
         return "Short description";

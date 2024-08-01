@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Entity.FormatUtils" %>
+<c:if test="${empty sessionScope.acc}">
+    <jsp:include page="../../Pages.jsp"></jsp:include>
+</c:if>
+<c:if test="${not empty sessionScope.acc}">
 <!doctype html>
 <html lang="en">
 
@@ -11,6 +15,7 @@
         <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -88,7 +93,7 @@
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>    
-                                                        <th class="sortable">Type ID</th>
+                                                        
                                                         <th class="sortable">Type Name</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -96,7 +101,7 @@
                                                 <tbody id="content">
                                                 <c:forEach items="${allType}" var="type">
                                                     <tr>
-                                                        <td data-label="Type ID">${type.typeItem_Id}</td>
+                                                  
                                                         <td data-label="Type Name">${type.name}</td>
                                                         <td data-label="Actions">
                                                             <a href="UpdateTypeOfItem.jsp?id=${type.typeItem_Id}" class="settings" title="Settings" data-toggle="tooltip"><i class='far fa-edit'></i></a>
@@ -196,3 +201,4 @@
         }
     </script>
 </html>
+</c:if>

@@ -69,13 +69,11 @@ public class DAORoom extends DBConnect {
     }
     
     
-    public List<Room> listAllRooms(int offset, int limit) {
+    public List<Room> listAllRooms() {
         List<Room> list = new ArrayList<>();
-        String sql = "SELECT * FROM room order by price desc LIMIT ? OFFSET ? ";
+        String sql = "SELECT * FROM room order by price desc";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, limit);
-            pre.setInt(2, offset);
             ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 list.add(new Room(rs.getInt(1),

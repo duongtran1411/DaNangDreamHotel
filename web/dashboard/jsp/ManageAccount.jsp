@@ -7,6 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Da Nang Hotel</title>
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
@@ -38,7 +39,7 @@
                                                 <th>ID</th>
                                                 <th>Role Name</th>
                                                 <th>Username</th>
-                                                <th>Password</th>
+<!--                                                <th>Password</th>-->
                                                 <th>Full Name</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
@@ -51,7 +52,7 @@
                                                 <td>${o.account_Id}</td>
                                                 <td>${o.roleId.name}</td>
                                                 <td>${o.userName}</td>
-                                                <td>${o.password}</td>
+<!--                                                <td>${o.password}</td>-->
                                                 <td>${o.lastName} ${o.firstName}</td>
                                                 <td>${o.email}</td>
                                                 <td>${o.phone}</td>
@@ -139,9 +140,12 @@
                                     <label>Password</label>
                                     <input name="password" type="password" class="form-control" placeholder="Enter password" required>
                                 </div>
-                                <div class="form-group">
-                                    <label>Role Id</label>
-                                    <input name="roleid" type="text" class="form-control" value="2" readonly required>
+                                <div class="form-group" style="margin-bottom: 12px">
+                                    <label>Role</label>
+                                    <select name="role" class="form-select" aria-label="Default select example">
+                                            <option value="2">Staff</option>
+                                            <option value="3">Manager</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Phone</label>

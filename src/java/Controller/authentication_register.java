@@ -4,124 +4,140 @@
  */
 package Controller;
 
-import Model.RegistrationDAO;
-import jakarta.servlet.RequestDispatcher;
+import Entity.Jobs;
+import Model.DAOJobs;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
-import Entity.RegistrationDTO;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
- * @author letua
+ * @author PC QUANG MINH
  */
+@WebServlet(name = "authentication_register", urlPatterns = {"/register"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1 MB
+        maxFileSize = 1024 * 1024 * 5, // 5 MB
+        maxRequestSize = 1024 * 1024 * 10) // 10
 public class authentication_register extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private static String uploadPath = null;
+
+    @Override
+    public void init() throws ServletException {
+        uploadPath = getServletContext().getRealPath("/uploads/cv");
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+    }
+
+    private List<Jobs> jobList = new ArrayList<>();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet authentication_register</title>");
+            out.println("<title>Servlet InsertJobsController</title>");
             out.println("</head>");
             out.println("<body>");
-            response.setContentType("text/html;charset=UTF-8");
-
-            String acoount = request.getParameter("acc");
-            String job = request.getParameter("job");
-            String password = request.getParameter("pass");
-            String rePass = request.getParameter("repass");
-            String fullname = request.getParameter("fullname");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            RegistrationDTO user = new RegistrationDTO();
-
-            String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
-            boolean isEmailValid = Pattern.matches(emailPattern, acoount);
-
-            if (!isEmailValid) {
-                request.setAttribute("mess", "Invalid email format !! Ex : example@example.com ");
-                request.getRequestDispatcher("signUP.jsp").forward(request, response);
-            } else if (!password.equals(rePass)) {
-                request.setAttribute("mess", "Nhập lại mật khẩu không giống nhau");
-                request.getRequestDispatcher("signUP.jsp").forward(request, response);
-            } else if (password.length() < 3) {
-                request.setAttribute("mess", "Password must be at least 3 characters long");
-                request.getRequestDispatcher("signUP.jsp").forward(request, response);
-            } else if (!phone.matches("[0-9]*")) {
-                request.setAttribute("mess", "Your Mobile Invalid");
-                request.getRequestDispatcher("signUP.jsp").forward(request, response);
-            }
-            RegistrationDAO dao = new RegistrationDAO();
-            request.setAttribute("mess", "Tạo Tài khoản thành công   !! ");
-            RequestDispatcher rd = request.getRequestDispatcher("signUP.jsp");
-            rd.forward(request, response);
-            out.println("<h1>Servlet authentication_register at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet InsertJobsController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            try {
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        String dob = request.getParameter("dob");
+
+        // Define the date format
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Parse the date strings
+        java.sql.Date create_at = null;
+        try {
+            java.util.Date createDate = sdf.parse(dob);
+            create_at = new java.sql.Date(createDate.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid date format");
+            return;
+        }
+
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+
+        // Handle file upload
+        String fileName = null;
+        try {
+            Part filePart = request.getPart("cv");
+            if (filePart != null && filePart.getSize() > 0) {
+                fileName = UUID.randomUUID().toString() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                Files.copy(filePart.getInputStream(), Paths.get(uploadPath + File.separator + fileName));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().println("File upload failed due to an error: " + e.getMessage());
+            return;
+        }
+  String status = request.getParameter("status");
+        DAOJobs dao = new DAOJobs();
+        int id = dao.getLastJobs().getJob_Id();
+        dao.insertJobs( firstName, lastName, create_at, phone, email, fileName);
+        response.sendRedirect("authentication-login");
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    // Extracts file name from HTTP header content-disposition
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
+/*
+ try {
+            Part filePart = request.getPart("fileImage");
+            String fileName = UUID.randomUUID().toString() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+
+            InputStream inputStream = filePart.getInputStream();
+            Files.copy(inputStream, Paths.get(uploadPath + File.separator + fileName));
+            if (daoTypeRoom.isValidName(name)) {
+                daoTypeRoom.addTypeRoom(name, bed, bath, people, fileName);
+                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+            } else {
+                
+                response.sendRedirect("typeRoomURL?action=listTypeRoom");
+            }
+        } catch (IOException | ServletException e) {
+            response.getWriter().println("File upload failed due to an error: " + e.getMessage());
+            e.printStackTrace();
+        }
+*/

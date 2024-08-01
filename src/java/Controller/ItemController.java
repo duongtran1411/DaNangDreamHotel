@@ -61,14 +61,8 @@ public class ItemController extends HttpServlet {
     }
 
     private void listAllItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int currentPage = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
-        int itemsPerPage = 7;
-        int totalTypes = daoItem.getTotalItem();
-        int totalPages = (int) Math.ceil((double) totalTypes / itemsPerPage);
-        List<Item> allItem = daoItem.getItemsWithPagin(currentPage, itemsPerPage);
+        List<Item> allItem = daoItem.getAllItem();
         request.setAttribute("allItem", allItem);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("dashboard/jsp/ItemManage.jsp").forward(request, response);
     }
     private void searchItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,15 +76,28 @@ public class ItemController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         daoItem.deleteItemInRoom(id);
         daoItem.deleteItem(id);
-        response.sendRedirect("ItemController");
+        
     }
     private void updateItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        int typeId = Integer.parseInt(request.getParameter("type"));
-        Double price = Double.parseDouble(request.getParameter("price"));
-        daoItem.updateItem(id, name, typeId, price);
-        response.sendRedirect("ItemController");
+        try {
+            String itemIdParam = request.getParameter("itemId");
+            if (itemIdParam == null || itemIdParam.isEmpty()) {
+                throw new IllegalArgumentException("Item ID is required!");
+            }
+            int id = Integer.parseInt(itemIdParam);
+            String name = request.getParameter("name");
+            int typeId = Integer.parseInt(request.getParameter("type"));
+            Double price = Double.parseDouble(request.getParameter("price"));
+            daoItem.updateItem(id, name, typeId, price);
+            response.sendRedirect("ItemController");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid number format");
+        }catch (IllegalArgumentException e) {
+        e.printStackTrace();
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+    }
+
     }
     private void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
@@ -111,3 +118,5 @@ public class ItemController extends HttpServlet {
     }// </editor-fold>
 
 }
+
+

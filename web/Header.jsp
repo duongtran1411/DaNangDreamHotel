@@ -8,30 +8,30 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <style>
-     li {
-            list-style-type: none;
-        }
-        a {
-            text-decoration: none;
-            position: relative;
-            display: inline-block;
-            color: #000; 
-        }
-        .fa-paper-plane {
-            font-size: 24px;
-            color: #C59B24; 
-            position: absolute;
-            bottom: -15px;
-            left: 10%;
-            transform: translateX(-60%);
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        
-        .fa-paper-plane.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(-20px); 
-        }
+    li {
+        list-style-type: none;
+    }
+    a {
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        color: #000;
+    }
+    .fa-paper-plane {
+        font-size: 24px;
+        color: #C59B24;
+        position: absolute;
+        bottom: -15px;
+        left: 10%;
+        transform: translateX(-60%);
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fa-paper-plane.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-20px);
+    }
 </style>
 <header class="header-section">
     <div class="top-nav">
@@ -46,7 +46,7 @@
                 <div class="col-lg-6">
                     <div class="tn-right">
                         <div class="top-social">
-                           
+
                         </div>
                         <a href="authentication-login" class="bk-btn">Login</a>
                     </div>
@@ -68,18 +68,21 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="active"><a href="homeController" style="text-decoration: none">Home</a></li>
+                                <li><a href="homeController" style="text-decoration: none">Home</a></li>
                                 <li>
                                     <a href="UtilitiesController">Service</a>
-                                  
+
                                 <li>
                                     <a href="viewRoomController" style="text-decoration: none">Resort</a>
                                 </li>
                                 <li><a href="eventController" style="text-decoration: none">Events</a></li>
                                 <li><a href="Contact.jsp" style="text-decoration: none">Contact</a></li>
-                                <c:if test="${cart.size() != 0}">
-                                <li><a href="viewCartController" style="text-decoration: none">Booked<i id="flashingIcon"class="fa-solid fa-paper-plane"></i></a></li>
-                                </c:if>
+                                                <c:if test="${sessionScope.cart.size() != 0}">
+                                                    <c:if test="${sessionScope.checkInDay != null}">
+                                                <li><a href="viewCartController" style="text-decoration: none">Booked<i id="flashingIcon" class="fa-solid fa-paper-plane"></i></a></li>
+                                                    </c:if>
+                                                </c:if>
+                                            
                                
                             </ul>
                         </nav>
@@ -90,14 +93,14 @@
     </div>
 </header>
 <script>
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const icon = document.getElementById('flashingIcon');
-            let isVisible = false;
 
-            setInterval(function() {
-                isVisible = !isVisible;
-                icon.classList.toggle('show', isVisible);
-            }, 1000);
-        });
+    document.addEventListener('DOMContentLoaded', function () {
+        const icon = document.getElementById('flashingIcon');
+        let isVisible = false;
+
+        setInterval(function () {
+            isVisible = !isVisible;
+            icon.classList.toggle('show', isVisible);
+        }, 1000);
+    });
 </script>

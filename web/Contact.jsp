@@ -16,6 +16,7 @@
         <title>Da Nang Dream Hotel</title>
 
         <!-- Google Font -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
         <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&amp;display=swap" rel="stylesheet">
@@ -87,7 +88,7 @@
 
                                 <div class="col-md-6">
                                     <label>Comments</label>
-                                    <input type="radio" name="feed" class="pointer" value="Comments"/>
+                                    <input type="radio" name="feed" class="pointer" value="Comments" checked=""/>
                                 </div>
                                 <div class="col-md-6">
                                     <label>Questions</label>
@@ -116,11 +117,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="map">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.0606825994123!2d-72.8735845851828!3d40.760690042573295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e85b24c9274c91%3A0xf310d41b791bcb71!2sWilliam%20Floyd%20Pkwy%2C%20Mastic%20Beach%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1578582744646!5m2!1sen!2sbd"
-                        height="470" style="border:0;" allowfullscreen=""></iframe>
-                </div>
+
             </div>
         </section>
         <!-- Contact Section End -->
@@ -231,7 +228,6 @@
                                                             confirmButtonText: 'OK',
                                                             timer: 2000
                                                         });
-                                                        
                                                     } else {
                                                         Swal.fire({
                                                             title: 'Error!',
@@ -242,7 +238,7 @@
                                                         });
                                                     }
                                                     setTimeout(() => {
-                                                            location.reload();
+                                                        location.reload();
                                                     }, 1000);
                                                 },
                                                 error: function () {
@@ -254,6 +250,49 @@
                                                     });
                                                 }
                                             });
+                                        });
+
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            const feedbackForm = document.getElementById('feedbackForm');
+
+                                            feedbackForm.addEventListener('submit', function (event) {
+                                                const firstName = document.getElementsByName('firstname')[0].value;
+                                                const lastName = document.getElementsByName('lastname')[0].value;
+                                                const email = document.getElementsByName('email')[0].value;
+
+                                                if (!validateName(firstName) || !validateName(lastName)) {
+                                                    Swal.fire({
+                                                        icon: "error",
+                                                        title: "Oops...",
+                                                        text: "First Name and Last Name must start with an uppercase letter.",
+                                                        footer: '<a href="#">Why do I have this issue?</a>'
+                                                    });
+                                                    
+                                                    event.preventDefault();
+                                                    return;
+                                                }
+
+                                                if (!validateEmail(email)) {
+                                                    Swal.fire({
+                                                        icon: "error",
+                                                        title: "Oops...",
+                                                        text: "Please enter a valid email address with '@'.",
+                                                        footer: '<a href="#">Why do I have this issue?</a>'
+                                                    });
+                                                   
+                                                    event.preventDefault();
+                                                    return;
+                                                }
+                                            });
+
+                                            function validateName(name) {
+                                                const namePattern = /^[A-Z][a-z]*$/;
+                                                return namePattern.test(name);
+                                            }
+
+                                            function validateEmail(email) {
+                                                return email.includes('@');
+                                            }
                                         });
         </script>
     </body>

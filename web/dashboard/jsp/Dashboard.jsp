@@ -14,6 +14,8 @@
 
         <!-- Title Page-->
         <title>Dashboard</title>
+
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link rel="shortcut icon" type="image/png" href="dashboard/assets/images/logos/favicon.png" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.min.css" />
         <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
@@ -39,7 +41,7 @@
         <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
         <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
         <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- Main CSS-->
@@ -59,6 +61,95 @@
             .profile-image-container:hover .profile-dropdown {
                 display: block;
                 margin-right: 200px;
+            }
+
+            .pagination {
+                display: flex;
+                justify-content: center;
+                padding: 20px;
+            }
+            .pagination a {
+                padding: 8px 16px;
+                margin: 0 4px;
+                border: 1px solid #ddd;
+                text-decoration: none;
+                color: #007bff;
+            }
+            .pagination a.active {
+                background-color: #007bff;
+                color: white;
+            }
+            .paging {
+                display: flex;
+                justify-content: center;
+                padding: 20px;
+            }
+            .paging a {
+                padding: 8px 16px;
+                margin: 0 4px;
+                border: 1px solid #ddd;
+                text-decoration: none;
+                color: #007bff;
+            }
+            .paging a.active {
+                background-color: #007bff;
+                color: white;
+            }
+            .paging a {
+                color: #333;
+                text-decoration: none;
+                padding-left: 12px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                border: none;
+                border-radius: 50px;
+            }
+
+            .paging a:hover {
+                background-color: #ddd;
+                color: white;
+                border-radius: 50px;
+            }
+
+            .paging a .active   {
+                background-color: #DFA974;
+                color: white;
+                border-color: #DFA974;
+                border-radius: 50px;
+            }
+            .pagination a.active {
+                background-color: #007bff;
+                color: white;
+            }
+            .pagination a {
+                color: #333;
+                text-decoration: none;
+                padding-left: 12px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                border: none;
+                border-radius: 50px;
+            }
+
+            .pagination a:hover {
+                background-color: #ddd;
+                color: white;
+                border-radius: 50px;
+            }
+
+            .pagination a .active   {
+                background-color: #DFA974;
+                color: white;
+                border-color: #DFA974;
+                border-radius: 50px;
             }
         </style>
     </head>
@@ -238,7 +329,7 @@
                                 <h2 class="title-1 m-b-25">Room</h2>
 
                                 <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
+                                    <table id="data-table2" class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
@@ -251,7 +342,7 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach items="${listR}" var="r">
-                                                <tr>
+                                                <tr class="table-room">
                                                     <td>${r.room_Id}</td>
                                                     <td>${r.name}</td>
                                                     <td>${FormatUtils.formatPRice(r.price)}</td>
@@ -262,138 +353,212 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                 <nav aria-label="Page navigation">
-                                        <ul class="pagination">
-                                            <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                                <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
+                                <div id="paging" class="paging">
+
+                                </div>
+
+                                <!--                                <nav aria-label="Page navigation">
+                                                                    <ul class="pagination">
+                                                                        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                                                            <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
+                                                                                <span aria-hidden="true">&laquo;</span>
+                                                                            </a>
+                                                                        </li>
+                                <c:forEach var="i" begin="1" end="${noOfPages}">
+                                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                        <a class="page-link" href="?page=${i}">${i}</a>
+                                    </li>
+                                </c:forEach>
+                                <li class="page-item ${currentPage == noOfPages ? 'disabled' : ''}">
+                                    <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>-->
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form method="get" action="AdminControllerURL">
+                                        <div class="form-group">
+                                            <label for="searchName">Search by Room Name:</label>
+                                            <input type="text" class="form-control" id="searchName" name="searchName">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </form> 
+                                    <div class="copyright">
+                                        <div class="table-responsive table--no-card m-b-40">
+                                            <table id="data-table" class="table table-borderless table-striped table-earning">
+                                                <thead>
+                                                    <tr>
+                                                        <th>RoomName</th>
+                                                        <th>ItemName</th>
+                                                        <th>Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${listI}" var="i">
+                                                        <tr class="table-row">
+                                                            <td>${i.getRoomName()}</td>
+                                                            <td>${i.getItemName()}</td>
+                                                            <td>${FormatUtils.formatPRice(i.getItempPrice())}</td>
+                                                            <td>${i.getQuantity()}</td>
+                                                            <td>${FormatUtils.formatPRice(i.getQuantity() * i.getItempPrice())}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="pagination" class="pagination">
+
+                                        </div>
+                                        <!-- Pagination controls for items -->
+                                        <!--                                                                                <nav aria-label="Page navigation">
+                                                                                                                            <ul class="pagination">
+                                        <c:if test="${currentItemPage > 1}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="?searchName=${param.searchName}&itemPage=${currentItemPage - 1}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
-                                            <c:forEach var="i" begin="1" end="${noOfPages}">
-                                                <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                                    <a class="page-link" href="?page=${i}">${i}</a>
-                                                </li>
-                                            </c:forEach>
-                                            <li class="page-item ${currentPage == noOfPages ? 'disabled' : ''}">
-                                                <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
+                                        </c:if>
+                                        <c:forEach var="i" begin="1" end="${noOfItemPages}">
+                                            <li class="page-item <c:if test="${i == currentItemPage}">active</c:if>">
+                                                <a class="page-link" href="?searchName=${param.searchName}&itemPage=${i}">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:if test="${currentItemPage < noOfItemPages}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="?searchName=${param.searchName}&itemPage=${currentItemPage + 1}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
-                                        </ul>
-                                    </nav>
-                            </div>
-                            
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <form method="get" action="AdminControllerURL">
-                                    <div class="form-group">
-                                        <label for="searchName">Search by Room Name:</label>
-                                        <input type="text" class="form-control" id="searchName" name="searchName">
+                                        </c:if>
+                                    </ul>
+                                </nav>-->
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Search</button>
-                                </form> 
-                                <div class="copyright">
-                                    <div class="table-responsive table--no-card m-b-40">
-                                        <table class="table table-borderless table-striped table-earning">
-                                            <thead>
-                                                <tr>
-                                                    <th>RoomName</th>
-                                                    <th>ItemName</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th>Total</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${listI}" var="i">
-                                                    <tr>
-                                                        <td>${i.getRoomName()}</td>
-                                                        <td>${i.getItemName()}</td>
-                                                        <td>${FormatUtils.formatPRice(i.getItempPrice())}</td>
-                                                        <td>${i.getQuantity()}</td>
-                                                        <td>${FormatUtils.formatPRice(i.getQuantity() * i.getItempPrice())}</td>
-
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- Pagination controls for items -->
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        <c:if test="${currentItemPage > 1}">
-            <li class="page-item">
-                <a class="page-link" href="?searchName=${param.searchName}&itemPage=${currentItemPage - 1}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-        </c:if>
-        <c:forEach var="i" begin="1" end="${noOfItemPages}">
-            <li class="page-item <c:if test="${i == currentItemPage}">active</c:if>">
-                <a class="page-link" href="?searchName=${param.searchName}&itemPage=${i}">${i}</a>
-            </li>
-        </c:forEach>
-        <c:if test="${currentItemPage < noOfItemPages}">
-            <li class="page-item">
-                <a class="page-link" href="?searchName=${param.searchName}&itemPage=${currentItemPage + 1}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </c:if>
-    </ul>
-</nav>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-                                                    
-    </div>                           
-    <script>
-        function validateDates() {
-            var checkinDate = document.getElementById('checkinDate').value;
-            var checkoutDate = document.getElementById('checkoutDate').value;
 
-            if (checkinDate && checkoutDate && checkinDate > checkoutDate) {
-                alert('Start Date must be before End Date. Please select the dates again.');
-                return false;
+        </div>                           
+        <script>
+            function validateDates() {
+                var checkinDate = document.getElementById('checkinDate').value;
+                var checkoutDate = document.getElementById('checkoutDate').value;
+
+                if (checkinDate && checkoutDate && checkinDate > checkoutDate) {
+                    alert('Start Date must be before End Date. Please select the dates again.');
+                    return false;
+                }
+                return true;
             }
-            return true;
-        }
-    </script>
-    <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
-    <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="dashboard/assets/js/sidebarmenu.js"></script>
-    <script src="dashboard/assets/js/app.min.js"></script>
-    <script src="dashboard/assets/libs/simplebar/dist/simplebar.js"></script>
-    <!-- Main JS-->
-    <script src="Admin/js/main.js"></script>
 
-</body>
+            document.addEventListener("DOMContentLoaded", function () {
+                const rowsPerPage = 11;
+                const table = document.querySelector("#data-table tbody");
+                const rows = Array.from(table.querySelectorAll(".table-row"));
+                const pagination = document.querySelector("#pagination");
+
+                const numPages = Math.ceil(rows.length / rowsPerPage);
+
+                function displayPage(pageNumber) {
+                    rows.forEach((row, index) => {
+                        row.style.display = (Math.floor(index / rowsPerPage) === pageNumber - 1) ? "" : "none";
+                    });
+                    updatePagination(pageNumber);
+                }
+
+                function updatePagination(currentPage) {
+                    pagination.innerHTML = "";
+                    for (let i = 1; i <= numPages; i++) {
+                        const link = document.createElement("a");
+                        link.href = "#";
+                        link.textContent = i;
+                        if (i === currentPage) {
+                            link.classList.add("active");
+                        }
+                        link.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            displayPage(i);
+                        });
+                        pagination.appendChild(link);
+                    }
+                }
+
+                displayPage(1);
+            });
+            document.addEventListener("DOMContentLoaded", function () {
+                const rowsPerPage = 6;
+                const table = document.querySelector("#data-table2 tbody");
+                const rows = Array.from(table.querySelectorAll(".table-room"));
+                const pagination = document.querySelector("#paging");
+
+                const numPages = Math.ceil(rows.length / rowsPerPage);
+
+                function displayPage(pageNumber) {
+                    rows.forEach((row, index) => {
+                        row.style.display = (Math.floor(index / rowsPerPage) === pageNumber - 1) ? "" : "none";
+                    });
+                    updatePagination(pageNumber);
+                }
+
+                function updatePagination(currentPage) {
+                    pagination.innerHTML = "";
+                    for (let i = 1; i <= numPages; i++) {
+                        const link = document.createElement("a");
+                        link.href = "#";
+                        link.textContent = i;
+                        if (i === currentPage) {
+                            link.classList.add("active");
+                        }
+                        link.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            displayPage(i);
+                        });
+                        pagination.appendChild(link);
+                    }
+                }
+
+                displayPage(1);
+            });
+        </script>
+        <!-- Jquery JS-->
+        <script src="vendor/jquery-3.2.1.min.js"></script>
+        <!-- Bootstrap JS-->
+        <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+        <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+        <!-- Vendor JS       -->
+        <script src="vendor/slick/slick.min.js">
+        </script>
+        <script src="vendor/wow/wow.min.js"></script>
+        <script src="vendor/animsition/animsition.min.js"></script>
+        <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+        </script>
+        <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+        <script src="vendor/counter-up/jquery.counterup.min.js">
+        </script>
+        <script src="vendor/circle-progress/circle-progress.min.js"></script>
+        <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+        <script src="vendor/select2/select2.min.js">
+        </script>
+        <script src="dashboard/assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="dashboard/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="dashboard/assets/js/sidebarmenu.js"></script>
+        <script src="dashboard/assets/js/app.min.js"></script>
+        <script src="dashboard/assets/libs/simplebar/dist/simplebar.js"></script>
+        <!-- Main JS-->
+        <script src="Admin/js/main.js"></script>
+
+    </body>
 
 </html>
 <!-- end document-->

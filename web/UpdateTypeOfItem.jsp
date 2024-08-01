@@ -6,6 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Update Item</title>
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <style>
             body {
                 font-family: Arial, sans-serif;

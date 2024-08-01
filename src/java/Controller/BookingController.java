@@ -5,6 +5,7 @@ import Entity.Customer;
 import Entity.FormatUtils;
 import Entity.Room;
 import Model.DAOBooking;
+import Model.DAOCustomer;
 import Model.DAORoom;
 import java.io.IOException;
 import java.util.List;
@@ -13,13 +14,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "BookingController", urlPatterns = {"/bookingURL"})
 public class BookingController extends HttpServlet {
 
     private DAORoom daoRoom = new DAORoom();
     private DAOBooking daoBooking = new DAOBooking();
-
+    private DAOCustomer daoCustomer = new DAOCustomer();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -45,6 +47,9 @@ public class BookingController extends HttpServlet {
             case "update":
                 updateBooking(request, response);
                 break;
+            case "edit":
+                editCustomer(request, response);
+                break;
             default:
                 listBooking(request, response);
                 break;
@@ -56,9 +61,25 @@ public class BookingController extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
+    
+     private void editCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        int id = Integer.parseInt(request.getParameter("customerId"));
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String email = request.getParameter("email");
+        String idCard = request.getParameter("idCard");
+        daoCustomer.updateCustomer(id, firstName, lastName, phoneNumber, email, idCard);
+        HttpSession session = request.getSession();
+        int rCode = (int) session.getAttribute("reservationCode");
+        response.sendRedirect("bookingURL?action=view&rCode=" + rCode);
+
+    }
 
     private void viewCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int rCode = Integer.parseInt(request.getParameter("rCode"));
+        request.getSession().setAttribute("reservationCode", rCode);
         List<Customer> customers = daoBooking.getCustomerSameBooking(rCode);
         request.setAttribute("customers", customers);
         request.getRequestDispatcher("dashboard/jsp/ManageCustomer.jsp").forward(request, response);
@@ -69,6 +90,7 @@ public class BookingController extends HttpServlet {
         request.setAttribute("listB", bookings);
         request.getRequestDispatcher("dashboard/jsp/ManageBooking.jsp").forward(request, response);
     }
+
     private void listBookingDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int bookingId = Integer.parseInt(request.getParameter("id"));
         List<Room> rooms = daoBooking.getRoomsByBookingId(bookingId);

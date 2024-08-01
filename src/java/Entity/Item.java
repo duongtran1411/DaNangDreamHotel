@@ -14,12 +14,12 @@ public class Item {
     public int item_Id;
     public String name;
     public int typeItem_Id;
-    public double price;
+    public int price;
 
     public Item() {
     }
 
-    public Item(int item_Id, String name, int typeItem_Id, double price) {
+    public Item(int item_Id, String name, int typeItem_Id, int price) {
         this.item_Id = item_Id;
         this.name = name;
         this.typeItem_Id = typeItem_Id;
@@ -58,7 +58,7 @@ public class Item {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

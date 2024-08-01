@@ -18,7 +18,10 @@
         <meta name="keywords" content="Sona, unica, creative, html" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Da Nang Dream Hotel</title>
         <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
         <link
             href="https://fonts.googleapis.com/css?family=Lora:400,700&amp;display=swap"
             rel="stylesheet"
@@ -28,7 +31,7 @@
             rel="stylesheet"
             />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-        <title>Da Nang Dream Hotel</title>
+
         <!-- Css Styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
@@ -161,8 +164,43 @@
             #prev{
                 transform: translateX(-35px);
             }
-            
-            
+
+
+            .slide{
+                overflow: hidden;
+                position:relative;
+            }
+
+            .image-rooms{
+                display: flex;
+                transition: 0.5s;
+            }
+
+            .btn-arrow{
+                font-size: 40px;
+                color: #999;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                transition: 0.5s;
+                border: none;
+            }
+
+            .btn-arrow:hover{
+                color: #fff;
+            }
+
+            .btn-Right{
+                right:0;
+                padding-Right:25px;
+            }
+
+            .btn-Left{
+                padding-left: 25px;
+            }
+
+
         </style>
     </head>
     <body>
@@ -303,25 +341,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-8 offset-lg-2">
+                    <div class="col-lg-8 offset-lg-2 image-rooms list-image">
                         <div class="testimonial-slider owl-carousel">
-                            <div class="ts-item">
-                                <p>
-                                    After a construction project took longer than expected, my
-                                    husband, my daughter and I needed a place to stay for a few
-                                    nights. As a Chicago resident, we know a lot about our city,
-                                    neighborhood and the types of housing options available and
-                                    absolutely love our vacation at Da Nang Dream Hotel Hotel.
-                                </p>
-                                <div class="ti-author">
-                                    <h5>- Alexander Vasquez</h5>
+                            <c:forEach items="${listFb}" var="o">
+                                <div class="ts-item">
+                                    <p>${o.content}</p>
+                                    <div class="ti-author">
+                                        <h5>-${o.fistName} ${o.lastName}-</h5>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- Testimonial Section End -->
         <section >
             <div class="container">
@@ -397,22 +432,22 @@
                                     We inspire and reach millions of travelers<br />
                                     across 90 local websites
                                 </p>
-                                <div class="fa-social">
+<!--                                <div class="fa-social">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
                                     <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                     <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                         <div class="col-lg-3 offset-lg-1">
                             <div class="ft-contact">
                                 <h6>Contact Us</h6>
                                 <ul>
-                                    <li>(12) 345 67890</li>
-                                    <li>info.colorlib@gmail.com</li>
-                                    <li>856 Cordia Extension Apt. 356, Lake, United State</li>
+                                    <li>(+84) 335 500390</li>
+                                    <li>danangdreamhotel@gmail.com</li>
+                                    <li>Da Nang, Viet Nam</li>
                                 </ul>
                             </div>
                         </div>
@@ -420,10 +455,10 @@
                             <div class="ft-newslatter">
                                 <h6>New latest</h6>
                                 <p>Get the latest updates and offers.</p>
-                                <form action="#" class="fn-form">
+<!--                                <form action="#" class="fn-form">
                                     <input type="text" placeholder="Email" />
                                     <button type="submit"><i class="fa fa-send"></i></button>
-                                </form>
+                                </form>-->
                             </div>
                         </div>
                     </div>
@@ -445,12 +480,12 @@
                                 <p>
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                     Copyright &copy;
-                                    <script>
-                                        document.write(new Date().getFullYear());
-                                    </script>
-                                    All rights reserved | This template is made with
-                                    <i class="fa fa-heart" aria-hidden="true"></i> by
-                                    <a href="https://colorlib.com/" target="_blank">Colorlib</a>
+                                    <!--                                    <script>
+                                                                            document.write(new Date().getFullYear());
+                                                                        </script>
+                                                                        All rights reserved | This template is made with
+                                                                        <i class="fa fa-heart" aria-hidden="true"></i> by
+                                                                        <a href="https://colorlib.com/" target="_blank">Colorlib</a>-->
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 </p>
                             </div>
@@ -482,60 +517,93 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
         <script>
-                                        var date = new Date();
-                                        var tdate = date.getDate();
-                                        var tmonth = date.getMonth() + 1;
-                                        if (tdate < 10) {
-                                            tdate = '0' + tdate;
-                                        }
-                                        if (tmonth < 10) {
-                                            tmonth = '0' + tmonth;
-                                        }
-                                        var year = date.getUTCFullYear();
-                                        var minDate = year + '-' + tmonth + '-' + tdate;
-                                        var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
-                                        var showDateIn = document.getElementById('checkin').setAttribute('value', minDate);
-                                        var tdateMin = date.getDate() + 1;
-                                        var tmonthMin = date.getMonth() + 1;
-                                        if (tdateMin < 10) {
-                                            tdateMin = '0' + tdateMin;
-                                        }
-                                        if (tmonthMin < 10) {
-                                            tmonthMin = '0' + tmonthMin;
-                                        }
-                                        var yearMin = date.getUTCFullYear();
-                                        var min = yearMin + '-' + tmonthMin + '-' + tdateMin;
-                                        var checkOut = document.getElementById('checkout').setAttribute('min', min);
-                                        var showDateOut = document.getElementById('checkout').setAttribute('value', min);
-                                        document.getElementById('checkin').addEventListener('input', function (e) {
-                                            if (e.target.value === '') {
-                                                e.preventDefault();
-                                                e.target.value = e.target.defaultValue;
-                                            }
-                                        });
+            var date = new Date();
+            var tdate = date.getDate();
+            var tmonth = date.getMonth() + 1;
+            if (tdate < 10) {
+                tdate = '0' + tdate;
+            }
+            if (tmonth < 10) {
+                tmonth = '0' + tmonth;
+            }
+            var year = date.getUTCFullYear();
+            var minDate = year + '-' + tmonth + '-' + tdate;
+            var checkIn = document.getElementById('checkin').setAttribute('min', minDate);
+            var showDateIn = document.getElementById('checkin').setAttribute('value', minDate);
+            var tdateMin = date.getDate() + 1;
+            var tmonthMin = date.getMonth() + 1;
+            if (tdateMin < 10) {
+                tdateMin = '0' + tdateMin;
+            }
+            if (tmonthMin < 10) {
+                tmonthMin = '0' + tmonthMin;
+            }
+            var yearMin = date.getUTCFullYear();
+            var min = yearMin + '-' + tmonthMin + '-' + tdateMin;
+            var checkOut = document.getElementById('checkout').setAttribute('min', min);
+            var showDateOut = document.getElementById('checkout').setAttribute('value', min);
+            document.getElementById('checkin').addEventListener('input', function (e) {
+                if (e.target.value === '') {
+                    e.preventDefault();
+                    e.target.value = e.target.defaultValue;
+                }
+            });
 
-                                        document.getElementById('checkout').addEventListener('input', function (e) {
-                                            if (e.target.value === '') {
-                                                e.preventDefault();
-                                                e.target.value = e.target.defaultValue;
-                                            }
-                                        });
+            document.getElementById('checkout').addEventListener('input', function (e) {
+                if (e.target.value === '') {
+                    e.preventDefault();
+                    e.target.value = e.target.defaultValue;
+                }
+            });
 
-                                        document.getElementById('next').onclick = function () {
-                                            let list = document.querySelectorAll('.roomItem');
-                                            document.getElementById('slide').appendChild(list[0]);
-                                        };
-                                        document.getElementById('prev').onclick = function () {
-                                            let list = document.querySelectorAll('.roomItem');
-                                            document.getElementById('slide').prepend(list[list.length - 1]);
-                                        };
+            document.getElementById('next').onclick = function () {
+                let list = document.querySelectorAll('.roomItem');
+                document.getElementById('slide').appendChild(list[0]);
+            };
+            document.getElementById('prev').onclick = function () {
+                let list = document.querySelectorAll('.roomItem');
+                document.getElementById('slide').prepend(list[list.length - 1]);
+            };
 
-                                        setInterval(() => {
-                                            let list = document.querySelectorAll('.roomItem');
-                                            document.getElementById('slide').appendChild(list[0]);
-                                        }, 4000);
+            setInterval(() => {
+                let list = document.querySelectorAll('.roomItem');
+                document.getElementById('slide').appendChild(list[0]);
+            }, 4000);
 
-                                      
+            const listImage = document.querySelector(".list-image");
+            const images = document.querySelectorAll("#slide-img");
+            let current = 0;
+            const length = images.length;
+
+
+            setInterval(() => {
+                if (current === length - 1) {
+                    current = 0;
+                    let width = images[0].offsetWidth;
+                    listImage.style.transform = `translateX(0px)`;
+                } else {
+                    current++;
+                    let width = images[0].offsetWidth;
+                    listImage.style.transform = `translateX(${width * - 1 * current}px)`;
+                }
+            }, 3000);
+
+            $(document).ready(function () {
+                $(".testimonial-slider").owlCarousel({
+                    items: 1,
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    navText: [
+                        "<i class='fa-solid fa-chevron-left icon-L'></i>",
+                        "<i class='fa-solid fa-chevron-right icon-R'></i>"
+                    ],
+                    dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 5000,
+                    autoplayHoverPause: true
+                });
+            });
 
 
         </script>

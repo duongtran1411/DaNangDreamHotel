@@ -57,11 +57,11 @@
         <div class="container">
             <div class="card-body design">
                 <div>
-                    <a href="./index.jsp" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                        <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                    <a href="homeController" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                        <img src="img/header_homepage.jpg" alt="" height="100px" width="200px" />
                     </a>
                 </div>
-                <form action="authentication_register" method="POST">
+                <form action="/DaNangDreamHotel/register" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
@@ -83,29 +83,16 @@
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control" name="username" placeholder="Your Username" required/>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Your Password" required/>
-                            </div>
-                            <div class="mb-3">
                                 <label class="form-label">Date of Birth</label>
                                 <input type="date" class="form-control" name="dob" required/>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Role</label>
-                                <select class="form-control" name="role">
-                                    <option value="1">Admin</option>
-                                    <option value="2">Staff</option>
-                                    <option value="3">Manager</option>
-                                </select>
+                                <label class="form-label">CV</label>
+                                <input id="cv" name="cv" class="input-file" type="file" required>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" onclick="window.location.href = 'http://localhost:8080/demo_war_exploded/ConfirmMail.jsp'">Continue</button>
-
+                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Continue</button>
                 </form>
             </div>
         </div>

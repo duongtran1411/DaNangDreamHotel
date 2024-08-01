@@ -75,7 +75,7 @@ public class CustomerController extends HttpServlet {
     }
 
     private void editCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("customerId"));
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String phoneNumber = request.getParameter("phoneNumber");
@@ -88,6 +88,6 @@ public class CustomerController extends HttpServlet {
     private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         daoCustomer.deleteCustomer(id);
-        response.sendRedirect("customerController?action=listCustomer");
+       
     }
 }

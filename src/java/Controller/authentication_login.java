@@ -110,22 +110,23 @@ public class authentication_login extends HttpServlet {
                     request.getRequestDispatcher("/dashboard/jsp/authentication-login.jsp").forward(request, response);
                 } else if (result) {
                     HttpSession session = request.getSession();
+                    session.setMaxInactiveInterval(1800);
                     session.setAttribute("acc", user);
                     switch (user.getRole_Id()) {
                         case 1:
                             response.sendRedirect("AdminControllerURL");
                             break;
                         case 2:
-                            response.sendRedirect("typeRoomURL");
+                            response.sendRedirect("statusRoomController");
                             break;
                         case 3:
-                            response.sendRedirect("AdminControllerURL");
+                            response.sendRedirect("typeRoomURL");
                             break;
                         default:
                             break;
                     }
                 } else {
-                    request.setAttribute("mess1", "Username or password is incorrect!<br>Enter your username again");
+                    request.setAttribute("mess1", "Username or password is incorrect!");
                     request.getRequestDispatcher("/dashboard/jsp/authentication-login.jsp").forward(request, response);
                 }
 

@@ -4,6 +4,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Add Item</title>
+        <title>Da Nang Dream Hotel</title>
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <style>
             body {
                 font-family: Arial, sans-serif;

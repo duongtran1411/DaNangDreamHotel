@@ -179,10 +179,6 @@ public class RegistrationDAO extends DBConnect {
 
             int rowAffected = st.executeUpdate();
 
-            if (rowAffected > 0) {
-                System.out.println("Một bản ghi công việc mới đã được thêm thành công!");
-            }
-
         } catch (SQLException e) {
             Logger.getLogger(RegistrationDAO.class.getName()).log(Level.SEVERE, null, e);
         }

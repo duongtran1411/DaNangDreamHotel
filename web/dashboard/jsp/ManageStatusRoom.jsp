@@ -2,6 +2,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${empty sessionScope.acc}">
+    <jsp:include page="../../Pages.jsp"></jsp:include>
+</c:if>
+<c:if test="${not empty sessionScope.acc}">
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +15,9 @@
         <link rel="stylesheet" href="dashboard/assets/css/styles.css" />
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <script src="dashboard/assets/js/sidebarmenu.js"></script>
+        <script src="dashboard/assets/js/app.min.js"></script>
+        <link rel="icon" href="img/title_danangdream.jpg" type="image/x-icon"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
         <link rel="stylesheet" href="css/statusroom.css" type="text/css" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -68,124 +74,145 @@
             .select{
                 background-color: #ddd;
             }
+            a:link {
+                text-decoration: none;
+            }
+
+            .profile-image-container {
+                position: relative;
+                display: inline-block;
+            }
+            .profile-dropdown {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                z-index: 1000;
+                display: none;
+            }
+            .profile-image-container:hover .profile-dropdown {
+                display: block;
+            }
+            
         </style>
     </head>
     <body>
+       
         <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
              data-sidebar-position="fixed" data-header-position="fixed">
             <jsp:include page="SlideBar.jsp"></jsp:include>
-
-                <div class="body-wrapper" >
+                <div class="body-wrapper">
                 <jsp:include page="Profile.jsp"></jsp:include>
-                    <div style="border: 1px solid #ddd;">
-                        <div>
-                            <div class="row" style="padding-left: 20px;width: 1600px;">
-                                <h4><i class="fa-solid fa-map"style="padding-right: 10px"></i>Map Room</h4>
-                                <div style="padding-bottom: 10px;padding-top: 10px">
-                                    <label class="text">Type Room:</label>
-                                    <select id="select-type" style="width: 150px" onchange="handleChange()">
-                                    <c:forEach items="${listType}" var="o">
-                                        <option value="${o.getTypeRoom_Id()}">${o.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="text">Floor Room:</label>
-                                <select id="select-floor" style="width: 150px" onchange="changeFloor()">
-                                    <c:forEach items="${listFloor}" var="o">
-                                        <option value="${o.floor_id}">${o.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div style="padding-top: 10px; padding-bottom: 10px">
-                                <span class="text">Status Room:</span>
-                                <input type="date" id="now-date"/>
-                            </div>
-                            <div>
-                                <button class="btn-hover select" onclick="getAll()">All</button>
-                                <button class="btn-hover" onclick="handleArrive()"><i class="fa-solid fa-person-walking-arrow-right icon-padding green" ></i>Prepare arrive</button>
-                                <button class="btn-hover" onclick="handleUnavai()"><i class="fa-solid fa-house icon-padding blue"></i>Live</button>
-                                <button class="btn-hover" onclick="handleLeave()"><i class="fa-solid fa-person-walking-arrow-right icon-padding red"></i>Prepare leave</button>
-                                <button class="btn-hover" onclick="handlAvai()"><i class="fa-solid fa-square-check icon-padding"></i>Availability</button>
-                                <button class="btn-hover status-room clean" onclick="cleanRoom()">Clean Room</button>
-                                <button class="btn-hover status-room dirty" onclick="dirtyRoom()">Dirty Room</button>
-                                <button class="btn-hover status-room fix" onclick="FixRoom()"><i class="fa-solid fa-wrench icon-padding"></i>Fix Room</button>
-                            </div>
-                        </div>
-                        <div class="row" id="main-room" style="width: 1600px">
-                            <c:forEach items="${list}" var="o">
-                                <div class="col-lg-3 col-md-6  justify-content-center element">
-                                    <input value="${o.room_Id}" type="hidden" id="room-id" class="RID"/>
-                                    <div class="room-item item-room <c:if test="${o.maintenance_status == 'dirty room'}">dirty-room</c:if><c:if test="${o.maintenance_status == 'fix room'}">fix-room</c:if>
-                                         <c:if test="${o.maintenance_status == 'clean room'}">clean-room</c:if>">
-                                             <!--                                  <div class="room-item item-room fix-room">   -->
-                                             <div class="ri-text">
-                                                 <img src="${o.image}" alt="" class="image-room" id="unique-image">
-                                             <h4 class="text-center name-room" id="room-name">
-                                                 ${o.name}
-                                             </h4>
-
-                                             <div class="content-icon d-flex align-items-between justify-content-between main-content">
-                                                 <div class="content-room">
-                                                     <i class="fa fa-users icon-room" aria-hidden="true"></i>
-                                                     <c:if test="${o.people == 1}">
-                                                         <span>${o.people} Person</span>
-                                                     </c:if>
-                                                     <c:if test="${o.people > 1}">
-                                                         <span>${o.people} People</span>
-                                                     </c:if>
-                                                 </div>
-                                                 <div class="content-room">
-                                                     <i class="fa fa-bed icon-room" aria-hidden="true"></i>
-                                                     <c:if test="${o.bed == 1}">
-                                                         <span>${o.bed} Bed</span>
-                                                     </c:if>
-                                                     <c:if test="${o.bed > 1}">
-                                                         <span>${o.bed} Beds</span>
-                                                     </c:if>
-                                                 </div>
-                                                 <div class="content-room">
-                                                     <i class="fa fa-bath icon-room" aria-hidden="true" ></i>
-                                                     <c:if test="${o.bath == 1}">
-                                                         <span>${o.bath} Bath</span>
-                                                     </c:if>
-                                                     <c:if test="${o.bath > 1}">
-                                                         <span>${o.bath} Baths</span>
-                                                     </c:if>             
-                                                 </div>
-                                             </div>
-                                         </div>
+                    <div class="card">
+                        <div class="card-body"> 
+                            <div class="container-fluid">
+                                    <div class="row" style="padding-left: 20px;width: 1600px;">
+                                        <h4><i class="fa-solid fa-map"style="padding-right: 10px"></i>Map Room</h4>
+                                        <div style="padding-bottom: 10px;padding-top: 10px">
+                                            <label class="text">Type Room:</label>
+                                            <select id="select-type" style="width: 150px" onchange="handleChange()">
+                                            <c:forEach items="${listType}" var="o">
+                                                <option value="${o.getTypeRoom_Id()}">${o.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="text">Floor Room:</label>
+                                        <select id="select-floor" style="width: 150px" onchange="changeFloor()">
+                                            <c:forEach items="${listFloor}" var="o">
+                                                <option value="${o.floor_id}">${o.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div style="padding-top: 10px; padding-bottom: 10px">
+                                        <span class="text">Status Room:</span>
+                                        <input type="date" id="now-date"/>
+                                    </div>
+                                    <div>
+                                        <button class="btn-hover select" onclick="getAll()">All</button>
+                                        <button class="btn-hover" onclick="handleArrive()"><i class="fa-solid fa-person-walking-arrow-right icon-padding green" ></i>Prepare arrive</button>
+                                        <button class="btn-hover" onclick="handleUnavai()"><i class="fa-solid fa-house icon-padding blue"></i>Live</button>
+                                        <button class="btn-hover" onclick="handleLeave()"><i class="fa-solid fa-person-walking-arrow-right icon-padding red"></i>Prepare leave</button>
+                                        <button class="btn-hover" onclick="handlAvai()"><i class="fa-solid fa-square-check icon-padding"></i>Availability</button>
+                                        <button class="btn-hover status-room clean" onclick="cleanRoom()">Clean Room</button>
+                                        <button class="btn-hover status-room dirty" onclick="dirtyRoom()">Dirty Room</button>
+                                        <button class="btn-hover status-room fix" onclick="FixRoom()"><i class="fa-solid fa-wrench icon-padding"></i>Fix Room</button>
                                     </div>
                                 </div>
-                            </c:forEach>
-                        </div>
-                        <div id="pagination-info" class="text-center mt-2" style="padding-bottom: 10px;">
+                                <div class="row" id="main-room" style="width: 1600px">
+                                    <c:forEach items="${list}" var="o">
+                                        <div class="col-lg-3 col-md-6  justify-content-center element">
+                                            <input value="${o.room_Id}" type="hidden" id="room-id" class="RID"/>
+                                            <div class="room-item item-room <c:if test="${o.maintenance_status == 'dirty room'}">dirty-room</c:if><c:if test="${o.maintenance_status == 'fix room'}">fix-room</c:if>
+                                                 <c:if test="${o.maintenance_status == 'clean room'}">clean-room</c:if>">
+                                                     <div class="ri-text">
+                                                         <img src="${o.image}" alt="" class="image-room" id="unique-image">
+                                                     <h4 class="text-center name-room" id="room-name">
+                                                         ${o.name}
+                                                     </h4>
+
+                                                     <div class="content-icon d-flex align-items-between justify-content-between main-content">
+                                                         <div class="content-room">
+                                                             <i class="fa fa-users icon-room" aria-hidden="true"></i>
+                                                             <c:if test="${o.people == 1}">
+                                                                 <span>${o.people} Person</span>
+                                                             </c:if>
+                                                             <c:if test="${o.people > 1}">
+                                                                 <span>${o.people} People</span>
+                                                             </c:if>
+                                                         </div>
+                                                         <div class="content-room">
+                                                             <i class="fa fa-bed icon-room" aria-hidden="true"></i>
+                                                             <c:if test="${o.bed == 1}">
+                                                                 <span>${o.bed} Bed</span>
+                                                             </c:if>
+                                                             <c:if test="${o.bed > 1}">
+                                                                 <span>${o.bed} Beds</span>
+                                                             </c:if>
+                                                         </div>
+                                                         <div class="content-room">
+                                                             <i class="fa fa-bath icon-room" aria-hidden="true" ></i>
+                                                             <c:if test="${o.bath == 1}">
+                                                                 <span>${o.bath} Bath</span>
+                                                             </c:if>
+                                                             <c:if test="${o.bath > 1}">
+                                                                 <span>${o.bath} Baths</span>
+                                                             </c:if>             
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                                <div id="pagination-info" class="text-center mt-2" style="padding-bottom: 10px;">
+
+                                </div>
+                                <div id="pagination-container" class="text-center mt-4 justify-content-center" style="padding-bottom: 10px">
+                                </div>
+
+                            </div>
+                            <div class="overlay" id="overlay" onclick="hidePopup()"></div>
+                            <div class="popup" id="popup" style="border: 1px solid #ddd; border-radius: 5px;">
+                                <h2 id="roomInfo"></h2>
+                                <!--                <input type="hidden" id="currentRoomId" value="" />-->
+                                <div style="padding-left: 35px">
+                                    <button class="btn-status" style="background-color:#E7FAF5" onclick="updateRoomStatus(this)" value="clean room">Clean Room</button>
+                                    <button class="btn-status"  style="background-color:#FFF9EF" onclick="updateRoomStatus(this)" value="dirty room" >Dirty Room</button>
+                                    <button class="btn-status" style="background-color:#FFEFF2" onclick="updateRoomStatus(this)" value="fix room">Fix Room</button>
+                                </div>
+                                <div style="transform: translateY(-150px);padding-left: 550px;"><button class="close-btn" style="width: 30px;height: 30px;border-radius: 50%;background-color:grey ;color: white;transform: translateX(30px);margin-top: 10px;border-color: grey" onclick="hidePopup()">X</button></div>
+                            </div>
 
                         </div>
-                        <div id="pagination-container" class="text-center mt-4 justify-content-center" style="padding-bottom: 10px">
-                        </div>
-
-                    </div>
-                    <div class="overlay" id="overlay" onclick="hidePopup()"></div>
-                    <div class="popup" id="popup" style="border: 1px solid #ddd; border-radius: 5px;">
-                        <h2 id="roomInfo"></h2>
-                        <!--                <input type="hidden" id="currentRoomId" value="" />-->
-                        <div style="padding-left: 35px">
-                            <button class="btn-status" style="background-color:#E7FAF5" onclick="updateRoomStatus(this)" value="clean room">Clean Room</button>
-                            <button class="btn-status"  style="background-color:#FFF9EF" onclick="updateRoomStatus(this)" value="dirty room" >Dirty Room</button>
-                            <button class="btn-status" style="background-color:#FFEFF2" onclick="updateRoomStatus(this)" value="fix room">Fix Room</button>
-                        </div>
-                        <div style="transform: translateY(-150px);padding-left: 550px;"><button class="close-btn" style="width: 30px;height: 30px;border-radius: 50%;background-color:grey ;color: white;transform: translateX(30px);margin-top: 10px;border-color: grey" onclick="hidePopup()">X</button></div>
-                    </div>
-
+                    
                 </div>
             </div>
-        </div>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="js/demo/pagingNumber.js"></script>
-        <script src="js/now-date.js"></script>
-        <script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="js/demo/pagingNumber.js"></script>
+            <script src="js/now-date.js"></script>
+            <script>
+                            
                             function handleChange() {
                                 var selectElement = document.getElementById("select-type");
                                 var selectedValue = selectElement.value;
@@ -522,6 +549,7 @@
 
 
 
-        </script>
+            </script>
     </body>
 </html>
+</c:if>

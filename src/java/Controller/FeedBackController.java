@@ -79,8 +79,6 @@ public class FeedBackController extends HttpServlet {
         String email = request.getParameter("email");
         String description = request.getParameter("description");
         String type = request.getParameter("feed");
-
-        // Khởi tạo đối tượng phản hồi JSON
         JsonObject jsonResponse = new JsonObject();
         boolean feedbackAdded = false;
 
@@ -93,23 +91,19 @@ public class FeedBackController extends HttpServlet {
                 if (o.getFirstName().equals(firstName) && o.getLastName().equals(lastName) && o.getEmail().equals(email)) {
                     daoF.addFeedBack(o.getCustomerId(), description, type);
                     feedbackAdded = true;
-                    break; // Thoát khỏi vòng lặp khi đã thêm phản hồi
+                    break; 
                 }
             }
-
-            // Thiết lập trạng thái phản hồi
             if (feedbackAdded) {
                 jsonResponse.addProperty("status", "success");
             } else {
                 jsonResponse.addProperty("status", "error");
             }
         } catch (Exception e) {
-            // Xử lý lỗi và gửi thông báo lỗi
             jsonResponse.addProperty("status", "error");
-            e.printStackTrace(); // Có thể ghi log hoặc xử lý lỗi theo cách khác
+            e.printStackTrace(); 
         }
 
-        // Cấu hình phản hồi JSON
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         out.print(jsonResponse.toString());
